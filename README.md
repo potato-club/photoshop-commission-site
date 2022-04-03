@@ -1,34 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 애완동물 여행추천 커뮤니티 사이트
 
-## Getting Started
+### 디렉토리 설명
 
-First, run the development server:
+assets - 이미지, 폰트 등을 저장
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+components - 2개이상의 페이지에 사용되는 '공용' 컴포넌트를 저장
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+constants - color, size 같은 값을 저장
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+containers - pages에 들어갈 View 컨테이너를 저장
+containers/TestPage/components - TestPages에만 사용될 컴포넌트를 저장
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+pages - 라우팅 될 페이지를 저장, Page의 로직파트가 들어감 , containers 폴더에서 View 파일만 import만 함
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+<br/>
 
-## Learn More
+### 브랜치 설명
 
-To learn more about Next.js, take a look at the following resources:
+main :배포 브랜치
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+develop :main브랜치에 넘어가기 전단계, 모든 브랜치는 develop에서 생성되어야 합니다.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Ex)
+feat/login :로그인개발 브랜치 (main -> develop -> feat/login)
 
-## Deploy on Vercel
+<br/>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### commit 설명
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+feat: 신 기능 개발 브랜치
+
+fix: 버그 fix
+
+style: 스타일 변경
+
+chore: 간단한 이미지 교체, 스타일 변경 등 위 type들에 해당하지 않는 잡무, 만일 커밋이 두 개 이상의 타입에 해당하는 경우, 커밋을 타입 단위로 쪼개어 커밋합니다.
