@@ -1,4 +1,15 @@
-export const customColor = {
+export type customColorType = {
+  white: string;
+  black: string;
+  blue: string;
+  lightBlue: string;
+  gray: string;
+  purple: string;
+
+  danger: string;
+  success: string;
+};
+export const customColor: customColorType = {
   white: '#FFFFFF',
   black: '#000000',
   blue: '#07689F',
