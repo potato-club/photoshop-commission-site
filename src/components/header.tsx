@@ -1,85 +1,76 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
 import Image from 'next/image';
 import user from '../assets/image/user.png';
 import alert from '../assets/image/alert.png';
 import Link from 'next/link';
+import styled from 'styled-components';
 
-const Header: NextPage = () => {
+const Header = () => {
   return (
     <>
-      <Head>
-        <title>Header</title>
-        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
-      </Head>
-
-      <header className="headerBox">
-        <nav className="contentBox">
-          <Link href="/">
-            <a className="theme">가나다 포토샵</a>
+      <HeaderBox>
+        <ContentBox>
+          <Link href="/" passHref>
+            <Theme>가나다 포토샵</Theme>
           </Link>
-          <div>
-            <Link href="user">
+          <Icons>
+            <Link href="/user">
               <a>
-                <Image
-                  src={user}
-                  alt="Picture of the author"
-                  className="user"
-                ></Image>
+                <UserImage src={user} alt="Picture of the author"></UserImage>
               </a>
             </Link>
 
-            <Link href="alert">
+            <Link href="/alert">
               <a>
-                <Image
+                <AlertImage
                   src={alert}
                   alt="Picture of the author"
-                  className="alert"
-                ></Image>
+                ></AlertImage>
               </a>
             </Link>
-          </div>
-        </nav>
-      </header>
-
-      <style jsx>{`
-        .theme {
-          color: white;
-          font-family: 'Roboto', sans-serif;
-          font-weight: 900;
-          font-size: 32px;
-          text-decoration: none;
-        }
-        div {
-          display: flex;
-          width: 100px;
-          align-items: center;
-          justify-content: space-between;
-        }
-        .user {
-          width: 45px;
-          height: 40px;
-        }
-        .alert {
-          width: 35px;
-          height: 35px;
-        }
-        .headerBox {
-          background-color: rgba(7, 104, 159, 1);
-          width: 100%;
-          height: 60px;
-        }
-        .contentBox {
-          display: flex;
-          width: 1178px;
-          justify-content: space-between;
-          align-items: center;
-          height: 100%;
-          margin: auto auto;
-        }
-      `}</style>
+          </Icons>
+        </ContentBox>
+      </HeaderBox>
     </>
   );
 };
 
 export default Header;
+
+const HeaderBox = styled.div`
+  background-color: rgba(7, 104, 159, 1);
+  width: 100%;
+  height: 60px;
+`;
+
+const ContentBox = styled.div`
+  display: flex;
+  width: 1178px;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: auto auto;
+`;
+
+const Theme = styled.a`
+  color: white;
+  font-weight: 900;
+  font-size: 32px;
+  text-decoration: none;
+`;
+
+const Icons = styled.div`
+  display: flex;
+  width: 100px;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const UserImage = styled(Image)`
+  width: 45px;
+  height: 40px;
+`;
+
+const AlertImage = styled(Image)`
+  width: 35px;
+  height: 35px;
+`;

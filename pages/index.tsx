@@ -5,8 +5,8 @@ import Header from '../src/components/header';
 const Home: NextPage = () => {
   return (
     <>
-      <Footer/>
       <Header/>
+      <Footer/>
     </>
   );
 };
