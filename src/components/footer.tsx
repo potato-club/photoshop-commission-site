@@ -1,162 +1,103 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import github from '../assets/image/github.png';
-import styled from 'styled-components';
-
+import { FaGithub } from 'react-icons/fa';
+import * as S from './Footer.style';
 
 const Footer = () => {
   return (
     <>
-      <Container>
-        <Wrapper>
-          <ContentWrapper>
-            <ContentBox>
-              <Content>
+      <S.Container>
+        <S.Wrapper>
+          <S.ContentWrapper>
+            <S.ContentBox>
+              <S.Content>
                 <Link href="/" passHref>
-                  <Page>인트로페이지</Page>
+                  <S.Page>
+                    <S.NewTypography size="20" color="blue" fontWeight="900">
+                      인트로페이지
+                    </S.NewTypography>
+                  </S.Page>
                 </Link>
-              </Content>
-              <Content>
-                <ContentUl>
+              </S.Content>
+              <S.Content>
+                <S.ContentUl>
                   <Link href="/" passHref>
-                    <Page>HOME</Page>
+                    <S.Page>
+                      <S.NewTypography size="20" color="blue" fontWeight="900">
+                        HOME
+                      </S.NewTypography>
+                    </S.Page>
                   </Link>
-                  <ContentLi>
+                  <S.ContentLi>
                     <Link href="/" passHref>
-                      <A>의뢰전</A>
+                      <S.A>
+                        <S.NewTypography size="12" color="gray">
+                          의뢰전
+                        </S.NewTypography>
+                      </S.A>
                     </Link>
-                  </ContentLi>
-                  <ContentLi>
+                  </S.ContentLi>
+                  <S.ContentLi>
                     <Link href="/" passHref>
-                      <A>의뢰중</A>
+                      <S.A>
+                        <S.NewTypography size="12" color="gray">
+                          의뢰중
+                        </S.NewTypography>
+                      </S.A>
                     </Link>
-                  </ContentLi>
-                  <ContentLi>
+                  </S.ContentLi>
+                  <S.ContentLi>
                     <Link href="/" passHref>
-                      <A>의뢰완료</A>
+                      <S.A>
+                        <S.NewTypography size="12" color="gray">
+                          의뢰완료
+                        </S.NewTypography>
+                      </S.A>
                     </Link>
-                  </ContentLi>
-                </ContentUl>
-              </Content>
-              <Content>
-                <ContentUl>
+                  </S.ContentLi>
+                </S.ContentUl>
+              </S.Content>
+              <S.Content>
+                <S.ContentUl>
                   <Link href="/" passHref>
-                    <Page>ABOUT</Page>
+                    <S.Page>
+                      <S.NewTypography size="20" color="blue" fontWeight="900">
+                        ABOUT
+                      </S.NewTypography>
+                    </S.Page>
                   </Link>
-                  <ContentLi>
+                  <S.ContentLi>
                     <Link href="/" passHref>
-                      <A>공지사항</A>
+                      <S.A>
+                        <S.NewTypography size="12" color="gray">
+                          공지사항
+                        </S.NewTypography>
+                      </S.A>
                     </Link>
-                  </ContentLi>
-                  <ContentLi>
+                  </S.ContentLi>
+                  <S.ContentLi>
                     <Link href="/" passHref>
-                      <A>이용약관</A>
+                      <S.A>
+                        <S.NewTypography size="12" color="gray">
+                          이용약관
+                        </S.NewTypography>
+                      </S.A>
                     </Link>
-                  </ContentLi>
-                </ContentUl>
-              </Content>
-            </ContentBox>
-            <Line></Line>
-          </ContentWrapper>
-          <EmailBox>
-            <EmailWrap>
-              <Email>이메일 thdwo999@naver.com</Email>
-              <Image src={github} alt="nothing" className="github"></Image>
-            </EmailWrap>
-          </EmailBox>
-        </Wrapper>
-      </Container>
-
-      <style jsx>{`
-        .contentBox > ul > li:nth-child(2) {
-          margin: 0 220px;
-        }
-        .page {
-        }
-        .page ~ li {
-        }
-      `}</style>
+                  </S.ContentLi>
+                </S.ContentUl>
+              </S.Content>
+            </S.ContentBox>
+            <S.Line></S.Line>
+          </S.ContentWrapper>
+          <S.EmailBox>
+            <S.EmailWrap>
+              <S.Email>이메일 thdwo999@naver.com</S.Email>
+              <FaGithub />
+            </S.EmailWrap>
+          </S.EmailBox>
+        </S.Wrapper>
+      </S.Container>
     </>
   );
 };
 
 export default Footer;
-
-const Container = styled.div`
-  height: 279px;
-  background-color: rgba(7, 104, 159, 0.14);
-  position: relative;
-  width: 100vw;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding-top: 40px;
-`;
-
-const ContentWrapper = styled.div`
-  width: 1178px;
-  list-style: none;
-  margin: 0 auto;
-`;
-
-const ContentBox = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-  justify-content: space-evenly
-`;
-
-const Page = styled.a`
-  color: rgba(7, 104, 159, 1);
-  font-size: 20px;
-  font-weight: 900;
-  display: inline-block;
-  margin-bottom: 9px;
-  text-decoration: none;
-`;
-
-const EmailBox = styled.div`
-  width: 1178px;
-  position: relative;
-  margin: 0 auto;
-  color: rgba(173, 173, 173, 1);
-  font-size: 12px;
-  height: 30px;
-`;
-
-const EmailWrap = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 22px;
-  display: flex;
-  align-items: center;
-`;
-
-const A = styled.a`
-  text-decoration: none;
-  color: rgba(173, 173, 173, 1);
-  font-size: 12px;
-  padding: 7px 0 7px 0;
-  :hover {
-    font-weight: 900;
-  }
-`;
-
-const Email = styled.span`
-  margin-right: 15px;
-`;
-
-const Line = styled.hr`
-  border: 0;
-  height: 0.5px;
-  background: rgba(173, 173, 173, 1);
-`;
-
-const Content = styled.li``;
-const ContentUl = styled.ul``;
-const ContentLi = styled.li``;
