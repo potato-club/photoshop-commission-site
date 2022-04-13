@@ -12,7 +12,7 @@ type ContentType = {
 const Content: NextPage<ContentType> = ({ theme, content, href }) => {
   return (
     <S.ContentUl>
-      <li>
+      <S.ContentLi>
         <Link href={href} passHref>
           <S.Page>
             <S.NewTypography size="20" color="blue" fontWeight="900">
@@ -20,10 +20,10 @@ const Content: NextPage<ContentType> = ({ theme, content, href }) => {
             </S.NewTypography>
           </S.Page>
         </Link>
-      </li>
+      </S.ContentLi>
 
-      {content?.map((element, index) => {
-        <S.ContentLi>
+      {content?.map((element, index) => (
+        <S.ContentLi key={index}>
           <Link href={href} passHref>
             <S.A key={index}>
               <S.NewTypography size="12" color="gray">
@@ -31,8 +31,8 @@ const Content: NextPage<ContentType> = ({ theme, content, href }) => {
               </S.NewTypography>
             </S.A>
           </Link>
-        </S.ContentLi>;
-      })}
+        </S.ContentLi>
+      ))}
     </S.ContentUl>
   );
 };

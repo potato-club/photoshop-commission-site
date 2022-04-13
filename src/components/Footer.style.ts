@@ -48,9 +48,6 @@ export const EmailWrap = styled.div`
 
 export const A = styled.a`
   text-decoration: none;
-  :hover {
-    font-weight: 900;
-  }
   `;
 
 export const Email = styled.span`
@@ -66,6 +63,10 @@ export const Line = styled.hr`
 
 export const NewTypography = styled(Typography)`
   padding: 5px 0 5px 0;
+  display: inline-block;
+  :hover {
+    font-weight: 900;
+  }
   `
   export const ContentBox = styled.div`
     list-style: none;

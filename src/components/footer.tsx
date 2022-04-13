@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import * as S from './Footer.style';
@@ -28,14 +27,14 @@ const Footer = () => {
         <S.Wrapper>
           <S.ContentWrapper>
             <S.ContentBox>
-              {list.map((element, index) => {
+              {list.map((element, index) => (
                 <Content
                   theme={element.theme}
                   content={element.content}
                   href={element.href}
                   key={index}
                 />
-              })}
+              ))}
             </S.ContentBox>
             <S.Line></S.Line>
           </S.ContentWrapper>
