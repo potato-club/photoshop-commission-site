@@ -1,90 +1,41 @@
 import Link from 'next/link';
+import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
 import * as S from './Footer.style';
+import Content from './Content';
 
 const Footer = () => {
+  const [list, setlist] = useState([
+    {
+      theme: '인트로페이지',
+      href: '/',
+    },
+    {
+      theme: 'HOME',
+      content: ['의뢰전', '의뢰중', '의뢰완료'],
+      href: '/home',
+    },
+    {
+      theme: 'ABOUT',
+      content: ['공지사항', '이용약관'],
+      href: '/about',
+    },
+  ]);
+
   return (
     <>
       <S.Container>
         <S.Wrapper>
           <S.ContentWrapper>
             <S.ContentBox>
-              <S.Content>
-                <Link href="/" passHref>
-                  <S.Page>
-                    <S.NewTypography size="20" color="blue" fontWeight="900">
-                      인트로페이지
-                    </S.NewTypography>
-                  </S.Page>
-                </Link>
-              </S.Content>
-              <S.Content>
-                <S.ContentUl>
-                  <Link href="/" passHref>
-                    <S.Page>
-                      <S.NewTypography size="20" color="blue" fontWeight="900">
-                        HOME
-                      </S.NewTypography>
-                    </S.Page>
-                  </Link>
-                  <S.ContentLi>
-                    <Link href="/" passHref>
-                      <S.A>
-                        <S.NewTypography size="12" color="gray">
-                          의뢰전
-                        </S.NewTypography>
-                      </S.A>
-                    </Link>
-                  </S.ContentLi>
-                  <S.ContentLi>
-                    <Link href="/" passHref>
-                      <S.A>
-                        <S.NewTypography size="12" color="gray">
-                          의뢰중
-                        </S.NewTypography>
-                      </S.A>
-                    </Link>
-                  </S.ContentLi>
-                  <S.ContentLi>
-                    <Link href="/" passHref>
-                      <S.A>
-                        <S.NewTypography size="12" color="gray">
-                          의뢰완료
-                        </S.NewTypography>
-                      </S.A>
-                    </Link>
-                  </S.ContentLi>
-                </S.ContentUl>
-              </S.Content>
-              <S.Content>
-                <S.ContentUl>
-                  <Link href="/" passHref>
-                    <S.Page>
-                      <S.NewTypography size="20" color="blue" fontWeight="900">
-                        ABOUT
-                      </S.NewTypography>
-                    </S.Page>
-                  </Link>
-                  <S.ContentLi>
-                    <Link href="/" passHref>
-                      <S.A>
-                        <S.NewTypography size="12" color="gray">
-                          공지사항
-                        </S.NewTypography>
-                      </S.A>
-                    </Link>
-                  </S.ContentLi>
-                  <S.ContentLi>
-                    <Link href="/" passHref>
-                      <S.A>
-                        <S.NewTypography size="12" color="gray">
-                          이용약관
-                        </S.NewTypography>
-                      </S.A>
-                    </Link>
-                  </S.ContentLi>
-                </S.ContentUl>
-              </S.Content>
+              {list.map((element, index) => {
+                <Content
+                  theme={element.theme}
+                  content={element.content}
+                  href={element.href}
+                  key={index}
+                />
+              })}
             </S.ContentBox>
             <S.Line></S.Line>
           </S.ContentWrapper>

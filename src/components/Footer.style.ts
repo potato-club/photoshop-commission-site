@@ -22,14 +22,6 @@ export const ContentWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const ContentBox = styled.ul`
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-  justify-content: space-evenly;
-`;
 
 export const Page = styled.a`
   display: inline-block;
@@ -44,7 +36,7 @@ export const EmailBox = styled.div`
   color: rgba(173, 173, 173, 1);
   font-size: 12px;
   height: 30px;
-`;
+  `;
 
 export const EmailWrap = styled.div`
   position: absolute;
@@ -59,23 +51,31 @@ export const A = styled.a`
   :hover {
     font-weight: 900;
   }
-`;
+  `;
 
 export const Email = styled.span`
   margin-right: 15px;
   font-size: 12px;
-`;
+  `;
 
 export const Line = styled.hr`
   border: 0;
   height: 0.5px;
   background: rgba(173, 173, 173, 1);
-`;
+  `;
 
 export const NewTypography = styled(Typography)`
   padding: 5px 0 5px 0;
+  `
+  export const ContentBox = styled.div`
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+    justify-content: space-evenly;
+  `;
 
-`
 export const Content = styled.li``;
 export const ContentUl = styled.ul``;
 export const ContentLi = styled.li``;
