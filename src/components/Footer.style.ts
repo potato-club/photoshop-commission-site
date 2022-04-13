@@ -71,12 +71,10 @@ export const NewTypography = styled(Typography)`
     list-style: none;
     padding: 0;
     display: flex;
-    justify-content: center;
     margin-bottom: 40px;
     justify-content: space-evenly;
   `;
 
-export const Content = styled.li``;
 export const ContentUl = styled.ul``;
 export const ContentLi = styled.li``;
 
