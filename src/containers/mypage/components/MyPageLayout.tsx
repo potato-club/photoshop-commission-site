@@ -1,6 +1,6 @@
-import { useState } from 'react';
 import { SideBar } from './sidebar/Sidebar';
 import styled from 'styled-components';
+import { customColor } from 'src/constants';
 
 const nickName = '양파먹는소녀';
 
@@ -50,16 +50,17 @@ export const Container = styled.div`
 export const SideBarWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 25%;
-  margin: auto;
-  height: 100%;
+  height: 100vh;
+  border-left: 1px solid ${customColor.gray};
+  border-right: 1px solid ${customColor.gray};
 `;
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 75%;
-  margin: auto;
+  margin-bottom: auto;
   height: 100%;
 `;

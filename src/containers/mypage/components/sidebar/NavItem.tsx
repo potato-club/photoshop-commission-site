@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Typography } from 'src/components/Typography';
+import { customColor } from 'src/constants';
 import styled from 'styled-components';
 
 type NavItemType = {
@@ -8,14 +9,24 @@ type NavItemType = {
 };
 export const NavItem = ({ name, pathName }: NavItemType) => {
   return (
-    <Wrapper>
-      <Link href={pathName}>
-        <a style={{ textDecoration: 'none' }}>
-          <Typography size="16">{name}</Typography>
-        </a>
-      </Link>
-    </Wrapper>
+    <Link href={pathName}>
+      <a style={{ textDecoration: 'none' }}>
+        <Wrapper>
+          <Typography size="24" color="gray">
+            {name}
+          </Typography>
+        </Wrapper>
+      </a>
+    </Link>
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  cursor: pointer;
+  margin-bottom: 40px;
+
+  &:hover div {
+    text-decoration: underline;
+    color: ${customColor.black};
+  }
+`;
