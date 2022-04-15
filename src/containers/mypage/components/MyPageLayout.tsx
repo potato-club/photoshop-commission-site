@@ -43,8 +43,9 @@ export const MyPageLayout = ({ children }: MyPageLayoutType) => {
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   width: 1178px;
+  height: 100%;
   margin: auto;
 `;
 export const SideBarWrapper = styled.div`
@@ -52,8 +53,7 @@ export const SideBarWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 20%;
-  height: 100vh;
-  margin-right: auto;
+  min-height: 100%;
   border-left: 1px solid ${customColor.gray};
   border-right: 1px solid ${customColor.gray};
 `;
@@ -63,6 +63,7 @@ export const Wrapper = styled.div`
   align-items: flex-start;
   width: 75%;
   margin-top: 60px;
+  margin-left: auto;
+
   margin-bottom: auto;
-  height: 100%;
 `;

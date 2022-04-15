@@ -6,18 +6,23 @@ import styled from 'styled-components';
 type NavItemType = {
   name: string;
   pathName: string;
+  route: string;
 };
-export const NavItem = ({ name, pathName }: NavItemType) => {
+export const NavItem = ({ name, pathName, route }: NavItemType) => {
   return (
-    <Link href={pathName}>
-      <a style={{ textDecoration: 'none' }}>
-        <Wrapper>
-          <Typography size="24" color="gray">
+    <Wrapper>
+      <Link href={pathName}>
+        <a style={{ textDecoration: 'none' }}>
+          <Typography
+            size="24"
+            color={route === pathName ? 'black' : 'gray'}
+            fontWeight={route === pathName ? 'bold' : 'none'}
+          >
             {name}
           </Typography>
-        </Wrapper>
-      </a>
-    </Link>
+        </a>
+      </Link>
+    </Wrapper>
   );
 };
 

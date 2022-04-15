@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
@@ -9,6 +10,7 @@ type SideBarType = {
 };
 
 export const SideBar = ({ NavItemInfo, nickName }: SideBarType) => {
+  const route = useRouter();
   return (
     <Wrapper>
       <TitleWrapper>
@@ -18,7 +20,12 @@ export const SideBar = ({ NavItemInfo, nickName }: SideBarType) => {
       </TitleWrapper>
       <NavList>
         {NavItemInfo.map(({ name, pathName }, i) => (
-          <NavItem key={i} name={name} pathName={pathName} />
+          <NavItem
+            key={i}
+            name={name}
+            pathName={pathName}
+            route={route.pathname}
+          />
         ))}
       </NavList>
       <BottomNavWrapper>
