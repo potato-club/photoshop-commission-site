@@ -51,8 +51,9 @@ export const SideBarWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  width: 25%;
+  width: 20%;
   height: 100vh;
+  margin-right: auto;
   border-left: 1px solid ${customColor.gray};
   border-right: 1px solid ${customColor.gray};
 `;
@@ -61,6 +62,7 @@ export const Wrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 75%;
+  margin-top: 60px;
   margin-bottom: auto;
   height: 100%;
 `;
