@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import { JobSelectRadio, NicknameInput, TextAreaComponent, Title } from './components';
 
 export function SignUpPage() {
-  const [job, setJob] = useState('requester');
+  const [selectedJob, setSelectedJob] = useState('requester');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setJob(value);
+    setSelectedJob(value);
   };
-  useEffect(() => {
-    console.log(job);
-  },[job])
 
   const signUp = () => {
     alert('가입하기 버튼 클릭');
@@ -24,7 +21,7 @@ export function SignUpPage() {
       <Line />
       <InfoWrapper>
         <NicknameInput />
-        <JobSelectRadio job={job} onChange={onChange} />
+        <JobSelectRadio selectedJob={selectedJob} onChange={onChange} />
         <TextAreaComponent />
         <SignUpButton onClick={() => signUp()}>
           <Typography size="20" color="white">

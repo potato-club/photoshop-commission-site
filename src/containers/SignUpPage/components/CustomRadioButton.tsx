@@ -1,65 +1,26 @@
-import React from 'react';
-import { Typography } from 'src/components/Typography';
-import styled from 'styled-components';
-import { customColor } from 'src/constants/customColor';
+import React from 'react'
+import { customColor } from 'src/constants';
+import styled from "styled-components";
 type Props = {
   job: string;
+  selectedJob: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
-export function JobSelectRadio({ job, onChange }: Props) {
+export function CustomRadioButton({ job, selectedJob, onChange }:Props) {
   return (
-    <Container>
-      <LeftMargin marginLeft={10}>
-        <Typography size="20" fontWeight="bold">
-          직업
-        </Typography>
-      </LeftMargin>
-
-      <LeftMargin marginLeft={65}>
-        <Typography
-          size="16"
-          fontWeight="bold"
-          color={job === 'requester' ? 'black' : 'gray'}
-        >
-          의뢰자
-        </Typography>
-      </LeftMargin>
+    <>
       <RadioButton
         type="radio"
         name="job"
-        id="requester"
-        value="requester"
+        id={job}
+        value={job}
         onChange={onChange}
-        checked={job === 'requester'}
+        checked={job === selectedJob}
       />
-      <Label htmlFor="requester" />
-
-      <LeftMargin marginLeft={65}>
-        <Typography
-          size="16"
-          fontWeight="bold"
-          color={job === 'designer' ? 'black' : 'gray'}
-        >
-          디자이너
-        </Typography>
-      </LeftMargin>
-      <RadioButton
-        type="radio"
-        name="job"
-        id="designer"
-        value="designer"
-        onChange={onChange}
-        checked={job === 'designer'}
-      />
-      <Label htmlFor="designer" />
-    </Container>
+      <Label htmlFor={job} />
+    </>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 const Label = styled.label`
   display: flex;
@@ -75,11 +36,4 @@ const RadioButton = styled.input`
   &:checked + ${Label} {
     background-color: ${customColor.blue};
   }
-`;
-
-type LeftMarginProps = {
-  marginLeft: number;
-};
-const LeftMargin = styled.div<LeftMarginProps>`
-  margin-left: ${({ marginLeft }) => marginLeft + 'px'};
 `;
