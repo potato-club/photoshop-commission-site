@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { ChangeEvent, ChangeEventHandler } from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-
-export function TextAreaComponent() {
+type Props = {
+  setAboutMe: React.Dispatch<React.SetStateAction<string>>;
+};
+export function TextAreaComponent({ setAboutMe }: Props) {
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setAboutMe(value);
+  };
   return (
     <Container>
       <TextWrapper>
@@ -12,7 +18,10 @@ export function TextAreaComponent() {
         </Typography>
       </TextWrapper>
       <InputWrapper>
-        <TextArea placeholder="자기소개를 입력해주세요"></TextArea>
+        <TextArea
+          onChange={onChange}
+          placeholder="자기소개를 입력해주세요"
+        ></TextArea>
         <Caption>
           <Typography size="12" fontWeight="bold">
             닉네임과 자기소개는 마이페이지에서 이후에 수정가능합니다
@@ -23,10 +32,8 @@ export function TextAreaComponent() {
   );
 }
 
-
 const Container = styled.div`
   display: flex;
-  align-items: center;
 `;
 const InputWrapper = styled.div`
   position: relative;
@@ -50,7 +57,6 @@ const TextArea = styled.textarea`
   font-size: 16px;
   ::placeholder {
     font-weight: bold;
-    font-size: 16px;
     color: ${customColor.gray};
   }
   :focus {
@@ -59,6 +65,5 @@ const TextArea = styled.textarea`
 `;
 
 const TextWrapper = styled.div`
-  margin-left:-10px;
-  align-self: flex-start;
+  margin-left: -10px;
 `;

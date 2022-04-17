@@ -1,15 +1,22 @@
 import React from 'react';
-import styled  from "styled-components";
-import { Typography } from "src/components/Typography";
+import styled from 'styled-components';
+import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
-export function NicknameInput() {
+type Props = {
+  setNickname: React.Dispatch<React.SetStateAction<string>>;
+};
+export function NicknameInput({ setNickname }: Props) {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setNickname(value);
+  };
   return (
     <Container>
       <Typography size="20" fontWeight="bold">
         닉네임
       </Typography>
       <InputWrapper>
-        <Input placeholder="닉네임을 입력해주세요"></Input>
+        <Input onChange={onChange} placeholder="닉네임을 입력해주세요"></Input>
         <Caption>
           <Typography size="12" fontWeight="bold">
             최대 n글자
@@ -45,7 +52,6 @@ const Input = styled.input`
   }
   ::placeholder {
     font-weight: bold;
-    font-size: 16px;
     color: ${customColor.gray};
   }
 `;

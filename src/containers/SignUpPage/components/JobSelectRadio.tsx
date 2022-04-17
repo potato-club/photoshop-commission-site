@@ -4,9 +4,13 @@ import styled from 'styled-components';
 import { RadioButtonLabel, CustomRadioButton } from './index';
 type Props = {
   selectedJob: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setSelectedJob: React.Dispatch<React.SetStateAction<string>>;
 };
-export function JobSelectRadio({ selectedJob, onChange }: Props) {
+export function JobSelectRadio({ selectedJob, setSelectedJob }: Props) {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setSelectedJob(value);
+  };
   return (
     <Container>
       <LeftMargin>
