@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import { MainPage } from 'src/containers';
+import CardList from 'src/components/CardList';
 
 const Home: NextPage = () => {
-  return <MainPage />;
+  return <CardList/>;
 };
 
 export default Home;
