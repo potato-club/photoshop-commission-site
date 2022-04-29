@@ -1,2 +1,2 @@
 export { InfoItem } from './InfoItem';
-export { ProfileLayout } from './profileLayout';
+export { ProfileLayout } from './ProfileLayout';
