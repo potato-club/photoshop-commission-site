@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import * as S from './Header.style';
-import { Typography } from 'src/components/Typography';
+import { Typography } from '../components';
 
-const Header = () => {
+export const Header = () => {
   return (
     <>
       <S.HeaderBox>

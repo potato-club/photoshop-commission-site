@@ -1,8 +1,10 @@
 import * as C from './CardList.style';
-import Card from './Card';
 import { useState } from 'react';
+import { Card } from '../components';
 
-const CardList = () => {
+
+
+export const CardList = () => {
   const [post, setPost] = useState([
     {
       src: '',
@@ -56,7 +58,7 @@ const CardList = () => {
   return (
     <C.CardBox>
       {post
-        .filter(e =>e.state=='의뢰중' && e.id <= 8)
+        .filter(e => e.state == '의뢰중' && e.id <= 8)
         .map(element => (
           <Card
             src={element.src}

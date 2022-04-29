@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import { FaUserAlt } from 'react-icons/fa';
 import { FaBell } from 'react-icons/fa';
 
@@ -29,19 +29,27 @@ export const Icons = styled.div`
 `;
 
 export const UserImage = styled(FaUserAlt)`
-  width: 30px;
-  height: 30px;
-  color: black;
-  :hover{
-    color: white;
+  width: 20px;
+  height: 20px;
+  color: white;
+  padding: 8px 8px;
+  border: 4px solid white;
+  border-radius: 100%;
+  :hover {
+    color: gray;
+    border: 4px solid gray;
   }
 `;
 
 export const AlertImage = styled(FaBell)`
-  width: 30px;
-  height: 30px;
-  color: black;
-  :hover{
-    color: white;
+  width: 20px;
+  height: 20px;
+  color: white;
+  padding: 8px 8px;
+  border: 4px solid white;
+  border-radius: 100%;
+  :hover {
+    border: 4px solid gray;
+    color: gray;
   }
 `;

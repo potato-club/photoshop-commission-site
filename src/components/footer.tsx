@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
+import { Content } from '../components';
 import * as S from './Footer.style';
-import Content from './Content';
 
-const Footer = () => {
+export const Footer = () => {
   const [list, setlist] = useState([
     {
       theme: '인트로페이지',

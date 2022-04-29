@@ -1,7 +1,6 @@
 import bg from '../assets/image/ticket.jpg';
-import { Typography } from './Typography';
+import { Typography } from '../components';
 import * as C from './Card.style';
-import { NextPage } from 'next';
 import Link from 'next/link';
 
 type postType = {
@@ -11,7 +10,7 @@ type postType = {
   data: string;
 };
 
-const Card: NextPage<postType> = ({ theme, name, src, data }) => {
+export const Card = ({ theme, name, src, data }: postType) => {
   return (
     <C.Container>
       <C.PhotoBox>

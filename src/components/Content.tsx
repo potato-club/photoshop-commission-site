@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
 import * as S from './Footer.style';
-import { NextPage } from 'next';
 
 type ContentType = {
   theme: string;
@@ -9,7 +8,7 @@ type ContentType = {
   href: string;
 };
 
-const Content: NextPage<ContentType> = ({ theme, content, href }) => {
+export const Content = ({ theme, content, href }: ContentType) => {
   return (
     <S.ContentUl>
       <S.ContentLi>

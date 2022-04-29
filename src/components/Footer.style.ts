@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Typography } from 'src/components/Typography';
+import { Typography } from './Typography';
+
 
 
 export const Container = styled.div`
