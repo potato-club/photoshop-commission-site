@@ -1,4 +1,4 @@
 export { TitleInput } from './TitleInput';
-export { PictureInput } from './PictureInput';
+export { ImageInput } from './ImageInput';
 export { TextArea } from './TextArea';
 export { WriteButton } from './WriteButton';

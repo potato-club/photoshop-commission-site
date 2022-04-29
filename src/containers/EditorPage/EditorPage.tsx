@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
-import { TitleInput, PictureInput, TextArea, WriteButton } from './components';
+import { TitleInput, ImageInput, TextArea, WriteButton } from './components';
 
 export function EditorPage() {
+  const [title, setTitle] = useState('');
+  const [request, setRequest] = useState('');
+
   return (
     <Container>
       <Title>
-          <Typography size="40" color={'blue'} fontWeight="bold">
-            글 작성
-          </Typography>
+        <Typography size="40" color={'blue'} fontWeight="bold">
+          글 작성
+        </Typography>
       </Title>
       <InputContainer>
-        <TitleInput />
-        <PictureInput />
-        <TextArea />
-      <WriteButton />
+        <TitleInput setTitle={setTitle} />
+        <ImageInput />
+        <TextArea setRequest={setRequest} />
+        <WriteButton />
       </InputContainer>
     </Container>
   );

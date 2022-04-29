@@ -4,9 +4,12 @@ import { customColor } from 'src/constants/customColor';
 import { Typography } from 'src/components/Typography';
 
 export function WriteButton() {
+  const onClick = () => {
+    alert('버튼클릭');
+  }
   return (
     <Container>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={onClick}>
         <Typography size="20" fontWeight="bold" color="white">
           글 작성하기
         </Typography>
@@ -29,4 +32,11 @@ const ButtonWrapper = styled.div`
   height: 50px;
   background-color: ${customColor.blue};
   border-radius: 10px;
+  cursor: pointer;
+  :hover {
+    transform: scale(0.99);
+  }
+  :active {
+    transform: scale(1.01);
+  }
 `;

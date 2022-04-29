@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react'
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-
-export function TitleInput() {
+type Props = {
+  setTitle: Dispatch<SetStateAction<string>>;
+};
+export function TitleInput({ setTitle }:Props) {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
+  };
   return (
     <Container>
-        <Typography size="20" fontWeight="bold">
-          글 제목
-        </Typography>
-      <Input placeholder="제목을 입력해주세요" />
+      <Typography size="20" fontWeight="bold">
+        글 제목
+      </Typography>
+      <Input placeholder="제목을 입력해주세요" onChange={onChange}/>
     </Container>
   );
 }

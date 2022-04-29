@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-
-export function TextArea() {
+type Props = {
+  setRequest: Dispatch<SetStateAction<string>>;
+}
+export function TextArea({ setRequest }:Props) {
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setRequest(e.target.value);
+  };
   return (
     <Container>
       <TextWrapper>
@@ -11,7 +16,7 @@ export function TextArea() {
           의뢰 내용
         </Typography>
       </TextWrapper>
-      <Input placeholder="제목을 입력해주세요" />
+      <Input placeholder="제목을 입력해주세요" onChange={onChange} />
     </Container>
   );
 }
