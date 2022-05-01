@@ -1,10 +1,12 @@
-import { Blob } from 'buffer';
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-
-export function ImageInput() {
+type Props = {
+  images: FormData | undefined;
+  setImages: Dispatch<SetStateAction<FormData | undefined>>;
+};
+export function ImageInput({ images, setImages }: Props) {
   const [fileNames, setFileNames] = useState<string[]>([]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -12,6 +14,7 @@ export function ImageInput() {
     if (!e.target.files) return;
 
     const uploadFiles = e.target.files;
+    const formData = new FormData();
 
     const fileNames = [];
 
@@ -24,9 +27,11 @@ export function ImageInput() {
     if (uploadFiles) {
       for (let i = 0; i < uploadFiles.length; ++i) {
         fileNames.push(uploadFiles[i].name);
+        formData.append('files', uploadFiles[i]);
       }
     }
     setFileNames(fileNames);
+    setImages(formData);
   };
 
   return (

@@ -1,11 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
 import { TitleInput, ImageInput, TextArea, WriteButton } from './components';
 
 export function EditorPage() {
   const [title, setTitle] = useState('');
+  const [images, setImages] = useState<FormData>();
   const [request, setRequest] = useState('');
+  useEffect(() => {
+    console.log(title);
+  }, [title]);
+
+  useEffect(() => {
+    console.log(request);
+  }, [request]);
+
+  // useEffect(() => {
+  //   if (images) {
+  //     for (let value of images.values()) {
+  //       console.log(value.name);
+  //     }
+  //   }
+  // }, [images]);
 
   return (
     <Container>
@@ -16,7 +32,7 @@ export function EditorPage() {
       </Title>
       <InputContainer>
         <TitleInput setTitle={setTitle} />
-        <ImageInput />
+        <ImageInput images={images} setImages={setImages} />
         <TextArea setRequest={setRequest} />
         <WriteButton />
       </InputContainer>
