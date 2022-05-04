@@ -2,26 +2,33 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
 import { TitleInput, ImageInput, TextArea, WriteButton } from './components';
+import axios from 'axios';
+
+const testUrl = 'http://localhost:3000/board/create';
 
 export function EditorPage() {
   const [title, setTitle] = useState('');
   const [images, setImages] = useState<FormData>();
   const [request, setRequest] = useState('');
-  useEffect(() => {
-    console.log(title);
-  }, [title]);
 
-  useEffect(() => {
-    console.log(request);
-  }, [request]);
-
-  // useEffect(() => {
-  //   if (images) {
-  //     for (let value of images.values()) {
-  //       console.log(value.name);
-  //     }
-  //   }
-  // }, [images]);
+  const onClick = () => {
+    // axios({
+    //   method: 'POST',
+    //   url: testUrl,
+    //   data: {
+    //     title,
+    //     contentsPicture: images,
+    //     contentsText: request,
+    //   },
+    // })
+    //   .then(res => {
+    //     console.log(res);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    console.log("클릭");
+  };
 
   return (
     <Container>
@@ -34,7 +41,7 @@ export function EditorPage() {
         <TitleInput setTitle={setTitle} />
         <ImageInput images={images} setImages={setImages} />
         <TextArea setRequest={setRequest} />
-        <WriteButton />
+        <WriteButton onClick={onClick} />
       </InputContainer>
     </Container>
   );

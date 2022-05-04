@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import { Typography } from 'src/components/Typography';
-
-export function WriteButton() {
-  const onClick = () => {
-    alert('버튼클릭');
-  }
+type Props = {
+  onClick : () => void;
+}
+export function WriteButton({ onClick }: Props) {
   return (
     <Container>
       <ButtonWrapper onClick={onClick}>
