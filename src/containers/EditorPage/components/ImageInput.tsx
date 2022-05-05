@@ -21,6 +21,7 @@ export function ImageInput({ images, setImages }: Props) {
     if (uploadFiles!.length > 3) {
       // 이미지 3개이상 선택했을때
       alert('이미지는 최대 3개까지 등록할 수 있습니다.');
+      setFileNames([]);
       return;
     }
 
