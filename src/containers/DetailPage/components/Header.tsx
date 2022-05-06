@@ -2,8 +2,13 @@ import React from 'react'
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-
-export function Header() {
+type Props = {
+  Title: string;
+  Writer: string;
+  Date: Date;
+  State: string;
+}
+export function Header({Title, Writer, Date, State}:any) {
   return (
     <Container>
       <Typography size="12" color="gray">
@@ -11,20 +16,20 @@ export function Header() {
       </Typography>
       <SpaceBetween>
         <Typography size="32" color="black" fontWeight="bold">
-          부자처럼 나오게 해주세요
+          {Title}
         </Typography>
         <WriterWrapper>
           <Typography size="16" color="black">
-            양파먹는소녀
+            {Writer}
           </Typography>
           <Typography size="12" color="black">
-            2022-03-18
+            {/* {Date} */}
           </Typography>
         </WriterWrapper>
       </SpaceBetween>
       <SpaceBetween>
         <Typography size="20" color="purple">
-          의뢰중
+          {State}
         </Typography>
         <Typography size="12" color="gray">
           신고하기

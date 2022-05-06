@@ -1,29 +1,33 @@
-import React from 'react'
+import React from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
-
-export function Comment() {
+import { ReplyType } from 'src/dummy/detailDummy';
+type Props = {
+  Writer: string;
+  Date: Date;
+  Text: string;
+  good: number;
+  bad: number;
+  reply: ReplyType[];
+};
+export function Comment({ Writer, Date, Text, good, bad, reply }: Props) {
   return (
     <CommentWrapper>
-      <Date>
-        <Typography size='12'>2022-03-18</Typography>
-      </Date>
-      <Writer>
+      <DateWrapper>
+        <Typography size="12">2022-03-18</Typography>
+      </DateWrapper>
+      <WriterWrapper>
         <Typography size="16" fontWeight="bold">
-          고잼
+          {Writer}
         </Typography>
         <Typography size="12" color="gray">
-          25분전
+          {/* {Date} */}
         </Typography>
-      </Writer>
+      </WriterWrapper>
       <Contents>
-        <Typography size="16">
-          일단은 더미데이터말고 디자인틀만 짜놨습니다
-          <br />
-          더마데이터로 구성하는건 틀 짜놓고 다시 구현하겠습니다~
-        </Typography>
+        <Typography size="16">{Text}</Typography>
       </Contents>
       <Reply>
         <FaThumbsUp fontSize={12} />
@@ -43,12 +47,12 @@ const CommentWrapper = styled.div`
   flex-direction: column;
   gap: 16px 0;
 `;
-const Date = styled.div`
+const DateWrapper = styled.div`
   position: absolute;
   top: 12px;
   right: 12px;
 `;
-const Writer = styled.div`
+const WriterWrapper = styled.div`
   display: flex;
   align-items: flex-end;
   gap: 0 4px;

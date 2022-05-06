@@ -1,10 +1,10 @@
 import React from 'react'
-import DetailPage from 'src/containers/DetailPage/DetailPage';
-
+import { DetailPage } from 'src/containers';
+import { DetailDummy } from 'src/dummy/detailDummy';
 export default function detail() {
   return (
     <div>
-      <DetailPage />
+      <DetailPage data={DetailDummy} />
     </div>
   );
 }

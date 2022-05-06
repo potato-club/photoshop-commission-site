@@ -3,23 +3,41 @@ import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import { Contents, Header, CommentHeader, Comment } from './components';
 import { Typography } from 'src/components/Typography';
-
-export default function DetailPage() {
+import { DetailType } from 'src/dummy/detailDummy';
+type Props = {
+  data: DetailType;
+};
+export function DetailPage({ data }: Props) {
   return (
     <Container>
       <Wrapper>
-        <Header />
-        <Contents />
+        <Header
+          Title={data.Title}
+          Writer={data.Writer}
+          Date={data.Date}
+          State={data.State}
+        />
+        <Contents Text={data.Text} />
         <CommentContainer>
-          <CommentHeader />
-          <Comment />
-          <Comment />
-          <Comment />
+          <CommentHeader TotalComment={data.TotalComment} />
+          {data.Comments.map(comment => (
+            <Comment
+              key={comment.id}
+              Writer={comment.Writer}
+              Date={comment.Date}
+              Text={comment.Text}
+              good={comment.good}
+              bad={comment.bad}
+              reply={comment.reply}
+            ></Comment>
+          ))}
         </CommentContainer>
         <InputWrapper>
           <Input placeholder="작성할 댓글을 입력해주세요..." />
           <SubMitButton>
-            <Typography size='16' color='white'>입력</Typography>
+            <Typography size="16" color="white">
+              입력
+            </Typography>
           </SubMitButton>
         </InputWrapper>
       </Wrapper>
