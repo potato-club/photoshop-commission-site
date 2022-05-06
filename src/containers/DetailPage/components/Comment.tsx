@@ -4,36 +4,41 @@ import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import { ReplyType } from 'src/dummy/detailDummy';
+import { formatDate } from 'src/utils/formatDate';
 type Props = {
   Writer: string;
   Date: Date;
   Text: string;
-  good: number;
-  bad: number;
-  reply: ReplyType[];
+  Good: number;
+  Bad: number;
+  Reply: ReplyType[];
 };
-export function Comment({ Writer, Date, Text, good, bad, reply }: Props) {
+export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
   return (
     <CommentWrapper>
       <DateWrapper>
-        <Typography size="12">2022-03-18</Typography>
+        <Typography size="12">{formatDate(Date)}</Typography>
       </DateWrapper>
       <WriterWrapper>
         <Typography size="16" fontWeight="bold">
           {Writer}
         </Typography>
         <Typography size="12" color="gray">
-          {/* {Date} */}
+          {formatDate(Date)}
         </Typography>
       </WriterWrapper>
       <Contents>
         <Typography size="16">{Text}</Typography>
       </Contents>
-      <Reply>
-        <FaThumbsUp fontSize={12} />
-        <FaThumbsDown fontSize={12} />
-        <Typography size="12">답글쓰기</Typography>
-      </Reply>
+      <ReplyWrapper>
+        <Reaction>
+          <FaThumbsUp fontSize={12} />{Good}
+        </Reaction>
+        <Reaction>
+          <FaThumbsDown fontSize={12} />{Bad}
+        </Reaction>
+        <Typography size="12" fontWeight='bold' color='gray'>답글쓰기</Typography>
+      </ReplyWrapper>
     </CommentWrapper>
   );
 }
@@ -61,8 +66,14 @@ const Contents = styled.div`
   width: 640px;
 `;
 
-const Reply = styled.div`
+const ReplyWrapper = styled.div`
   display: flex;
   gap: 0 30px;
+  align-items: flex-end;
+`;
+
+const Reaction = styled.div`
+  display: flex;
   align-items: center;
+  gap: 0 8px;
 `;

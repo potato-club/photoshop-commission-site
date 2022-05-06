@@ -2,17 +2,18 @@ import React from 'react'
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
+import { formatDate } from "src/utils/formatDate";
 type Props = {
   Title: string;
   Writer: string;
   Date: Date;
   State: string;
 }
-export function Header({Title, Writer, Date, State}:any) {
+export function Header({ Title, Writer, Date, State }: Props) {
   return (
     <Container>
       <Typography size="12" color="gray">
-        {`<< 홈 < 의뢰중 게시글`}
+        {`<< 홈 < ${State} 게시글`}
       </Typography>
       <SpaceBetween>
         <Typography size="32" color="black" fontWeight="bold">
@@ -23,7 +24,7 @@ export function Header({Title, Writer, Date, State}:any) {
             {Writer}
           </Typography>
           <Typography size="12" color="black">
-            {/* {Date} */}
+            {formatDate(Date)}
           </Typography>
         </WriterWrapper>
       </SpaceBetween>
