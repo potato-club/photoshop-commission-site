@@ -6,7 +6,7 @@ import styled from 'styled-components';
 export function CommentHeader() {
   return (
     <Container>
-      <Typography size="20">댓글</Typography>
+      <Typography size="20" fontWeight='bold'>댓글</Typography>
       <Typography size="16" color="blue">
         (4)
       </Typography>

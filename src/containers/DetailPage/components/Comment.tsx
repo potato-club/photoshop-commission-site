@@ -7,6 +7,9 @@ import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 export function Comment() {
   return (
     <CommentWrapper>
+      <Date>
+        <Typography size='12'>2022-03-18</Typography>
+      </Date>
       <Writer>
         <Typography size="16" fontWeight="bold">
           고잼
@@ -32,6 +35,7 @@ export function Comment() {
 }
 
 const CommentWrapper = styled.div`
+  position: relative;
   height: 120px;
   padding: 12px 16px;
   border-bottom: 1px solid ${customColor.gray};
@@ -39,7 +43,11 @@ const CommentWrapper = styled.div`
   flex-direction: column;
   gap: 16px 0;
 `;
-
+const Date = styled.div`
+  position: absolute;
+  top: 12px;
+  right: 12px;
+`;
 const Writer = styled.div`
   display: flex;
   align-items: flex-end;
