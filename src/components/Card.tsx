@@ -1,5 +1,5 @@
 import bg from '../assets/image/ticket.jpg';
-import { Typography } from '../components';
+import { Typography } from '../components/index';
 import * as C from './Card.style';
 import Link from 'next/link';
 

@@ -1,25 +1,9 @@
-import { useState } from 'react';
 import { FaGithub } from 'react-icons/fa';
-import { Content } from '../components';
+import { dummyFooter } from 'src/dummy/dummyFooter';
+import { Content } from '../components/index';
 import * as S from './Footer.style';
 
 export const Footer = () => {
-  const [list, setlist] = useState([
-    {
-      theme: '인트로페이지',
-      href: '/',
-    },
-    {
-      theme: 'HOME',
-      content: ['의뢰전', '의뢰중', '의뢰완료'],
-      href: '/home',
-    },
-    {
-      theme: 'ABOUT',
-      content: ['공지사항', '이용약관'],
-      href: '/about',
-    },
-  ]);
 
   return (
     <>
@@ -27,7 +11,7 @@ export const Footer = () => {
         <S.Wrapper>
           <S.ContentWrapper>
             <S.ContentBox>
-              {list.map((element, index) => (
+              {dummyFooter.map((element, index) => (
                 <Content
                   theme={element.theme}
                   content={element.content}

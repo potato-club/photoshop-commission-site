@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import * as S from './Header.style';
-import { Typography } from '../components';
+import { Typography } from '../components/index';
 
 export const Header = () => {
   return (

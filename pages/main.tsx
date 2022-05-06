@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
-import Link from 'next/link';
-import CardList from 'src/components/CardList';
-import { Typography } from 'src/components/Typography';
+import { Typography, SideBox, CardList } from '../src/components/index';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
   return (
@@ -24,15 +23,17 @@ const Home: NextPage = () => {
           <Typography size="24" fontWeight="900">
             의뢰전
           </Typography>
-          <Link href="/" passHref>
-            <A>
-              <Typography size="16" fontWeight="900">
-                더보기{'>>'}
-              </Typography>
-            </A>
-          </Link>
+          <Plus>
+            <Link href={'/before'} passHref>
+              <A>
+                <Typography size="16" fontWeight="900">
+                  더보기
+                </Typography>
+              </A>
+            </Link>
+          </Plus>
         </Title>
-        <Hr></Hr>
+        <Hr />
         <CardList />
       </RequestBox>
       <RequestBox>
@@ -40,15 +41,17 @@ const Home: NextPage = () => {
           <Typography size="24" fontWeight="900">
             의뢰중
           </Typography>
-          <Link href="/" passHref>
-            <A>
-              <Typography size="16" fontWeight="900">
-                더보기 {'>>'}
-              </Typography>
-            </A>
-          </Link>
+          <Plus>
+            <Link href={'/doing'} passHref>
+              <A>
+                <Typography size="16" fontWeight="900">
+                  더보기
+                </Typography>
+              </A>
+            </Link>
+          </Plus>
         </Title>
-        <Hr></Hr>
+        <Hr />
         <CardList />
       </RequestBox>
       <RequestBox>
@@ -56,28 +59,20 @@ const Home: NextPage = () => {
           <Typography size="24" fontWeight="900">
             의뢰완료
           </Typography>
-          <Link href="/" passHref>
-            <A>
-              <Typography size="16" fontWeight="900">
-                더보기 {'>>'}
-              </Typography>
-            </A>
-          </Link>
+          <Plus>
+            <Link href={'/complete'} passHref>
+              <A>
+                <Typography size="16" fontWeight="900">
+                  더보기
+                </Typography>
+              </A>
+            </Link>
+          </Plus>
         </Title>
-        <Hr></Hr>
+        <Hr />
         <CardList />
       </RequestBox>
-
-      <AdvertiseBox>
-        <TopBox>
-          <Typography size="16">임송재 님</Typography>
-          <Typography size="16">평점</Typography>
-          <Typography size="16">3.8/5.0</Typography>
-        </TopBox>
-        <BottomBox>
-          <Typography size="16">Top</Typography>
-        </BottomBox>
-      </AdvertiseBox>
+      <SideBox />
     </Container>
   );
 };
@@ -125,31 +120,18 @@ const Title = styled.div`
   justify-content: space-between;
 `;
 
-const A = styled.a`
+const Plus = styled.span`
   text-decoration: none;
+  margin: 0px 15px 0 0;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Hr = styled.hr`
   margin-bottom: 0;
 `;
 
-const AdvertiseBox = styled.div`
-  position: fixed;
-  width: 110px;
-  height: 137px;
-  display: flex;
-  flex-direction: column;
-  top: 350px;
-  right: 235px;
-  text-align: center;
-`;
-
-const TopBox = styled.div`
-  width: 100%;
-  box-shadow: 1px 1px 1px 1px;
-
-`;
-const BottomBox = styled.div`
-  width: 100%;
-  background-color: rgba(7, 104, 159, 1);
+const A = styled.a`
+  text-decoration: none;
 `;
