@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
@@ -13,7 +13,22 @@ type Props = {
   Bad: number;
   Reply: ReplyType[];
 };
+const limitText = 150;
 export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
+  const [limit, setLimit] = useState(150);
+  const toggleMoreView = (str: any, limit: any) => {
+    return {
+      string: str.slice(0, limit),
+      displayMoreView: str.length > limit,
+    };
+  };
+
+  const onClickMore = (str: any) => {
+    if (toggleMoreView(str, limit).displayMoreView) {
+      setLimit(str.length);
+    } else setLimit(limitText);
+  };
+
   return (
     <CommentWrapper>
       <DateWrapper>
@@ -28,16 +43,35 @@ export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
         </Typography>
       </WriterWrapper>
       <Contents>
-        <Typography size="16">{Text}</Typography>
+        <TextWrapper>
+          <Typography size="16">
+            {toggleMoreView(Text, limit).string}
+            <ToggleWrapper onClick={() => onClickMore(Text)}>
+              {toggleMoreView(Text, limit).displayMoreView ? (
+                <Typography size="12" color="gray">
+                  ...더보기
+                </Typography>
+              ) : (
+                <Typography size="12" color="gray">
+                  닫기
+                </Typography>
+              )}
+            </ToggleWrapper>
+          </Typography>
+        </TextWrapper>
       </Contents>
       <ReplyWrapper>
         <Reaction>
-          <FaThumbsUp fontSize={12} />{Good}
+          <FaThumbsUp fontSize={12} />
+          {Good}
         </Reaction>
         <Reaction>
-          <FaThumbsDown fontSize={12} />{Bad}
+          <FaThumbsDown fontSize={12} />
+          {Bad}
         </Reaction>
-        <Typography size="12" fontWeight='bold' color='gray'>답글쓰기</Typography>
+        <Typography size="12" fontWeight="bold" color="gray">
+          답글쓰기
+        </Typography>
       </ReplyWrapper>
     </CommentWrapper>
   );
@@ -45,12 +79,10 @@ export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
 
 const CommentWrapper = styled.div`
   position: relative;
-  height: 120px;
   padding: 12px 16px;
   border-bottom: 1px solid ${customColor.gray};
   display: flex;
   flex-direction: column;
-  gap: 16px 0;
 `;
 const DateWrapper = styled.div`
   position: absolute;
@@ -59,17 +91,30 @@ const DateWrapper = styled.div`
 `;
 const WriterWrapper = styled.div`
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   gap: 0 4px;
+  height: 20px;
 `;
 const Contents = styled.div`
-  width: 640px;
+  display: flex;
+  align-items: flex-end;
 `;
-
+const TextWrapper = styled.div`
+  margin-top: 4px;
+  display: flex;
+  > :nth-child(1) {
+    width: 600px;
+    div {
+      display: inline;
+    }
+  }
+`;
+const ToggleWrapper = styled.div``;
 const ReplyWrapper = styled.div`
   display: flex;
   gap: 0 30px;
   align-items: flex-end;
+  height: 20px;
 `;
 
 const Reaction = styled.div`

@@ -3,14 +3,17 @@ import React from 'react';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 type Props = {
+  ImageUrls: string[];
   Text : string;
 }
-export function Contents({ Text } : Props) {
+export function Contents({ Text, ImageUrls } : Props) {
   return (
     <Container>
-      <ImgWrapper>
-        <Image width={630} height={470} src="/schedule.jpeg" alt="img" />
-      </ImgWrapper>
+      <ImgContainer>
+        {ImageUrls.map((data, index) => (
+          <Image width={630} height={470} key={index} src={data} alt="img" />
+        ))}
+      </ImgContainer>
       <TextWrapper>
         <Typography size="16">{Text}</Typography>
       </TextWrapper>
@@ -25,8 +28,10 @@ const Container = styled.div`
   margin-bottom: 200px;
 `;
 
-const ImgWrapper = styled.div`
+const ImgContainer = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 40px 0;
   justify-content: center;
   align-items: center;
 `;

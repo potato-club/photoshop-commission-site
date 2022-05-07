@@ -17,7 +17,7 @@ export function DetailPage({ data }: Props) {
           Date={data.Date}
           State={data.State}
         />
-        <Contents Text={data.Text} />
+        <Contents ImageUrls={data.ImageUrls} Text={data.Text} />
         <CommentContainer>
           <CommentHeader TotalComment={data.TotalComment} />
           {data.Comments.map(comment => (
