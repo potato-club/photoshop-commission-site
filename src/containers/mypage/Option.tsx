@@ -1,5 +1,28 @@
 import { MyPageLayout } from './components/MyPageLayout';
-
+import { CustomButton } from './components/option/CustomButton';
+import * as S from './Option.style';
 export const Option = () => {
-  return <MyPageLayout>옵션</MyPageLayout>;
+  const handleLogout = () => {};
+  return (
+    <MyPageLayout>
+      <S.Container>
+        <S.ButtonWrapper>
+          <CustomButton
+            handleClick={handleLogout}
+            style={{ color: 'blue', borderColor: 'blue' }}
+          >
+            로그아웃
+          </CustomButton>
+        </S.ButtonWrapper>
+        <S.ButtonWrapper>
+          <CustomButton
+            handleClick={handleLogout}
+            style={{ color: 'white', backgroundColor: 'blue' }}
+          >
+            회원탈퇴
+          </CustomButton>
+        </S.ButtonWrapper>
+      </S.Container>
+    </MyPageLayout>
+  );
 };
