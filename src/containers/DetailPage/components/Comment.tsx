@@ -22,7 +22,7 @@ export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
   );
 
   const onClickMore = (str: string) => {
-    if (str.length > limit) {
+    if (toggleText === ' ...더보기') {
       setLimit(str.length);
       setToggleText(' 닫기');
     } else {
