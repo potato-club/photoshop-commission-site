@@ -1,11 +1,21 @@
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { IoCreateOutline } from 'react-icons/io5';
+import { IoCreateOutline, IoSaveOutline } from 'react-icons/io5';
+import { Dispatch, SetStateAction } from 'react';
 
-type ProfileLayoutType = React.PropsWithChildren<{ title: string }>;
+type ProfileLayoutType = React.PropsWithChildren<{
+  title: string;
+  isChangeState: boolean;
+  handleClickButton: () => void;
+}>;
 
-export const ProfileLayout = ({ title, children }: ProfileLayoutType) => {
+export const ProfileLayout = ({
+  title,
+  children,
+  isChangeState,
+  handleClickButton,
+}: ProfileLayoutType) => {
   return (
     <Container>
       <HeaderWrapper>
@@ -14,8 +24,8 @@ export const ProfileLayout = ({ title, children }: ProfileLayoutType) => {
             {title}
           </Typography>
         </TitleWrapper>
-        <ButtonWrapper onClick={() => {}}>
-          <IoCreateOutline />
+        <ButtonWrapper onClick={() => handleClickButton()}>
+          {isChangeState ? <IoSaveOutline /> : <IoCreateOutline />}
         </ButtonWrapper>
       </HeaderWrapper>
       <Box>{children}</Box>
@@ -60,7 +70,8 @@ const ButtonWrapper = styled.div`
 const Box = styled.div`
   border: 1px solid ${customColor.gray};
   border-radius: 10px;
-  padding: 30px 50px;
+  width: 100%;
+  height: 100%;
   div {
     margin-top: 4px;
     margin-bottom: 4px;

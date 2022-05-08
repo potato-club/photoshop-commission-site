@@ -8,4 +8,19 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   margin-bottom: 50px;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ItemWrapper = styled.div`
+  padding: 30px 50px;
+`;
+
+export const IntroduceBoxWrapper = styled.div`
+  padding: 10px 20px;
+`;
+export const CustomIntroduceInput = styled.textarea`
+  width: 100%;
+  height: 100px;
+  resize: none;
 `;

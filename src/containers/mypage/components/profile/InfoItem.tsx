@@ -1,11 +1,11 @@
+import { Dispatch, SetStateAction } from 'react';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 
-type InfoItemType = {
+type InfoItemType = React.PropsWithChildren<{
   header: string;
-  item: string;
-};
-export const InfoItem = ({ header, item }: InfoItemType) => {
+}>;
+export const InfoItem = ({ header, children }: InfoItemType) => {
   return (
     <Wrapper>
       <HeaderWrapper>
@@ -13,15 +13,7 @@ export const InfoItem = ({ header, item }: InfoItemType) => {
           {header}
         </Typography>
       </HeaderWrapper>
-      <ItemWrapper>
-        <Typography
-          size="16"
-          color={header !== '평점' ? 'black' : 'blue'}
-          fontWeight="bold"
-        >
-          {item}
-        </Typography>
-      </ItemWrapper>
+      <ItemWrapper>{children}</ItemWrapper>
     </Wrapper>
   );
 };
