@@ -13,20 +13,26 @@ type Props = {
   Bad: number;
   Reply: ReplyType[];
 };
-const limitText = 150;
 export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
-  const [limit, setLimit] = useState(150);
-  const toggleMoreView = (str: any, limit: any) => {
-    return {
-      string: str.slice(0, limit),
-      displayMoreView: str.length > limit,
-    };
+  const limitNumber = 150;
+  const [limit, setLimit] = useState(limitNumber);
+  const showToggle = Text.length >= limit ? true : false;
+  const [toggleText, setToggleText] = useState<' ...더보기' | ' 닫기'>(
+    ' ...더보기',
+  );
+
+  const onClickMore = (str: string) => {
+    if (str.length > limit) {
+      setLimit(str.length);
+      setToggleText(' 닫기');
+    } else {
+      setLimit(limitNumber);
+      setToggleText(' ...더보기');
+    }
   };
 
-  const onClickMore = (str: any) => {
-    if (toggleMoreView(str, limit).displayMoreView) {
-      setLimit(str.length);
-    } else setLimit(limitText);
+  const sliceText = (str: string) => {
+    return str.slice(0, limit);
   };
 
   return (
@@ -45,18 +51,14 @@ export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
       <Contents>
         <TextWrapper>
           <Typography size="16">
-            {toggleMoreView(Text, limit).string}
-            <ToggleWrapper onClick={() => onClickMore(Text)}>
-              {toggleMoreView(Text, limit).displayMoreView ? (
+            {sliceText(Text)}
+            {showToggle && (
+              <ToggleWrapper onClick={() => onClickMore(Text)}>
                 <Typography size="12" color="gray">
-                  ...더보기
+                  {toggleText}
                 </Typography>
-              ) : (
-                <Typography size="12" color="gray">
-                  닫기
-                </Typography>
-              )}
-            </ToggleWrapper>
+              </ToggleWrapper>
+            )}
           </Typography>
         </TextWrapper>
       </Contents>
