@@ -33,13 +33,15 @@ export const CommentList = ({ list }: Props) => {
 };
 
 const Container = styled.div`
+  height: 100%;
   width: 100%;
 `;
 const ListWrapper = styled.div`
   min-height: 80px;
+  height: 100%;
+
   width: 100%;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
   padding-left: 10px;
   padding-right: 10px;
@@ -48,19 +50,44 @@ const ListWrapper = styled.div`
 
 const LeftWrapper = styled.div`
   width: 90%;
+  min-height: 80px;
+
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-around;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  justify-content: center;
 `;
 
-const ContentWrapper = styled.div``;
+const ContentWrapper = styled.div`
+  width: 100%;
+  height: 60%;
+  margin-bottom: 10px;
+  :hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  div {
+    padding-top: 3px;
+    text-overflow: ellipsis;
+    height: 70%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+`;
 
 const BoardWrapper = styled.div`
-  margin-top: 10px;
+  width: 50%;
+  height: 40%;
+
+  div {
+    padding-top: 3px;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    white-space: nowrap;
+  }
 `;
 
 const RightWrapper = styled.div`

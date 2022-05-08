@@ -23,6 +23,9 @@ export const Profile = () => {
         if (nickname.length > 8) {
           alert('닉네임은 8글자 이하로 설정해주세요');
           return;
+        } else if (nickname.length === 0) {
+          alert('닉네임을 입력해주세요.');
+          return;
         }
         //Todo: API에 저장하기
 

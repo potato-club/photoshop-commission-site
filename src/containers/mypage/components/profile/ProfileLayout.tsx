@@ -63,7 +63,7 @@ const ButtonWrapper = styled.div`
   border-radius: 10px;
   padding: 3px;
   &:hover {
-    border: 1px solid ${customColor.gray};
+    color: ${customColor.blue};
   }
 `;
 
