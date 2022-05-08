@@ -16,7 +16,7 @@ type Props = {
 export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
   const limitNumber = 150;
   const [limit, setLimit] = useState(limitNumber);
-  const showToggle = Text.length > limit ? true : false;
+  const showToggle = Text.length >= limit ? true : false;
   const [toggleText, setToggleText] = useState<' ...더보기' | ' 닫기'>(
     ' ...더보기',
   );
