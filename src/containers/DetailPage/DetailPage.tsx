@@ -27,7 +27,6 @@ export function DetailPage({ data }: Props) {
               Date={comment.Date}
               Text={comment.Text}
               Good={comment.Good}
-              Bad={comment.Bad}
               Reply={comment.Reply}
             ></Comment>
           ))}

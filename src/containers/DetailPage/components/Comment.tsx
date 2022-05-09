@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+import { FaThumbsUp } from 'react-icons/fa';
 import { ReplyType } from 'src/dummy/detailDummy';
 import { formatDate } from 'src/utils/formatDate';
 type Props = {
@@ -10,16 +10,19 @@ type Props = {
   Date: Date;
   Text: string;
   Good: number;
-  Bad: number;
   Reply: ReplyType[];
 };
-export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
+export function Comment({ Writer, Date, Text, Good, Reply }: Props) {
   const limitNumber = 150;
   const [limit, setLimit] = useState(limitNumber);
   const showToggle = Text.length >= limit ? true : false;
   const [toggleText, setToggleText] = useState<' ...더보기' | ' 닫기'>(
     ' ...더보기',
   );
+
+  // Todo API 에서 클릭했는지 정보를 받아오고, Click 시 체크했는지 여부랑 숫자 변경하는 식으로 구현해야함.
+  // Todo 지금은 useState 로 그냥 디자인만 구현한거임.
+  const [likeComment, setLikeComment] = useState<boolean>(false);
 
   const onClickMore = (str: string) => {
     if (toggleText === ' ...더보기') {
@@ -44,37 +47,36 @@ export function Comment({ Writer, Date, Text, Good, Bad, Reply }: Props) {
         <Typography size="16" fontWeight="bold">
           {Writer}
         </Typography>
-        <Typography size="12" color="gray">
-          {formatDate(Date)}
-        </Typography>
       </WriterWrapper>
-      <Contents>
-        <TextWrapper>
-          <Typography size="16">
-            {sliceText(Text)}
-            {showToggle && (
-              <ToggleWrapper onClick={() => onClickMore(Text)}>
-                <Typography size="12" color="gray">
-                  {toggleText}
-                </Typography>
-              </ToggleWrapper>
-            )}
-          </Typography>
-        </TextWrapper>
-      </Contents>
-      <ReplyWrapper>
-        <Reaction>
-          <FaThumbsUp fontSize={12} />
-          {Good}
-        </Reaction>
-        <Reaction>
-          <FaThumbsDown fontSize={12} />
-          {Bad}
-        </Reaction>
-        <Typography size="12" fontWeight="bold" color="gray">
-          답글쓰기
+      <TextWrapper>
+        <Typography size="16">
+          {sliceText(Text)}
+          {showToggle && (
+            <CursorPointer onClick={() => onClickMore(Text)}>
+              <Typography size="12" color="gray">
+                {toggleText}
+              </Typography>
+            </CursorPointer>
+          )}
         </Typography>
-      </ReplyWrapper>
+      </TextWrapper>
+      <ReactionContainer>
+        <ReactionWrapper>
+          <IConWrapper likeComment={likeComment}>
+            <FaThumbsUp
+              fontSize={12}
+              fill={likeComment ? 'red' : ''}
+              onClick={() => setLikeComment(!likeComment)}
+            />
+          </IConWrapper>
+          {Good}
+        </ReactionWrapper>
+        <CursorPointer>
+          <Typography size="12" fontWeight="bold" color="gray">
+            답글쓰기
+          </Typography>
+        </CursorPointer>
+      </ReactionContainer>
     </CommentWrapper>
   );
 }
@@ -97,13 +99,10 @@ const WriterWrapper = styled.div`
   gap: 0 4px;
   height: 20px;
 `;
-const Contents = styled.div`
+const TextWrapper = styled.div`
+  margin-top: 8px;
   display: flex;
   align-items: flex-end;
-`;
-const TextWrapper = styled.div`
-  margin-top: 4px;
-  display: flex;
   > :nth-child(1) {
     width: 600px;
     div {
@@ -111,16 +110,27 @@ const TextWrapper = styled.div`
     }
   }
 `;
-const ToggleWrapper = styled.div``;
-const ReplyWrapper = styled.div`
+const CursorPointer = styled.div`
+  cursor: pointer;
+`;
+const ReactionContainer = styled.div`
+  margin-top: 8px;
   display: flex;
   gap: 0 30px;
   align-items: flex-end;
   height: 20px;
 `;
 
-const Reaction = styled.div`
+const ReactionWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 0 8px;
+`;
+
+type IConPros = {
+  likeComment: boolean;
+};
+const IConWrapper = styled.div<IConPros>`
+  transform: ${({ likeComment }) => likeComment && 'scale(1.5)'};
+  transition: all 300ms ease-in-out;
 `;
