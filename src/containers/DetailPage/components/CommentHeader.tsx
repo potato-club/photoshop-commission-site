@@ -24,5 +24,4 @@ const Container = styled.div`
   gap: 0 4px;
   padding-bottom: 12px;
   padding-left: 16px;
-  border-bottom: 1px solid ${customColor.gray};
 `;

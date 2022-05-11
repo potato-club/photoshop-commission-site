@@ -8,9 +8,11 @@ type CommentType = {
 };
 
 export type ReplyType = {
+  id: number;
   Writer: string;
   Date: Date;
   Text: string;
+  Good: number;
 };
 
 export type DetailType = {
@@ -23,7 +25,8 @@ export type DetailType = {
   TotalComment: number;
   Comments: CommentType[];
 };
-
+let id = 1;
+let replyId = 1;
 export const DetailDummy: DetailType = {
   Title: '부자처럼 나오게 해주세요',
   State: '의뢰중',
@@ -34,39 +37,75 @@ export const DetailDummy: DetailType = {
   TotalComment: 4,
   Comments: [
     {
-      id: 1,
+      id: id++,
       Writer: '고잼',
       Date: new Date(2022, 4, 7, 3, 50),
       Text: '생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 이 글자까지 보였으면 성공',
       Good: 20,
-      Reply: [{ Writer: '김가나다', Date: new Date(), Text: '가나다라마바사' }],
+      Reply: [
+        {
+          id: replyId++,
+          Writer: '김가나다',
+          Date: new Date(),
+          Text: '가나다라마바사',
+          Good: 1,
+        },
+      ],
     },
     {
-      id: 2,
+      id: id++,
       Writer: '고잼',
       Date: new Date(2022, 4, 7, 3, 50),
       Text: '딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻게 될까딱 150자면 어떻',
       Good: 2,
       Reply: [
-        { Writer: '김가나다', Date: new Date(), Text: '가나다라마바사' },
-        { Writer: '김가나다', Date: new Date(), Text: '가나다라마바사' },
+        {
+          id: replyId++,
+          Writer: '김가나다',
+          Date: new Date(),
+          Text: '생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 아아아아아아아생각해보니 펼치기 기능도 구현해야하네 일단 길게 써보자 ',
+          Good: 2,
+        },
+        {
+          id: replyId++,
+          Writer: '김가나다',
+          Date: new Date(),
+          Text: '가나다라마바사',
+          Good: 3,
+        },
       ],
     },
     {
-      id: 3,
+      id: id++,
       Writer: '양파먹는소녀',
       Date: new Date(2022, 4, 7, 3, 50),
       Text: '근데 답글은 어떻게 보여주지',
       Good: 12,
-      Reply: [{ Writer: '김가나다', Date: new Date(), Text: '가나다라마바사' }],
+      Reply: [
+        {
+          id: replyId++,
+          Writer: '김가나다',
+          Date: new Date(),
+          Text: '가나다라마바사',
+          Good: 4,
+        },
+      ],
     },
     {
-      id: 4,
+      id: id++,
       Writer: '양파먹는소녀',
       Date: new Date(2022, 4, 7, 3, 50),
       Text: '이 페이지 디자인 회의때 다같이 다시 잡는게 좋을거같기도함. 임의로했다가 디자인 변경사항 생기면 좀 그러니까',
       Good: 520,
-      Reply: [{ Writer: '김가나다', Date: new Date(), Text: '가나다라마바사' }],
+      Reply: [
+        {
+          id: replyId++,
+          Writer: '김가나다',
+          Date: new Date(),
+          Text: '가나다라마바사',
+          Good: 5,
+        },
+      ],
     },
   ],
 };

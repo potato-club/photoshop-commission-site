@@ -1,34 +1,39 @@
+
 import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import { Contents, Header, CommentHeader, Comment } from './components';
 import { Typography } from 'src/components/Typography';
 import { DetailType } from 'src/dummy/detailDummy';
+import { CommentTest } from './components/CommentTest';
+import { ReplyTest } from './components/ReplyTest';
 type Props = {
   data: DetailType;
 };
 export function DetailPage({ data }: Props) {
+  const {Title, State, Writer, Date, ImageUrls, Text, TotalComment, Comments} = data;
   return (
     <Container>
       <Wrapper>
         <Header
-          Title={data.Title}
-          Writer={data.Writer}
-          Date={data.Date}
-          State={data.State}
+          Title={Title}
+          Writer={Writer}
+          Date={Date}
+          State={State}
         />
-        <Contents ImageUrls={data.ImageUrls} Text={data.Text} />
+        <Contents ImageUrls={ImageUrls} Text={Text} />
         <CommentContainer>
-          <CommentHeader TotalComment={data.TotalComment} />
-          {data.Comments.map(comment => (
-            <Comment
+          <CommentHeader TotalComment={TotalComment} />
+          {Comments.map(comment => (
+            <ReplyTest
               key={comment.id}
               Writer={comment.Writer}
               Date={comment.Date}
               Text={comment.Text}
               Good={comment.Good}
               Reply={comment.Reply}
-            ></Comment>
+              type='Comment'
+            ></ReplyTest>
           ))}
         </CommentContainer>
         <InputWrapper>
