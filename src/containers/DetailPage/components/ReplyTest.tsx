@@ -43,7 +43,7 @@ export function ReplyTest({ Writer, Date, Text, Good, type, Reply }: Props) {
   return (
     <Container type={type}>
       <Wrapper type={type}>
-        <DateWrapper>
+        <DateWrapper type={type}>
           <Typography size="12">{formatDate(Date)}</Typography>
         </DateWrapper>
         <WriterWrapper>
@@ -102,24 +102,25 @@ type StyleProps = {
 };
 const Container = styled.div<StyleProps>`
   position: relative;
-  padding: 12px 16px;
+  padding: ${({type}) => type === 'Comment' && `12px 16px`};
   /* border-top: 1px solid ${customColor.gray}; */
-  border-top: ${({ type }) => type === 'Comment' ? `1px solid ${customColor.gray}` : ""};
+  border-top: ${({ type }) => type === 'Comment' && `1px solid ${customColor.gray}`};
   display: flex;
   flex-direction: column;
+  margin-top: ${({type}) => type === 'Reply' && '20px'};
 `;
 
 type WrapperStyled = {
   type: 'Comment' | 'Reply';
 };
 const Wrapper = styled.div<WrapperStyled>`
-  padding-left: ${({ type }) => (type === 'Reply' ? '80px' : '0px')};
+  padding-left: ${({ type }) => (type === 'Reply' && '80px')};
+  position: relative;
 `;
 
-const DateWrapper = styled.div`
+const DateWrapper = styled.div<StyleProps>`
   position: absolute;
-  top: 12px;
-  right: 12px;
+  right: 0;
 `;
 const WriterWrapper = styled.div`
   display: flex;

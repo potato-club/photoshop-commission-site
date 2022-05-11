@@ -81,6 +81,7 @@ const Input = styled.input`
   padding: 0 80px 0 16px;
   outline: none;
   border: none;
+  border-top: 1px solid ${customColor.gray};
   border-bottom: 1px solid ${customColor.gray};
   font-size: 16px;
   ::placeholder {
