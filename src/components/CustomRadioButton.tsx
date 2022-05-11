@@ -6,6 +6,7 @@ import styled from 'styled-components';
 type Props = {
   id: string;
   label: string;
+  name: string;
   selectedValue: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   gap: number;
@@ -13,8 +14,21 @@ type Props = {
   marginRight?: number;
 };
 
+/**
+ * 
+ * @param id: string;
+ * @param label: string 
+ * @param name: string (그룹 이름)
+ * @param selectedValue: string;
+ * @param onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+ * @param gap: number (글자와 버튼 사이의 거리);
+ * @param marginLeft?: number;
+ * @param marginRight?: number;
+ * 
+ */
+
 export default function CustomRadioButton(props: Props) {
-  const {id, label, selectedValue, onChange, gap, marginLeft, marginRight} = props;
+  const {id, label, name, selectedValue, onChange, gap, marginLeft, marginRight} = props;
   return (
     <Container gap={gap} marginLeft={marginLeft} marginRight={marginRight}>
       <Typography
@@ -26,7 +40,7 @@ export default function CustomRadioButton(props: Props) {
       </Typography>
       <RadioButton
         type="radio"
-        name="job"
+        name={name}
         id={id}
         value={id}
         onChange={onChange}

@@ -21,14 +21,17 @@ export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
       <CustomRadioButton
         id="requester"
         label="의뢰자"
+        name="job"
         selectedValue={selectedJob}
         onChange={onChange}
         gap={10}
         marginRight={20}
       />
+
       <CustomRadioButton
         id="designer"
         label="디자이너"
+        name="job"
         selectedValue={selectedJob}
         onChange={onChange}
         gap={10}
