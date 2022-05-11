@@ -3,7 +3,7 @@ import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import {
-  JobSelectRadio,
+  JobSelectInput,
   NicknameInput,
   TextAreaComponent,
   Title,
@@ -24,7 +24,7 @@ export function SignUpPage() {
       <Line />
       <InfoWrapper>
         <NicknameInput setNickname={setNickname} />
-        <JobSelectRadio
+        <JobSelectInput
           selectedJob={selectedJob}
           setSelectedJob={setSelectedJob}
         />

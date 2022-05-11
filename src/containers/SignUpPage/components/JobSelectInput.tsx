@@ -1,42 +1,37 @@
 import React from 'react';
+import CustomRadioButton from 'src/components/CustomRadioButton';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
-import { RadioButtonLabel, CustomRadioButton } from './index';
 type Props = {
   selectedJob: string;
   setSelectedJob: React.Dispatch<React.SetStateAction<string>>;
 };
-export function JobSelectRadio({ selectedJob, setSelectedJob }: Props) {
+export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSelectedJob(value);
   };
   return (
     <Container>
-      <LeftMargin>
+      <TextWrapper>
         <Typography size="20" fontWeight="bold">
           직업
         </Typography>
-      </LeftMargin>
-      <RadioButtonLabel
-        text="의뢰자"
-        job="requester"
-        selectedJob={selectedJob}
+      </TextWrapper>
+      <CustomRadioButton
+        id="requester"
+        label="의뢰자"
+        selectedValue={selectedJob}
+        onChange={onChange}
+        gap={10}
+        marginRight={20}
       />
       <CustomRadioButton
-        job="requester"
-        selectedJob={selectedJob}
+        id="designer"
+        label="디자이너"
+        selectedValue={selectedJob}
         onChange={onChange}
-      />
-      <RadioButtonLabel
-        text="디자이너"
-        job="designer"
-        selectedJob={selectedJob}
-      />
-      <CustomRadioButton
-        job="designer"
-        selectedJob={selectedJob}
-        onChange={onChange}
+        gap={10}
       />
     </Container>
   );
@@ -47,6 +42,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const LeftMargin = styled.div`
+const TextWrapper = styled.div`
   margin-left: 10px;
+  margin-right: 65px;
 `;
