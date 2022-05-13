@@ -2,11 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
-import { Contents, Header, CommentHeader, Comment } from './components';
-import { Typography } from 'src/components/Typography';
+import { Contents, Header, CommentHeader, Comment, CustomInput } from './components';
 import { DetailType } from 'src/dummy/detailDummy';
-import { CommentTest } from './components/CommentTest';
-import { ReplyTest } from './components/ReplyTest';
 type Props = {
   data: DetailType;
 };
@@ -25,7 +22,7 @@ export function DetailPage({ data }: Props) {
         <CommentContainer>
           <CommentHeader TotalComment={TotalComment} />
           {Comments.map(comment => (
-            <ReplyTest
+            <Comment
               key={comment.id}
               Writer={comment.Writer}
               Date={comment.Date}
@@ -33,17 +30,10 @@ export function DetailPage({ data }: Props) {
               Good={comment.Good}
               Reply={comment.Reply}
               type='Comment'
-            ></ReplyTest>
+            />
           ))}
         </CommentContainer>
-        <InputWrapper>
-          <Input placeholder="작성할 댓글을 입력해주세요..." />
-          <SubMitButton>
-            <Typography size="16" color="white">
-              입력
-            </Typography>
-          </SubMitButton>
-        </InputWrapper>
+        <CustomInput />
       </Wrapper>
     </Container>
   );

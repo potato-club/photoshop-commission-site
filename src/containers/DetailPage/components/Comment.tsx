@@ -5,22 +5,27 @@ import styled from 'styled-components';
 import { FaThumbsUp } from 'react-icons/fa';
 import { ReplyType } from 'src/dummy/detailDummy';
 import { formatDate } from 'src/utils/formatDate';
+import { CustomInput } from './CustomInput';
 type Props = {
   Writer: string;
   Date: Date;
   Text: string;
   Good: number;
-  Reply: ReplyType[];
+  type: 'Comment' | 'Reply';
+  Reply?: ReplyType[];
 };
-export function Comment({ Writer, Date, Text, Good, Reply }: Props) {
+export function Comment({ Writer, Date, Text, Good, type, Reply }: Props) {
+  // ! 댓글, 대댓글 모두 필요한 로직.
   const limitNumber = 150;
   const [limit, setLimit] = useState(limitNumber);
   const showToggle = Text.length >= limit ? true : false;
   const [toggleText, setToggleText] = useState<' ...더보기' | ' 닫기'>(
     ' ...더보기',
   );
+  const [openInput, setOpenInput] = useState<boolean>(false);
 
-  // Todo API 에서 클릭했는지 정보를 받아오고, Click 시 체크했는지 여부랑 숫자 변경하는 식으로 구현해야함.
+
+  // Todo API 에서 클릭했는지 정보를 받아오고, Click 시 체크했는지 여부랑 숫자 변경하는 식으로 구현해야함.`
   // Todo 지금은 useState 로 그냥 디자인만 구현한거임.
   const [likeComment, setLikeComment] = useState<boolean>(false);
 
@@ -39,59 +44,88 @@ export function Comment({ Writer, Date, Text, Good, Reply }: Props) {
   };
 
   return (
-    <CommentWrapper>
-      <DateWrapper>
-        <Typography size="12">{formatDate(Date)}</Typography>
-      </DateWrapper>
-      <WriterWrapper>
-        <Typography size="16" fontWeight="bold">
-          {Writer}
-        </Typography>
-      </WriterWrapper>
-      <TextWrapper>
-        <Typography size="16">
-          {sliceText(Text)}
-          {showToggle && (
-            <CursorPointer onClick={() => onClickMore(Text)}>
-              <Typography size="12" color="gray">
-                {toggleText}
+    <Container type={type}>
+      <Wrapper type={type}>
+        <DateWrapper type={type}>
+          <Typography size="12">{formatDate(Date)}</Typography>
+        </DateWrapper>
+        <WriterWrapper>
+          <Typography size="16" fontWeight="bold">
+            {Writer}
+          </Typography>
+        </WriterWrapper>
+        <TextWrapper>
+          <Typography size="16">
+            {sliceText(Text)}
+            {showToggle && (
+              <CursorPointer onClick={() => onClickMore(Text)}>
+                <Typography size="12" color="gray">
+                  {toggleText}
+                </Typography>
+              </CursorPointer>
+            )}
+          </Typography>
+        </TextWrapper>
+        <ReactionContainer>
+          <ReactionWrapper>
+            <IConWrapper likeComment={likeComment}>
+              <FaThumbsUp
+                fontSize={12}
+                fill={likeComment ? 'red' : ''}
+                onClick={() => setLikeComment(!likeComment)}
+              />
+            </IConWrapper>
+            {Good}
+          </ReactionWrapper>
+          {type === 'Comment' && (
+            <CursorPointer onClick={() => setOpenInput(!openInput)}>
+              <Typography size="12" fontWeight="bold" color="gray">
+                답글쓰기
               </Typography>
             </CursorPointer>
           )}
-        </Typography>
-      </TextWrapper>
-      <ReactionContainer>
-        <ReactionWrapper>
-          <IConWrapper likeComment={likeComment}>
-            <FaThumbsUp
-              fontSize={12}
-              fill={likeComment ? 'red' : ''}
-              onClick={() => setLikeComment(!likeComment)}
-            />
-          </IConWrapper>
-          {Good}
-        </ReactionWrapper>
-        <CursorPointer>
-          <Typography size="12" fontWeight="bold" color="gray">
-            답글쓰기
-          </Typography>
-        </CursorPointer>
-      </ReactionContainer>
-    </CommentWrapper>
+        </ReactionContainer>
+      </Wrapper>
+      {openInput && <CustomInput/>}
+      {Reply?.map(data => (
+        <Comment
+          key={data.id}
+          Writer={data.Writer}
+          Date={data.Date}
+          Text={data.Text}
+          Good={data.Good}
+          type="Reply"
+        />
+      ))}
+    </Container>
   );
 }
 
-const CommentWrapper = styled.div`
+type StyleProps = {
+  type: 'Comment' | 'Reply';
+};
+const Container = styled.div<StyleProps>`
   position: relative;
-  padding: 12px 16px;
-  border-bottom: 1px solid ${customColor.gray};
+  border-top: ${({ type }) =>
+    type === 'Comment' && `1px solid ${customColor.gray}`};
   display: flex;
   flex-direction: column;
+
 `;
-const DateWrapper = styled.div`
+
+type WrapperStyled = {
+  type: 'Comment' | 'Reply';
+};
+const Wrapper = styled.div<WrapperStyled>`
+  padding-left: ${({ type }) => type === 'Reply' && '80px'};
+  padding: ${({ type }) => type === 'Comment' ? "12px 16px" : "12px 0 12px 92px"};
+  position: relative;
+`;
+
+const DateWrapper = styled.div<StyleProps>`
   position: absolute;
-  top: 12px;
-  right: 12px;
+  right: 16px;
+  top : 12px;
 `;
 const WriterWrapper = styled.div`
   display: flex;
