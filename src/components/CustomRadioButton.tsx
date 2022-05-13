@@ -15,20 +15,29 @@ type Props = {
 };
 
 /**
- * 
+ *
  * @param id: string;
- * @param label: string 
- * @param name: string (그룹 이름)
- * @param selectedValue: string;
- * @param onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+ * @param label: string
+ * @param name: string (라디오버튼 그룹 이름)
+ * @param selectedValue: string; (useState string 값)
+ * @param onChange: (e => setUseState(e.target.value))
  * @param gap: number (글자와 버튼 사이의 거리);
  * @param marginLeft?: number;
  * @param marginRight?: number;
- * 
+ *
  */
 
 export default function CustomRadioButton(props: Props) {
-  const {id, label, name, selectedValue, onChange, gap, marginLeft, marginRight} = props;
+  const {
+    id,
+    label,
+    name,
+    selectedValue,
+    onChange,
+    gap,
+    marginLeft,
+    marginRight,
+  } = props;
   return (
     <Container gap={gap} marginLeft={marginLeft} marginRight={marginRight}>
       <Typography

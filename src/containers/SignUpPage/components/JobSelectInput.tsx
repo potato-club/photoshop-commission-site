@@ -7,10 +7,6 @@ type Props = {
   setSelectedJob: React.Dispatch<React.SetStateAction<string>>;
 };
 export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setSelectedJob(value);
-  };
   return (
     <Container>
       <TextWrapper>
@@ -23,7 +19,7 @@ export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
         label="의뢰자"
         name="job"
         selectedValue={selectedJob}
-        onChange={onChange}
+        onChange={e => setSelectedJob(e.target.value)}
         gap={10}
         marginRight={20}
       />
@@ -33,7 +29,7 @@ export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
         label="디자이너"
         name="job"
         selectedValue={selectedJob}
-        onChange={onChange}
+        onChange={e => setSelectedJob(e.target.value)}
         gap={10}
       />
     </Container>

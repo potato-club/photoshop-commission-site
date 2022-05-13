@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
-import { SignUpPage } from 'src/containers';
+
 const Home: NextPage = () => {
-  return <SignUpPage />;
+  return <div>Index Page</div>;
 };
 
 export default Home;
