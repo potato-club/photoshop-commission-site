@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
-import { TitleInput, ImageInput, TextArea, WriteButton } from './components';
+import { TitleInput, ImageInput, TextArea, WriteButton, SecretSelectInput } from './components';
 import axios from 'axios';
 
-const testUrl = 'http://localhost:3000/board/create';
+// const testUrl = 'http://localhost:3000/board/create';
 
 export function EditorPage() {
   const [title, setTitle] = useState('');
   const [images, setImages] = useState<FormData>();
   const [request, setRequest] = useState('');
+  const [secret, setSecret] = useState('noSecret');
 
   const onClick = () => {
     // axios({
@@ -40,6 +41,7 @@ export function EditorPage() {
       <InputContainer>
         <TitleInput setTitle={setTitle} />
         <ImageInput images={images} setImages={setImages} />
+        <SecretSelectInput secret={secret} setSecret={setSecret} />
         <TextArea setRequest={setRequest} />
         <WriteButton onClick={onClick} />
       </InputContainer>

@@ -1,10 +1,7 @@
 import type { NextPage } from 'next';
-import { EditorPage } from 'src/containers';
 
 const Home: NextPage = () => {
-  return (
-    <EditorPage />
-  );
+  return <div>Index Page</div>;
 };
 
 export default Home;
