@@ -50,21 +50,26 @@ export function EditorPage() {
 }
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-bottom: 160px;
 `;
 const Title = styled.div`
-  margin-top: 100px;
+  display: flex;
+  width: 100%;
+  max-width: 900px;
+  justify-content: center;
+  margin: 100px 0;
 `;
 
 const InputContainer = styled.div`
-  margin-top: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 1178px;
+  width: 100%;
   gap: 80px 0;
 `;

@@ -11,11 +11,11 @@ export function TextArea({ setRequest }:Props) {
   };
   return (
     <Container>
-      <TextWrapper>
+      <TitleWrapper>
         <Typography size="20" fontWeight="bold">
           의뢰 내용
         </Typography>
-      </TextWrapper>
+      </TitleWrapper>
       <Input placeholder="제목을 입력해주세요" onChange={onChange} />
     </Container>
   );
@@ -23,16 +23,24 @@ export function TextArea({ setRequest }:Props) {
 
 const Container = styled.div`
   display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  white-space: nowrap;
 `;
-const TextWrapper = styled.div`
-  margin-left: -20px;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  min-width: 100px;
+  justify-content: flex-end;
 `;
+
 const Input = styled.textarea`
   margin-left: 30px;
   border-radius: 10px;
+  width: 100%;
   outline: none;
   border-bottom: 1px solid ${customColor.black};
-  width: 780px;
   height: 600px;
   font-size: 16px;
   padding: 20px;

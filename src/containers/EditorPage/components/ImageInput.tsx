@@ -37,9 +37,11 @@ export function ImageInput({ images, setImages }: Props) {
 
   return (
     <Container>
-      <Typography size="20" fontWeight="bold">
-        의뢰할 사진을 등록
-      </Typography>
+      <TitleWrapper>
+        <Typography size="20" fontWeight="bold">
+          의뢰사진
+        </Typography>
+      </TitleWrapper>
       <Input
         id="imgUpload"
         type="file"
@@ -65,9 +67,16 @@ export function ImageInput({ images, setImages }: Props) {
 
 const Container = styled.div`
   display: flex;
-  align-items: center;
-  width: 1130px;
+  align-items: center;  width: 100%;
+  max-width: 900px;
 `;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  min-width: 100px;
+  justify-content: flex-end;
+`;
+
 
 const Input = styled.input`
   display: none;

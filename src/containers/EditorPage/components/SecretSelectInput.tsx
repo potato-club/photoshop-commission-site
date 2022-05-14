@@ -1,5 +1,5 @@
-import React from 'react'
-import CustomRadioButton from 'src/components/CustomRadioButton'
+import React from 'react';
+import CustomRadioButton from 'src/components/CustomRadioButton';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 type Props = {
@@ -9,11 +9,11 @@ type Props = {
 export function SecretSelectInput({ secret, setSecret }: Props) {
   return (
     <Container>
-      <TextWrapper>
+      <TitleWrapper>
         <Typography size="20" fontWeight="bold">
           공개여부
         </Typography>
-      </TextWrapper>
+      </TitleWrapper>
       <CustomRadioButton
         id="noSecret"
         label="공개"
@@ -38,9 +38,12 @@ export function SecretSelectInput({ secret, setSecret }: Props) {
 
 const Container = styled.div`
   display: flex;
-  width: 950px;
+  width: 100%;
+  max-width: 900px;
 `;
 
-const TextWrapper = styled.div`
-  margin-left: 10px;
+const TitleWrapper = styled.div`
+  display: flex;
+  min-width: 100px;
+  justify-content: flex-end;
 `;

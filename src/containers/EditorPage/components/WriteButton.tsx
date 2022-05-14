@@ -18,7 +18,8 @@ export function WriteButton({ onClick }: Props) {
 }
 
 const Container = styled.div`
-  width: 920px;
+  width: 100%;
+  max-width: 900px;
   display: flex;
   justify-content: flex-end;
 `;
