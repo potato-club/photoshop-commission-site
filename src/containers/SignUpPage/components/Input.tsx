@@ -12,9 +12,11 @@ export function NicknameInput({ setNickname }: Props) {
   };
   return (
     <Container>
-      <Typography size="20" fontWeight="bold">
-        닉네임
-      </Typography>
+      <LeftMargin>
+        <Typography size="20" fontWeight="bold">
+          닉네임
+        </Typography>
+      </LeftMargin>
       <InputWrapper>
         <Input onChange={onChange} placeholder="닉네임을 입력해주세요"></Input>
         <Caption>
@@ -30,6 +32,8 @@ export function NicknameInput({ setNickname }: Props) {
 const Container = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+  max-width: 800px;
 `;
 
 const InputWrapper = styled.div`
@@ -60,4 +64,8 @@ const Caption = styled.div`
   position: absolute;
   top: 35px;
   right: 0;
+`;
+
+const LeftMargin = styled.div`
+  margin-left: 12px;
 `;

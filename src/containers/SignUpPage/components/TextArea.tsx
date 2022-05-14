@@ -12,11 +12,9 @@ export function TextAreaComponent({ setAboutMe }: Props) {
   };
   return (
     <Container>
-      <TextWrapper>
         <Typography size="20" fontWeight="bold">
           자기소개
         </Typography>
-      </TextWrapper>
       <InputWrapper>
         <TextArea
           onChange={onChange}
@@ -34,25 +32,32 @@ export function TextAreaComponent({ setAboutMe }: Props) {
 
 const Container = styled.div`
   display: flex;
+  width: 100%;
+  max-width: 800px;
+  white-space: nowrap;
 `;
 const InputWrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
 `;
 
 const Caption = styled.div`
   position: absolute;
   top: 345px;
   right: 0;
+  div {
+    right: 0;
+  }
 `;
 
 const TextArea = styled.textarea`
   border-radius: 10px;
-  width: 600px;
   height: 330px;
   padding: 5px 10px;
+  box-sizing: border-box;
   margin-left: 40px;
   font-size: 16px;
   ::placeholder {
@@ -62,8 +67,5 @@ const TextArea = styled.textarea`
   :focus {
     outline: none;
   }
-`;
-
-const TextWrapper = styled.div`
-  margin-left: -10px;
+  resize: none;
 `;

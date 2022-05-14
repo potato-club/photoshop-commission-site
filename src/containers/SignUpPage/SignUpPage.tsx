@@ -41,22 +41,26 @@ export function SignUpPage() {
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 100vw;
+  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 160px;
 `;
 
 const Line = styled.div`
-  width: 1178px;
+  width: 100%;
+  max-width: 1178px;
   border-bottom: 1px solid ${customColor.gray};
-  margin-top: 20px;
-  margin-bottom: 80px;
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 80px;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 80px;
 `;
 
 const SignUpButton = styled.div`

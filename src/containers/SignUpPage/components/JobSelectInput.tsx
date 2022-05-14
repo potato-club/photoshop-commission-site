@@ -9,11 +9,11 @@ type Props = {
 export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
   return (
     <Container>
-      <TextWrapper>
+      <LeftMargin>
         <Typography size="20" fontWeight="bold">
           직업
         </Typography>
-      </TextWrapper>
+      </LeftMargin>
       <CustomRadioButton
         id="requester"
         label="의뢰자"
@@ -21,6 +21,7 @@ export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
         selectedValue={selectedJob}
         onChange={e => setSelectedJob(e.target.value)}
         gap={10}
+        marginLeft={65}
         marginRight={20}
       />
 
@@ -39,9 +40,10 @@ export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
 const Container = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
+  max-width: 800px;
 `;
 
-const TextWrapper = styled.div`
-  margin-left: 10px;
-  margin-right: 65px;
+const LeftMargin = styled.div`
+  margin-left: 16px;
 `;
