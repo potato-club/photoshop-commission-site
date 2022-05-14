@@ -138,7 +138,7 @@ const TextWrapper = styled.div`
   display: flex;
   align-items: flex-end;
   > :nth-child(1) {
-    width: 600px;
+    max-width: 600px;
     div {
       display: inline;
     }
