@@ -21,6 +21,7 @@ export type DetailType = {
   Writer: string;
   Date: Date;
   ImageUrls: string[];
+  Secret: 'secret' | 'noSecret';
   Text: string;
   TotalComment: number;
   Comments: CommentType[];
@@ -33,6 +34,7 @@ export const DetailDummy: DetailType = {
   Writer: '더미글쓴이',
   Date: new Date(2022, 4, 7, 0, 49),
   ImageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
+  Secret: 'noSecret',
   Text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
   TotalComment: 4,
   Comments: [

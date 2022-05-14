@@ -8,17 +8,12 @@ type Props = {
   data: DetailType;
 };
 export function DetailPage({ data }: Props) {
-  const {Title, State, Writer, Date, ImageUrls, Text, TotalComment, Comments} = data;
+  const {Title, State, Writer, Date, ImageUrls, Secret, Text, TotalComment, Comments} = data;
   return (
     <Container>
       <Wrapper>
-        <Header
-          Title={Title}
-          Writer={Writer}
-          Date={Date}
-          State={State}
-        />
-        <Contents ImageUrls={ImageUrls} Text={Text} />
+        <Header Title={Title} Writer={Writer} Date={Date} State={State} />
+        <Contents ImageUrls={ImageUrls} Text={Text} Secret={Secret} />
         <CommentContainer>
           <CommentHeader TotalComment={TotalComment} />
           {Comments.map(comment => (
@@ -29,7 +24,7 @@ export function DetailPage({ data }: Props) {
               Text={comment.Text}
               Good={comment.Good}
               Reply={comment.Reply}
-              type='Comment'
+              type="Comment"
             />
           ))}
         </CommentContainer>

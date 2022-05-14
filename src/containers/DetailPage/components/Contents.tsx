@@ -4,16 +4,17 @@ import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 type Props = {
   ImageUrls: string[];
-  Text : string;
-}
-export function Contents({ Text, ImageUrls } : Props) {
+  Text: string;
+  Secret: 'secret' | 'noSecret';
+};
+export function Contents({ Text, ImageUrls, Secret } : Props) {
   return (
     <Container>
-      <ImgContainer>
+      {Secret === 'noSecret' && <ImgContainer>
         {ImageUrls.map((data, index) => (
           <Image width={630} height={470} key={index} src={data} alt="img" />
         ))}
-      </ImgContainer>
+      </ImgContainer>}
       <TextWrapper>
         <Typography size="16">{Text}</Typography>
       </TextWrapper>
