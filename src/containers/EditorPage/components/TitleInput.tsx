@@ -11,11 +11,11 @@ export function TitleInput({ setTitle }:Props) {
   };
   return (
     <Container>
-      <TitleWrapper>
+      <LeftMargin>
         <Typography size="20" fontWeight="bold">
           글 제목
         </Typography>
-      </TitleWrapper>
+      </LeftMargin>
       <Input placeholder="제목을 입력해주세요" onChange={onChange} />
     </Container>
   );
@@ -29,11 +29,6 @@ const Container = styled.div`
   white-space: nowrap;
 `;
 
-const TitleWrapper = styled.div`
-  display: flex;
-  min-width: 100px;
-  justify-content: flex-end;
-`;
 const Input = styled.input`
   margin-left: 20px;
   border: none;
@@ -47,4 +42,8 @@ const Input = styled.input`
   ::placeholder {
     color: ${customColor.gray};
   }
+`;
+
+const LeftMargin = styled.div`
+  margin-left: 12px;
 `;

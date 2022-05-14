@@ -37,11 +37,9 @@ export function ImageInput({ images, setImages }: Props) {
 
   return (
     <Container>
-      <TitleWrapper>
         <Typography size="20" fontWeight="bold">
           의뢰사진
         </Typography>
-      </TitleWrapper>
       <Input
         id="imgUpload"
         type="file"
@@ -69,12 +67,6 @@ const Container = styled.div`
   display: flex;
   align-items: center;  width: 100%;
   max-width: 900px;
-`;
-
-const TitleWrapper = styled.div`
-  display: flex;
-  min-width: 100px;
-  justify-content: flex-end;
 `;
 
 

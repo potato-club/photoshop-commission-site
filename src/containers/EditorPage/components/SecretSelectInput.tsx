@@ -9,11 +9,9 @@ type Props = {
 export function SecretSelectInput({ secret, setSecret }: Props) {
   return (
     <Container>
-      <TitleWrapper>
         <Typography size="20" fontWeight="bold">
           공개여부
         </Typography>
-      </TitleWrapper>
       <CustomRadioButton
         id="noSecret"
         label="공개"
@@ -42,8 +40,3 @@ const Container = styled.div`
   max-width: 900px;
 `;
 
-const TitleWrapper = styled.div`
-  display: flex;
-  min-width: 100px;
-  justify-content: flex-end;
-`;
