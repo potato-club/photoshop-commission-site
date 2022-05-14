@@ -10,7 +10,7 @@ export function EditorPage() {
   const [title, setTitle] = useState('');
   const [images, setImages] = useState<FormData>();
   const [request, setRequest] = useState('');
-  const [secret, setSecret] = useState('noSecret');
+  const [secret, setSecret] = useState<string>('noSecret');
 
   const onClick = () => {
     // axios({
@@ -28,7 +28,15 @@ export function EditorPage() {
     //   .catch(error => {
     //     console.log(error);
     //   });
-    console.log("클릭");
+    if(!title) {
+      alert("제목을 입력해주세요");
+      return;
+    }
+    if(!images) {
+      alert("사진을 등록해주세요");
+      return;
+    }
+    alert("등록완료");
   };
 
   return (
