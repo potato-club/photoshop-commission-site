@@ -2,20 +2,23 @@ import * as C from './CardList.style';
 import { Card } from '../components/index';
 import { dummyList } from '../dummy/dummyList';
 
-export const CardList = () => {
+type CardListType = {
+  offset: number;
+  limit: number;
+};
+
+export const CardList = ({ offset, limit }: CardListType) => {
   return (
     <C.CardBox>
-      {dummyList
-        .filter(e => e.state == '의뢰중' && e.id <= 8)
-        .map(element => (
-          <Card
-            src={element.src}
-            theme={element.theme}
-            name={element.name}
-            data={element.data}
-            key={element.id}
-          />
-        ))}
+      {dummyList.slice(offset, offset + limit).map(e => (
+        <Card
+          src={e.src}
+          theme={e.theme}
+          name={e.name}
+          data={e.data}
+          key={e.id}
+        />
+      ))}
     </C.CardBox>
   );
 };

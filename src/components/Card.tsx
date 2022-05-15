@@ -25,6 +25,7 @@ export const Card = ({ theme, name, src, data }: postType) => {
           <C.A>
             <Typography size="16" color="black">
               배경 좀 지워주세요
+              {theme}
             </Typography>
           </C.A>
         </Link>

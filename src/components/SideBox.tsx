@@ -35,19 +35,18 @@ export default SideBox;
 
 const AdvertiseBox = styled.div`
   position: fixed;
-  width: 130px;
-  height: 137px;
+  width: 120px;
   display: flex;
   flex-direction: column;
-  top: 500px;
-  left: 1700px;
+  top: 250px;
+  left: 1360px;
   text-align: center;
 `;
 
 const TopBox = styled.div`
   margin-bottom: 10px;
   width: 100%;
-  box-shadow: 1px 1px 1px 1px;
+  box-shadow: gray 1px 1px 1px 1px;
   padding: 15px 15px;
   border-radius: 25px;
 `;
@@ -56,6 +55,7 @@ const BottomBtn = styled.button`
   background-color: rgba(7, 104, 159, 1);
   padding: 3px;
   border-radius: 25px;
+  border: 0;
 `;
 
 const User = styled(Typography)`
