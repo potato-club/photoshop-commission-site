@@ -6,6 +6,7 @@ import { FaThumbsUp } from 'react-icons/fa';
 import { ReplyType } from 'src/dummy/detailDummy';
 import { formatDate } from 'src/utils/formatDate';
 import { CustomInput } from './CustomInput';
+
 type Props = {
   Writer: string;
   Date: Date;
@@ -70,7 +71,7 @@ export function Comment({ Writer, Date, Text, Good, type, Reply }: Props) {
           <ReactionWrapper>
             <IConWrapper likeComment={likeComment}>
               <FaThumbsUp
-                fontSize={12}
+                size={12}
                 fill={likeComment ? 'red' : ''}
                 onClick={() => setLikeComment(!likeComment)}
               />
@@ -86,7 +87,7 @@ export function Comment({ Writer, Date, Text, Good, type, Reply }: Props) {
           )}
         </ReactionContainer>
       </Wrapper>
-      {openInput && <CustomInput/>}
+      {openInput && <CustomInput type={'Comment'}/>}
       {Reply?.map(data => (
         <Comment
           key={data.id}
@@ -106,8 +107,7 @@ type StyleProps = {
 };
 const Container = styled.div<StyleProps>`
   position: relative;
-  border-top: ${({ type }) =>
-    type === 'Comment' && `1px solid ${customColor.gray}`};
+  border-top: ${({ type }) => type === 'Comment' && `1px solid ${customColor.gray}`};
   display: flex;
   flex-direction: column;
 

@@ -28,7 +28,8 @@ export function DetailPage({ data }: Props) {
             />
           ))}
         </CommentContainer>
-        <CustomInput />
+        <Line />
+        <CustomInput type='Board'/>
       </Wrapper>
     </Container>
   );
@@ -85,4 +86,9 @@ const SubMitButton = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${customColor.blue};
+`;
+
+const Line = styled.div`
+  margin-bottom: 20px;
+  border-bottom: 1px solid ${customColor.gray};
 `;
