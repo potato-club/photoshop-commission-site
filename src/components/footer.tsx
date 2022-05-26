@@ -1,17 +1,18 @@
 import { FaGithub } from 'react-icons/fa';
-import { dummyFooter } from 'src/dummy/dummyFooter';
+import { FooterList } from 'src/constants/footer/FooterList';
+import { Email } from 'src/constants/footer/FooterEmail';
 import { Content } from '../components/index';
+
 import * as S from './Footer.style';
 
 export const Footer = () => {
-
   return (
     <>
       <S.Container>
         <S.Wrapper>
           <S.ContentWrapper>
             <S.ContentBox>
-              {dummyFooter.map((element, index) => (
+              {FooterList.map((element, index) => (
                 <Content
                   theme={element.theme}
                   content={element.content}
@@ -24,7 +25,7 @@ export const Footer = () => {
           </S.ContentWrapper>
           <S.EmailBox>
             <S.EmailWrap>
-              <S.Email>이메일 thdwo999@naver.com</S.Email>
+              <S.Email>{Email.email}</S.Email>
               <FaGithub />
             </S.EmailWrap>
           </S.EmailBox>

@@ -1,16 +1,17 @@
 import Link from 'next/link';
 import * as S from './Header.style';
 import { Typography } from '../components/index';
+import { HeaderName } from 'src/constants/header/HeaderName';
 
 export const Header = () => {
   return (
     <>
       <S.HeaderBox>
         <S.ContentBox>
-          <Link href="/" passHref>
+          <Link href="/main" passHref>
             <S.Theme>
               <Typography color="white" size="32" fontWeight="900">
-                가나다 포토샵
+                {HeaderName.name}
               </Typography>
             </S.Theme>
           </Link>

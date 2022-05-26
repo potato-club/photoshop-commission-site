@@ -1,20 +1,31 @@
 import { NextPage } from 'next';
 import styled from 'styled-components';
-import { CardList, Typography, SideBox } from 'src/components/index';
+import {
+  CardList,
+  Typography,
+  SideBox,
+  CustomPagination,
+} from 'src/components/index';
 import { dummyFilter } from 'src/dummy/dummyFilter';
+import { dummyList } from 'src/dummy/dummyList';
+import { all } from 'src/constants/all/all';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import React, { useState } from 'react';
-import Page from 'src/components/Page';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Before: NextPage = () => {
   const [text, setText] = useState('');
   const [selected, setSelected] = useState('제목');
   const [page, setPage] = useState<number>(1);
   const offset = (page - 1) * 15;
+  const router = useRouter();
+  const { state } = router.query;
   const [post, setPost] = useState([]); // 데이터 받아와서 저장하는 state
 
   const handlePageChange = (page: number) => {
     setPage(page);
+    window.scrollTo(0, 0);
     console.log(page);
   };
 
@@ -22,11 +33,14 @@ const Before: NextPage = () => {
     <Container>
       <Post>
         <Typography size="40" color="blue" fontWeight="900">
-          의뢰중 게시글
+          {state == 'before' && all.before}
+          {state == 'doing' && all.doing}
+          {state == 'complete' && all.complete}
+          {' ' + all.post}
         </Typography>
       </Post>
       <Title>
-        <Typography size="16">필터</Typography>
+        <Typography size="16">{all.filter}</Typography>
         <SelectBox>
           <Select
             onChange={e => {
@@ -54,23 +68,28 @@ const Before: NextPage = () => {
         <Hr />
       </Div>
       <RequestBox>
-        <CardList
-          offset={offset}
-          limit={15}
-        />
+        <CardList dummyList={dummyList} offset={offset} limit={15} />
       </RequestBox>
-      <Page page={page} handlePageChange={handlePageChange} />
+      <CustomPagination
+        activePage={page}
+        onChange={handlePageChange}
+        totalItemsCount={dummyList.length}
+      />
       <SignUpBox>
         <SignUpComment>
           <Typography size="40" color="blue" fontWeight="900">
-            원하시는 사진을 수정하고 싶으시다면 지금 바로 신청해주세요!
+            {all.comment}
           </Typography>
         </SignUpComment>
-        <SignUpBtn>
-          <Typography size="20" color="white" fontWeight="900">
-            의뢰 작성하기
-          </Typography>
-        </SignUpBtn>
+        <Link href={'/signup'} passHref>
+          <A>
+            <SignUpBtn>
+              <Typography size="20" color="white" fontWeight="900">
+                {all.writeBtn}
+              </Typography>
+            </SignUpBtn>
+          </A>
+        </Link>
       </SignUpBox>
       <SideBox />
     </Container>
@@ -151,6 +170,7 @@ const SignUpBtn = styled.button`
   background-color: rgba(7, 104, 159, 1);
   border-radius: 10px;
   padding: 10px 27px;
+  border: none;
   :hover {
     background-color: black;
   }
@@ -168,5 +188,8 @@ const SearchIcon = styled(BiSearchAlt2)`
 const Hr = styled.hr`
   margin-bottom: 20px;
 `;
-
+const A = styled.a`
+  text-decoration: none;
+  text-align: center;
+`;
 const RequestBox = styled.div``;

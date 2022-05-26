@@ -1,13 +1,20 @@
 import * as C from './CardList.style';
 import { Card } from '../components/index';
-import { dummyList } from '../dummy/dummyList';
 
 type CardListType = {
   offset: number;
   limit: number;
+  dummyList: Array<{
+    src: string;
+    theme: string;
+    name: string;
+    data: string;
+    date: string;
+    id: number;
+  }>;
 };
 
-export const CardList = ({ offset, limit }: CardListType) => {
+export const CardList = ({ dummyList, offset, limit }: CardListType) => {
   return (
     <C.CardBox>
       {dummyList.slice(offset, offset + limit).map(e => (
@@ -16,6 +23,7 @@ export const CardList = ({ offset, limit }: CardListType) => {
           theme={e.theme}
           name={e.name}
           data={e.data}
+          date={e.date}
           key={e.id}
         />
       ))}

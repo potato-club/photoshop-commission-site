@@ -1,5 +1,7 @@
 import { Typography } from '../components/index';
 import styled from 'styled-components';
+import { List } from 'src/constants/sidebox/SideboxList';
+import { dummyUser } from 'src/dummy/dummyUser';
 
 export const SideBox = () => {
   return (
@@ -7,24 +9,25 @@ export const SideBox = () => {
       <TopBox>
         <Typography size="16" fontWeight="900">
           <User color="blue" size="20" fontWeight="900">
-            임송재
+            {dummyUser.name}
           </User>{' '}
-          님
+          {List.user}
         </Typography>
         <br></br>
         <Typography size="16" fontWeight="900">
-          평점
+          {List.grade}
         </Typography>
         <Typography size="16" fontWeight="900">
           <User color="blue" size="20" fontWeight="900">
-            3.8
+            {dummyUser.score}
           </User>
-          /5.0
+          {List.score}
         </Typography>
       </TopBox>
-      <BottomBtn onClick={() => window.scrollTo(0, 0)}>
+      
+      <BottomBtn onClick={() => window.scrollTo({top:0, behavior:'smooth'})}>
         <Top size="16" fontWeight="900" color="white">
-          Top
+          {List.top}
         </Top>
       </BottomBtn>
     </AdvertiseBox>
@@ -41,6 +44,9 @@ const AdvertiseBox = styled.div`
   top: 250px;
   left: 1360px;
   text-align: center;
+  @media screen and (max-width: 1500px) {
+    display: none;
+  }
 `;
 
 const TopBox = styled.div`

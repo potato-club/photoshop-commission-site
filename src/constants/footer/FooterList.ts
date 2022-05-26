@@ -1,4 +1,4 @@
-export const dummyFooter = [
+export const FooterList = [
   {
     theme: '인트로페이지',
     href: '/',

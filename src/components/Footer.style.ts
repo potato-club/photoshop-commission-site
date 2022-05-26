@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { Typography } from './Typography';
 
-
-
 export const Container = styled.div`
   height: 279px;
   background-color: rgba(7, 104, 159, 0.14);

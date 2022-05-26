@@ -5,3 +5,4 @@ export { Footer } from './footer';
 export { Header } from './header';
 export { Typography } from './Typography';
 export { SideBox } from './SideBox';
+export { CustomPagination } from './CustomPagination';
