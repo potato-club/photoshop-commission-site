@@ -9,10 +9,12 @@ type postType = {
   name: string;
   data: string;
   date: string;
+  key: number;
 };
 
-export const Card = ({ theme, name, src, data, date }: postType) => {
+export const Card = ({ theme, name, src, data, date, key }: postType) => {
   const exImg = bg;
+
   return (
     <C.Container>
       <C.PhotoBox>
@@ -26,7 +28,7 @@ export const Card = ({ theme, name, src, data, date }: postType) => {
         <Link href="/" passHref>
           <C.A>
             <Typography size="16" color="black">
-              {theme}
+              {theme.length >= 30 ? theme.substring(0, 30) + '...' : theme}
             </Typography>
           </C.A>
         </Link>

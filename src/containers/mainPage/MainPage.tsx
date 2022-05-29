@@ -123,7 +123,7 @@ const SignUpBtn = styled.button`
 
 const RequestBox = styled.div`
   width: 100%;
-  margin-bottom: 185px;
+  margin-bottom: 150px;
 `;
 
 const Title = styled.div`

@@ -40,7 +40,6 @@ const Before: NextPage = () => {
         </Typography>
       </Post>
       <Title>
-        <Typography size="16">{all.filter}</Typography>
         <SelectBox>
           <Select
             onChange={e => {
@@ -115,7 +114,7 @@ const Post = styled.div`
 
 const Title = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   margin: 10px 10px;
 `;
@@ -153,7 +152,7 @@ const SelectInput = styled.input`
   border-radius: 4px;
   border-style: solid;
   border-width: 1px;
-  padding: 0;
+  padding: 0px 30px 0px 5px;
   ::placeholder {
     color: gray;
     font-size: 12px;

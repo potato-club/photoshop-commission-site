@@ -24,8 +24,10 @@ export const SideBox = () => {
           {List.score}
         </Typography>
       </TopBox>
-      
-      <BottomBtn onClick={() => window.scrollTo({top:0, behavior:'smooth'})}>
+
+      <BottomBtn
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      >
         <Top size="16" fontWeight="900" color="white">
           {List.top}
         </Top>
@@ -52,7 +54,7 @@ const AdvertiseBox = styled.div`
 const TopBox = styled.div`
   margin-bottom: 10px;
   width: 100%;
-  box-shadow: gray 1px 1px 1px 1px;
+  box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0px;
   padding: 15px 15px;
   border-radius: 25px;
 `;

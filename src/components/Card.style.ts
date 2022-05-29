@@ -9,6 +9,7 @@ export const Container = styled.div`
   margin-top: 20px;
   margin-left: 12.25px;
   margin-right: 12.25px;
+  margin-bottom: 36px;
 `;
 
 export const PhotoBox = styled.div`
@@ -21,14 +22,13 @@ export const NewImage = styled(Image)`
 
 export const ThemeBox = styled.div`
   width: 100%;
-  height: 19px;
-  margin-top: 5px;
+  margin-top: 9px;
+  height: 32px;
 `;
 
 export const NameDateBox = styled.div`
-  margin-top: 4px;
+  margin-top: 12px;
   width: 100%;
-  height: 19px;
   display: flex;
   justify-content: space-between;
 `;
