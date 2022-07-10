@@ -4,7 +4,7 @@ import { Card } from '../components/index';
 type CardListType = {
   offset: number;
   limit: number;
-  dummyList: Array<{
+  list: Array<{
     src: string;
     theme: string;
     name: string;
@@ -14,18 +14,11 @@ type CardListType = {
   }>;
 };
 
-export const CardList = ({ dummyList, offset, limit }: CardListType) => {
+export const CardList = ({ list, offset, limit }: CardListType) => {
   return (
     <C.CardBox>
-      {dummyList.slice(offset, offset + limit).map(e => (
-        <Card
-          src={e.src}
-          theme={e.theme}
-          name={e.name}
-          data={e.data}
-          date={e.date}
-          key={e.id}
-        />
+      {list.slice(offset, offset + limit).map(cardInfo => (
+        <Card key={cardInfo.id} {...cardInfo} />
       ))}
     </C.CardBox>
   );

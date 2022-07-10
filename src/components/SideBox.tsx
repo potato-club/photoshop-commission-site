@@ -10,10 +10,10 @@ export const SideBox = () => {
         <Typography size="16" fontWeight="900">
           <User color="blue" size="20" fontWeight="900">
             {dummyUser.name}
-          </User>{' '}
-          {List.user}
+          </User>
+          {' ' + List.user}
         </Typography>
-        <br></br>
+        <br />
         <Typography size="16" fontWeight="900">
           {List.grade}
         </Typography>
@@ -47,7 +47,8 @@ const AdvertiseBox = styled.div`
   left: 1360px;
   text-align: center;
   @media screen and (max-width: 1500px) {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
   }
 `;
 

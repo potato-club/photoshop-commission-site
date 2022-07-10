@@ -44,7 +44,7 @@ export const MainPage: NextPage = () => {
           </Plus>
         </Title>
         <Hr />
-        <CardList dummyList={dummyList} offset={offset} limit={limit} />
+        <CardList list={dummyList} offset={offset} limit={limit} />
       </RequestBox>
       <RequestBox>
         <Title>
@@ -62,7 +62,7 @@ export const MainPage: NextPage = () => {
           </Plus>
         </Title>
         <Hr />
-        <CardList dummyList={dummyList} offset={offset} limit={limit} />
+        <CardList list={dummyList} offset={offset} limit={limit} />
       </RequestBox>
       <RequestBox>
         <Title>
@@ -80,7 +80,7 @@ export const MainPage: NextPage = () => {
           </Plus>
         </Title>
         <Hr />
-        <CardList dummyList={dummyList} offset={offset} limit={limit} />
+        <CardList list={dummyList} offset={offset} limit={limit} />
       </RequestBox>
       <SideBox />
     </Container>

@@ -7,31 +7,29 @@ import * as S from './Footer.style';
 
 export const Footer = () => {
   return (
-    <>
-      <S.Container>
-        <S.Wrapper>
-          <S.ContentWrapper>
-            <S.ContentBox>
-              {FooterList.map((element, index) => (
-                <Content
-                  theme={element.theme}
-                  content={element.content}
-                  href={element.href}
-                  key={index}
-                />
-              ))}
-            </S.ContentBox>
-            <S.Line></S.Line>
-          </S.ContentWrapper>
-          <S.EmailBox>
-            <S.EmailWrap>
-              <S.Email>{Email.email}</S.Email>
-              <FaGithub />
-            </S.EmailWrap>
-          </S.EmailBox>
-        </S.Wrapper>
-      </S.Container>
-    </>
+    <S.Container>
+      <S.Wrapper>
+        <S.ContentWrapper>
+          <S.ContentBox>
+            {FooterList.map((element, index) => (
+              <Content
+                theme={element.theme}
+                content={element.content}
+                href={element.href}
+                key={index}
+              />
+            ))}
+          </S.ContentBox>
+          <S.Line />
+        </S.ContentWrapper>
+        <S.EmailBox>
+          <S.EmailWrap>
+            <S.Email>{Email.email}</S.Email>
+            <FaGithub />
+          </S.EmailWrap>
+        </S.EmailBox>
+      </S.Wrapper>
+    </S.Container>
   );
 };
 

@@ -4,7 +4,7 @@ import * as S from './Footer.style';
 
 type ContentType = {
   theme: string;
-  content?: string[] | null;
+  content?: string[];
   href: string;
 };
 
@@ -24,7 +24,7 @@ export const Content = ({ theme, content, href }: ContentType) => {
       {content?.map((element, index) => (
         <S.ContentLi key={index}>
           <Link href={href} passHref>
-            <S.A key={index}>
+            <S.A>
               <S.NewTypography size="12" color="gray">
                 {element}
               </S.NewTypography>

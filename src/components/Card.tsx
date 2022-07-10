@@ -9,10 +9,9 @@ type postType = {
   name: string;
   data: string;
   date: string;
-  key: number;
 };
 
-export const Card = ({ theme, name, src, data, date, key }: postType) => {
+export const Card = ({ theme, name, src, data, date }: postType) => {
   const exImg = bg;
 
   return (
