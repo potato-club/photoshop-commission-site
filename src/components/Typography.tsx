@@ -25,7 +25,7 @@ export const Typography = (props: TypographyProps) => {
   return <TypographyText {...props}>{props.children}</TypographyText>;
 };
 
-const handleColor = (color: keyof customColorType) => {
+export const handleColor = (color: keyof customColorType) => {
   for (const keyStore of Object.keys(customColor)) {
     if (keyStore === color) return customColor[keyStore];
   }
