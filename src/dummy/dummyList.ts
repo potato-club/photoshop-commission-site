@@ -5,7 +5,7 @@ export const dummyList = [
       '안녕하세용가나다라마redcrded차카타파하좋아요dd좋아요dsdsd아아아아아아아아아아아',
     name: '조민선',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 1,
   },
   {
@@ -14,7 +14,7 @@ export const dummyList = [
       '가나다가나다가나다가나다가나다가나다가나다가나다가나가가나다아나다가나다아가아다아아아앙아',
     name: '임송재',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 2,
   },
   {
@@ -22,7 +22,7 @@ export const dummyList = [
     theme: '인생이 너무 쓰다',
     name: '임송재',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 3,
   },
   {
@@ -30,7 +30,7 @@ export const dummyList = [
     theme: '배가 너무 아파요',
     name: '홍길동',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 4,
   },
   {
@@ -38,7 +38,7 @@ export const dummyList = [
     theme: '인생',
     name: '윤운일',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 5,
   },
   {
@@ -46,7 +46,7 @@ export const dummyList = [
     theme: '졸려',
     name: '고재민',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 6,
   },
   {
@@ -54,7 +54,7 @@ export const dummyList = [
     theme: '배고파',
     name: '박현호',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 7,
   },
   {
@@ -62,7 +62,7 @@ export const dummyList = [
     theme: '안되는줄알았다',
     name: '임꺽정',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 8,
   },
   {
@@ -70,7 +70,7 @@ export const dummyList = [
     theme: '',
     name: '가나다',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 9,
   },
   {
@@ -78,7 +78,7 @@ export const dummyList = [
     theme: '집가고싶다',
     name: '아줌마',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 10,
   },
   {
@@ -86,7 +86,7 @@ export const dummyList = [
     theme: '놀고싶다',
     name: '아저씨',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 11,
   },
   {
@@ -94,7 +94,7 @@ export const dummyList = [
     theme: '빠잉',
     name: '졸린사람',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 12,
   },
   {
@@ -102,7 +102,7 @@ export const dummyList = [
     theme: '',
     name: '이름 뭐 하지',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 13,
   },
   {
@@ -110,7 +110,7 @@ export const dummyList = [
     theme: '',
     name: '임송재',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 14,
   },
   {
@@ -118,7 +118,7 @@ export const dummyList = [
     theme: '너 모해',
     name: '내이름은뭘까',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 15,
   },
   {
@@ -126,7 +126,7 @@ export const dummyList = [
     theme: '고마워',
     name: '피곤한사람',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 16,
   },
   {
@@ -134,7 +134,7 @@ export const dummyList = [
     theme: '잘지내',
     name: '이런',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 17,
   },
   {
@@ -142,7 +142,7 @@ export const dummyList = [
     theme: '모해',
     name: '졸린사람',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 18,
   },
   {
@@ -150,7 +150,7 @@ export const dummyList = [
     theme: '아 싫다',
     name: '임송재',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 19,
   },
   {
@@ -158,7 +158,7 @@ export const dummyList = [
     theme: '아 좋다',
     name: '윤운일',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 20,
   },
   {
@@ -166,7 +166,7 @@ export const dummyList = [
     theme: 'ㅋㅋㅋㅋ',
     name: '임송재',
     data: '',
-    date: '2022/01/17',
+    date: new Date(),
     id: 21,
   },
 ];

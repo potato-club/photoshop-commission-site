@@ -9,7 +9,7 @@ type CardListType = {
     theme: string;
     name: string;
     data: string;
-    date: string;
+    date: Date;
     id: number;
   }>;
 };

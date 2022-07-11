@@ -1,4 +1,3 @@
-import { NextPage } from 'next';
 import styled from 'styled-components';
 import {
   CardList,
@@ -10,15 +9,15 @@ import { dummyFilter } from 'src/dummy/dummyFilter';
 import { dummyList } from 'src/dummy/dummyList';
 import { all } from 'src/constants/all/all';
 import { BiSearchAlt2 } from 'react-icons/bi';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-const StatePage: NextPage = () => {
+const StatePage = () => {
   const [text, setText] = useState('');
   const [selected, setSelected] = useState('제목');
-  const [page, setPage] = useState<number>(1);
-  const offset = (page - 1) * 15;
+  const [page, setPage] = useState(1);
+  const offset = useMemo(() => (page - 1) * 15, [page]);
   const router = useRouter();
   const { state } = router.query;
   const [post, setPost] = useState([]); // 데이터 받아와서 저장하는 state
@@ -26,7 +25,6 @@ const StatePage: NextPage = () => {
   const handlePageChange = (page: number) => {
     setPage(page);
     window.scrollTo(0, 0);
-    console.log(page);
   };
 
   return (

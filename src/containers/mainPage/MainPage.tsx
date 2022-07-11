@@ -8,7 +8,6 @@ import { all } from 'src/constants/all/all';
 
 export const MainPage: NextPage = () => {
   const [limit, setLimit] = useState(8);
-  const offset = 0;
 
   return (
     <Container>
@@ -44,7 +43,7 @@ export const MainPage: NextPage = () => {
           </Plus>
         </Title>
         <Hr />
-        <CardList list={dummyList} offset={offset} limit={limit} />
+        <CardList list={dummyList} offset={0} limit={limit} />
       </RequestBox>
       <RequestBox>
         <Title>
@@ -62,7 +61,7 @@ export const MainPage: NextPage = () => {
           </Plus>
         </Title>
         <Hr />
-        <CardList list={dummyList} offset={offset} limit={limit} />
+        <CardList list={dummyList} offset={0} limit={limit} />
       </RequestBox>
       <RequestBox>
         <Title>
@@ -80,7 +79,7 @@ export const MainPage: NextPage = () => {
           </Plus>
         </Title>
         <Hr />
-        <CardList list={dummyList} offset={offset} limit={limit} />
+        <CardList list={dummyList} offset={0} limit={limit} />
       </RequestBox>
       <SideBox />
     </Container>

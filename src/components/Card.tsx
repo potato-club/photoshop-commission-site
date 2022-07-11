@@ -2,13 +2,14 @@ import bg from '../assets/image/ticket.jpg';
 import { Typography } from '../components/index';
 import * as C from './Card.style';
 import Link from 'next/link';
+import { formatDate } from 'src/utils/formatDate';
 
 type postType = {
   src: string;
   theme: string;
   name: string;
   data: string;
-  date: string;
+  date: Date;
 };
 
 export const Card = ({ theme, name, src, data, date }: postType) => {
@@ -44,7 +45,7 @@ export const Card = ({ theme, name, src, data, date }: postType) => {
         </C.Name>
         <C.Date>
           <Typography size="16" color="lightBlue" fontWeight="900">
-            {date}
+            {formatDate(date)}
           </Typography>
         </C.Date>
       </C.NameDateBox>
