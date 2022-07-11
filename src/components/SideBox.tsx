@@ -44,7 +44,7 @@ const AdvertiseBox = styled.div`
   display: flex;
   flex-direction: column;
   top: 250px;
-  left: 1360px;
+  right: 25px;
   text-align: center;
   @media screen and (max-width: 1500px) {
     opacity: 0;
