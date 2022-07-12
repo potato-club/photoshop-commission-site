@@ -5,10 +5,10 @@ export type customColorType = {
   lightBlue: string;
   gray: string;
   purple: string;
-
   danger: string;
   success: string;
 };
+
 export const customColor: customColorType = {
   white: '#FFFFFF',
   black: '#000000',
@@ -16,7 +16,6 @@ export const customColor: customColorType = {
   lightBlue: '#A2D5F2',
   gray: '#ADADAD',
   purple: '#A2AAF2',
-
   danger: '#FF5858',
   success: '#33DE4E',
 };

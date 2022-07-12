@@ -123,10 +123,38 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 html,
 body {
   height: 100%;
 }
 #__next {
   height: 100%;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 130px;
+  margin-top: 130px;
+  text-align: center;
+  font-size: 30px;
+}
+.pagination li {
+  margin-right: 5px;
+}
+.pagination li a {
+  color: rgba(209, 205, 205, 1);
+  text-decoration: none;
+}
+.pagination li.active a {
+  color: rgba(7, 104, 159, 1);
+  text-decoration: none;
+}
+.pagination li a:hover {
+  color: rgba(7, 104, 159, 1);
+}
+.pagination li:nth-child(-n + 2) a,
+.pagination li:nth-last-child(-n + 2) a {
+  color: black;
 }
