@@ -3,7 +3,7 @@ import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { FaThumbsUp } from 'react-icons/fa';
-import { ReplyType } from 'src/dummy/detailDummy';
+import { ReplyType } from 'src/dummy/writingDummy';
 import { formatDate } from 'src/utils/formatDate';
 import { CustomInput } from './CustomInput';
 

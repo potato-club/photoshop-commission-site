@@ -3,9 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import { Contents, Header, CommentHeader, Comment, CustomInput } from './components';
-import { DetailType } from 'src/dummy/detailDummy';
+import { WritingType } from 'src/dummy/writingDummy';
 type Props = {
-  data: DetailType;
+  data: WritingType;
 };
 export function DetailPage({ data }: Props) {
   const {title, state, writer, date, imageUrls, secret, text, totalComment, comments} = data;
