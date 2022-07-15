@@ -3,20 +3,20 @@ import React from 'react';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 type Props = {
-  ImageUrls: string[];
-  Text: string;
-  Secret: 'secret' | 'noSecret';
+  imageUrls: string[];
+  text: string;
+  secret: 'secret' | 'noSecret';
 };
-export function Contents({ Text, ImageUrls, Secret } : Props) {
+export function Contents({ text, imageUrls, secret } : Props) {
   return (
     <Container>
-      {Secret === 'noSecret' && <ImgContainer>
-        {ImageUrls.map((data, index) => (
+      {secret === 'noSecret' && <ImgContainer>
+        {imageUrls.map((data, index) => (
           <Image width={630} height={470} key={index} src={data} alt="img" />
         ))}
       </ImgContainer>}
       <TextWrapper>
-        <Typography size="16">{Text}</Typography>
+        <Typography size="16">{text}</Typography>
       </TextWrapper>
     </Container>
   );

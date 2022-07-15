@@ -4,33 +4,33 @@ import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { formatDate } from "src/utils/formatDate";
 type Props = {
-  Title: string;
-  Writer: string;
-  Date: Date;
-  State: string;
+  title: string;
+  writer: string;
+  date: Date;
+  state: string;
 }
-export function Header({ Title, Writer, Date, State }: Props) {
+export function Header({ title, writer, date, state }: Props) {
   return (
     <Container>
       <Typography size="12" color="gray">
-        {`<< 홈 < ${State} 게시글`}
+        {`<< 홈 < ${state} 게시글`}
       </Typography>
       <SpaceBetween>
         <Typography size="32" color="black" fontWeight="bold">
-          {Title}
+          {title}
         </Typography>
         <WriterWrapper>
           <Typography size="16" color="black">
-            {Writer}
+            {writer}
           </Typography>
           <Typography size="12" color="black">
-            {formatDate(Date)}
+            {formatDate(date)}
           </Typography>
         </WriterWrapper>
       </SpaceBetween>
       <SpaceBetween>
         <Typography size="20" color="purple">
-          {State}
+          {state}
         </Typography>
         <Typography size="12" color="gray">
           신고하기

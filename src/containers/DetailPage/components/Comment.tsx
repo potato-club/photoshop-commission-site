@@ -8,18 +8,18 @@ import { formatDate } from 'src/utils/formatDate';
 import { CustomInput } from './CustomInput';
 
 type Props = {
-  Writer: string;
-  Date: Date;
-  Text: string;
-  Good: number;
+  writer: string;
+  date: Date;
+  text: string;
+  good: number;
   type: 'Comment' | 'Reply';
-  Reply?: ReplyType[];
+  reply?: ReplyType[];
 };
-export function Comment({ Writer, Date, Text, Good, type, Reply }: Props) {
+export function Comment({ writer, date, text, good, type, reply }: Props) {
   // ! 댓글, 대댓글 모두 필요한 로직.
   const limitNumber = 150;
   const [limit, setLimit] = useState(limitNumber);
-  const showToggle = Text.length >= limit ? true : false;
+  const showToggle = text.length >= limit ? true : false;
   const [toggleText, setToggleText] = useState<' ...더보기' | ' 닫기'>(
     ' ...더보기',
   );
@@ -48,18 +48,18 @@ export function Comment({ Writer, Date, Text, Good, type, Reply }: Props) {
     <Container type={type}>
       <Wrapper type={type}>
         <DateWrapper type={type}>
-          <Typography size="12">{formatDate(Date)}</Typography>
+          <Typography size="12">{formatDate(date)}</Typography>
         </DateWrapper>
         <WriterWrapper>
           <Typography size="16" fontWeight="bold">
-            {Writer}
+            {writer}
           </Typography>
         </WriterWrapper>
         <TextWrapper>
           <Typography size="16">
-            {sliceText(Text)}
+            {sliceText(text)}
             {showToggle && (
-              <CursorPointer onClick={() => onClickMore(Text)}>
+              <CursorPointer onClick={() => onClickMore(text)}>
                 <Typography size="12" color="gray">
                   {toggleText}
                 </Typography>
@@ -76,7 +76,7 @@ export function Comment({ Writer, Date, Text, Good, type, Reply }: Props) {
                 onClick={() => setLikeComment(!likeComment)}
               />
             </IConWrapper>
-            {Good}
+            {good}
           </ReactionWrapper>
           {type === 'Comment' && (
             <CursorPointer onClick={() => setOpenInput(!openInput)}>
@@ -88,13 +88,13 @@ export function Comment({ Writer, Date, Text, Good, type, Reply }: Props) {
         </ReactionContainer>
       </Wrapper>
       {openInput && <CustomInput type={'Comment'}/>}
-      {Reply?.map(data => (
+      {reply?.map(data => (
         <Comment
           key={data.id}
-          Writer={data.Writer}
-          Date={data.Date}
-          Text={data.Text}
-          Good={data.Good}
+          writer={data.writer}
+          date={data.date}
+          text={data.text}
+          good={data.good}
           type="Reply"
         />
       ))}
