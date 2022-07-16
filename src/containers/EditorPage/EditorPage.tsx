@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
 import { TitleInput, ImageInput, TextArea, WriteButton, SecretSelectInput } from './components';
@@ -10,7 +10,8 @@ export function EditorPage() {
   const [title, setTitle] = useState('');
   const [images, setImages] = useState<FormData>();
   const [request, setRequest] = useState('');
-  const [secret, setSecret] = useState<string>('noSecret');
+  const [secret, setSecret] = useState<boolean>(false);
+
 
   const onClick = () => {
     // axios({

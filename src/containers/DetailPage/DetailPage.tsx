@@ -3,27 +3,27 @@ import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import { Contents, Header, CommentHeader, Comment, CustomInput } from './components';
-import { DetailType } from 'src/dummy/detailDummy';
+import { WritingType } from 'src/dummy/writingDummy';
 type Props = {
-  data: DetailType;
+  data: WritingType;
 };
 export function DetailPage({ data }: Props) {
-  const {Title, State, Writer, Date, ImageUrls, Secret, Text, TotalComment, Comments} = data;
+  const {title, state, writer, date, imageUrls, secret, text, totalComment, comments} = data;
   return (
     <Container>
       <Wrapper>
-        <Header Title={Title} Writer={Writer} Date={Date} State={State} />
-        <Contents ImageUrls={ImageUrls} Text={Text} Secret={Secret} />
+        <Header title={title} writer={writer} date={date} state={state} />
+        <Contents imageUrls={imageUrls} text={text} secret={secret} />
         <CommentContainer>
-          <CommentHeader TotalComment={TotalComment} />
-          {Comments.map(comment => (
+          <CommentHeader totalComment={totalComment} />
+          {comments.map(comment => (
             <Comment
               key={comment.id}
-              Writer={comment.Writer}
-              Date={comment.Date}
-              Text={comment.Text}
-              Good={comment.Good}
-              Reply={comment.Reply}
+              writer={comment.writer}
+              date={comment.date}
+              text={comment.text}
+              good={comment.good}
+              reply={comment.reply}
               type="Comment"
             />
           ))}
