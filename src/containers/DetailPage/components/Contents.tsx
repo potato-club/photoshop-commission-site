@@ -5,12 +5,12 @@ import styled from 'styled-components';
 type Props = {
   imageUrls: string[];
   text: string;
-  secret: 'secret' | 'noSecret';
+  secret: boolean;
 };
 export function Contents({ text, imageUrls, secret } : Props) {
   return (
     <Container>
-      {secret === 'noSecret' && <ImgContainer>
+      {!secret && <ImgContainer>
         {imageUrls.map((data, index) => (
           <Image width={630} height={470} key={index} src={data} alt="img" />
         ))}

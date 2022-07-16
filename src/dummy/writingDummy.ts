@@ -22,7 +22,7 @@ export type WritingType = {
   writer: string;
   date: Date;
   imageUrls: string[];
-  secret: 'secret' | 'noSecret';
+  secret: boolean;
   text: string;
   totalComment: number;
   comments: CommentType[];
@@ -38,7 +38,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -122,7 +122,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: true,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -206,7 +206,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -290,7 +290,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -374,7 +374,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -458,7 +458,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -542,7 +542,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -626,7 +626,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -710,7 +710,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
@@ -794,7 +794,7 @@ export const writingDummy: WritingType[] = [
     writer: '더미글쓴이',
     date: new Date(2022, 4, 7, 0, 49),
     imageUrls: ['/schedule.jpeg', '/schedule.jpeg'],
-    secret: 'noSecret',
+    secret: false,
     text: '공강이 하나밖에 없다니.. 편집으로라도 행복해지고 싶습니다 공강 3일 있는것처럼 바꿔주세요..! 아니 그나저나 5월6일이 개교기념일 이였다니 나만 몰랐던건가 ㅋㅋㅋㅋㅋㅋㅋ',
     totalComment: 4,
     comments: [
