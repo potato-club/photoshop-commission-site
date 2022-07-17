@@ -3,9 +3,9 @@ import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { FaThumbsUp } from 'react-icons/fa';
-import { ReplyType } from 'src/dummy/writingDummy';
 import { formatDate } from 'src/utils/formatDate';
 import { CustomInput } from './CustomInput';
+import { ReplyType } from 'src/types/comments.type';
 
 type Props = {
   writer: string;
@@ -90,10 +90,10 @@ export function Comment({ writer, date, text, good, type, reply }: Props) {
       {openInput && <CustomInput type={'Comment'}/>}
       {reply?.map(data => (
         <Comment
-          key={data.id}
+          key={data.replyNo}
           writer={data.writer}
           date={data.date}
-          text={data.text}
+          text={data.contents}
           good={data.good}
           type="Reply"
         />

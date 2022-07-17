@@ -3,25 +3,25 @@ import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import { Contents, Header, CommentHeader, Comment, CustomInput } from './components';
-import { WritingType } from 'src/dummy/writingDummy';
+import { BoardType } from 'src/types/board.type';
 type Props = {
-  data: WritingType;
+  data: BoardType;
 };
 export function DetailPage({ data }: Props) {
-  const {title, state, writer, date, imageUrls, secret, text, totalComment, comments} = data;
+  const {title, state, writer, date, imageUrls, imageSecret, contents, totalComment, commentList} = data;
   return (
     <Container>
       <Wrapper>
         <Header title={title} writer={writer} date={date} state={state} />
-        <Contents imageUrls={imageUrls} text={text} secret={secret} />
+        <Contents imageUrls={imageUrls} contents={contents} imageSecret={imageSecret} />
         <CommentContainer>
           <CommentHeader totalComment={totalComment} />
-          {comments.map(comment => (
+          {commentList.map(comment => (
             <Comment
-              key={comment.id}
+              key={comment.CommentNo}
               writer={comment.writer}
               date={comment.date}
-              text={comment.text}
+              text={comment.contents}
               good={comment.good}
               reply={comment.reply}
               type="Comment"
@@ -29,7 +29,7 @@ export function DetailPage({ data }: Props) {
           ))}
         </CommentContainer>
         <Line />
-        <CustomInput type='Board'/>
+        <CustomInput type="Board" />
       </Wrapper>
     </Container>
   );
