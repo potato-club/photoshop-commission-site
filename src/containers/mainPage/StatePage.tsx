@@ -5,7 +5,7 @@ import {
   SideBox,
   CustomPagination,
 } from 'src/components/index';
-import { dummyFilter } from 'src/dummy/dummyFilter';
+import { dummyFilter } from 'src/constants/all/filter';
 import { dummyList } from 'src/dummy/dummyList';
 import { all } from 'src/constants/all/all';
 import { BiSearchAlt2 } from 'react-icons/bi';

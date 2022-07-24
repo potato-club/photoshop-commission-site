@@ -8,24 +8,24 @@ type postType = {
   src: string;
   theme: string;
   name: string;
-  data: string;
   date: Date;
+  id: number;
 };
 
-export const Card = ({ theme, name, src, data, date }: postType) => {
+export const Card = ({ theme, name, src, date, id }: postType) => {
   const exImg = bg;
 
   return (
     <C.Container>
       <C.PhotoBox>
-        <Link href="/" passHref>
+        <Link href={`/detail/${id}`} passHref>
           <C.A>
             <C.NewImage src={exImg} width="270px" height="192px" alt="비공개" />
           </C.A>
         </Link>
       </C.PhotoBox>
       <C.ThemeBox>
-        <Link href="/" passHref>
+        <Link href={`/detail/${id}`} passHref>
           <C.A>
             <Typography size="16" color="black">
               {theme.length >= 30 ? theme.substring(0, 30) + '...' : theme}
@@ -35,7 +35,7 @@ export const Card = ({ theme, name, src, data, date }: postType) => {
       </C.ThemeBox>
       <C.NameDateBox>
         <C.Name>
-          <Link href="/" passHref>
+          <Link href={`/detail/${id}`} passHref>
             <C.A>
               <Typography size="16" color="blue" fontWeight="900">
                 {name}

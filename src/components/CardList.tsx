@@ -8,7 +8,6 @@ type CardListType = {
     src: string;
     theme: string;
     name: string;
-    data: string;
     date: Date;
     id: number;
   }>;
