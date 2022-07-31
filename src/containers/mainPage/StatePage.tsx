@@ -12,12 +12,13 @@ import { BiSearchAlt2 } from 'react-icons/bi';
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import axios from 'axios';
 
 const StatePage = () => {
-  const [text, setText] = useState('');
-  const [selected, setSelected] = useState('제목');
+  const [text, setText] = useState(''); // 필터링 값
+  const [selected, setSelected] = useState('title');
   const [page, setPage] = useState(1);
-  const offset = useMemo(() => (page - 1) * 15, [page]);
+  const offset = useMemo(() => (page - 1) * 16, [page]);
   const router = useRouter();
   const { state } = router.query;
   const [post, setPost] = useState([]); // 데이터 받아와서 저장하는 state
@@ -25,6 +26,19 @@ const StatePage = () => {
   const handlePageChange = (page: number) => {
     setPage(page);
     window.scrollTo(0, 0);
+  };
+
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<any>,
+  ) => {
+    e.preventDefault();
+    let data = {
+      option: selected,
+      text: text,
+    };
+    console.log(data);
+    // axios.post('api', data).then(res => console.log(res));
+    setText('');
   };
 
   return (
@@ -38,11 +52,10 @@ const StatePage = () => {
         </Typography>
       </Post>
       <Title>
-        <SelectBox>
+        <SelectBox onSubmit={handleSubmit}>
           <Select
             onChange={e => {
               setSelected(e.target.value);
-              console.log(selected);
             }}
           >
             {dummyFilter.map(item => (
@@ -52,12 +65,14 @@ const StatePage = () => {
             ))}
           </Select>
           <SelectInput
+            type="text"
+            value={text}
             placeholder="검색할 내용 입력"
             onChange={e => {
               setText(e.target.value);
             }}
           />
-          <SearchIcon onClick={() => {}} />
+          <SearchIcon onClick={handleSubmit} />
         </SelectBox>
       </Title>
 
@@ -65,7 +80,7 @@ const StatePage = () => {
         <Hr />
       </div>
       <div>
-        <CardList list={dummyList} offset={offset} limit={15} />
+        <CardList list={dummyList} offset={offset} limit={16} />
       </div>
       <CustomPagination
         activePage={page}
@@ -78,7 +93,7 @@ const StatePage = () => {
             {all.comment}
           </Typography>
         </SignUpComment>
-        <Link href={'/signup'} passHref>
+        <Link href={'/signUp'} passHref>
           <A>
             <SignUpBtn>
               <Typography size="20" color="white" fontWeight="900">
@@ -127,7 +142,7 @@ const SignUpComment = styled.div`
   text-align: center;
 `;
 
-const SelectBox = styled.div`
+const SelectBox = styled.form`
   display: flex;
   align-items: center;
   position: relative;

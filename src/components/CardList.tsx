@@ -1,25 +1,28 @@
-import * as C from './CardList.style';
 import { Card } from '../components/index';
+import { IDummyList } from 'src/dummy/dummyList';
+import styled from 'styled-components';
 
-type CardListType = {
+interface CardListType {
   offset: number;
   limit: number;
-  list: Array<{
-    src: string;
-    theme: string;
-    name: string;
-    date: Date;
-    id: number;
-  }>;
-};
+  list: IDummyList[];
+}
+
+const CardBox = styled.div`
+  width: 1178px;
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: start;
+`;
 
 export const CardList = ({ list, offset, limit }: CardListType) => {
   return (
-    <C.CardBox>
+    <CardBox>
       {list.slice(offset, offset + limit).map(cardInfo => (
         <Card key={cardInfo.id} {...cardInfo} />
       ))}
-    </C.CardBox>
+    </CardBox>
   );
 };
 

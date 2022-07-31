@@ -1,55 +1,87 @@
-import bg from '../assets/image/ticket.jpg';
 import { Typography } from '../components/index';
-import * as C from './Card.style';
 import Link from 'next/link';
 import { formatDate } from 'src/utils/formatDate';
+import { IDummyList } from 'src/dummy/dummyList';
+import styled from 'styled-components';
+import Image from 'next/image';
 
-type postType = {
-  src: string;
-  theme: string;
-  name: string;
-  date: Date;
-  id: number;
-};
+const Container = styled.div`
+  width: 270px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 12.25px;
+  margin-right: 12.25px;
+  margin-bottom: 36px;
+`;
 
-export const Card = ({ theme, name, src, date, id }: postType) => {
-  const exImg = bg;
+const PhotoBox = styled.div`
+  width: 100%;
+`;
 
+const NewImage = styled(Image)`
+  border-radius: 20px;
+`;
+
+const ThemeBox = styled.div`
+  width: 100%;
+  margin-top: 9px;
+  height: 32px;
+`;
+
+const NameDateBox = styled.div`
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const A = styled.a`
+  text-decoration: none;
+`;
+
+export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
   return (
-    <C.Container>
-      <C.PhotoBox>
+    <Container>
+      <PhotoBox>
         <Link href={`/detail/${id}`} passHref>
-          <C.A>
-            <C.NewImage src={exImg} width="270px" height="192px" alt="비공개" />
-          </C.A>
+          <A>
+            <NewImage
+              src={imageUrls}
+              width="270px"
+              height="192px"
+              alt="비공개"
+            />
+          </A>
         </Link>
-      </C.PhotoBox>
-      <C.ThemeBox>
+      </PhotoBox>
+      <ThemeBox>
         <Link href={`/detail/${id}`} passHref>
-          <C.A>
+          <A>
             <Typography size="16" color="black">
-              {theme.length >= 30 ? theme.substring(0, 30) + '...' : theme}
+              {title.length >= 30 ? title.substring(0, 30) + '...' : title}
             </Typography>
-          </C.A>
+          </A>
         </Link>
-      </C.ThemeBox>
-      <C.NameDateBox>
-        <C.Name>
+      </ThemeBox>
+      <NameDateBox>
+        <div>
           <Link href={`/detail/${id}`} passHref>
-            <C.A>
+            <A>
               <Typography size="16" color="blue" fontWeight="900">
-                {name}
+                {writer}
               </Typography>
-            </C.A>
+            </A>
           </Link>
-        </C.Name>
-        <C.Date>
+        </div>
+        <div>
           <Typography size="16" color="lightBlue" fontWeight="900">
             {formatDate(date)}
           </Typography>
-        </C.Date>
-      </C.NameDateBox>
-    </C.Container>
+        </div>
+      </NameDateBox>
+    </Container>
   );
 };
 
