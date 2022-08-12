@@ -5,12 +5,34 @@ export const FooterList = [
   },
   {
     theme: 'HOME',
-    content: ['의뢰전', '의뢰중', '의뢰완료'],
-    href: '/home',
+    content: [
+      {
+        text: '의뢰전',
+        href: 'before',
+      },
+      {
+        text: '의뢰중',
+        href: 'doing',
+      },
+      {
+        text: '의뢰완료',
+        href: 'complete',
+      },
+    ],
+    href: '/main',
   },
   {
     theme: 'ABOUT',
-    content: ['공지사항', '이용약관'],
+    content: [
+      {
+        text: '공지사항',
+        href: '/',
+      },
+      {
+        text: '이용약관',
+        href: '/',
+      },
+    ],
     href: '/about',
   },
 ];
