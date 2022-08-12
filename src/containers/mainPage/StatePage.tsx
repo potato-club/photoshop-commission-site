@@ -37,7 +37,7 @@ const StatePage = () => {
       text: text,
     };
     console.log(data);
-    // axios.post('api', data).then(res => console.log(res));
+    // axios.get('api', data).then(res => console.log(res));
     setText('');
   };
 

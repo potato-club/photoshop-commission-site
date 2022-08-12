@@ -4,6 +4,7 @@ import { formatDate } from 'src/utils/formatDate';
 import { IDummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
 import Image from 'next/image';
+import { useMemo } from 'react';
 
 const Container = styled.div`
   width: 270px;
@@ -42,6 +43,9 @@ const A = styled.a`
 `;
 
 export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
+
+  const theme = useMemo(()=>title.length >= 30 ? title.substring(0, 30) + '...' : title,[title])
+  
   return (
     <Container>
       <PhotoBox>
@@ -60,7 +64,7 @@ export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
         <Link href={`/detail/${id}`} passHref>
           <A>
             <Typography size="16" color="black">
-              {title.length >= 30 ? title.substring(0, 30) + '...' : title}
+              {theme}
             </Typography>
           </A>
         </Link>
