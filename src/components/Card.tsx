@@ -1,55 +1,91 @@
-import bg from '../assets/image/ticket.jpg';
 import { Typography } from '../components/index';
-import * as C from './Card.style';
 import Link from 'next/link';
 import { formatDate } from 'src/utils/formatDate';
+import { IDummyList } from 'src/dummy/dummyList';
+import styled from 'styled-components';
+import Image from 'next/image';
+import { useMemo } from 'react';
 
-type postType = {
-  src: string;
-  theme: string;
-  name: string;
-  data: string;
-  date: Date;
-};
+const Container = styled.div`
+  width: 270px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 12.25px;
+  margin-right: 12.25px;
+  margin-bottom: 36px;
+`;
 
-export const Card = ({ theme, name, src, data, date }: postType) => {
-  const exImg = bg;
+const PhotoBox = styled.div`
+  width: 100%;
+`;
 
+const NewImage = styled(Image)`
+  border-radius: 20px;
+`;
+
+const ThemeBox = styled.div`
+  width: 100%;
+  margin-top: 9px;
+  height: 32px;
+`;
+
+const NameDateBox = styled.div`
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const A = styled.a`
+  text-decoration: none;
+`;
+
+export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
+
+  const theme = useMemo(()=>title.length >= 30 ? title.substring(0, 30) + '...' : title,[title])
+  
   return (
-    <C.Container>
-      <C.PhotoBox>
-        <Link href="/" passHref>
-          <C.A>
-            <C.NewImage src={exImg} width="270px" height="192px" alt="비공개" />
-          </C.A>
+    <Container>
+      <PhotoBox>
+        <Link href={`/detail/${id}`} passHref>
+          <A>
+            <NewImage
+              src={imageUrls}
+              width="270px"
+              height="192px"
+              alt="비공개"
+            />
+          </A>
         </Link>
-      </C.PhotoBox>
-      <C.ThemeBox>
-        <Link href="/" passHref>
-          <C.A>
+      </PhotoBox>
+      <ThemeBox>
+        <Link href={`/detail/${id}`} passHref>
+          <A>
             <Typography size="16" color="black">
-              {theme.length >= 30 ? theme.substring(0, 30) + '...' : theme}
+              {theme}
             </Typography>
-          </C.A>
+          </A>
         </Link>
-      </C.ThemeBox>
-      <C.NameDateBox>
-        <C.Name>
-          <Link href="/" passHref>
-            <C.A>
+      </ThemeBox>
+      <NameDateBox>
+        <div>
+          <Link href={`/detail/${id}`} passHref>
+            <A>
               <Typography size="16" color="blue" fontWeight="900">
-                {name}
+                {writer}
               </Typography>
-            </C.A>
+            </A>
           </Link>
-        </C.Name>
-        <C.Date>
+        </div>
+        <div>
           <Typography size="16" color="lightBlue" fontWeight="900">
             {formatDate(date)}
           </Typography>
-        </C.Date>
-      </C.NameDateBox>
-    </C.Container>
+        </div>
+      </NameDateBox>
+    </Container>
   );
 };
 
