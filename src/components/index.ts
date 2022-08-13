@@ -1,2 +1,9 @@
-//공용컴포넌트 폴더입니다
-export {};
+export { Card } from './Card';
+export { CardList } from './CardList';
+export { Content } from './Content';
+export { Footer } from './footer';
+export { Header } from './header';
+export { Typography } from './Typography';
+export { SideBox } from './SideBox';
+export { CustomPagination } from './CustomPagination';
+export { MainRequestBoard } from './MainRequestBoard';

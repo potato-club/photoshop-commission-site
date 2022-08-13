@@ -1,7 +1,7 @@
-import type { NextPage } from 'next';
+import React from 'react'
 
-const Home: NextPage = () => {
-  return <div>Index Page</div>;
-};
-
-export default Home;
+export default function Intro() {
+  return (
+    <div>인트로페이지</div>
+  )
+}
