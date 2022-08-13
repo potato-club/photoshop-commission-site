@@ -10,6 +10,10 @@ export function NicknameInput({ setNickname }: Props) {
     const { value } = e.target;
     setNickname(value);
   };
+
+  const checkDuplication = () => {
+    alert("중복확인 버튼 클릭");
+  };
   return (
     <Container>
       <LeftMargin>
@@ -17,14 +21,23 @@ export function NicknameInput({ setNickname }: Props) {
           닉네임
         </Typography>
       </LeftMargin>
-      <InputWrapper>
-        <Input onChange={onChange} placeholder="닉네임을 입력해주세요"></Input>
-        <Caption>
-          <Typography size="12" fontWeight="bold">
-            최대 n글자
-          </Typography>
-        </Caption>
-      </InputWrapper>
+      <Wrapper>
+        <InputWrapper>
+          <div style={{position: 'relative'}}>
+            <Input onChange={onChange} placeholder="닉네임을 입력해주세요" />
+            <Caption>
+              <Typography size="12" fontWeight="bold">
+                최대 8글자
+              </Typography>
+            </Caption>
+          </div>
+          <CheckButton onClick={() => checkDuplication()}>
+            <Typography size="12" fontWeight="bold" color="blue">
+              중복확인
+            </Typography>
+          </CheckButton>
+        </InputWrapper>
+      </Wrapper>
     </Container>
   );
 }
@@ -37,6 +50,20 @@ const Container = styled.div`
 `;
 
 const InputWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+`;
+
+const CheckButton = styled.button`
+  display: flex;
+  border: 1px solid ${customColor.blue};
+  background-color: white;
+  cursor: pointer;
+  padding: 8px 20px;
+  border-radius: 10px;
+`;
+
+const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
