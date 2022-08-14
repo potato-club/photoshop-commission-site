@@ -11,17 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Generate Environment Variables File for Production
-        run: |
-          echo "NEXT_PUBLIC_S3_UPLOAD_KEY=$NEXT_PUBLIC_S3_UPLOAD_KEY" >> .env.local
-          echo "NEXT_PUBLIC_S3_UPLOAD_SECRET=$NEXT_PUBLIC_S3_UPLOAD_SECRET" >> .env.local
-          echo "NEXT_PUBLIC_S3_UPLOAD_BUCKET=$NEXT_PUBLIC_S3_UPLOAD_BUCKET" >> .env.local
-          echo "NEXT_PUBLIC_S3_UPLOAD_REGION=$NEXT_PUBLIC_S3_UPLOAD_REGION" >> .env.local
-        env:
-          NEXT_PUBLIC_S3_UPLOAD_KEY: ${{ secrets.NEXT_PUBLIC_S3_UPLOAD_KEY }}
-          NEXT_PUBLIC_S3_UPLOAD_SECRET: ${{ secrets.NEXT_PUBLIC_S3_UPLOAD_SECRET }}
-          NEXT_PUBLIC_S3_UPLOAD_BUCKET: ${{ secrets.NEXT_PUBLIC_S3_UPLOAD_BUCKET }}
-          NEXT_PUBLIC_S3_UPLOAD_REGION: 'ap-northeast-2'
-
       - run: npm install
       - run: npm run build
 
