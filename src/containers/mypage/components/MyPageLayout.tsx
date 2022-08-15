@@ -15,7 +15,7 @@ const NavItemInfo = [
   },
   {
     name: '작성 글',
-    pathName: '/mypage/post',
+    pathName: '/mypage/post/all',
   },
   {
     name: '작성 댓글',

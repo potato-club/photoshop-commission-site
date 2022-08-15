@@ -4,36 +4,37 @@ import { Email } from 'src/constants/footer/FooterEmail';
 import { Content } from '../components/index';
 import styled from 'styled-components';
 
- const Container = styled.div`
+const Container = styled.div`
   height: 279px;
   background-color: rgba(7, 104, 159, 0.14);
   position: relative;
   width: 100vw;
+  margin-bottom: 90px;
 `;
 
- const Wrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding-top: 40px;
 `;
 
- const ContentWrapper = styled.div`
+const ContentWrapper = styled.div`
   width: 1178px;
   list-style: none;
   margin: 0 auto;
 `;
 
- const EmailBox = styled.div`
+const EmailBox = styled.div`
   width: 1178px;
   position: relative;
   margin: 0 auto;
   color: rgba(173, 173, 173, 1);
   font-size: 12px;
   height: 30px;
-  `;
+`;
 
- const EmailWrap = styled.div`
+const EmailWrap = styled.div`
   position: absolute;
   right: 0px;
   top: 22px;
@@ -41,24 +42,24 @@ import styled from 'styled-components';
   align-items: center;
 `;
 
- const Emails = styled.span`
+const Emails = styled.span`
   margin-right: 15px;
   font-size: 12px;
-  `;
+`;
 
- const Line = styled.hr`
+const Line = styled.hr`
   border: 0;
   height: 0.5px;
   background: rgba(173, 173, 173, 1);
-  `;
+`;
 
-   const ContentBox = styled.div`
-    list-style: none;
-    padding: 0;
-    display: flex;
-    margin-bottom: 40px;
-    justify-content: space-evenly;
-  `;
+const ContentBox = styled.div`
+  list-style: none;
+  padding: 0;
+  display: flex;
+  margin-bottom: 40px;
+  justify-content: space-evenly;
+`;
 
 export const Footer = () => {
   return (

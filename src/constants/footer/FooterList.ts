@@ -19,20 +19,20 @@ export const FooterList = [
         href: 'complete',
       },
     ],
-    href: '/main',
+    href: 'main',
   },
   {
     theme: 'ABOUT',
     content: [
       {
         text: '공지사항',
-        href: '/',
+        href: '',
       },
       {
         text: '이용약관',
-        href: '/',
+        href: '',
       },
     ],
-    href: '/about',
+    href: 'about',
   },
 ];
