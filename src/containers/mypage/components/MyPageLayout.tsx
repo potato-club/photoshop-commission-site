@@ -14,6 +14,10 @@ const NavItemInfo = [
     pathName: '/mypage/rate',
   },
   {
+    name: '후기 남기기',
+    pathName: '/mypage/review',
+  },
+  {
     name: '작성 글',
     pathName: '/mypage/post/all',
   },
