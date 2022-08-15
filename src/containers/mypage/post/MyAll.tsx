@@ -34,7 +34,7 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
           {state === 'complete' && all.complete}
         </Typography>
         <Plus>
-          <Link href={`/main/${state}`} passHref>
+          <Link href={`/mypage/post/${state}`} passHref>
             <A>
               <Typography size="16" fontWeight="900">
                 {all.plus}
@@ -56,7 +56,7 @@ const Container = styled.div`
 
 const RequestBox = styled.div`
   width: 100%;
-  margin-bottom: 150px;
+  margin-bottom: 80px;
 `;
 
 const Title = styled.div`
