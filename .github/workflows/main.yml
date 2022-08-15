@@ -11,12 +11,10 @@ jobs:
     steps:
       - name: Checkout source code
       - uses: actions/checkout@master
-      
-      - name: build
+
       - run: npm install
       - run: npm run build
 
-      - name: S3 Bucket sync
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
