@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
-      - uses: actions/checkout@master
+        uses: actions/checkout@master
 
       - run: npm install
       - run: npm run build
