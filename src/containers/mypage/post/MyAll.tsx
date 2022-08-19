@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { pathName } from 'pathName';
+import { pathName } from 'src/containers/pathName';
 import { Typography } from 'src/components';
 import { all } from 'src/constants/all/all';
 import { dummyList } from 'src/dummy/dummyList';

@@ -13,7 +13,7 @@ import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
-import { pathName } from 'pathName';
+import { pathName } from 'src/containers/pathName';
 
 const StatePage = () => {
   const [text, setText] = useState(''); // 필터링 값

@@ -1,7 +1,7 @@
 import { SideBar } from './sidebar/Sidebar';
 import styled from 'styled-components';
 import { customColor } from 'src/constants';
-import { pathName } from 'pathName';
+import { pathName } from 'src/containers/pathName';
 
 const nickName = '양파먹는소녀';
 
@@ -12,7 +12,7 @@ const NavItemInfo = [
   },
   {
     name: '평점',
-    pathName: pathName.MYPAGE.PROFILE,
+    pathName: pathName.MYPAGE.RATE,
   },
   {
     name: '작성 글',

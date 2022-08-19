@@ -4,7 +4,7 @@ import { HeaderName } from 'src/constants/header/HeaderName';
 import styled from 'styled-components';
 import { FaUserAlt } from 'react-icons/fa';
 import { FaBell } from 'react-icons/fa';
-import { pathName } from 'pathName';
+import { pathName } from 'src/containers/pathName';
 
 export const HeaderBox = styled.div`
   background-color: rgba(7, 104, 159, 1);
