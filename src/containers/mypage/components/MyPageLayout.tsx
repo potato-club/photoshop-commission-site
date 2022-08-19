@@ -1,29 +1,30 @@
 import { SideBar } from './sidebar/Sidebar';
 import styled from 'styled-components';
 import { customColor } from 'src/constants';
+import { pathName } from 'pathName';
 
 const nickName = '양파먹는소녀';
 
 const NavItemInfo = [
   {
     name: '프로필',
-    pathName: '/mypage/profile',
+    pathName: pathName.MYPAGE.PROFILE,
   },
   {
     name: '평점',
-    pathName: '/mypage/rate',
+    pathName: pathName.MYPAGE.PROFILE,
   },
   {
     name: '작성 글',
-    pathName: '/mypage/post/all',
+    pathName: pathName.MYPAGE.POST.ALL,
   },
   {
     name: '작성 댓글',
-    pathName: '/mypage/comment',
+    pathName: pathName.MYPAGE.COMMENT,
   },
   {
     name: '설정',
-    pathName: '/mypage/option',
+    pathName: pathName.MYPAGE.OPTION,
   },
 ];
 

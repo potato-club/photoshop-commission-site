@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { pathName } from 'pathName';
 import React, { useState } from 'react';
 import { all } from 'src/constants/all/all';
 import { dummyList } from 'src/dummy/dummyList';
@@ -48,7 +49,7 @@ export const MainRequestBoard = ({ state }: MainRequestBoardProps) => {
           {state === 'complete' && all.complete}
         </Typography>
         <Plus>
-          <Link href={`/main/${state}`} passHref>
+          <Link href={`${pathName.MOREVIEW}/${state}`} passHref>
             <A>
               <Typography size="16" fontWeight="900">
                 {all.plus}

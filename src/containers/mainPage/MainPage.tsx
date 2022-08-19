@@ -3,6 +3,7 @@ import { Typography, SideBox, MainRequestBoard } from '../../components/index';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { all } from 'src/constants/all/all';
+import { pathName } from 'pathName';
 
 export const MainPage: NextPage = () => {
   return (
@@ -13,7 +14,7 @@ export const MainPage: NextPage = () => {
             {all.comment}
           </Typography>
         </SignUpComment>
-        <Link href={'/signUp'} passHref>
+        <Link href={pathName.SIGNUP} passHref>
           <A>
             <SignUpBtn>
               <Typography size="20" color="white" fontWeight="900">

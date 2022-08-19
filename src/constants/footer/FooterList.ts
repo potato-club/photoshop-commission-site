@@ -1,25 +1,26 @@
+import { pathName } from 'pathName';
 export const FooterList = [
   {
     theme: '인트로페이지',
-    href: '/',
+    href: pathName.INDEX,
   },
   {
     theme: 'HOME',
     content: [
       {
         text: '의뢰전',
-        href: 'before',
+        href: `${pathName.MOREVIEW}/before`,
       },
       {
         text: '의뢰중',
-        href: 'doing',
+        href: `${pathName.MOREVIEW}/doing`,
       },
       {
         text: '의뢰완료',
-        href: 'complete',
+        href: `${pathName.MOREVIEW}/complete`,
       },
     ],
-    href: 'main',
+    href: pathName.MOREVIEW,
   },
   {
     theme: 'ABOUT',
