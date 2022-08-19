@@ -5,11 +5,12 @@ export const CustomPagination = ({
   activePage,
   onChange,
   totalItemsCount,
+  itemsCountPerPage,
 }: ReactJsPaginationProps) => {
   return (
     <Pagination
       activePage={activePage}
-      itemsCountPerPage={15}
+      itemsCountPerPage={itemsCountPerPage}
       totalItemsCount={totalItemsCount}
       onChange={onChange}
       pageRangeDisplayed={5}
