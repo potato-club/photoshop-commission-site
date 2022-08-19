@@ -2,12 +2,14 @@ const tokenKey = 'TOKEN';
 
 export const tokenService = {
   getToken: () => {
-    localStorage.getItem(tokenKey) ?? '';
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem(tokenKey) ?? '';
+    }
   },
-  setToken: (token:string) => {
+  setToken: (token: string) => {
     localStorage.setItem(tokenKey, token);
   },
   resetToken: () => {
     localStorage.removeItem(tokenKey);
-  }
+  },
 };

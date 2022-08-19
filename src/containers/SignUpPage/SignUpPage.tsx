@@ -8,14 +8,31 @@ import {
   TextAreaComponent,
   Title,
 } from './components';
+import { tokenService } from 'src/utils/useToken';
+import { signUpApi } from 'src/apis';
 
 export function SignUpPage() {
   const [nickname, setNickname] = useState('');
-  const [selectedJob, setSelectedJob] = useState('requester');
+  const [selectedJob, setSelectedJob] = useState('USER');
   const [aboutMe, setAboutMe] = useState('');
 
-  const signUp = () => {
-    alert('가입하기 버튼 클릭');
+  const signUp = async () => {
+    try {
+      console.log('nickname :', nickname);
+      console.log('introduction :', aboutMe);
+      console.log('userRole :', selectedJob);
+      console.log('token : ', tokenService.getToken());
+
+      const data = await signUpApi.signUp({
+        nickname,
+        introduction: aboutMe,
+        userRole: selectedJob,
+        token: tokenService.getToken(),
+      });
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
