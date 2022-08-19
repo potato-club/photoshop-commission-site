@@ -3,7 +3,7 @@ import { Typography, SideBox, MainRequestBoard } from '../../components/index';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { all } from 'src/constants/all/all';
-import { pathName } from 'src/containers/pathName';
+import { pathName } from 'src/constants/pathName';
 
 export const MainPage: NextPage = () => {
   return (

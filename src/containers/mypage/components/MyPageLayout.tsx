@@ -1,7 +1,7 @@
 import { SideBar } from './sidebar/Sidebar';
 import styled from 'styled-components';
 import { customColor } from 'src/constants';
-import { pathName } from 'src/containers/pathName';
+import { pathName } from 'src/constants/pathName';
 
 const nickName = '양파먹는소녀';
 

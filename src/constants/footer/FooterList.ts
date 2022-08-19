@@ -1,4 +1,4 @@
-import { pathName } from 'src/containers/pathName';
+import { pathName } from 'src/constants/pathName';
 export const FooterList = [
   {
     theme: '인트로페이지',
