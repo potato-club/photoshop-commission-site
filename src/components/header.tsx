@@ -4,6 +4,7 @@ import { HeaderName } from 'src/constants/header/HeaderName';
 import styled from 'styled-components';
 import { FaUserAlt } from 'react-icons/fa';
 import { FaBell } from 'react-icons/fa';
+import { pathName } from 'src/constants/pathName';
 
 export const HeaderBox = styled.div`
   background-color: rgba(7, 104, 159, 1);
@@ -61,7 +62,7 @@ export const Header = () => {
   return (
     <HeaderBox>
       <ContentBox>
-        <Link href="/main" passHref>
+        <Link href={pathName.MAIN} passHref>
           <Theme>
             <Typography color="white" size="32" fontWeight="900">
               {HeaderName.name}
@@ -69,7 +70,7 @@ export const Header = () => {
           </Theme>
         </Link>
         <Icons>
-          <Link href="/mypage/profile">
+          <Link href={pathName.MYPAGE.PROFILE}>
             <a>
               <UserImage />
             </a>

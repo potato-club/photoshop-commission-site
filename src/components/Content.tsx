@@ -41,7 +41,7 @@ export const Content = ({ theme, content, href }: ContentType) => {
 
       {content?.map((element, index) => (
         <li key={index}>
-          <Link href={`/main/${element.href}`} passHref>
+          <Link href={`${element.href}`} passHref>
             <a>
               <NewTypography size="12" color="gray">
                 {element.text}

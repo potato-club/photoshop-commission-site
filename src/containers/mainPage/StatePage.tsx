@@ -13,6 +13,7 @@ import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import axios from 'axios';
+import { pathName } from 'src/constants/pathName';
 
 const StatePage = () => {
   const [text, setText] = useState(''); // 필터링 값
@@ -95,7 +96,7 @@ const StatePage = () => {
             {all.comment}
           </Typography>
         </SignUpComment>
-        <Link href={'/signUp'} passHref>
+        <Link href={pathName.SIGNUP} passHref>
           <A>
             <SignUpBtn>
               <Typography size="20" color="white" fontWeight="900">
