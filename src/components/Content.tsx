@@ -12,20 +12,6 @@ interface ContentType {
   href: string;
 }
 
-const Page = styled.a`
-  display: inline-block;
-  margin-bottom: 9px;
-  text-decoration: none;
-`;
-
-const NewTypography = styled(Typography)`
-  padding: 5px 0 5px 0;
-  display: inline-block;
-  :hover {
-    font-weight: 900;
-  }
-`;
-
 export const Content = ({ theme, content, href }: ContentType) => {
   return (
     <ul>
@@ -55,3 +41,17 @@ export const Content = ({ theme, content, href }: ContentType) => {
 };
 
 export default Content;
+
+const Page = styled.a`
+  display: inline-block;
+  margin-bottom: 9px;
+  text-decoration: none;
+`;
+
+const NewTypography = styled(Typography)`
+  padding: 5px 0 5px 0;
+  display: inline-block;
+  :hover {
+    font-weight: 900;
+  }
+`;
