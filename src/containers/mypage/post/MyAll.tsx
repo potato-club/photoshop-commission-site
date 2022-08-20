@@ -35,11 +35,7 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
           {state === 'complete' && all.complete}
         </Typography>
         <Plus>
-<<<<<<< HEAD
           <Link href={`/mypage/post/${state}`} passHref>
-=======
-          <Link href={`${pathName.MOREVIEW}/${state}`} passHref>
->>>>>>> develop
             <A>
               <Typography size="16" fontWeight="900">
                 {all.plus}
