@@ -23,11 +23,18 @@ const customStyles = {
     background: customColor.lightBlue,
   },
 };
-export const RequestModal = () => {
+
+interface IRequestModal {
+  modalOpen: boolean;
+  handleCloseModal: () => void;
+}
+export const RequestModal = ({
+  modalOpen,
+  handleCloseModal,
+}: IRequestModal) => {
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]; // 신청자 리스트 정보(dummy)받아와야함
   const offset = 5;
   const [page, setPage] = useState(1);
-  const [modalIsOpen, setIsOpen] = useState<boolean>(false);
   const handlePageChange = (page: number) => {
     setPage(page);
   };
@@ -39,15 +46,10 @@ export const RequestModal = () => {
 
   return (
     <div>
-      <ModalBtn onClick={() => setIsOpen(true)}>
-        <Typography color="black" size="16" fontWeight="700">
-          요청 확인하기
-        </Typography>
-      </ModalBtn>
       <Modal
         ariaHideApp={false}
-        isOpen={modalIsOpen}
-        onRequestClose={() => setIsOpen(false)}
+        isOpen={modalOpen}
+        onRequestClose={handleCloseModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
@@ -58,7 +60,7 @@ export const RequestModal = () => {
                 신청자 리스트
               </NewTypography>
             </Theme>
-            <CustomImCross onClick={() => setIsOpen(false)} size={24} />
+            <CustomImCross onClick={handleCloseModal} size={24} />
           </Header>
           <Guide>
             <Typography color="gray" size="16">
@@ -101,16 +103,6 @@ export const RequestModal = () => {
 
 export default RequestModal;
 
-const ModalBtn = styled.button`
-  border: none;
-  padding: 10px 15px;
-  background-color: ${customColor.gray};
-  font-size: 16px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${customColor.danger};
-  }
-`;
 const CustomImCross = styled(ImCross)`
   cursor: pointer;
 
@@ -124,7 +116,7 @@ const CommissionBtn = styled.button`
   border-radius: 15px;
   padding: 10px 20px;
   cursor: pointer;
-  
+
   &:hover {
     background-color: ${customColor.success};
   }
