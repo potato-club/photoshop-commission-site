@@ -1,6 +1,6 @@
 import { IDummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
-import { MyCard } from './myCard';
+import { MyCard } from './MyCard';
 
 type Props = {
   offset: number;

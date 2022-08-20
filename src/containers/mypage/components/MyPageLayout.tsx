@@ -15,6 +15,10 @@ const NavItemInfo = [
     pathName: pathName.MYPAGE.RATE,
   },
   {
+    name: '후기 남기기',
+    pathName: '/mypage/review',
+  },
+  {
     name: '작성 글',
     pathName: pathName.MYPAGE.POST.ALL,
   },
@@ -46,7 +50,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 1178px;
-  height: 100%;
+
   margin: auto;
 `;
 export const SideBarWrapper = styled.div`
@@ -54,9 +58,13 @@ export const SideBarWrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 20%;
+  height: 100%;
+
   min-height: 100%;
-  border-left: 1px solid ${customColor.gray};
-  border-right: 1px solid ${customColor.gray};
+  margin-bottom: 80px;
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.6);
 `;
 export const Wrapper = styled.div`
   display: flex;
@@ -65,6 +73,7 @@ export const Wrapper = styled.div`
   width: 75%;
   margin-top: 60px;
   margin-left: auto;
+  height: 100%;
 
   margin-bottom: auto;
 `;
