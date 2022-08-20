@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { pathName } from 'src/constants/pathName';
 import { Typography } from 'src/components';
 import { all } from 'src/constants/all/all';
 import { dummyList } from 'src/dummy/dummyList';
@@ -34,7 +35,11 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
           {state === 'complete' && all.complete}
         </Typography>
         <Plus>
+<<<<<<< HEAD
           <Link href={`/mypage/post/${state}`} passHref>
+=======
+          <Link href={`${pathName.MOREVIEW}/${state}`} passHref>
+>>>>>>> develop
             <A>
               <Typography size="16" fontWeight="900">
                 {all.plus}
