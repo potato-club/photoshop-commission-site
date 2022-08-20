@@ -6,46 +6,12 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { useMemo } from 'react';
 
-const Container = styled.div`
-  width: 270px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-  margin-left: 12.25px;
-  margin-right: 12.25px;
-  margin-bottom: 36px;
-`;
-
-const PhotoBox = styled.div`
-  width: 100%;
-`;
-
-const NewImage = styled(Image)`
-  border-radius: 20px;
-`;
-
-const ThemeBox = styled.div`
-  width: 100%;
-  margin-top: 9px;
-  height: 32px;
-`;
-
-const NameDateBox = styled.div`
-  margin-top: 12px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-`;
-
-const A = styled.a`
-  text-decoration: none;
-`;
-
 export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
+  const theme = useMemo(
+    () => (title.length >= 30 ? title.substring(0, 30) + '...' : title),
+    [title],
+  );
 
-  const theme = useMemo(()=>title.length >= 30 ? title.substring(0, 30) + '...' : title,[title])
-  
   return (
     <Container>
       <PhotoBox>
@@ -90,3 +56,39 @@ export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
 };
 
 export default Card;
+
+const Container = styled.div`
+  width: 270px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  margin-left: 12.25px;
+  margin-right: 12.25px;
+  margin-bottom: 36px;
+`;
+
+const PhotoBox = styled.div`
+  width: 100%;
+`;
+
+const NewImage = styled(Image)`
+  border-radius: 20px;
+`;
+
+const ThemeBox = styled.div`
+  width: 100%;
+  margin-top: 9px;
+  height: 32px;
+`;
+
+const NameDateBox = styled.div`
+  margin-top: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const A = styled.a`
+  text-decoration: none;
+`;

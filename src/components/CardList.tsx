@@ -8,14 +8,6 @@ interface CardListType {
   list: IDummyList[];
 }
 
-const CardBox = styled.div`
-  width: 1178px;
-  display: flex;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  justify-content: start;
-`;
-
 export const CardList = ({ list, offset, limit }: CardListType) => {
   return (
     <CardBox>
@@ -27,3 +19,11 @@ export const CardList = ({ list, offset, limit }: CardListType) => {
 };
 
 export default CardList;
+
+const CardBox = styled.div`
+  width: 1178px;
+  display: flex;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: start;
+`;
