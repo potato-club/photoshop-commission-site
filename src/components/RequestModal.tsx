@@ -20,7 +20,7 @@ const customStyles = {
     overflow: 'hidden',
   },
   overlay: {
-    background: customColor.lightBlue,
+    background: '#ffffff80',
   },
 };
 
@@ -127,7 +127,7 @@ const Date = styled.div`
 
 const NickName = styled.div`
   position: relative;
-  right: 40px;
+  right: 30px;
 `;
 const List = styled.div`
   width: 100%;

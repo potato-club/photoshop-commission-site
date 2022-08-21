@@ -9,7 +9,11 @@ export function useModal() {
     setModalOpen(false);
   };
 
-  return { modalOpen, handleOpenModal, handleCloseModal };
+  const handleModal = () => {
+    setModalOpen(prev => !prev);
+  };
+
+  return { modalOpen, handleOpenModal, handleCloseModal, handleModal };
 }
 
 export default useModal;
