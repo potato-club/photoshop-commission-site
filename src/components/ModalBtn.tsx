@@ -3,9 +3,12 @@ import { customColor } from 'src/constants/customColor';
 import styled from 'styled-components';
 import { Typography } from './Typography';
 
-const ModalBtn = () => {
+interface IModalBtn {
+  handleModal: () => void;
+}
+const ModalBtn = ({ handleModal }: IModalBtn) => {
   return (
-    <Button>
+    <Button onClick={handleModal}>
       <Typography color="black" size="16" fontWeight="700">
         요청 확인하기
       </Typography>
