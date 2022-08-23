@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
@@ -12,8 +12,11 @@ import { signUpApi } from 'src/apis';
 import { useRouter } from 'next/router';
 import useLocalStorage from 'src/utils/useLocalStorage';
 
+
+
 export function SignUpPage() {
   const [nickname, setNickname] = useState('');
+  const [doubleNameCheck, setDoubleNameCheck] = useState<boolean>(false);
   const [selectedJob, setSelectedJob] = useState('USER');
   const [aboutMe, setAboutMe] = useState('');
   const router = useRouter();
@@ -21,6 +24,10 @@ export function SignUpPage() {
 
   const signUp = async () => {
     try {
+      if(!doubleNameCheck) {
+        alert("닉네임 중복확인을 해주세요!");
+        return;
+      }
       console.log('nickname :', nickname);
       console.log('introduction :', aboutMe);
       console.log('userRole :', selectedJob);
@@ -39,13 +46,22 @@ export function SignUpPage() {
       console.log(err);
     }
   };
+  
+  useEffect(() => {
+    setDoubleNameCheck(false);
+  }, [nickname])
 
   return (
     <Container>
       <Title />
       <Line />
       <InfoWrapper>
-        <NicknameInput setNickname={setNickname} />
+        <NicknameInput
+          nickname={nickname}
+          setNickname={setNickname}
+          doubleNameCheck={doubleNameCheck}
+          setDoubleNameCheck={setDoubleNameCheck}
+        />
         <JobSelectInput
           selectedJob={selectedJob}
           setSelectedJob={setSelectedJob}
