@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
@@ -8,28 +8,33 @@ import {
   TextAreaComponent,
   Title,
 } from './components';
-import { tokenService } from 'src/utils/useToken';
 import { signUpApi } from 'src/apis';
+import { useRouter } from 'next/router';
+import useLocalStorage from 'src/utils/useLocalStorage';
 
 export function SignUpPage() {
   const [nickname, setNickname] = useState('');
   const [selectedJob, setSelectedJob] = useState('USER');
   const [aboutMe, setAboutMe] = useState('');
+  const router = useRouter();
+  const { getStorage, setStorage, resetStorage } = useLocalStorage();
 
   const signUp = async () => {
     try {
       console.log('nickname :', nickname);
       console.log('introduction :', aboutMe);
       console.log('userRole :', selectedJob);
-      console.log('token : ', tokenService.getToken());
 
-      const data = await signUpApi.signUp({
+      const { data } = await signUpApi.signUp({
         nickname,
         introduction: aboutMe,
         userRole: selectedJob,
-        token: tokenService.getToken(),
+        email: getStorage('email'),
       });
       console.log(data);
+      resetStorage('email');
+      setStorage('session', data.session);
+      router.push('/main');
     } catch (err) {
       console.log(err);
     }
