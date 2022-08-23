@@ -1,18 +1,35 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
+import { signUpApi } from 'src/apis';
+import { BsCheckLg } from 'react-icons/bs';
+import { ImCross } from 'react-icons/im';
+
 type Props = {
+  nickname: string;
   setNickname: React.Dispatch<React.SetStateAction<string>>;
+  doubleNameCheck: boolean;
+  setDoubleNameCheck: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export function NicknameInput({ setNickname }: Props) {
+export function NicknameInput({
+  nickname,
+  setNickname,
+  doubleNameCheck,
+  setDoubleNameCheck,
+}: Props) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setNickname(value);
   };
 
-  const checkDuplication = () => {
-    alert("중복확인 버튼 클릭");
+  const checkDuplication = async () => {
+    const { data } = await signUpApi.checkNickname({
+      params: {
+        nickname,
+      },
+    });
+    setDoubleNameCheck(data);
   };
   return (
     <Container>
@@ -23,8 +40,12 @@ export function NicknameInput({ setNickname }: Props) {
       </LeftMargin>
       <Wrapper>
         <InputWrapper>
-          <div style={{position: 'relative'}}>
-            <Input onChange={onChange} placeholder="닉네임을 입력해주세요" />
+          <div style={{ position: 'relative' }}>
+            <Input
+              onChange={onChange}
+              placeholder="닉네임을 입력해주세요"
+              maxLength={8}
+            />
             <Caption>
               <Typography size="12" fontWeight="bold">
                 최대 8글자
@@ -36,6 +57,13 @@ export function NicknameInput({ setNickname }: Props) {
               중복확인
             </Typography>
           </CheckButton>
+          <IconWrapper>
+            {doubleNameCheck ? (
+              <BsCheckLg size={20} color="#1ebd08" />
+            ) : (
+              <ImCross size={20} color="#f13737" />
+            )}
+          </IconWrapper>
         </InputWrapper>
       </Wrapper>
     </Container>
@@ -95,4 +123,10 @@ const Caption = styled.div`
 
 const LeftMargin = styled.div`
   margin-left: 12px;
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
