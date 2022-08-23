@@ -6,23 +6,25 @@ import { Typography } from './Typography';
 interface IModalBtn {
   handleModal: () => void;
 }
-const ModalBtn = ({ handleModal }: IModalBtn) => {
+export const RequestModalBtn = ({ handleModal }: IModalBtn) => {
   return (
     <Button onClick={handleModal}>
-      <Typography color="black" size="16" fontWeight="700">
-        요청 확인하기
+      <Typography color="white" size="16" fontWeight="700">
+        의뢰 신청하기
       </Typography>
     </Button>
   );
 };
 
-export default ModalBtn;
+export default RequestModalBtn;
 
 const Button = styled.button`
   border: none;
-  padding: 10px 15px;
-  background-color: ${customColor.gray};
+  padding: 15px 20px;
+  background-color: ${customColor.lightBlue};
   font-size: 16px;
+  width: 180px;
+  border-radius: 10px;
   cursor: pointer;
   &:hover {
     background-color: ${customColor.danger};
