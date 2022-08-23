@@ -1,23 +1,33 @@
 import type { NextPage } from 'next';
-import { Typography, SideBox, CardList } from '../../components/index';
+import { Typography, SideBox, MainRequestBoard } from '../../components/index';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { useState } from 'react';
-import { dummyList } from 'src/dummy/dummyList';
 import { all } from 'src/constants/all/all';
+import { pathName } from 'src/constants/pathName';
+import { useRouter } from 'next/router';
 
 export const MainPage: NextPage = () => {
-  const [limit, setLimit] = useState(8);
-
+  const router = useRouter();
+  const callKaKaoLoginHandler = () => {
+    router.push({
+      pathname: process.env.NEXT_PUBLIC_PATHNAME,
+      query: {
+        response_type: process.env.NEXT_PUBLIC_RESPONSE_TYPE,
+        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
+        redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI,
+      },
+    });
+  }
   return (
     <Container>
+      <button onClick={() => callKaKaoLoginHandler()}>카카오 로그인 테스트</button>
       <SignUpBox>
         <SignUpComment>
           <Typography size="40" color="blue" fontWeight="900">
             {all.comment}
           </Typography>
         </SignUpComment>
-        <Link href={'/signup'} passHref>
+        <Link href={pathName.SIGNUP} passHref>
           <A>
             <SignUpBtn>
               <Typography size="20" color="white" fontWeight="900">
@@ -27,60 +37,11 @@ export const MainPage: NextPage = () => {
           </A>
         </Link>
       </SignUpBox>
-      <RequestBox>
-        <Title>
-          <Typography size="24" fontWeight="900">
-            {all.before}
-          </Typography>
-          <Plus>
-            <Link href={'/main/before'} passHref>
-              <A>
-                <Typography size="16" fontWeight="900">
-                  {all.plus}
-                </Typography>
-              </A>
-            </Link>
-          </Plus>
-        </Title>
-        <Hr />
-        <CardList list={dummyList} offset={0} limit={limit} />
-      </RequestBox>
-      <RequestBox>
-        <Title>
-          <Typography size="24" fontWeight="900">
-            {all.doing}
-          </Typography>
-          <Plus>
-            <Link href={'/main/doing'} passHref>
-              <A>
-                <Typography size="16" fontWeight="900">
-                  {all.plus}
-                </Typography>
-              </A>
-            </Link>
-          </Plus>
-        </Title>
-        <Hr />
-        <CardList list={dummyList} offset={0} limit={limit} />
-      </RequestBox>
-      <RequestBox>
-        <Title>
-          <Typography size="24" fontWeight="900">
-            {all.complete}
-          </Typography>
-          <Plus>
-            <Link href={'/main/complete'} passHref>
-              <A>
-                <Typography size="16" fontWeight="900">
-                  {all.plus}
-                </Typography>
-              </A>
-            </Link>
-          </Plus>
-        </Title>
-        <Hr />
-        <CardList list={dummyList} offset={0} limit={limit} />
-      </RequestBox>
+
+      <MainRequestBoard state="before" />
+      <MainRequestBoard state="doing" />
+      <MainRequestBoard state="complete" />
+
       <SideBox />
     </Container>
   );
@@ -118,29 +79,6 @@ const SignUpBtn = styled.button`
   :hover {
     background-color: black;
   }
-`;
-
-const RequestBox = styled.div`
-  width: 100%;
-  margin-bottom: 150px;
-`;
-
-const Title = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Plus = styled.span`
-  text-decoration: none;
-  margin: 0px 15px 0 0;
-  :hover {
-    cursor: pointer;
-  }
-`;
-
-const Hr = styled.hr`
-  margin-bottom: 0;
 `;
 
 const A = styled.a`

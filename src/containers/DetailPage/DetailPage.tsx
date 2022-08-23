@@ -1,39 +1,104 @@
-
 import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
-import { Contents, Header, CommentHeader, Comment, CustomInput } from './components';
-import { WritingType } from 'src/dummy/writingDummy';
+import {
+  Contents,
+  Header,
+  CommentHeader,
+  Comment,
+  CustomInput,
+} from './components';
+import { BoardType } from 'src/types/board.type';
+import {
+  ConfirmModalBtn,
+  ConfirmModal,
+  RequestModalBtn,
+  RequestModal,
+} from '../../../src/components/index';
+import useModal from 'src/hooks/useModal';
 type Props = {
-  data: WritingType;
+  data: BoardType;
 };
 export function DetailPage({ data }: Props) {
-  const {title, state, writer, date, imageUrls, secret, text, totalComment, comments} = data;
+  const {
+    requestModalOpen,
+    handleCloseRequestModal,
+    handleRequestModal,
+    confirmModalOpen,
+    handleCloseConfirmModal,
+    handleConfirmModal,
+  } = useModal();
+  const {
+    title,
+    state,
+    writer,
+    date,
+    imageUrls,
+    imageSecret,
+    contents,
+    totalComment,
+    commentList,
+  } = data;
   return (
     <Container>
       <Wrapper>
         <Header title={title} writer={writer} date={date} state={state} />
-        <Contents imageUrls={imageUrls} text={text} secret={secret} />
+        <Contents
+          imageUrls={imageUrls}
+          contents={contents}
+          imageSecret={imageSecret}
+        />
         <CommentContainer>
           <CommentHeader totalComment={totalComment} />
-          {comments.map(comment => (
+          {commentList.map(comment => (
             <Comment
-              key={comment.id}
+              key={comment.CommentNo}
               writer={comment.writer}
               date={comment.date}
-              text={comment.text}
+              text={comment.contents}
               good={comment.good}
               reply={comment.reply}
               type="Comment"
             />
           ))}
+          <ModalWrapper>
+            <div style={{ marginBottom: '15px' }}>
+              <ConfirmModalBtn handleModal={handleConfirmModal} />
+              <ConfirmModal
+                modalOpen={confirmModalOpen}
+                handleCloseModal={handleCloseConfirmModal}
+              />
+            </div>
+            <div>
+              <RequestModalBtn handleModal={handleRequestModal} />
+              <RequestModal
+                modalOpen={requestModalOpen}
+                handleCloseModal={handleCloseRequestModal}
+              />
+            </div>
+          </ModalWrapper>
         </CommentContainer>
-        <Line />
-        <CustomInput type='Board'/>
+        <Line></Line>
+        <CustomInput type="Board" />
       </Wrapper>
     </Container>
   );
 }
+
+export default DetailPage;
+
+const ModalWrapper = styled.div`
+  position: absolute;
+  top: -85px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  &:nth-child(0) {
+    margin-bottom: 10px;
+  }
+`;
+
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -56,36 +121,7 @@ const Wrapper = styled.div`
 const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const InputWrapper = styled.div`
   position: relative;
-`;
-const Input = styled.input`
-  width: 100%;
-  box-sizing: border-box;
-  height: 40px;
-  padding: 0 80px 0 16px;
-  outline: none;
-  border: none;
-  border-top: 1px solid ${customColor.gray};
-  border-bottom: 1px solid ${customColor.gray};
-  font-size: 16px;
-  ::placeholder {
-    color: ${customColor.gray};
-  }
-`;
-
-const SubMitButton = styled.div`
-  position: absolute;
-  width: 60px;
-  height: 100%;
-  top: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${customColor.blue};
 `;
 
 const Line = styled.div`

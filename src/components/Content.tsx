@@ -1,39 +1,57 @@
-import React from 'react';
 import Link from 'next/link';
-import * as S from './Footer.style';
+import styled from 'styled-components';
+import { Typography } from './Typography';
 
-type ContentType = {
-  theme: string;
-  content?: string[];
+interface IContent {
+  text: string;
   href: string;
-};
+}
+interface ContentType {
+  theme: string;
+  content?: IContent[];
+  href: string;
+}
 
 export const Content = ({ theme, content, href }: ContentType) => {
   return (
-    <S.ContentUl>
-      <S.ContentLi>
+    <ul>
+      <li>
         <Link href={href} passHref>
-          <S.Page>
-            <S.NewTypography size="20" color="blue" fontWeight="900">
+          <Page>
+            <NewTypography size="20" color="blue" fontWeight="900">
               {theme}
-            </S.NewTypography>
-          </S.Page>
+            </NewTypography>
+          </Page>
         </Link>
-      </S.ContentLi>
+      </li>
 
       {content?.map((element, index) => (
-        <S.ContentLi key={index}>
-          <Link href={href} passHref>
-            <S.A>
-              <S.NewTypography size="12" color="gray">
-                {element}
-              </S.NewTypography>
-            </S.A>
+        <li key={index}>
+          <Link href={`${element.href}`} passHref>
+            <a>
+              <NewTypography size="12" color="gray">
+                {element.text}
+              </NewTypography>
+            </a>
           </Link>
-        </S.ContentLi>
+        </li>
       ))}
-    </S.ContentUl>
+    </ul>
   );
 };
 
 export default Content;
+
+const Page = styled.a`
+  display: inline-block;
+  margin-bottom: 9px;
+  text-decoration: none;
+`;
+
+const NewTypography = styled(Typography)`
+  padding: 5px 0 5px 0;
+  display: inline-block;
+  :hover {
+    font-weight: 900;
+  }
+`;

@@ -6,3 +6,8 @@ export { Header } from './header';
 export { Typography } from './Typography';
 export { SideBox } from './SideBox';
 export { CustomPagination } from './CustomPagination';
+export { MainRequestBoard } from './MainRequestBoard';
+export { ConfirmModal } from './ConfirmModal';
+export { ConfirmModalBtn } from './ConfirmModalBtn';
+export { RequestModal } from './RequestModal';
+export { RequestModalBtn } from './RequestModalBtn';

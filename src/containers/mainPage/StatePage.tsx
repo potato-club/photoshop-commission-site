@@ -5,19 +5,21 @@ import {
   SideBox,
   CustomPagination,
 } from 'src/components/index';
-import { dummyFilter } from 'src/dummy/dummyFilter';
+import { dummyFilter } from 'src/constants/all/filter';
 import { dummyList } from 'src/dummy/dummyList';
 import { all } from 'src/constants/all/all';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import React, { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import axios from 'axios';
+import { pathName } from 'src/constants/pathName';
 
 const StatePage = () => {
-  const [text, setText] = useState('');
-  const [selected, setSelected] = useState('제목');
+  const [text, setText] = useState(''); // 필터링 값
+  const [selected, setSelected] = useState('title');
   const [page, setPage] = useState(1);
-  const offset = useMemo(() => (page - 1) * 15, [page]);
+  const offset = useMemo(() => (page - 1) * 16, [page]);
   const router = useRouter();
   const { state } = router.query;
   const [post, setPost] = useState([]); // 데이터 받아와서 저장하는 state
@@ -25,6 +27,19 @@ const StatePage = () => {
   const handlePageChange = (page: number) => {
     setPage(page);
     window.scrollTo(0, 0);
+  };
+
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<any>,
+  ) => {
+    e.preventDefault();
+    let data = {
+      option: selected,
+      text: text,
+    };
+    console.log(data);
+    // axios.get('api', data).then(res => console.log(res));
+    setText('');
   };
 
   return (
@@ -38,11 +53,10 @@ const StatePage = () => {
         </Typography>
       </Post>
       <Title>
-        <SelectBox>
+        <SelectBox onSubmit={handleSubmit}>
           <Select
             onChange={e => {
               setSelected(e.target.value);
-              console.log(selected);
             }}
           >
             {dummyFilter.map(item => (
@@ -52,25 +66,29 @@ const StatePage = () => {
             ))}
           </Select>
           <SelectInput
+            type="text"
+            value={text}
             placeholder="검색할 내용 입력"
             onChange={e => {
               setText(e.target.value);
             }}
           />
-          <SearchIcon onClick={() => {}} />
+          <SearchIcon onClick={handleSubmit} />
         </SelectBox>
       </Title>
 
       <div>
         <Hr />
       </div>
-      <div>
-        <CardList list={dummyList} offset={offset} limit={15} />
-      </div>
+      <CardListWrap>
+        <CardList list={dummyList} offset={offset} limit={16} />
+      </CardListWrap>
       <CustomPagination
+        itemClass="page"
         activePage={page}
         onChange={handlePageChange}
         totalItemsCount={dummyList.length}
+        itemsCountPerPage={15}
       />
       <SignUpBox>
         <SignUpComment>
@@ -78,7 +96,7 @@ const StatePage = () => {
             {all.comment}
           </Typography>
         </SignUpComment>
-        <Link href={'/signup'} passHref>
+        <Link href={pathName.SIGNUP} passHref>
           <A>
             <SignUpBtn>
               <Typography size="20" color="white" fontWeight="900">
@@ -95,6 +113,9 @@ const StatePage = () => {
 
 export default StatePage;
 
+const CardListWrap = styled.div`
+  margin-bottom: 130px;
+`;
 const Container = styled.div`
   width: 1178px;
   margin: 0 auto;
@@ -120,6 +141,7 @@ const SignUpBox = styled.div`
   height: 140px;
   display: flex;
   flex-direction: column;
+  margin-top: 130px;
   margin-bottom: 150px;
 `;
 
@@ -127,7 +149,7 @@ const SignUpComment = styled.div`
   text-align: center;
 `;
 
-const SelectBox = styled.div`
+const SelectBox = styled.form`
   display: flex;
   align-items: center;
   position: relative;

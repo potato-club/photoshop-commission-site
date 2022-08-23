@@ -1,12 +1,12 @@
-import { Typography } from '../components/index';
 import Link from 'next/link';
 import { formatDate } from 'src/utils/formatDate';
 import { IDummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { useMemo } from 'react';
+import { Typography } from 'src/components';
 
-export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
+export const MyCard = ({ id, title, writer, date, imageUrls }: IDummyList) => {
   const theme = useMemo(
     () => (title.length >= 30 ? title.substring(0, 30) + '...' : title),
     [title],
@@ -19,8 +19,8 @@ export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
           <A>
             <NewImage
               src={imageUrls}
-              width="270px"
-              height="192px"
+              width="191px"
+              height="143px"
               alt="비공개"
             />
           </A>
@@ -55,10 +55,8 @@ export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
   );
 };
 
-export default Card;
-
 const Container = styled.div`
-  width: 270px;
+  width: 191px;
   height: 100%;
   display: flex;
   flex-direction: column;
