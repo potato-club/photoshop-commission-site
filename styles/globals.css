@@ -135,8 +135,6 @@ body {
 .pagination {
   display: flex;
   justify-content: center;
-  margin-bottom: 130px;
-  margin-top: 130px;
   text-align: center;
   font-size: 30px;
 }
@@ -157,4 +155,11 @@ body {
 .pagination li:nth-child(-n + 2) a,
 .pagination li:nth-last-child(-n + 2) a {
   color: black;
+}
+
+.testPage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -25px;
 }

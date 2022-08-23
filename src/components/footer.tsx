@@ -4,6 +4,36 @@ import { Email } from 'src/constants/footer/FooterEmail';
 import { Content } from '../components/index';
 import styled from 'styled-components';
 
+export const Footer = () => {
+  return (
+    <Container>
+      <Wrapper>
+        <ContentWrapper>
+          <ContentBox>
+            {FooterList.map((element, index) => (
+              <Content
+                theme={element.theme}
+                content={element.content}
+                href={element.href}
+                key={index}
+              />
+            ))}
+          </ContentBox>
+          <Line />
+        </ContentWrapper>
+        <EmailBox>
+          <EmailWrap>
+            <Emails>{Email.email}</Emails>
+            <FaGithub />
+          </EmailWrap>
+        </EmailBox>
+      </Wrapper>
+    </Container>
+  );
+};
+
+export default Footer;
+
 const Container = styled.div`
   height: 279px;
   background-color: rgba(7, 104, 159, 0.14);
@@ -60,33 +90,3 @@ const ContentBox = styled.div`
   margin-bottom: 40px;
   justify-content: space-evenly;
 `;
-
-export const Footer = () => {
-  return (
-    <Container>
-      <Wrapper>
-        <ContentWrapper>
-          <ContentBox>
-            {FooterList.map((element, index) => (
-              <Content
-                theme={element.theme}
-                content={element.content}
-                href={element.href}
-                key={index}
-              />
-            ))}
-          </ContentBox>
-          <Line />
-        </ContentWrapper>
-        <EmailBox>
-          <EmailWrap>
-            <Emails>{Email.email}</Emails>
-            <FaGithub />
-          </EmailWrap>
-        </EmailBox>
-      </Wrapper>
-    </Container>
-  );
-};
-
-export default Footer;

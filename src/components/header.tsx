@@ -6,6 +6,37 @@ import { FaUserAlt } from 'react-icons/fa';
 import { FaBell } from 'react-icons/fa';
 import { pathName } from 'src/constants/pathName';
 
+export const Header = () => {
+  return (
+    <HeaderBox>
+      <ContentBox>
+        <Link href={pathName.MAIN} passHref>
+          <Theme>
+            <Typography color="white" size="32" fontWeight="900">
+              {HeaderName.name}
+            </Typography>
+          </Theme>
+        </Link>
+        <Icons>
+          <Link href={pathName.MYPAGE.PROFILE}>
+            <a>
+              <UserImage />
+            </a>
+          </Link>
+
+          <Link href="/alert">
+            <a>
+              <AlertImage />
+            </a>
+          </Link>
+        </Icons>
+      </ContentBox>
+    </HeaderBox>
+  );
+};
+
+export default Header;
+
 export const HeaderBox = styled.div`
   background-color: rgba(7, 104, 159, 1);
   width: 100%;
@@ -57,34 +88,3 @@ const AlertImage = styled(FaBell)`
     color: gray;
   }
 `;
-
-export const Header = () => {
-  return (
-    <HeaderBox>
-      <ContentBox>
-        <Link href={pathName.MAIN} passHref>
-          <Theme>
-            <Typography color="white" size="32" fontWeight="900">
-              {HeaderName.name}
-            </Typography>
-          </Theme>
-        </Link>
-        <Icons>
-          <Link href={pathName.MYPAGE.PROFILE}>
-            <a>
-              <UserImage />
-            </a>
-          </Link>
-
-          <Link href="/alert">
-            <a>
-              <AlertImage />
-            </a>
-          </Link>
-        </Icons>
-      </ContentBox>
-    </HeaderBox>
-  );
-};
-
-export default Header;

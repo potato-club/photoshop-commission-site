@@ -80,13 +80,15 @@ const StatePage = () => {
       <div>
         <Hr />
       </div>
-      <div>
+      <CardListWrap>
         <CardList list={dummyList} offset={offset} limit={16} />
-      </div>
+      </CardListWrap>
       <CustomPagination
+        itemClass="page"
         activePage={page}
         onChange={handlePageChange}
         totalItemsCount={dummyList.length}
+        itemsCountPerPage={15}
       />
       <SignUpBox>
         <SignUpComment>
@@ -111,6 +113,9 @@ const StatePage = () => {
 
 export default StatePage;
 
+const CardListWrap = styled.div`
+  margin-bottom: 130px;
+`;
 const Container = styled.div`
   width: 1178px;
   margin: 0 auto;
@@ -136,6 +141,7 @@ const SignUpBox = styled.div`
   height: 140px;
   display: flex;
   flex-direction: column;
+  margin-top: 130px;
   margin-bottom: 150px;
 `;
 
