@@ -1,19 +1,43 @@
 import { useState } from 'react';
 
 export function useModal() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setModalOpen(false);
+  const [requestModalOpen, setRequestModalOpen] = useState(false);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+
+  const handleOpenRequestModal = () => {
+    setRequestModalOpen(true);
   };
 
-  const handleModal = () => {
-    setModalOpen(prev => !prev);
+  const handleOpenConfirmModal = () => {
+    setConfirmModalOpen(true);
   };
 
-  return { modalOpen, handleOpenModal, handleCloseModal, handleModal };
+  const handleCloseRequestModal = () => {
+    setRequestModalOpen(false);
+  };
+
+  const handleCloseConfirmModal = () => {
+    setConfirmModalOpen(false);
+  };
+
+  const handleRequestModal = () => {
+    setRequestModalOpen(prev => !prev);
+  };
+
+  const handleConfirmModal = () => {
+    setConfirmModalOpen(prev => !prev);
+  };
+
+  return {
+    requestModalOpen,
+    handleOpenRequestModal,
+    handleCloseRequestModal,
+    handleRequestModal,
+    confirmModalOpen,
+    handleOpenConfirmModal,
+    handleCloseConfirmModal,
+    handleConfirmModal,
+  };
 }
 
 export default useModal;
