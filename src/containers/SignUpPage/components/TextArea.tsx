@@ -18,8 +18,7 @@ export function TextAreaComponent({ setAboutMe }: Props) {
       <InputWrapper>
         <TextArea
           onChange={onChange}
-          placeholder="자기소개를 입력해주세요"
-        ></TextArea>
+          placeholder="자기소개를 입력해주세요" />
         <Caption>
           <Typography size="12" fontWeight="bold">
             닉네임과 자기소개는 마이페이지에서 이후에 수정가능합니다

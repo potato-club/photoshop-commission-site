@@ -8,22 +8,60 @@ import {
   TextAreaComponent,
   Title,
 } from './components';
+import { signUpApi } from 'src/apis';
+import { useRouter } from 'next/router';
+import useLocalStorage from 'src/utils/useLocalStorage';
+
+
 
 export function SignUpPage() {
   const [nickname, setNickname] = useState('');
-  const [selectedJob, setSelectedJob] = useState('requester');
+  const [doubleNameCheck, setDoubleNameCheck] = useState<boolean>(false);
+  const [selectedJob, setSelectedJob] = useState('USER');
   const [aboutMe, setAboutMe] = useState('');
+  const router = useRouter();
+  const { getStorage, setStorage, resetStorage } = useLocalStorage();
 
-  const signUp = () => {
-    alert('가입하기 버튼 클릭');
+  const signUp = async () => {
+    try {
+      if(!doubleNameCheck) {
+        alert("닉네임 중복확인을 해주세요!");
+        return;
+      }
+      console.log('nickname :', nickname);
+      console.log('introduction :', aboutMe);
+      console.log('userRole :', selectedJob);
+
+      const { data } = await signUpApi.signUp({
+        nickname,
+        introduction: aboutMe,
+        userRole: selectedJob,
+        email: getStorage('email'),
+      });
+      console.log(data);
+      resetStorage('email');
+      setStorage('session', data.session);
+      router.push('/main');
+    } catch (err) {
+      console.log(err);
+    }
   };
+  
+  useEffect(() => {
+    setDoubleNameCheck(false);
+  }, [nickname])
 
   return (
     <Container>
       <Title />
       <Line />
       <InfoWrapper>
-        <NicknameInput setNickname={setNickname} />
+        <NicknameInput
+          nickname={nickname}
+          setNickname={setNickname}
+          doubleNameCheck={doubleNameCheck}
+          setDoubleNameCheck={setDoubleNameCheck}
+        />
         <JobSelectInput
           selectedJob={selectedJob}
           setSelectedJob={setSelectedJob}

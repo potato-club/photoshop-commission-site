@@ -15,7 +15,7 @@ export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
         </Typography>
       </LeftMargin>
       <CustomRadioButton
-        id="requester"
+        id="USER"
         label="의뢰자"
         name="job"
         selectedValue={selectedJob}
@@ -26,7 +26,7 @@ export function JobSelectInput({ selectedJob, setSelectedJob }: Props) {
       />
 
       <CustomRadioButton
-        id="designer"
+        id="ARTIST"
         label="디자이너"
         name="job"
         selectedValue={selectedJob}
