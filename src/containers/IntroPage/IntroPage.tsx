@@ -1,97 +1,42 @@
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { Typography } from 'src/components';
 import { customColor } from 'src/constants';
 import Link from 'next/link';
+import {
+  HeaderTextFrame,
+  HeaderImgFrame,
+  SectionImgFrame,
+  SectionTextFrame,
+  FooterImgFrame,
+  FooterTextFrame,
+  NoneFrame,
+} from './frame/frame';
+import useScroll from 'src/hooks/useScroll';
 
 const IntroPage = () => {
-  const HeaderImgFrame = keyframes`
-  0%{
-    position: relative;
-    top:100px;
-    opacity: 0;
-  }
-  100%{
-    opacity: 1;
-    position:relative;
-    top:0px;
-  }
-  `;
-  const HeaderTextFrame = keyframes`
-    0%{
-        position: relative;
-        right: 1000px;
-    }
-    100%{
-        position:relative;
-        right: 0px;
-    }
-  `;
-  const SectionImgFrame = keyframes`
-    0%{
-        position: relative;
-        top: 350px;
-        opacity: 0;
-    }
-    100%{
-        position:relative;
-        top: 0px;
-        opacity: 1;
-    }
-  `;
-  const SectionTextFrame = keyframes`
-  0%{
-      position: relative;
-      left: 1000px;
-  }
-  100%{
-      position:relative;
-      left: 0px;
-  }
-`;
-  const FooterImgFrame = keyframes`
-    0%{
-        position: relative;
-        top: 180px;
-        right: 120px;
-        opacity: 0;
-    }
-    100%{
-        position: relative;
-        top: 0px;
-        right: 0px;
-        opacity: 1;
-    }
-  `;
-  const FooterTextFrame = keyframes`
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
-    `;
+  const { y } = useScroll();
   return (
     <Container>
-      <HeaderImageBox frame={HeaderImgFrame}>
+      <HeaderImageBox scroll={y}>
         <Image
           src="/image92.png"
           width="1180px"
           height="640px"
           alt="이미지가 없습니다.."
+          priority={true}
         />
       </HeaderImageBox>
-      <HeaderTextBox frame={HeaderTextFrame}>
+      <HeaderTextBox scroll={y}>
         <Typography size="48" fontWeight="900">
           소중한 사진들을 편집하는데
         </Typography>
         <Typography size="48" fontWeight="900">
-          어려움을 느끼신다면?
+          어려움을 느끼신다면? {y}
         </Typography>
       </HeaderTextBox>
 
-      <SectionImageBox frame={SectionImgFrame}>
+      <SectionImageBox>
         <ImageBox>
           <Image
             src="/image43.png"
@@ -115,7 +60,7 @@ const IntroPage = () => {
           </Typography>
         </ImageBox>
       </SectionImageBox>
-      <SectionTextBox frame={SectionTextFrame}>
+      <SectionTextBox>
         <Typography size="60" fontWeight="900">
           또는, 고객의 요구사항대로
         </Typography>
@@ -123,7 +68,7 @@ const IntroPage = () => {
           편집하는 역량을 기르고 싶다면?
         </Typography>
       </SectionTextBox>
-      <FooterImageBox frame={FooterImgFrame}>
+      <FooterImageBox>
         <Image
           src="/image93.png"
           width="1180px"
@@ -132,7 +77,7 @@ const IntroPage = () => {
         />
       </FooterImageBox>
 
-      <FooterTextBox frame={FooterTextFrame}>
+      <FooterTextBox>
         <Typography size="60" fontWeight="900">
           이곳에서 시도해보세요
         </Typography>
@@ -198,34 +143,36 @@ const BtnBox = styled.div`
 const TextBox = styled.div`
   text-align: center;
 `;
-const FooterImageBox = styled.div<{ frame: any }>`
-  animation: ${prop => prop.frame} 3s linear alternate;
+const FooterImageBox = styled.div`
+  animation: ${FooterImgFrame} 3s linear alternate;
   width: 100%;
   text-align: center;
 `;
-const FooterTextBox = styled(TextBox)<{ frame: any }>`
+const FooterTextBox = styled(TextBox)`
   margin: 250px 0;
-  animation: ${prop => prop.frame} 10s;
+  animation: ${FooterTextFrame} 10s;
 `;
-const SectionTextBox = styled(TextBox)<{ frame: any }>`
+const SectionTextBox = styled(TextBox)`
   margin: 0 0 250px 0;
-  animation: ${prop => prop.frame} 5s;
+  animation: ${SectionTextFrame} 5s;
 `;
-const SectionImageBox = styled.div<{ frame: any }>`
+const SectionImageBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
   margin-bottom: 250px;
-  animation: ${prop => prop.frame} 3s linear alternate;
+  animation: ${SectionImgFrame} 3s linear alternate;
 `;
 const ImageBox = styled.div``;
-const HeaderTextBox = styled(TextBox)<{ frame: any }>`
+
+const HeaderTextBox = styled(TextBox)<{ scroll: number }>`
   margin: 25px 0 250px 0;
-  animation: ${prop => prop.frame} 5s;
+  animation: 5s ${HeaderTextFrame};
 `;
-const HeaderImageBox = styled.div<{ frame: any }>`
+
+const HeaderImageBox = styled.div<{ scroll: number }>`
   margin: 40px 0 50px 0;
-  animation: ${prop => prop.frame} 3s linear alternate;
+  animation: ${HeaderImgFrame} 3s linear alternate;
 `;
 const Container = styled.div`
   display: flex;
