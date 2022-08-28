@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 export type TypographyProps = React.PropsWithChildren<{
   size:
+    | '80'
+    | '60'
     | '48'
     | '44'
     | '40'
