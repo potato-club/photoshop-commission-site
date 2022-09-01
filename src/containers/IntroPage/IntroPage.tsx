@@ -3,22 +3,17 @@ import styled from 'styled-components';
 import { Typography } from 'src/components';
 import { customColor } from 'src/constants';
 import Link from 'next/link';
-import {
-  HeaderTextFrame,
-  HeaderImgFrame,
-  SectionImgFrame,
-  SectionTextFrame,
-  FooterImgFrame,
-  FooterTextFrame,
-  NoneFrame,
-} from './frame/frame';
-import useScroll from 'src/hooks/useScroll';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const IntroPage = () => {
-  const { y } = useScroll();
+  useEffect(() => {
+    AOS.init();
+  });
   return (
     <Container>
-      <HeaderImageBox scroll={y}>
+      <HeaderImageBox data-aos="fade-left" data-aos-duration="3000">
         <Image
           src="/image92.png"
           width="1180px"
@@ -27,17 +22,25 @@ const IntroPage = () => {
           priority={true}
         />
       </HeaderImageBox>
-      <HeaderTextBox scroll={y}>
+      <HeaderTextBox
+        data-aos="zoom-in"
+        data-aos-duration="3000"
+        data-aos-offset="300"
+      >
         <Typography size="48" fontWeight="900">
           소중한 사진들을 편집하는데
         </Typography>
         <Typography size="48" fontWeight="900">
-          어려움을 느끼신다면? {y}
+          어려움을 느끼신다면?
         </Typography>
       </HeaderTextBox>
 
       <SectionImageBox>
-        <ImageBox>
+        <ImageBox
+          data-aos="zoom-out-right"
+          data-aos-duration="3000"
+          data-aos-offset="500"
+        >
           <Image
             src="/image43.png"
             width="480px"
@@ -48,7 +51,11 @@ const IntroPage = () => {
             Before
           </Typography>
         </ImageBox>
-        <ImageBox>
+        <ImageBox
+          data-aos="zoom-out-left"
+          data-aos-duration="3000"
+          data-aos-offset="500"
+        >
           <Image
             src="/image44.png"
             width="480px"
@@ -60,7 +67,11 @@ const IntroPage = () => {
           </Typography>
         </ImageBox>
       </SectionImageBox>
-      <SectionTextBox>
+      <SectionTextBox
+        data-aos="zoom-in"
+        data-aos-duration="3000"
+        data-aos-offset="300"
+      >
         <Typography size="60" fontWeight="900">
           또는, 고객의 요구사항대로
         </Typography>
@@ -68,7 +79,11 @@ const IntroPage = () => {
           편집하는 역량을 기르고 싶다면?
         </Typography>
       </SectionTextBox>
-      <FooterImageBox>
+      <FooterImageBox
+        data-aos="fade-right"
+        data-aos-duration="3000"
+        data-aos-offset="400"
+      >
         <Image
           src="/image93.png"
           width="1180px"
@@ -77,7 +92,11 @@ const IntroPage = () => {
         />
       </FooterImageBox>
 
-      <FooterTextBox>
+      <FooterTextBox
+        data-aos="zoom-in"
+        data-aos-duration="3000"
+        data-aos-offset="300"
+      >
         <Typography size="60" fontWeight="900">
           이곳에서 시도해보세요
         </Typography>
@@ -144,35 +163,29 @@ const TextBox = styled.div`
   text-align: center;
 `;
 const FooterImageBox = styled.div`
-  animation: ${FooterImgFrame} 3s linear alternate;
   width: 100%;
   text-align: center;
 `;
 const FooterTextBox = styled(TextBox)`
   margin: 250px 0;
-  animation: ${FooterTextFrame} 10s;
 `;
 const SectionTextBox = styled(TextBox)`
   margin: 0 0 250px 0;
-  animation: ${SectionTextFrame} 5s;
 `;
 const SectionImageBox = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-around;
   margin-bottom: 250px;
-  animation: ${SectionImgFrame} 3s linear alternate;
 `;
 const ImageBox = styled.div``;
 
-const HeaderTextBox = styled(TextBox)<{ scroll: number }>`
+const HeaderTextBox = styled(TextBox)`
   margin: 25px 0 250px 0;
-  animation: 5s ${HeaderTextFrame};
 `;
 
-const HeaderImageBox = styled.div<{ scroll: number }>`
+const HeaderImageBox = styled.div`
   margin: 40px 0 50px 0;
-  animation: ${HeaderImgFrame} 3s linear alternate;
 `;
 const Container = styled.div`
   display: flex;
