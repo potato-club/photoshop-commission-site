@@ -86,8 +86,14 @@ const Button = styled.button<{ color: string; margin?: boolean }>`
   margin-right: ${prop => (prop.margin ? '10px' : '0px')};
   border: none;
   border-radius: 5px;
+  &:active {
+    position: relative;
+    top: 1px;
+    left: 0.5px;
+  }
   &:hover {
     background-color: black;
+    cursor: pointer;
   }
 `;
 const CustomImCross = styled(ImCross)`

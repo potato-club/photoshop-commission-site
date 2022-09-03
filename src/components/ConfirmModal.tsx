@@ -63,7 +63,7 @@ export const ConfirmModal = ({
             <CustomImCross onClick={handleCloseModal} size={24} />
           </Header>
           <Guide>
-            <Typography color="gray" size="16">
+            <Typography color='danger' size='12' fontWeight='900'>
               의뢰는 1명에게만 맡길 수 있습니다.
             </Typography>
           </Guide>
@@ -78,7 +78,7 @@ export const ConfirmModal = ({
               </Date>
               <NickName>
                 <Typography color="black" size="16" fontWeight="900">
-                  양파먹는 소녀
+                  임송재
                 </Typography>
               </NickName>
               <CommissionBtn onClick={SelectDesigner}>
@@ -112,13 +112,17 @@ const CustomImCross = styled(ImCross)`
 `;
 const CommissionBtn = styled.button`
   border: none;
-  background-color: green;
+  background-color: ${customColor.gray};
   border-radius: 15px;
   padding: 10px 20px;
   cursor: pointer;
-
+  &:active {
+    position: relative;
+    top: 1px;
+    left: 0.5px;
+  }
   &:hover {
-    background-color: ${customColor.success};
+    background-color: ${customColor.black};
   }
 `;
 const Date = styled.div`
