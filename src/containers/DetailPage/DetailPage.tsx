@@ -56,7 +56,6 @@ export function DetailPage({ data }: Props) {
               writer={comment.writer}
               date={comment.date}
               text={comment.contents}
-              good={comment.good}
               reply={comment.reply}
               type="Comment"
             />
@@ -78,7 +77,7 @@ export function DetailPage({ data }: Props) {
             </div>
           </ModalWrapper>
         </CommentContainer>
-        <Line></Line>
+        <Line />
         <CustomInput type="Board" />
       </Wrapper>
     </Container>
@@ -112,9 +111,6 @@ const Wrapper = styled.div`
   max-width: 1178px;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
-  border-left: 1px solid ${customColor.gray};
-  border-right: 1px solid ${customColor.gray};
   padding-bottom: 400px;
 `;
 

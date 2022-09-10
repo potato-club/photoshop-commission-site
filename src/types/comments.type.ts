@@ -3,7 +3,6 @@ export type CommentType = {
   writer: string;
   date: Date;
   contents: string;
-  good: number;
   reply: ReplyType[];
 };
 
@@ -12,5 +11,4 @@ export type ReplyType = {
   writer: string;
   date: Date;
   contents: string;
-  good: number;
 };
