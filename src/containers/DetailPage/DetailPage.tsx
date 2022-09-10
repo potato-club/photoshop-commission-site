@@ -57,7 +57,6 @@ export function DetailPage({ data }: Props) {
               date={comment.date}
               text={comment.contents}
               reply={comment.reply}
-              type="Comment"
             />
           ))}
           <ModalWrapper>

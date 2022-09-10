@@ -36,8 +36,9 @@ const Container = styled.div<StyleProps>`
   position: relative;
   width: 100%;
   max-width: 1178px;
-  padding-right: 12px;
-  padding-left: ${({ type }) => (type === 'Board' ? '12px' : '92px')};
+  padding-left: ${({ type }) => (type === 'Board' ? '12px' : '160px')};
+  padding-right: ${({ type }) => (type === 'Board' ? '12px' : 0)};
+  margin-bottom: 20px;
 `;
 const Input = styled.textarea<StyleProps>`
   width: 100%;
@@ -58,9 +59,9 @@ const Input = styled.textarea<StyleProps>`
 const SubMitButton = styled.div<StyleProps>`
   position: absolute;
   height: 100%;
-  right: 24px;
   display: flex;
   top: ${({ type }) => type === 'Comment' && '0'};
   bottom: ${({ type }) => type === 'Board' && '12px'};
+  right: ${({type}) => type === 'Board' ? '24px' : '12px'};
   align-items: ${({ type }) => (type === 'Board' ? 'flex-end' : 'center')};
 `;
