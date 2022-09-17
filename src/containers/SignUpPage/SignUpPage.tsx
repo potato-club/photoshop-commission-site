@@ -10,7 +10,7 @@ import {
 } from './components';
 import { signUpApi } from 'src/apis';
 import { useRouter } from 'next/router';
-import useLocalStorage from 'src/utils/useLocalStorage';
+import { useLocalStorage } from 'src/hooks';
 
 
 

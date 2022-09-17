@@ -6,6 +6,7 @@ import { formatDate } from 'src/utils/formatDate';
 import { CustomInput } from './CustomInput';
 import { ReplyType } from 'src/types/comments.type';
 import { Reply } from './Reply';
+import { useTextMoreView } from 'src/hooks';
 
 type Props = {
   writer: string;
@@ -14,28 +15,11 @@ type Props = {
   reply?: ReplyType[];
 };
 export function Comment({ writer, date, text, reply }: Props) {
-  // ! 댓글, 대댓글 모두 필요한 로직.
-  const limitNumber = 150;
-  const [limit, setLimit] = useState(limitNumber);
-  const showToggle = text.length > limit ? true : false;
-  const [toggleText, setToggleText] = useState<' ...더보기' | ' 닫기'>(
-    ' ...더보기',
-  );
+
+  const { sliceText, onClickMore, showToggle, toggleText } = useTextMoreView({
+    text,
+  });
   const [openInput, setOpenInput] = useState<boolean>(false);
-
-  const onClickMore = (str: string) => {
-    if (toggleText === ' ...더보기') {
-      setLimit(str.length-1);
-      setToggleText(' 닫기');
-    } else {
-      setLimit(limitNumber);
-      setToggleText(' ...더보기');
-    }
-  };
-
-  const sliceText = (str: string) => {
-    return str.slice(0, limit+1);
-  };
 
   return (
     <Container>
@@ -48,9 +32,9 @@ export function Comment({ writer, date, text, reply }: Props) {
           </WriterWrapper>
           <ContentsWrapper>
             <Typography size="16" fontHeight="1.2">
-              {sliceText(text)}
+              {sliceText()}
               {showToggle && (
-                <MoreView onClick={() => onClickMore(text)}>
+                <MoreView onClick={() => onClickMore()}>
                   <Typography size="12" color="gray">
                     {toggleText}
                   </Typography>

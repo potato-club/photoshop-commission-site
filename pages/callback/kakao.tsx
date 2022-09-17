@@ -3,7 +3,7 @@ import { ParsedUrlQuery } from 'querystring';
 import React, { useCallback, useEffect } from 'react';
 import { signUpApi } from 'src/apis';
 import { Typography } from 'src/components';
-import useLocalStorage from 'src/utils/useLocalStorage';
+import { useLocalStorage } from 'src/hooks';
 
 export default function CheckToken() {
   const router = useRouter();
