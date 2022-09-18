@@ -17,13 +17,21 @@ export default function CheckToken() {
       },
     });
 
+    console.log(data);
+
+    // 회원가입을 제대로 하지 않고 중간에 나갔을때 : fail
+    if (data.fail) {
+      router.push('/main')
+      alert("이전에 회원가입이 제대로 진행되지 않았습니다. 다시 로그인 해주세요.");
+    }
+
     // 받는거(최초 로그인일때) : 이메일, 메세지
-    if (data.email) {
-      console.log("이메일!")
-      setStorage('email', data.email);
+    if (data.SerialCode) {
+      setStorage('serialCode', data.SerialCode);
       router.push('/signUp');
       return;
     }
+
     // 최초 로그인이 아닐때 : 세션, 메세지
     if (data.session) {
       console.log('세션!');
@@ -31,7 +39,6 @@ export default function CheckToken() {
       router.push('/main');
       return;
     }
-
   }, [code, setStorage, router]);
 
   useEffect(() => {
@@ -45,5 +52,5 @@ export default function CheckToken() {
     }
   }, [router.isReady, code, checkUser]);
 
-  return <Typography size='20'>로그인 중입니다...</Typography>;
+  return <Typography size="20">로그인 중입니다...</Typography>;
 }
