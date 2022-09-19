@@ -36,10 +36,9 @@ export function SignUpPage() {
         nickname,
         introduction: aboutMe,
         userRole: selectedJob,
-        email: getStorage('email'),
+        serialCode: getStorage('serialCode'),
       });
-      console.log(data);
-      resetStorage('email');
+      resetStorage('serialCode');
       setStorage('session', data.session);
       router.push('/main');
     } catch (err) {
