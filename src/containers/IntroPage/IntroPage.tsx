@@ -13,7 +13,7 @@ const IntroPage = () => {
   });
   return (
     <Container>
-      <HeaderImageBox data-aos="fade-left" data-aos-duration="3000">
+      <HeaderImageBox data-aos="fade-left" data-aos-duration="1000">
         <Image
           src="/image92.png"
           width="1180px"
@@ -24,7 +24,7 @@ const IntroPage = () => {
       </HeaderImageBox>
       <HeaderTextBox
         data-aos="zoom-in"
-        data-aos-duration="3000"
+        data-aos-duration="1000"
         data-aos-offset="300"
       >
         <Typography size="48" fontWeight="900">
@@ -38,7 +38,7 @@ const IntroPage = () => {
       <SectionImageBox>
         <ImageBox
           data-aos="zoom-out-right"
-          data-aos-duration="3000"
+          data-aos-duration="1000"
           data-aos-offset="500"
         >
           <Image
@@ -53,7 +53,7 @@ const IntroPage = () => {
         </ImageBox>
         <ImageBox
           data-aos="zoom-out-left"
-          data-aos-duration="3000"
+          data-aos-duration="1000"
           data-aos-offset="500"
         >
           <Image
@@ -69,7 +69,7 @@ const IntroPage = () => {
       </SectionImageBox>
       <SectionTextBox
         data-aos="zoom-in"
-        data-aos-duration="3000"
+        data-aos-duration="1000"
         data-aos-offset="300"
       >
         <Typography size="60" fontWeight="900">
@@ -81,7 +81,7 @@ const IntroPage = () => {
       </SectionTextBox>
       <FooterImageBox
         data-aos="fade-right"
-        data-aos-duration="3000"
+        data-aos-duration="1000"
         data-aos-offset="400"
       >
         <Image
@@ -94,7 +94,7 @@ const IntroPage = () => {
 
       <FooterTextBox
         data-aos="zoom-in"
-        data-aos-duration="3000"
+        data-aos-duration="1000"
         data-aos-offset="300"
       >
         <Typography size="60" fontWeight="900">
