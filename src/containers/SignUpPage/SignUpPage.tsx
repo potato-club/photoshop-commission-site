@@ -10,7 +10,7 @@ import {
 } from './components';
 import { signUpApi } from 'src/apis';
 import { useRouter } from 'next/router';
-import useLocalStorage from 'src/utils/useLocalStorage';
+import { useLocalStorage } from 'src/hooks/useLocalStorage';
 
 
 
@@ -20,7 +20,8 @@ export function SignUpPage() {
   const [selectedJob, setSelectedJob] = useState('USER');
   const [aboutMe, setAboutMe] = useState('');
   const router = useRouter();
-  const { getStorage, setStorage, resetStorage } = useLocalStorage();
+  const { getLocalStorage, setLocalStorage, removeLocalStorage } =
+    useLocalStorage();
 
   const signUp = async () => {
     try {
@@ -36,10 +37,10 @@ export function SignUpPage() {
         nickname,
         introduction: aboutMe,
         userRole: selectedJob,
-        serialCode: getStorage('serialCode'),
+        serialCode: getLocalStorage('serialCode'),
       });
-      resetStorage('serialCode');
-      setStorage('session', data.session);
+      removeLocalStorage('serialCode');
+      setLocalStorage('session', data.session);
       router.push('/main');
     } catch (err) {
       console.log(err);
