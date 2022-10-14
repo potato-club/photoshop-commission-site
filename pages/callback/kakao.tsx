@@ -37,13 +37,17 @@ export default function CheckToken() {
     }
 
     // 최초 로그인이 아닐때 : 액세스토큰
-    if (data.session) {
+    if (headers) {
       console.log('액세스 토큰', headers.authorization); // authorization : 액세스 토큰
-      setSessionStorage('리프레쉬 토큰', headers.refreshToken); // refreshToken : 리프레쉬 토큰
+      console.log('리프레쉬 토큰', headers.refreshtoken); // authorization : 액세스 토큰
+      setSessionStorage('access', headers.authorization);
+      // Todo 백엔드 refreshtoken -> refreshToken 으로 수정할 예정이라고함.
+      // Todo 쿠키 option 설정 해줘야함, 일단 저장 잘 되는지 테스트용
+      setCookie('refresh', headers.refreshtoken);
       router.push('/main');
       return;
     }
-  }, [code, setSessionStorage, router]);
+  }, [code, setSessionStorage, setCookie, router]);
 
   useEffect(() => {
     if (!router.isReady) return;
