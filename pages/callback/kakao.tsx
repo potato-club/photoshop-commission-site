@@ -41,7 +41,6 @@ export default function CheckToken() {
       console.log('액세스 토큰', headers.authorization); // authorization : 액세스 토큰
       console.log('리프레쉬 토큰', headers.refreshtoken); // authorization : 액세스 토큰
       setSessionStorage('access', headers.authorization);
-      // Todo 백엔드 refreshtoken -> refreshToken 으로 수정할 예정이라고함.
       // Todo 쿠키 option 설정 해줘야함, 일단 저장 잘 되는지 테스트용
       setCookie('refresh', headers.refreshtoken);
       router.push('/main');

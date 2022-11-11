@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { all } from 'src/constants/all/all';
 import { pathName } from 'src/constants/pathName';
 import { useRouter } from 'next/router';
+import { useCookies } from 'src/hooks/useCookies';
 
 export const MainPage: NextPage = () => {
   const router = useRouter();
