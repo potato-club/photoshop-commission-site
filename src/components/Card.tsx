@@ -22,6 +22,8 @@ export const Card = ({ id, title, writer, date, imageUrls }: IDummyList) => {
               width="270px"
               height="192px"
               alt="비공개"
+              placeholder="blur"
+              blurDataURL="/loading.png"
             />
           </A>
         </Link>
