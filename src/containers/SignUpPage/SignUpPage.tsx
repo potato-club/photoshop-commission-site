@@ -10,7 +10,8 @@ import {
 } from './components';
 import { signUpApi } from 'src/apis';
 import { useRouter } from 'next/router';
-import useLocalStorage from 'src/utils/useLocalStorage';
+import { useLocalStorage } from 'src/hooks/useLocalStorage';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
 
 
 
@@ -20,7 +21,8 @@ export function SignUpPage() {
   const [selectedJob, setSelectedJob] = useState('USER');
   const [aboutMe, setAboutMe] = useState('');
   const router = useRouter();
-  const { getStorage, setStorage, resetStorage } = useLocalStorage();
+  const { setSessionStorage, getSessionStorage, removeSessionStorage } =
+    useSessionStorage();
 
   const signUp = async () => {
     try {
@@ -31,15 +33,16 @@ export function SignUpPage() {
       console.log('nickname :', nickname);
       console.log('introduction :', aboutMe);
       console.log('userRole :', selectedJob);
+      console.log('토큰', getSessionStorage('serialCode'));
 
       const { data } = await signUpApi.signUp({
         nickname,
         introduction: aboutMe,
         userRole: selectedJob,
-        serialCode: getStorage('serialCode'),
+        serialCode: getSessionStorage('serialCode'),
       });
-      resetStorage('serialCode');
-      setStorage('session', data.session);
+      removeSessionStorage('serialCode');
+      setSessionStorage('session', data.session);
       router.push('/main');
     } catch (err) {
       console.log(err);

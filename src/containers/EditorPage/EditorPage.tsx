@@ -1,43 +1,70 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
-import { TitleInput, ImageInput, TextArea, WriteButton, SecretSelectInput } from './components';
+import {
+  TitleInput,
+  ImageInput,
+  TextArea,
+  WriteButton,
+  SecretSelectInput,
+} from './components';
 import axios from 'axios';
+import { boardApi } from '../../apis/board';
+import { useCookies } from 'src/hooks/useCookies';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
 export function EditorPage() {
   const [title, setTitle] = useState('');
-  const [images, setImages] = useState<FormData>();
+  const [images, setImages] = useState<File[]>();
   const [request, setRequest] = useState('');
   const [secret, setSecret] = useState<boolean>(false);
+  const { getCookie } = useCookies();
+  const { getSessionStorage } = useSessionStorage();
 
+  useEffect(() => {
+    console.log(images);
+  }, [images]);
 
   const onClick = () => {
-    // axios({
-    //   method: 'POST',
-    //   url: testUrl,
-    //   data: {
-    //     title,
-    //     contentsPicture: images,
-    //     contentsText: request,
-    //   },
-    // })
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-    if(!title) {
-      alert("제목을 입력해주세요");
+    if (!title) {
+      alert('제목을 입력해주세요');
       return;
     }
-    if(!images) {
-      alert("사진을 등록해주세요");
+    if (!images) {
+      alert('사진을 등록해주세요');
       return;
     }
-    alert("등록완료");
+    try {
+      const frm = new FormData();
+      frm.append('title', title);
+      frm.append('context', request);
+      frm.append('questEnum', 'BEFORE'); // ! 백엔드 코드 수정 전 임시 값
+
+      images.forEach(data => {
+        frm.append('image', data);
+      });
+
+      const data = boardApi.create(
+        frm,
+        getSessionStorage('access'),
+        getCookie('refresh'),
+      );
+
+      // console.log(data);
+      // console.log(frm)
+
+      // console.log(getSessionStorage('access'));
+      // console.log(getCookie('refresh'));
+
+      // accessToken: getSessionStorage('access'),
+      // refreshToken: getCookie('refresh')
+
+      // alert('등록완료');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -49,7 +76,7 @@ export function EditorPage() {
       </Title>
       <InputContainer>
         <TitleInput setTitle={setTitle} />
-        <ImageInput images={images} setImages={setImages} />
+        <ImageInput setImages={setImages} />
         <SecretSelectInput secret={secret} setSecret={setSecret} />
         <TextArea setRequest={setRequest} />
         <WriteButton onClick={onClick} />
