@@ -23,23 +23,7 @@ export const MainPage: NextPage = () => {
   };
 
   const onClick = () => {
-    axios.post(
-      `https://www.photoshopcommission.shop/list/create?loginUser=10`,
-      {
-        context: '테스트 글입니다.',
-        fileList: ['test1.png', 'test2.png'],
-        id: 1,
-        questEnum: 'BEFORE',
-        title: '테스트 제목입니다.',
-      },
-    );
   };
-
-  useEffect(() => {
-    axios
-      .get('https://www.photoshopcommission.shop/main')
-      .then(res => console.log(res.data));
-  }, []);
 
   return (
     <Container>
