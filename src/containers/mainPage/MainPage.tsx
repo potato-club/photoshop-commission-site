@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { all } from 'src/constants/all/all';
 import { pathName } from 'src/constants/pathName';
 import { useRouter } from 'next/router';
-import { useCookies } from 'src/hooks/useCookies';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export const MainPage: NextPage = () => {
+  const [data, setData] = useState({});
   const router = useRouter();
   const callKaKaoLoginHandler = () => {
     router.push({
@@ -18,24 +20,44 @@ export const MainPage: NextPage = () => {
         redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI,
       },
     });
-  }
+  };
+
+  const onClick = () => {
+    axios.post(
+      `https://www.photoshopcommission.shop/list/create?loginUser=10`,
+      {
+        context: '테스트 글입니다.',
+        fileList: ['test1.png', 'test2.png'],
+        id: 1,
+        questEnum: 'BEFORE',
+        title: '테스트 제목입니다.',
+      },
+    );
+  };
+
+  useEffect(() => {
+    axios
+      .get('https://www.photoshopcommission.shop/main')
+      .then(res => console.log(res.data));
+  }, []);
+
   return (
     <Container>
-      <button onClick={() => callKaKaoLoginHandler()}>카카오 로그인 테스트</button>
+      <button onClick={() => callKaKaoLoginHandler()}>
+        카카오 로그인 테스트
+      </button>
       <SignUpBox>
-        <SignUpComment>
+        <SignUpComment onClick={() => onClick()}>
           <Typography size="40" color="blue" fontWeight="900">
             {all.comment}
           </Typography>
         </SignUpComment>
         <Link href={pathName.SIGNUP} passHref>
-          <A>
-            <SignUpBtn>
-              <Typography size="20" color="white" fontWeight="900">
-                {all.writeBtn}
-              </Typography>
-            </SignUpBtn>
-          </A>
+          <SignUpBtn>
+            <Typography size="20" color="white" fontWeight="900">
+              {all.writeBtn}
+            </Typography>
+          </SignUpBtn>
         </Link>
       </SignUpBox>
 
@@ -79,10 +101,6 @@ const SignUpBtn = styled.button`
   border: none;
   :hover {
     background-color: black;
+    cursor: pointer;
   }
-`;
-
-const A = styled.a`
-  text-decoration: none;
-  text-align: center;
 `;
