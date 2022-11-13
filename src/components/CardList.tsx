@@ -1,11 +1,12 @@
 import { Card } from '../components/index';
 import { IDummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
+import { IData } from './MainRequestBoard';
 
 interface CardListType {
   offset: number;
   limit: number;
-  list: IDummyList[];
+  list: IData[];
 }
 
 export const CardList = ({ list, offset, limit }: CardListType) => {
