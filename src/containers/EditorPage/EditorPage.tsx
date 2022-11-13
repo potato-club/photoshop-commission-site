@@ -27,7 +27,7 @@ export function EditorPage() {
     console.log(images);
   }, [images]);
 
-  const onClick = () => {
+  const onClick = async() => {
     if (!title) {
       alert('제목을 입력해주세요');
       return;
@@ -46,11 +46,12 @@ export function EditorPage() {
         frm.append('image', data);
       });
 
-      const data = boardApi.create(
+      const data = await boardApi.create(
         frm,
         getSessionStorage('access'),
         getCookie('refresh'),
       );
+      console.log(data);
 
       // console.log(data);
       // console.log(frm)
