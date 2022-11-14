@@ -9,10 +9,12 @@ import { dummyFilter } from 'src/constants/all/filter';
 import { dummyList } from 'src/dummy/dummyList';
 import { all } from 'src/constants/all/all';
 import { BiSearchAlt2 } from 'react-icons/bi';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { pathName } from 'src/constants/pathName';
+import axios from 'axios';
+import { mainApi } from 'src/apis/mainPage';
 
 const StatePage = () => {
   const [text, setText] = useState(''); // 필터링 값
@@ -20,6 +22,7 @@ const StatePage = () => {
   const [page, setPage] = useState(1);
   const router = useRouter();
   const { state } = router.query;
+  const [data, setData] = useState([]);
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -38,7 +41,43 @@ const StatePage = () => {
     // axios.get('api', data).then(res => console.log(res));
     setText('');
   };
+  type map = {
+    [key: string]: () => Promise<void>;
+  };
 
+  const dataAllMap: map = {
+    beforeAll: async () => {
+      const beforeData = await mainApi.getBeforeAll();
+      setData(beforeData.data);
+    },
+    completeAll: async () => {
+      const completeData = await mainApi.getCompleteAll();
+      setData(completeData.data);
+    },
+    doingAll: async () => {
+      const requestingData = await mainApi.getRequestingAll();
+      setData(requestingData.data);
+    },
+  };
+
+  const getData = (state: string) => {
+    const type = state + 'All';
+    return dataAllMap[type]();
+  };
+
+  useEffect(() => {
+    if(!state){
+      return;
+    }
+    const findData = (state: string) => {
+      getData(state);
+    };
+    findData(state as string);
+  }, [state]);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   return (
     <Container>
       <Post>
@@ -78,7 +117,7 @@ const StatePage = () => {
         <Hr />
       </div>
       <CardListWrap>
-        <CardList list={dummyList} />
+        <CardList list={data} />
       </CardListWrap>
       <CustomPagination
         itemClass="page"
