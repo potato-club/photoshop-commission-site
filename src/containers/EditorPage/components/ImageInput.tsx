@@ -3,10 +3,9 @@ import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 type Props = {
-  images: FormData | undefined;
-  setImages: Dispatch<SetStateAction<FormData | undefined>>;
+  setImages: React.Dispatch<React.SetStateAction<File[] | undefined>>;
 };
-export function ImageInput({ images, setImages }: Props) {
+export function ImageInput({ setImages }: Props) {
   const [fileNames, setFileNames] = useState<string[]>([]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,7 +13,7 @@ export function ImageInput({ images, setImages }: Props) {
     if (!e.target.files) return;
 
     const uploadFiles = e.target.files;
-    const formData = new FormData();
+    const formData = [];
 
     const fileNames = [];
 
@@ -28,12 +27,13 @@ export function ImageInput({ images, setImages }: Props) {
     if (uploadFiles) {
       for (let i = 0; i < uploadFiles.length; ++i) {
         fileNames.push(uploadFiles[i].name);
-        formData.append('files', uploadFiles[i]);
+        formData.push(uploadFiles[i]);
       }
     }
     setFileNames(fileNames);
     setImages(formData);
   };
+
 
   return (
     <Container>
