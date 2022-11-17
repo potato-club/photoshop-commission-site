@@ -20,25 +20,10 @@ type Props = {
   data: BoardType;
 };
 export function DetailPage({ data }: Props) {
-  const {
-    requestModalOpen,
-    handleCloseRequestModal,
-    handleRequestModal,
-    confirmModalOpen,
-    handleCloseConfirmModal,
-    handleConfirmModal,
-  } = useModal();
-  const {
-    title,
-    state,
-    writer,
-    date,
-    imageUrls,
-    imageSecret,
-    contents,
-    totalComment,
-    commentList,
-  } = data;
+  const { requestModalOpen, handleCloseRequestModal, handleRequestModal, confirmModalOpen, handleCloseConfirmModal, handleConfirmModal, } = useModal();
+  // const { title, state, writer, date, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
+  const { title, state, writer, date, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
+
   return (
     <Container>
       <Wrapper>
@@ -82,8 +67,6 @@ export function DetailPage({ data }: Props) {
     </Container>
   );
 }
-
-export default DetailPage;
 
 const ModalWrapper = styled.div`
   position: absolute;

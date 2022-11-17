@@ -12,7 +12,7 @@ export default {
   post: async (url: string, params: any) =>
     await axios.post(setting.baseUrl + url, params),
 
-  boardPostTest: async (url: string, params: any, accessToken: any, refreshToken: any) =>
+  postWithToken: async (url: string, params: any, accessToken: any, refreshToken: any) =>
     await axios.post(setting.baseUrl + url, params, {
       headers: {
         authorization : accessToken,
