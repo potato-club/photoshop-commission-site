@@ -1,33 +1,28 @@
-import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
+import React from 'react';
 import { boardApi } from 'src/apis/board';
 import { DetailPage } from 'src/containers';
 import { BoardType } from 'src/types/board.type';
 
-export default function Detail() {
-  const router = useRouter();
-  const [data, setData] = useState<BoardType>();
+export default function Detail(data: BoardType) {
+  return <DetailPage data={data} />;
+}
 
-  const getData = useCallback(async () => {
-    const { data } = await boardApi.getDetail(router.query.id);
-    setData({
-      boardNo: data.id,
-      title: data.title,
-      state: data.questEnum,
-      writer: data.nickname,
-      date: new Date(),
-      imageUrls: data.image,
+export const getServerSideProps: GetServerSideProps = async context => {
+  const { data } = await boardApi.getDetail(context.query.id);
+
+  return {
+    props: {
+      boardNo: data[0].id,
+      title: data[0].title,
+      state: data[0].questEnum,
+      writer: data[0].nickname,
+      date: data[0].modifiedDate,
+      imageUrls: data[0].image,
       imageSecret: false, // Todo api 아직 안만들어졌음
-      contents: data.context,
+      contents: data[0].context,
       totalComment: 1, // Todo 댓글 length 로 받아도 될지 모르겠음. 스웨거 작성중이라고 하니 작성되면 확인하기
       commentList: [], // Todo 댓글 api 확인되면 사용
-    });
-  }, [router.query.id]);
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    getData();
-  }, [router.isReady, getData]);
-
-  return <>{data && <DetailPage data={data} />}</>;
-}
+    },
+  };
+};
