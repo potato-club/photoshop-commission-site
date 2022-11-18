@@ -13,14 +13,14 @@ export const getServerSideProps: GetServerSideProps = async context => {
 
   return {
     props: {
-      boardNo: data[0].id,
-      title: data[0].title,
-      state: data[0].questEnum,
-      writer: data[0].nickname,
-      date: data[0].modifiedDate,
-      imageUrls: data[0].image,
+      boardNo: data.id,
+      title: data.title,
+      state: data.questEnum,
+      writer: data.nickname,
+      date: data.modifiedDate,
+      imageUrls: data.image,
       imageSecret: false, // Todo api 아직 안만들어졌음
-      contents: data[0].context,
+      contents: data.context,
       totalComment: 1, // Todo 댓글 length 로 받아도 될지 모르겠음. 스웨거 작성중이라고 하니 작성되면 확인하기
       commentList: [], // Todo 댓글 api 확인되면 사용
     },
