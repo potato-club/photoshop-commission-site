@@ -6,7 +6,7 @@ import { useTextMoreView } from 'src/hooks';
 
 type Props = {
   writer: string;
-  date: Date;
+  date: string;
   text: string;
 };
 export const Reply = ({ writer, date, text }: Props) => {

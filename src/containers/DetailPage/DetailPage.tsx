@@ -37,11 +37,12 @@ export function DetailPage({ data }: Props) {
           <CommentHeader totalComment={totalComment} />
           {commentList.map(comment => (
             <Comment
-              key={comment.CommentNo}
-              writer={comment.writer}
-              date={comment.date}
-              text={comment.contents}
-              reply={comment.reply}
+              key={comment.id}
+              writer={comment.nickname}
+              createdDate={comment.createdDate}
+              modifiedDate={comment.modifiedDate}
+              text={comment.comment}
+              reply={comment.children}
             />
           ))}
           <ModalWrapper>

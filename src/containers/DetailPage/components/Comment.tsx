@@ -10,12 +10,12 @@ import { useTextMoreView } from 'src/hooks';
 
 type Props = {
   writer: string;
-  date: Date;
+  createdDate: string;
+  modifiedDate: string;
   text: string;
   reply?: ReplyType[];
 };
-export function Comment({ writer, date, text, reply }: Props) {
-
+export function Comment({ writer, createdDate, modifiedDate, text, reply }: Props) {
   const { sliceText, onClickMore, showToggle, toggleText } = useTextMoreView({
     text,
   });
@@ -50,12 +50,12 @@ export function Comment({ writer, date, text, reply }: Props) {
         </div>
 
         <DateWrapper>
-          <Typography size="12">{formatDate(date)}</Typography>
+          <Typography size="12">{formatDate(modifiedDate)}</Typography>
         </DateWrapper>
       </CommentWrapper>
 
       {openInput && <CustomInput type={'Comment'} />}
-      {reply && (
+      {/* {reply && (
         <ReplyWrapper>
           {reply?.map(data => (
             <Reply
@@ -66,7 +66,7 @@ export function Comment({ writer, date, text, reply }: Props) {
             />
           ))}
         </ReplyWrapper>
-      )}
+      )} */}
     </Container>
   );
 }

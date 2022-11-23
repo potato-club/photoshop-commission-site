@@ -12,7 +12,7 @@ const printTime = (date: Date) => {
   return "오늘 " + formattedTime;
 }
 
-export const formatDate = (stringDate: Date) => {
+export const formatDate = (stringDate: string) => {
   const date = new Date(stringDate);
   if (new Date().getTime() - date.getTime() > 86400000) return printDate(date);
   else return printTime(date);

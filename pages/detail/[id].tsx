@@ -5,6 +5,7 @@ import { DetailPage } from 'src/containers';
 import { BoardType } from 'src/types/board.type';
 
 export default function Detail(data: BoardType) {
+  console.log(data)
   return <DetailPage data={data} />;
 }
 
@@ -21,8 +22,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
       imageUrls: data.image,
       imageSecret: false, // Todo api 아직 안만들어졌음
       contents: data.context,
-      totalComment: 1, // Todo 댓글 length 로 받아도 될지 모르겠음. 스웨거 작성중이라고 하니 작성되면 확인하기
-      commentList: [], // Todo 댓글 api 확인되면 사용
+      totalComment: data.comments.length || 0,
+      commentList: data.comments || [],
     },
   };
 };

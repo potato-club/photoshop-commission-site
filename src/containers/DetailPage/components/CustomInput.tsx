@@ -2,17 +2,33 @@ import React, { useState } from 'react';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { FaPaperPlane } from 'react-icons/fa';
+import { boardApi } from 'src/apis/board';
+import { useRouter } from 'next/router';
+import { useGetToken } from 'src/hooks/useGetToken';
 
-// Todo : 타입 받아서 게시글 댓글창인지, 대댓글 댓글창인지 확인해야하고,
-// Todo : 아마 보내는 API 도 다를거같음. (게시글 댓글달기, 대댓글 댓글달기 => 얘기 해봐야함)
 type Props = {
   type: 'Board' | 'Comment';
+  id?: number;
 };
 export function CustomInput({ type }: Props) {
   const [comment, setComment] = useState<string>();
+  const { query } = useRouter();
+  const { access, refresh } = useGetToken();
 
-  const clickWrite = () => {
-    alert('입력버튼 클릭\n값: ' + comment);
+
+  const clickWrite = async () => {
+    if(!comment) {
+      alert('내용을 입력해주세요!'); // Todo : alert 창 뭐로 할건지 등등
+      return;
+    }
+    const data = await boardApi.postComment(
+      query.id,
+      {comment},
+      access,
+      refresh,
+    );
+
+    console.log(data);
   };
   return (
     <Container type={type}>
@@ -62,6 +78,6 @@ const SubMitButton = styled.div<StyleProps>`
   display: flex;
   top: ${({ type }) => type === 'Comment' && '0'};
   bottom: ${({ type }) => type === 'Board' && '12px'};
-  right: ${({type}) => type === 'Board' ? '24px' : '12px'};
+  right: ${({ type }) => (type === 'Board' ? '24px' : '12px')};
   align-items: ${({ type }) => (type === 'Board' ? 'flex-end' : 'center')};
 `;
