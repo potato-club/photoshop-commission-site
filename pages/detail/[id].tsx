@@ -18,7 +18,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
       title: data.title,
       state: data.questEnum,
       writer: data.nickname,
-      date: data.modifiedDate,
+      createdDate: data.createdDate || '2022-11-13 13:01:58.0', // Todo : 백엔드 createDate -> createdDate 로 변수명 수정예정이라 없는값이므로 우선 더미데이터 사용
+      modifiedDate: data.modifiedDate || '2022-11-13 13:01:58.0',
       imageUrls: data.image,
       imageSecret: false, // Todo api 아직 안만들어졌음
       contents: data.context,

@@ -5,7 +5,7 @@ export type CommentType = {
   contents: string;
   reply: ReplyType[];
   boardListId: number;
-  children: ReplyType[]; // Todo : 백엔드에서 추후 알려주기로함 (ReplyType[])
+  children: ReplyType[];
   comment: string;
   createdDate: string;
   modifiedDate: string;

@@ -22,12 +22,18 @@ type Props = {
 export function DetailPage({ data }: Props) {
   const { requestModalOpen, handleCloseRequestModal, handleRequestModal, confirmModalOpen, handleCloseConfirmModal, handleConfirmModal, } = useModal();
   // const { title, state, writer, date, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
-  const { title, state, writer, date, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
+  const { title, state, writer, createdDate, modifiedDate, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
 
   return (
     <Container>
       <Wrapper>
-        <Header title={title} writer={writer} date={date} state={state} />
+        <Header
+          title={title}
+          writer={writer}
+          createdDate={createdDate}
+          modifiedDate={modifiedDate}
+          state={state}
+        />
         <Contents
           imageUrls={imageUrls}
           contents={contents}

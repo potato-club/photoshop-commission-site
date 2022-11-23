@@ -7,6 +7,7 @@ import { CustomInput } from './CustomInput';
 import { ReplyType } from 'src/types/comments.type';
 import { Reply } from './Reply';
 import { useTextMoreView } from 'src/hooks';
+import { CheckModifyDate } from './CheckModifyDate';
 
 type Props = {
   writer: string;
@@ -49,9 +50,11 @@ export function Comment({ writer, createdDate, modifiedDate, text, reply, parent
             </ReactionContainer>
           </ContentsWrapper>
         </div>
-
         <DateWrapper>
-          <Typography size="12">{formatDate(modifiedDate)}</Typography>
+          <CheckModifyDate
+            createdDate={createdDate}
+            modifiedDate={modifiedDate}
+          />
         </DateWrapper>
       </CommentWrapper>
 
