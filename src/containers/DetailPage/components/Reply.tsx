@@ -6,18 +6,18 @@ import { useTextMoreView } from 'src/hooks';
 
 type Props = {
   writer: string;
-  date: string;
+  createdDate: string;
+  modifiedDate: string;
   text: string;
 };
-export const Reply = ({ writer, date, text }: Props) => {
-
+export const Reply = ({ writer, createdDate, modifiedDate, text }: Props) => {
   const { sliceText, onClickMore, showToggle, toggleText } = useTextMoreView({
     text,
   });
 
   return (
     <Container>
-      <div style={{display: 'flex'}}>
+      <div style={{ display: 'flex' }}>
         <WriterWrapper>
           <Typography size="16" fontWeight="bold">
             {writer}
@@ -38,7 +38,7 @@ export const Reply = ({ writer, date, text }: Props) => {
       </div>
 
       <DateWrapper>
-        <Typography size="12">{formatDate(date)}</Typography>
+        <Typography size="12">{formatDate(modifiedDate)}</Typography>
       </DateWrapper>
     </Container>
   );

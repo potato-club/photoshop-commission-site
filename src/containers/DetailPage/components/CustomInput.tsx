@@ -8,27 +8,27 @@ import { useGetToken } from 'src/hooks/useGetToken';
 
 type Props = {
   type: 'Board' | 'Comment';
-  id?: number;
+  parentId?: number;
 };
-export function CustomInput({ type }: Props) {
+export function CustomInput({ type, parentId }: Props) {
   const [comment, setComment] = useState<string>();
   const { query } = useRouter();
   const { access, refresh } = useGetToken();
 
-
-  const clickWrite = async () => {
-    if(!comment) {
+  const commentSubmit = async () => {
+    if (!comment) {
       alert('내용을 입력해주세요!'); // Todo : alert 창 뭐로 할건지 등등
       return;
     }
-    const data = await boardApi.postComment(
-      query.id,
-      {comment},
-      access,
-      refresh,
-    );
-
-    console.log(data);
+    const data = parentId
+      ? await boardApi.postReply(
+          query.id,
+          { comment, parentId },
+          access,
+          refresh,
+        )
+      : await boardApi.postComment(query.id, { comment }, access, refresh);
+      console.log(data);
   };
   return (
     <Container type={type}>
@@ -39,7 +39,7 @@ export function CustomInput({ type }: Props) {
         onChange={e => setComment(e.target.value)}
       />
       <SubMitButton type={type}>
-        <FaPaperPlane size={24} onClick={() => clickWrite()} />
+        <FaPaperPlane size={24} onClick={() => commentSubmit()} />
       </SubMitButton>
     </Container>
   );

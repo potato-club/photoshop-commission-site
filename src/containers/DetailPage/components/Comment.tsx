@@ -14,8 +14,9 @@ type Props = {
   modifiedDate: string;
   text: string;
   reply?: ReplyType[];
+  parentId: number;
 };
-export function Comment({ writer, createdDate, modifiedDate, text, reply }: Props) {
+export function Comment({ writer, createdDate, modifiedDate, text, reply, parentId }: Props) {
   const { sliceText, onClickMore, showToggle, toggleText } = useTextMoreView({
     text,
   });
@@ -54,19 +55,20 @@ export function Comment({ writer, createdDate, modifiedDate, text, reply }: Prop
         </DateWrapper>
       </CommentWrapper>
 
-      {openInput && <CustomInput type={'Comment'} />}
-      {/* {reply && (
+      {openInput && <CustomInput type={'Comment'} parentId={parentId} />}
+      {reply && (
         <ReplyWrapper>
           {reply?.map(data => (
             <Reply
-              key={data.replyNo}
-              writer={data.writer}
-              date={data.date}
-              text={data.contents}
+              key={data.id}
+              writer={data.nickname}
+              createdDate={data.createdDate}
+              modifiedDate={data.modifiedDate}
+              text={data.comment}
             />
           ))}
         </ReplyWrapper>
-      )} */}
+      )}
     </Container>
   );
 }

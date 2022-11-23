@@ -38,6 +38,7 @@ export function DetailPage({ data }: Props) {
           {commentList.map(comment => (
             <Comment
               key={comment.id}
+              parentId={comment.id}
               writer={comment.nickname}
               createdDate={comment.createdDate}
               modifiedDate={comment.modifiedDate}
