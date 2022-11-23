@@ -3,6 +3,7 @@ import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 import { formatDate } from 'src/utils/formatDate';
 import { useTextMoreView } from 'src/hooks';
+import { CheckModifyDate } from './CheckModifyDate';
 
 type Props = {
   writer: string;
@@ -38,7 +39,7 @@ export const Reply = ({ writer, createdDate, modifiedDate, text }: Props) => {
       </div>
 
       <DateWrapper>
-        <Typography size="12">{formatDate(modifiedDate)}</Typography>
+        <CheckModifyDate createdDate={createdDate} modifiedDate={modifiedDate}/>
       </DateWrapper>
     </Container>
   );
