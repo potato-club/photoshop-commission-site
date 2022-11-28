@@ -7,15 +7,16 @@ import { IData } from 'src/containers/mainPage/components/MainRequestBoard';
 interface IPhoto {
   id: number;
   image: IData['image'];
+  imageOpen: boolean;
 }
 
-const Photo = ({ id, image }: IPhoto) => {
+const Photo = ({ id, image, imageOpen }: IPhoto) => {
   return (
     <PhotoBox>
       <Link href={`/detail/${id}`} passHref>
         <a>
           <NewImage
-            src={image[0].fileUrl}
+            src={imageOpen && image ? image[0].fileUrl : '/image92.png'}
             width="270px"
             height="192px"
             alt="비공개"

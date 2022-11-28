@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const Write = () => {
   return (
-    <Link href={pathName.SIGNUP} passHref>
+    <Link href={pathName.EDITOR} passHref>
       <WriteBtn>
         <Typography size="20" color="white" fontWeight="900">
           {all.writeBtn}
