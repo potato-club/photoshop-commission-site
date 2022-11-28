@@ -13,8 +13,9 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { pathName } from 'src/constants/pathName';
+import { stateApi } from 'src/apis/statePage';
 import axios from 'axios';
-import { mainApi } from 'src/apis/mainPage';
+import { setting } from 'src/constants/setting';
 
 const StatePage = () => {
   const [text, setText] = useState(''); // 필터링 값
@@ -38,35 +39,40 @@ const StatePage = () => {
       text: text,
     };
     console.log(data);
-    // axios.get('api', data).then(res => console.log(res));
+    // const filterData = async () => await stateApi.getFilterTitle(text, page);
+    const filterDatas = async () =>
+      await axios.get(
+        `https://www.photoshopcommission.shop/filter/nickname?keyword=sd&page=1`,
+      );
+    console.log(filterDatas);
     setText('');
   };
   type map = {
-    [key: string]: () => Promise<void>;
+    [key: string]: (page: number) => Promise<void>;
   };
 
   const dataAllMap: map = {
-    beforeAll: async () => {
-      const beforeData = await mainApi.getBeforeAll();
-      setData(beforeData.data);
+    beforeAll: async (page: number) => {
+      const beforeData = await stateApi.getBeforeAll(page);
+      setData(beforeData.data.content);
     },
-    completeAll: async () => {
-      const completeData = await mainApi.getCompleteAll();
-      setData(completeData.data);
+    completeAll: async (page: number) => {
+      const completeData = await stateApi.getCompleteAll(page);
+      setData(completeData.data.content);
     },
-    doingAll: async () => {
-      const requestingData = await mainApi.getRequestingAll();
-      setData(requestingData.data);
+    doingAll: async (page: number) => {
+      const requestingData = await stateApi.getRequestingAll(page);
+      setData(requestingData.data.content);
     },
   };
 
   const getData = (state: string) => {
     const type = state + 'All';
-    return dataAllMap[type]();
+    return dataAllMap[type](page);
   };
 
   useEffect(() => {
-    if(!state){
+    if (!state) {
       return;
     }
     const findData = (state: string) => {
@@ -78,6 +84,7 @@ const StatePage = () => {
   useEffect(() => {
     console.log(data);
   }, [data]);
+
   return (
     <Container>
       <Post>
@@ -132,7 +139,7 @@ const StatePage = () => {
             {all.comment}
           </Typography>
         </SignUpComment>
-        <Link href={pathName.SIGNUP} passHref>
+        <Link href={pathName.EDITOR} passHref>
           <A>
             <SignUpBtn>
               <Typography size="20" color="white" fontWeight="900">

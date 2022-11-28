@@ -4,10 +4,18 @@ import Photo from './Photo';
 import Theme from './Theme';
 import NameAndDate from './NameAndDate';
 
-export const Card = ({ id, title, createDate, image, nickname }: IData) => {
+export const Card = ({
+  id,
+  title,
+  createDate,
+  image,
+  nickname,
+  imageOpen,
+  questEnum,
+}: IData) => {
   return (
     <Container>
-      <Photo id={id} image={image} />
+      <Photo id={id} image={image} imageOpen={imageOpen} />
       <Theme id={id} title={title} />
       <NameAndDate id={id} nickname={nickname} />
     </Container>

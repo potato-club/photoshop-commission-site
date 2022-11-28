@@ -11,15 +11,15 @@ export interface MainRequestBoardProps {
 interface IImage {
   fileName: string;
   fileUrl: string;
-  boardListId: number;
 }
 export interface IData {
   id: number;
-  image: IImage[];
+  createDate: String;
   nickname: string;
-  questEnum: string;
   title: string;
-  createDate: Date;
+  imageOpen: boolean;
+  questEnum: string;
+  image: IImage[];
 }
 
 export const MainRequestBoard = ({ state }: MainRequestBoardProps) => {
