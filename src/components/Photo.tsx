@@ -3,11 +3,12 @@ import React from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
 import { IData } from 'src/containers/mainPage/components/MainRequestBoard';
+import { imageOpenType } from 'src/types/imageOpen.type';
 
 interface IPhoto {
   id: number;
   image: IData['image'];
-  imageOpen: boolean;
+  imageOpen: imageOpenType;
 }
 
 const Photo = ({ id, image, imageOpen }: IPhoto) => {
@@ -16,7 +17,7 @@ const Photo = ({ id, image, imageOpen }: IPhoto) => {
       <Link href={`/detail/${id}`} passHref>
         <a>
           <NewImage
-            src={imageOpen && image ? image[0].fileUrl : '/image92.png'}
+            src={imageOpen === imageOpenType.open && image ? image[0].fileUrl : '/image92.png'}
             width="270px"
             height="192px"
             alt="비공개"

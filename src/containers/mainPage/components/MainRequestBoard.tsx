@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import CardList from '../../../components/CardList';
 import { mainApi } from 'src/apis/mainPage';
 import Title from './Title';
+import { imageOpenType } from 'src/types/imageOpen.type';
 
 export interface MainRequestBoardProps {
   state: string;
@@ -17,7 +18,7 @@ export interface IData {
   createDate: String;
   nickname: string;
   title: string;
-  imageOpen: boolean;
+  imageOpen: imageOpenType;
   questEnum: string;
   image: IImage[];
 }

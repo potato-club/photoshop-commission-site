@@ -12,7 +12,7 @@ import axios from 'axios';
 import { boardApi } from '../../apis/board';
 import { useCookies } from 'src/hooks/useCookies';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
-import { useGetToken } from 'src/hooks/useGetToken';
+import { imageOpenType } from 'src/types/imageOpen.type';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
@@ -20,14 +20,17 @@ export function EditorPage() {
   const [title, setTitle] = useState('');
   const [images, setImages] = useState<File[]>();
   const [request, setRequest] = useState('');
-  const [secret, setSecret] = useState<boolean>(false);
-  const { access, refresh } = useGetToken();
+  const [imageOpen, setImageOpen] = useState<imageOpenType>(imageOpenType.open);
+  const { getCookie } = useCookies();
+  const { getSessionStorage } = useSessionStorage();
+
+  
 
   useEffect(() => {
     console.log(images);
   }, [images]);
 
-  const onClick = async() => {
+  const onClick = async () => {
     if (!title) {
       alert('제목을 입력해주세요');
       return;
@@ -40,16 +43,19 @@ export function EditorPage() {
       const frm = new FormData();
       frm.append('title', title);
       frm.append('context', request);
+      frm.append('imageOpen', imageOpen);
+
       images.forEach(data => {
         frm.append('image', data);
       });
 
       const data = await boardApi.create(
         frm,
-        access,
-        refresh
+        getSessionStorage('access'),
+        getCookie('refresh'),
       );
       console.log(data);
+
 
       // console.log(data);
       // console.log(frm)
@@ -76,7 +82,7 @@ export function EditorPage() {
       <InputContainer>
         <TitleInput setTitle={setTitle} />
         <ImageInput setImages={setImages} />
-        <SecretSelectInput secret={secret} setSecret={setSecret} />
+        <SecretSelectInput imageOpen={imageOpen} setImageOpen={setImageOpen} />
         <TextArea setRequest={setRequest} />
         <WriteButton onClick={onClick} />
       </InputContainer>
