@@ -1,5 +1,6 @@
 import { CommentType } from './comments.type';
 import { ImageType } from './image.type';
+import { imageOpenType } from './imageOpen.type';
 
 export type BoardType = {
   boardNo: number;
@@ -9,7 +10,7 @@ export type BoardType = {
   createdDate: string;
   modifiedDate: string;
   imageUrls: ImageType[];
-  imageSecret: boolean; // Todo true 면 비공개, false 면 공개 (공개가 default : false)
+  imageOpen: imageOpenType;
   contents: string;
   totalComment: number;
   commentList: CommentType[];

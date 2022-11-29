@@ -9,7 +9,7 @@ export default function Detail(data: BoardType) {
   return <DetailPage data={data} />;
 }
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async context => { // Todo S3 로 배포하게 되면 이 방법 말고 CSR 로 할 예정
   const { data } = await boardApi.getDetail(context.query.id);
 
   return {
@@ -20,11 +20,12 @@ export const getServerSideProps: GetServerSideProps = async context => {
       writer: data.nickname,
       createdDate: data.createdDate,
       modifiedDate: data.modifiedDate,
-      imageUrls: data.image,
-      imageSecret: false, // Todo api 아직 안만들어졌음
+      imageUrls: data.image || [],
+      imageOpen: data.imageOpen,
       contents: data.context,
       totalComment: data.comments.length || 0,
       commentList: data.comments || [],
     },
   };
 };
+

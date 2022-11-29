@@ -21,8 +21,7 @@ type Props = {
 };
 export function DetailPage({ data }: Props) {
   const { requestModalOpen, handleCloseRequestModal, handleRequestModal, confirmModalOpen, handleCloseConfirmModal, handleConfirmModal, } = useModal();
-  // const { title, state, writer, date, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
-  const { title, state, writer, createdDate, modifiedDate, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
+  const { title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList, } = data;
 
   return (
     <Container>
@@ -37,7 +36,7 @@ export function DetailPage({ data }: Props) {
         <Contents
           imageUrls={imageUrls}
           contents={contents}
-          imageSecret={imageSecret}
+          imageOpen={imageOpen}
         />
         <CommentContainer>
           <CommentHeader totalComment={totalComment} />
