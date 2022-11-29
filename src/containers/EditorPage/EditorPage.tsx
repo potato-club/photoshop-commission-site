@@ -12,6 +12,7 @@ import axios from 'axios';
 import { boardApi } from '../../apis/board';
 import { useCookies } from 'src/hooks/useCookies';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { useGetToken } from 'src/hooks/useGetToken';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
@@ -20,8 +21,7 @@ export function EditorPage() {
   const [images, setImages] = useState<File[]>();
   const [request, setRequest] = useState('');
   const [secret, setSecret] = useState<boolean>(false);
-  const { getCookie } = useCookies();
-  const { getSessionStorage } = useSessionStorage();
+  const { access, refresh } = useGetToken();
 
   useEffect(() => {
     console.log(images);
@@ -40,16 +40,14 @@ export function EditorPage() {
       const frm = new FormData();
       frm.append('title', title);
       frm.append('context', request);
-      frm.append('questEnum', 'BEFORE'); // ! 백엔드 코드 수정 전 임시 값
-
       images.forEach(data => {
         frm.append('image', data);
       });
 
       const data = await boardApi.create(
         frm,
-        getSessionStorage('access'),
-        getCookie('refresh'),
+        access,
+        refresh
       );
       console.log(data);
 

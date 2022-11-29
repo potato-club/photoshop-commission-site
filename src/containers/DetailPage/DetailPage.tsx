@@ -20,29 +20,20 @@ type Props = {
   data: BoardType;
 };
 export function DetailPage({ data }: Props) {
-  const {
-    requestModalOpen,
-    handleCloseRequestModal,
-    handleRequestModal,
-    confirmModalOpen,
-    handleCloseConfirmModal,
-    handleConfirmModal,
-  } = useModal();
-  const {
-    title,
-    state,
-    writer,
-    date,
-    imageUrls,
-    imageSecret,
-    contents,
-    totalComment,
-    commentList,
-  } = data;
+  const { requestModalOpen, handleCloseRequestModal, handleRequestModal, confirmModalOpen, handleCloseConfirmModal, handleConfirmModal, } = useModal();
+  // const { title, state, writer, date, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
+  const { title, state, writer, createdDate, modifiedDate, imageUrls, imageSecret, contents, totalComment, commentList, } = data;
+
   return (
     <Container>
       <Wrapper>
-        <Header title={title} writer={writer} date={date} state={state} />
+        <Header
+          title={title}
+          writer={writer}
+          createdDate={createdDate}
+          modifiedDate={modifiedDate}
+          state={state}
+        />
         <Contents
           imageUrls={imageUrls}
           contents={contents}
@@ -52,13 +43,13 @@ export function DetailPage({ data }: Props) {
           <CommentHeader totalComment={totalComment} />
           {commentList.map(comment => (
             <Comment
-              key={comment.CommentNo}
-              writer={comment.writer}
-              date={comment.date}
-              text={comment.contents}
-              good={comment.good}
-              reply={comment.reply}
-              type="Comment"
+              key={comment.id}
+              parentId={comment.id}
+              writer={comment.nickname}
+              createdDate={comment.createdDate}
+              modifiedDate={comment.modifiedDate}
+              text={comment.comment}
+              reply={comment.children}
             />
           ))}
           <ModalWrapper>
@@ -78,14 +69,12 @@ export function DetailPage({ data }: Props) {
             </div>
           </ModalWrapper>
         </CommentContainer>
-        <Line></Line>
+        <Line />
         <CustomInput type="Board" />
       </Wrapper>
     </Container>
   );
 }
-
-export default DetailPage;
 
 const ModalWrapper = styled.div`
   position: absolute;
@@ -112,9 +101,6 @@ const Wrapper = styled.div`
   max-width: 1178px;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
-  border-left: 1px solid ${customColor.gray};
-  border-right: 1px solid ${customColor.gray};
   padding-bottom: 400px;
 `;
 

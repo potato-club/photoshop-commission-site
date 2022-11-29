@@ -3,13 +3,15 @@ import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { formatDate } from "src/utils/formatDate";
+import { CheckModifyDate } from './CheckModifyDate';
 type Props = {
   title: string;
   writer: string;
-  date: Date;
+  createdDate: string;
+  modifiedDate: string;
   state: string;
-}
-export function Header({ title, writer, date, state }: Props) {
+};
+export function Header({ title, writer, createdDate, modifiedDate, state }: Props) {
   return (
     <Container>
       <Typography size="12" color="gray">
@@ -23,9 +25,10 @@ export function Header({ title, writer, date, state }: Props) {
           <Typography size="16" color="black">
             {writer}
           </Typography>
-          <Typography size="12" color="black">
-            {formatDate(date)}
-          </Typography>
+          <CheckModifyDate
+            createdDate={createdDate}
+            modifiedDate={modifiedDate}
+          />
         </WriterWrapper>
       </SpaceBetween>
       <SpaceBetween>
