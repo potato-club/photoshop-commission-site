@@ -22,7 +22,7 @@ type Props = {
 };
 export function DetailPage({ data, myPost }: Props) {
   const { requestModalOpen, handleCloseRequestModal, handleRequestModal, confirmModalOpen, handleCloseConfirmModal, handleConfirmModal, } = useModal();
-  const { title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList, } = data;
+  const { title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList } = data;
 
   useEffect(() => {
     console.log(myPost)
@@ -37,6 +37,7 @@ export function DetailPage({ data, myPost }: Props) {
           createdDate={createdDate}
           modifiedDate={modifiedDate}
           state={state}
+          myPost={myPost}
         />
         <Contents
           imageUrls={imageUrls}
