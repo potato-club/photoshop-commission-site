@@ -11,8 +11,8 @@ export default function Detail() {
   const [data, setData] = useState<BoardType>();
   const router = useRouter();
   const { access, refresh } = useGetToken();
-  const [myPost, setMyPost] = useState<boolean>(false);
-  const [myJob, setMyJob] = useState('GUEST');
+  const [myPost, setMyPost] = useState<boolean>();
+  // const [myJob, setMyJob] = useState('GUEST');
 
   const getData = async () => {
     const { data } = await boardApi.getDetail(router.query.id);
@@ -40,10 +40,15 @@ export default function Detail() {
     setMyPost(data);
   };
 
-  const checkJob = async () => {
-    const { data } = await checkApi.checkJob(access, refresh);
-    setMyJob(data);
-  };
+  // const checkJob = async () => { // Todo checkJob 은 로그인할때 전역상태관리하는 형식으로 할 예정
+  //   const { data } = await checkApi.checkJob(access, refresh);
+  //   setMyJob(data);
+  // };
+  // useEffect(() => {
+  //   if (!access || !refresh) return;
+  //   checkJob();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [access, refresh]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -52,18 +57,13 @@ export default function Detail() {
   }, [router]);
 
   useEffect(() => {
-    if (!access || !refresh) return;
-    checkJob();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [access, refresh]);
-
-  useEffect(() => {
-    if (!router.isReady || !access || !refresh) return;
+    if (!router.isReady) return;
+    if (!access || !refresh) setMyPost(false);
     checkWriter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, access, refresh]);
 
-  return <>{data && <DetailPage data={data} />}</>;
+  return <>{data && myPost !== undefined && <DetailPage data={data} myPost={myPost}/>}</>;
 }
 
 //////////////////////////////////// * get ServerSideProps 쓰는 코드 ///////////////////////////////////////

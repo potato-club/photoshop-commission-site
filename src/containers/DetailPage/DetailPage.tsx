@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import {
@@ -18,10 +18,15 @@ import {
 import useModal from 'src/hooks/useModal';
 type Props = {
   data: BoardType;
+  myPost: boolean;
 };
-export function DetailPage({ data }: Props) {
+export function DetailPage({ data, myPost }: Props) {
   const { requestModalOpen, handleCloseRequestModal, handleRequestModal, confirmModalOpen, handleCloseConfirmModal, handleConfirmModal, } = useModal();
   const { title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList, } = data;
+
+  useEffect(() => {
+    console.log(myPost)
+  }, [myPost])
 
   return (
     <Container>
