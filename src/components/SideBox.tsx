@@ -1,15 +1,19 @@
 import { Typography } from '../components/index';
 import styled from 'styled-components';
 import { List } from 'src/constants/sidebox/SideboxList';
-import { dummyUser } from 'src/dummy/dummyUser';
+import { RootState } from 'src/redux-toolkit/store';
+import { useSelector } from 'react-redux';
+import { dummyUser } from "src/dummy/dummyUser";
 
 export const SideBox = () => {
+  const nickName = useSelector((state: RootState) => state.nickName.value);
+
   return (
     <AdvertiseBox>
       <TopBox>
         <Typography size="16" fontWeight="900">
           <User color="blue" size="20" fontWeight="900">
-            {dummyUser.name}
+            {nickName}
           </User>
           {' ' + List.user}
         </Typography>

@@ -1,16 +1,18 @@
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import React, { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { signUpApi } from 'src/apis';
-import { Typography } from 'src/components';
 import { useCookies } from 'src/hooks/useCookies';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { rename } from 'src/redux-toolkit/slice/nickName';
 
 export default function CheckToken() {
   const router = useRouter();
   const { code }: ParsedUrlQuery = router.query;
   const { setSessionStorage } = useSessionStorage();
   const { setCookie } = useCookies();
+  const dispatch = useDispatch();
 
   const checkUser = useCallback(async () => {
     const { data, headers } = await signUpApi.checkUser({
@@ -18,8 +20,6 @@ export default function CheckToken() {
         code,
       },
     });
-    console.log(data);
-    console.log(headers);
 
     // 회원가입을 제대로 하지 않고 중간에 나갔을때 : fail
     if (data.fail) {
@@ -38,15 +38,15 @@ export default function CheckToken() {
 
     // 최초 로그인이 아닐때 : 액세스토큰
     if (headers) {
-      console.log('액세스 토큰', headers.authorization); // authorization : 액세스 토큰
-      console.log('리프레쉬 토큰', headers.refreshtoken); // authorization : 액세스 토큰
+      console.log('액세스 토큰', headers.authorization);
+      console.log('리프레쉬 토큰', headers.refreshtoken);
       setSessionStorage('access', headers.authorization);
-      // Todo 쿠키 option 설정 해줘야함, 일단 저장 잘 되는지 테스트용
       setCookie('refresh', headers.refreshtoken);
+      dispatch(rename(data.nickname[0]))
       router.push('/main');
       return;
     }
-  }, [code, setSessionStorage, setCookie, router]);
+  }, [code, setSessionStorage, setCookie, router, dispatch]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -59,5 +59,5 @@ export default function CheckToken() {
     }
   }, [router.isReady, code, checkUser]);
 
-  return <Typography size="20">로그인 중입니다...</Typography>;
+  return <></>;
 }
