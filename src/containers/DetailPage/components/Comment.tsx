@@ -59,7 +59,7 @@ export function Comment({ writer, createdDate, modifiedDate, text, reply, parent
       </CommentWrapper>
 
       {openInput && <CustomInput type={'Comment'} parentId={parentId} />}
-      {reply && (
+      {reply && reply.length !== 0 && (
         <ReplyWrapper>
           {reply?.map(data => (
             <Reply
@@ -81,7 +81,6 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  border-top: 1px solid ${customColor.gray};
   padding: 16px 0 20px 12px;
 `;
 
@@ -120,11 +119,11 @@ const ReactionContainer = styled.div`
 `;
 
 const ReplyWrapper = styled.div`
-  padding: 20px 12px;
+  padding: 0 12px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
-  gap: 20px 0;
+  justify-content: space-between;
   background-color: ${customColor.gray}40;
   margin-left: 160px;
 `;
