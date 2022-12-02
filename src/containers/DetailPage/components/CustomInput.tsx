@@ -12,7 +12,7 @@ type Props = {
 };
 export function CustomInput({ type, parentId }: Props) {
   const [comment, setComment] = useState<string>();
-  const { query } = useRouter();
+  const { query: {id} } = useRouter();
   const { access, refresh } = useGetToken();
 
   const commentSubmit = async () => {
@@ -22,12 +22,12 @@ export function CustomInput({ type, parentId }: Props) {
     }
     const data = parentId
       ? await boardApi.postReply(
-          query.id,
+          id,
           { comment, parentId },
           access,
           refresh,
         )
-      : await boardApi.postComment(query.id, { comment }, access, refresh);
+      : await boardApi.postComment(id, { comment }, access, refresh);
       console.log(data);
   };
   return (

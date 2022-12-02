@@ -40,6 +40,7 @@ export default function CheckToken() {
       setSessionStorage('access', headers.authorization);
       setCookie('refresh', headers.refreshtoken);
       setSessionStorage('nickName', data.nickname[0]);
+      setSessionStorage('job', data.uerRole[0])
       router.push('/main');
       return;
     }
