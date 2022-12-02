@@ -1,18 +1,15 @@
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import React, { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { signUpApi } from 'src/apis';
 import { useCookies } from 'src/hooks/useCookies';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
-import { rename } from 'src/redux-toolkit/slice/nickName';
 
 export default function CheckToken() {
   const router = useRouter();
   const { code }: ParsedUrlQuery = router.query;
   const { setSessionStorage } = useSessionStorage();
   const { setCookie } = useCookies();
-  const dispatch = useDispatch();
 
   const checkUser = useCallback(async () => {
     const { data, headers } = await signUpApi.checkUser({
@@ -42,11 +39,11 @@ export default function CheckToken() {
       console.log('리프레쉬 토큰', headers.refreshtoken);
       setSessionStorage('access', headers.authorization);
       setCookie('refresh', headers.refreshtoken);
-      dispatch(rename(data.nickname[0]))
+      setSessionStorage('nickName', data.nickname[0]);
       router.push('/main');
       return;
     }
-  }, [code, setSessionStorage, setCookie, router, dispatch]);
+  }, [code, setSessionStorage, setCookie, router]);
 
   useEffect(() => {
     if (!router.isReady) return;
