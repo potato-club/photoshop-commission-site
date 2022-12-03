@@ -2,17 +2,21 @@ import React from 'react';
 import { customColor } from 'src/constants/customColor';
 import styled from 'styled-components';
 import { Typography } from './Typography';
+import { useDispatch } from "react-redux";
+import { openConfirmModal } from 'src/redux-toolkit/slice/confirmModal';
+import ConfirmModal from './ConfirmModal';
 
-interface IModalBtn {
-  handleModal: () => void;
-}
-export const ConfirmModalBtn = ({ handleModal }: IModalBtn) => {
+export const ConfirmModalBtn = () => {
+  const dispatch = useDispatch();
   return (
-    <Button onClick={handleModal}>
-      <Typography color="black" size="16" fontWeight="700">
-        요청 확인하기
-      </Typography>
-    </Button>
+    <>
+      <Button onClick={() => dispatch(openConfirmModal())}>
+        <Typography color="black" size="16" fontWeight="700">
+          요청 확인하기
+        </Typography>
+      </Button>
+      <ConfirmModal />
+    </>
   );
 };
 

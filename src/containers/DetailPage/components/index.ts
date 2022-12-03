@@ -1,8 +1,8 @@
 export { Header } from './Header';
 export { Contents } from './Contents'
 export { CommentHeader } from './CommentHeader';
-export { Comment } from './Comment';
+export { CommentAndReply } from './CommentAndReply';
 export { CustomInput } from './CustomInput';
 export { Reply } from './Reply';
 export { CheckModifyDate } from './CheckModifyDate';
-export { BoardMenu } from './BoardMenu';
+export { MenuItem } from './MenuItem';

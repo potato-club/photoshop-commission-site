@@ -1,34 +1,36 @@
-import { GetServerSideProps } from 'next';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { boardApi } from 'src/apis/board';
 import { DetailPage } from 'src/containers';
-import { BoardType } from 'src/types/board.type';
 import { useRouter } from 'next/router';
 import { useGetToken } from 'src/hooks/useGetToken';
 import { checkApi } from 'src/apis/check';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'src/redux-toolkit/store';
+import { exitDetail, newDetail, checkMyPost } from "src/redux-toolkit/slice/detailData";
 
 export default function Detail() {
-  const [data, setData] = useState<BoardType>();
   const router = useRouter();
   const { access, refresh } = useGetToken();
-  const [myPost, setMyPost] = useState<boolean>();
-  // const [myJob, setMyJob] = useState('GUEST');
+  const dispatch = useDispatch();
+  const detailData = useSelector((state:RootState) => state.detailData.data) // Todo 로딩으로 처리해도 될듯함
 
   const getData = async () => {
     const { data } = await boardApi.getDetail(router.query.id);
-    setData({
-      boardNo: data.id,
-      title: data.title,
-      state: data.questEnum,
-      writer: data.nickname,
-      createdDate: data.createdDate,
-      modifiedDate: data.modifiedDate,
-      imageUrls: data.image || [],
-      imageOpen: data.imageOpen,
-      contents: data.context,
-      totalComment: data.comments.length || 0,
-      commentList: data.comments || [],
-    });
+    dispatch(
+      newDetail({
+        boardNo: data.id,
+        title: data.title,
+        state: data.questEnum,
+        writer: data.nickname,
+        createdDate: data.createdDate,
+        modifiedDate: data.modifiedDate,
+        imageUrls: data.image || [],
+        imageOpen: data.imageOpen,
+        contents: data.context,
+        totalComment: data.comments.length || 0,
+        commentList: data.comments || [],
+      }),
+    );
   };
 
   const checkWriter = async () => {
@@ -37,18 +39,8 @@ export default function Detail() {
       access,
       refresh,
     );
-    setMyPost(data);
+    dispatch(checkMyPost(data));
   };
-
-  // const checkJob = async () => { // Todo checkJob 은 로그인할때 전역상태관리하는 형식으로 할 예정
-  //   const { data } = await checkApi.checkJob(access, refresh);
-  //   setMyJob(data);
-  // };
-  // useEffect(() => {
-  //   if (!access || !refresh) return;
-  //   checkJob();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [access, refresh]);
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -57,13 +49,26 @@ export default function Detail() {
   }, [router]);
 
   useEffect(() => {
-    if (!router.isReady) return;
-    if (!access || !refresh) setMyPost(false);
+    if (!router.isReady || !access || !refresh) return;
     checkWriter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, access, refresh]);
 
-  return <>{data && myPost !== undefined && <DetailPage data={data} myPost={myPost}/>}</>;
+  useEffect(() => {
+    return () => {
+      dispatch(exitDetail())
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+
+  return (
+    <>
+      {detailData && (
+        <DetailPage />
+      )}
+    </>
+  );
 }
 
 //////////////////////////////////// * get ServerSideProps 쓰는 코드 ///////////////////////////////////////

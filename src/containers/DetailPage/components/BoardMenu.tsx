@@ -1,83 +1,36 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { AiOutlineMore } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux-toolkit/store';
 import styled from 'styled-components';
-import { customColor } from 'src/constants/customColor';
-import { Typography } from 'src/components';
-import { useRouter } from 'next/router';
-import { boardApi } from 'src/apis/board';
-import { useGetToken } from 'src/hooks/useGetToken';
-type Props = {
-  myPost: boolean;
-};
-export const BoardMenu = ({ myPost }: Props) => {
-  const router = useRouter();
-  const { access, refresh } = useGetToken();
-  const remove = async () => {
-    try {
-      const { data } = await boardApi.delete(router.query.id, access, refresh);
-      console.log(data);
-      router.push('/main');
-    } catch (e) {
-      console.log(e);
-    }
-  };
+import { MenuItem } from './MenuItem';
 
-  const update = () => {
-    // 수정하기 페이지로 보내기 (쿼리도 같이 보내기)
-  };
+export const BoardMenu = () => {
+  const [menuToggle, setMenuToggle] = useState<boolean>(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const myPost = useSelector((state: RootState) => state.detailData.myPost);
 
+  useEffect(() => {
+    document.addEventListener('mousedown', handleCloseModal);
+    return () => {
+      document.removeEventListener('mousedown', handleCloseModal);
+    };
+  });
+
+  const handleCloseModal = (e: MouseEvent) => {
+    if (!menuToggle) return;
+
+    if (!menuRef.current || !menuRef.current.contains(e.target as HTMLElement))
+      setMenuToggle(false);
+  };
   return (
-    <Container>
-      {myPost ? (
-        <Wrapper>
-          <Content>
-            <Typography size="16" fontWeight="bold">
-              수정하기
-            </Typography>
-          </Content>
-          <Content onClick={() => remove()}>
-            <Typography size="16" fontWeight="bold">
-              삭제하기
-            </Typography>
-          </Content>
-        </Wrapper>
-      ) : (
-        <Wrapper>
-          <Content>
-            <Typography size="16" fontWeight="bold">
-              신고하기
-            </Typography>
-          </Content>
-        </Wrapper>
-      )}
-    </Container>
+    <MenuWrapper onClick={() => setMenuToggle(true)} ref={menuRef}>
+      <AiOutlineMore size={16} />
+      {menuToggle && <MenuItem myPost={myPost} />}
+    </MenuWrapper>
   );
 };
 
-const Container = styled.div`
-  position: absolute;
-  width: max-content;
-  top: 20px;
-  right: 0;
-  background-color: ${customColor.white};
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-`;
-
-const Content = styled.div`
-  padding: 20px;
-  border: 1px solid ${customColor.blue};
-  border-bottom: none;
-  :last-child {
-    border-bottom: 1px solid ${customColor.blue};
-  }
-  :hover {
-    background-color: ${customColor.lightBlue};
-    div {
-      color: ${customColor.white};
-    }
-  }
+const MenuWrapper = styled.div`
+  position: relative;
 `;

@@ -4,6 +4,10 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { CustomPagination, Typography } from 'src/components';
 import { customColor } from 'src/constants';
+import { useSelector } from "react-redux";
+import { RootState } from 'src/redux-toolkit/store';
+import { useDispatch } from 'react-redux';
+import { closeConfirmModal } from 'src/redux-toolkit/slice/confirmModal';
 
 const customStyles = {
   content: {
@@ -24,14 +28,12 @@ const customStyles = {
   },
 };
 
-interface IRequestModal {
-  modalOpen: boolean;
-  handleCloseModal: () => void;
-}
-export const ConfirmModal = ({
-  modalOpen,
-  handleCloseModal,
-}: IRequestModal) => {
+export const ConfirmModal = () => {
+
+  const modalOpen = useSelector((state:RootState) => state.confirmModal.value);
+  const dispatch = useDispatch();
+  
+
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]; // 신청자 리스트 정보(dummy)받아와야함
   const offset = 5;
   const [page, setPage] = useState(1);
@@ -49,7 +51,7 @@ export const ConfirmModal = ({
       <Modal
         ariaHideApp={false}
         isOpen={modalOpen}
-        onRequestClose={handleCloseModal}
+        onRequestClose={() => dispatch(closeConfirmModal())}
         style={customStyles}
         contentLabel="Example Modal"
       >
@@ -60,10 +62,13 @@ export const ConfirmModal = ({
                 신청자 리스트
               </NewTypography>
             </Theme>
-            <CustomImCross onClick={handleCloseModal} size={24} />
+            <CustomImCross
+              onClick={() => dispatch(closeConfirmModal())}
+              size={24}
+            />
           </Header>
           <Guide>
-            <Typography color='danger' size='12' fontWeight='900'>
+            <Typography color="danger" size="12" fontWeight="900">
               의뢰는 1명에게만 맡길 수 있습니다.
             </Typography>
           </Guide>

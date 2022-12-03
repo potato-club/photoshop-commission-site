@@ -1,9 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { nickName } from './slice';
-
+import { confirmModal, detailData, requestModal } from './slice';
 const store = configureStore({
   reducer: {
-    nickName: nickName.reducer,
+    detailData: detailData.reducer,
+    confirmModal: confirmModal.reducer,
+    requestModal: requestModal.reducer
   },
 });
 

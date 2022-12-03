@@ -1,78 +1,38 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
 import {
   Contents,
   Header,
   CommentHeader,
-  Comment,
   CustomInput,
 } from './components';
-import { BoardType } from 'src/types/board.type';
 import {
   ConfirmModalBtn,
-  ConfirmModal,
   RequestModalBtn,
-  RequestModal,
 } from '../../../src/components/index';
-import useModal from 'src/hooks/useModal';
-type Props = {
-  data: BoardType;
-  myPost: boolean;
-};
-export function DetailPage({ data, myPost }: Props) {
-  const { requestModalOpen, handleCloseRequestModal, handleRequestModal, confirmModalOpen, handleCloseConfirmModal, handleConfirmModal, } = useModal();
-  const { title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList } = data;
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux-toolkit/store';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { CommentList } from './CommentList';
 
-  useEffect(() => {
-    console.log(myPost)
-  }, [myPost])
+export function DetailPage() {
+  const myPost = useSelector((state: RootState) => state.detailData.myPost);
+  const { getSessionStorage } = useSessionStorage();
+  const job = getSessionStorage('job');
 
   return (
     <Container>
       <Wrapper>
-        <Header
-          title={title}
-          writer={writer}
-          createdDate={createdDate}
-          modifiedDate={modifiedDate}
-          state={state}
-          myPost={myPost}
-        />
-        <Contents
-          imageUrls={imageUrls}
-          contents={contents}
-          imageOpen={imageOpen}
-        />
+        <Header />
+        <Contents />
+        <ModalWrapper>
+          {myPost && <ConfirmModalBtn />}
+          {job === 'designer' && <RequestModalBtn />}
+        </ModalWrapper>
         <CommentContainer>
-          <CommentHeader totalComment={totalComment} />
-          {commentList.map(comment => (
-            <Comment
-              key={comment.id}
-              parentId={comment.id}
-              writer={comment.nickname}
-              createdDate={comment.createdDate}
-              modifiedDate={comment.modifiedDate}
-              text={comment.comment}
-              reply={comment.children}
-            />
-          ))}
-          <ModalWrapper>
-            <div style={{ marginBottom: '15px' }}>
-              <ConfirmModalBtn handleModal={handleConfirmModal} />
-              <ConfirmModal
-                modalOpen={confirmModalOpen}
-                handleCloseModal={handleCloseConfirmModal}
-              />
-            </div>
-            <div>
-              <RequestModalBtn handleModal={handleRequestModal} />
-              <RequestModal
-                modalOpen={requestModalOpen}
-                handleCloseModal={handleCloseRequestModal}
-              />
-            </div>
-          </ModalWrapper>
+          <CommentHeader />
+          <CommentList />
         </CommentContainer>
         <Line />
         <CustomInput type="Board" />
@@ -82,15 +42,9 @@ export function DetailPage({ data, myPost }: Props) {
 }
 
 const ModalWrapper = styled.div`
-  position: absolute;
-  top: -85px;
-  right: 12px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  &:nth-child(0) {
-    margin-bottom: 10px;
-  }
 `;
 
 const Container = styled.div`

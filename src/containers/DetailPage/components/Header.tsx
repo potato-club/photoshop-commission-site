@@ -1,37 +1,15 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { formatDate } from 'src/utils/formatDate';
 import { CheckModifyDate } from './CheckModifyDate';
-import { AiOutlineMore } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux-toolkit/store';
 import { BoardMenu } from './BoardMenu';
 
-type Props = {
-  title: string;
-  writer: string;
-  createdDate: string;
-  modifiedDate: string;
-  state: string;
-  myPost: boolean;
-};
-export function Header({ title, writer, createdDate, modifiedDate, state, myPost }: Props) {
-  const [menuToggle, setMenuToggle] = useState<boolean>(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    document.addEventListener('mousedown', handleCloseModal);
-    return () => {
-      document.removeEventListener('mousedown', handleCloseModal);
-    };
-  });
-
-  const handleCloseModal = (e: MouseEvent) => {
-    if (!menuToggle) return;
-
-    if (!menuRef.current || !menuRef.current.contains(e.target as HTMLElement))
-      setMenuToggle(false);
-  };
+export function Header() {
+  const detailData = useSelector((state: RootState) => state.detailData.data);
+  const { title, writer, createdDate, modifiedDate, state } = detailData;
 
   return (
     <Container>
@@ -56,10 +34,7 @@ export function Header({ title, writer, createdDate, modifiedDate, state, myPost
         <Typography size="20" color="purple">
           {state}
         </Typography>
-        <MenuWrapper onClick={() => setMenuToggle(true)} ref={menuRef}>
-          <AiOutlineMore size={16} />
-          {menuToggle && <BoardMenu myPost={myPost} />}
-        </MenuWrapper>
+        <BoardMenu />
       </SpaceBetween>
     </Container>
   );
