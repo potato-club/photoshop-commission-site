@@ -1,5 +1,6 @@
 import React from 'react';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
@@ -15,10 +16,13 @@ export function TitleInput({ register, errors }: Props) {
           글 제목
         </Typography>
       </div>
-      <Input
-        placeholder="제목을 입력해주세요"
-        {...register('title', { required: '제목을 입력해주세요' })}
-      />
+      <InputWrapper>
+        <Input
+          placeholder="제목을 입력해주세요"
+          {...register('title', { required: '제목을 입력해주세요' })}
+        />
+        <CustomErrorMessage errors={errors} name="title" leftPosition="30" />
+      </InputWrapper>
     </Container>
   );
 }
@@ -29,6 +33,10 @@ const Container = styled.div`
   width: 100%;
   max-width: 900px;
   white-space: nowrap;
+`;
+const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 const Input = styled.input`

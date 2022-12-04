@@ -64,8 +64,8 @@ const Icons = styled.div`
 `;
 
 const UserImage = styled(FaUserAlt)`
-  width: 20px;
-  height: 20px;
+  width: 45px;
+  height: 45px;
   color: white;
   padding: 8px 8px;
   border: 4px solid white;
@@ -77,8 +77,8 @@ const UserImage = styled(FaUserAlt)`
 `;
 
 const AlertImage = styled(FaBell)`
-  width: 20px;
-  height: 20px;
+  width: 45px;
+  height: 45px;
   color: white;
   padding: 8px 8px;
   border: 4px solid white;

@@ -1,9 +1,7 @@
 import Image from 'next/image';
-import React, {
-  ChangeEvent,
-  useState,
-} from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
@@ -15,7 +13,8 @@ export function ImageInput({ register, errors }: Props) {
   const [thumbnails, setThumbnails] = useState<string[]>([]);
   const { onChange, ...rest } = register('image', {
     required: '사진파일을 첨부해주세요',
-    validate: (value) => value.length > 3 ? "이미지는 최대 3개까지 등록할 수 있습니다." : true,
+    validate: value =>
+      value.length > 3 ? '이미지는 최대 3개까지 등록할 수 있습니다.' : true,
   });
 
   const addImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,22 +41,26 @@ export function ImageInput({ register, errors }: Props) {
       <Typography size="20" fontWeight="bold">
         의뢰사진
       </Typography>
-      <Input
-        id="imgUpload"
-        type="file"
-        accept="image/*"
-        multiple
-        {...rest}
-        onChange={e => {
-          addImage(e);
-          onChange(e);
-        }}
-      />
-      <Label htmlFor="imgUpload">
-        <Typography size="16" fontWeight="bold" color="blue">
-          사진 등록
-        </Typography>
-      </Label>
+      <InputWrapper>
+        <Input
+          id="imgUpload"
+          type="file"
+          accept="image/*"
+          multiple
+          {...rest}
+          onChange={e => {
+            addImage(e);
+            onChange(e);
+          }}
+        />
+        <Label htmlFor="imgUpload">
+          <Typography size="16" fontWeight="bold" color="blue">
+            사진 등록
+          </Typography>
+        </Label>
+          <CustomErrorMessage errors={errors} name="image" leftPosition="30" bottomPosition='-24'/>
+      </InputWrapper>
+
       <ThumbnailContainer>
         {thumbnails.map((data, index) => (
           <ImageWrapper key={index}>
@@ -75,6 +78,12 @@ const Container = styled.div`
   width: 100%;
   max-width: 900px;
   height: 100px;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  position: relative;
+  width: max-content;
 `;
 
 const Input = styled.input`

@@ -44,6 +44,6 @@ const ErrorWrapper = styled.div<StyledProps>`
   ${({ marginBottom }) => (marginBottom ? `margin-top: ${marginBottom}px` : '')};
   ${({ leftPosition }) => (leftPosition ? `left: ${leftPosition}px` : '')};
   ${({ bottomPosition }) => (bottomPosition ? `bottom: ${bottomPosition}px;` : '')};
-  
+  width: max-content;
 `;
 
