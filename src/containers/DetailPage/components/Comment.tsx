@@ -2,30 +2,25 @@ import React, { useState } from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { formatDate } from 'src/utils/formatDate';
 import { CustomInput } from './CustomInput';
-import { ReplyType } from 'src/types/comments.type';
-import { Reply } from './Reply';
 import { useTextMoreView } from 'src/hooks';
 import { CheckModifyDate } from './CheckModifyDate';
-
 type Props = {
   writer: string;
   createdDate: string;
   modifiedDate: string;
   text: string;
-  reply?: ReplyType[];
   parentId: number;
 };
-export function Comment({ writer, createdDate, modifiedDate, text, reply, parentId }: Props) {
-  const { sliceText, onClickMore, showToggle, toggleText } = useTextMoreView({
+export const Comment = ({ writer, createdDate, modifiedDate, text, parentId }: Props) => {
+    const { sliceText, onClickMore, showToggle, toggleText } = useTextMoreView({
     text,
   });
   const [openInput, setOpenInput] = useState<boolean>(false);
 
   return (
-    <Container>
-      <CommentWrapper>
+    <>
+      <Wrapper>
         <div style={{ display: 'flex' }}>
           <WriterWrapper>
             <Typography size="16" fontWeight="bold">
@@ -56,36 +51,14 @@ export function Comment({ writer, createdDate, modifiedDate, text, reply, parent
             modifiedDate={modifiedDate}
           />
         </DateWrapper>
-      </CommentWrapper>
-
+      </Wrapper>
       {openInput && <CustomInput type={'Comment'} parentId={parentId} />}
-      {reply && (
-        <ReplyWrapper>
-          {reply?.map(data => (
-            <Reply
-              key={data.id}
-              writer={data.nickname}
-              createdDate={data.createdDate}
-              modifiedDate={data.modifiedDate}
-              text={data.comment}
-            />
-          ))}
-        </ReplyWrapper>
-      )}
-    </Container>
+    </>
   );
-}
+};
 
-const Container = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid ${customColor.gray};
-  padding: 16px 0 20px 12px;
-`;
 
-const CommentWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -117,14 +90,4 @@ const ReactionContainer = styled.div`
   cursor: pointer;
   white-space: nowrap;
   margin: 20px 0;
-`;
-
-const ReplyWrapper = styled.div`
-  padding: 20px 12px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px 0;
-  background-color: ${customColor.gray}40;
-  margin-left: 160px;
 `;

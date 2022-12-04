@@ -5,6 +5,10 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Typography } from 'src/components';
 import { customColor } from 'src/constants';
+import { useSelector } from "react-redux";
+import { RootState } from 'src/redux-toolkit/store';
+import { useDispatch } from 'react-redux';
+import { closeRequestModal } from 'src/redux-toolkit/slice/requestModal';
 
 const customStyles = {
   content: {
@@ -25,25 +29,20 @@ const customStyles = {
   },
 };
 
-interface IRequestModal {
-  modalOpen: boolean;
-  handleCloseModal: () => void;
-}
-export const RequestModal = ({
-  modalOpen,
-  handleCloseModal,
-}: IRequestModal) => {
+export const RequestModal = () => {
+  const modalOpen = useSelector((state:RootState) => state.requestModal.value);
+  const dispatch = useDispatch();
   return (
     <div>
       <Modal
         ariaHideApp={false}
         isOpen={modalOpen}
-        onRequestClose={handleCloseModal}
+        onRequestClose={() => dispatch(closeRequestModal())}
         style={customStyles}
         contentLabel="Example Modal"
       >
         <Container>
-          <CustomImCross onClick={handleCloseModal} />
+          <CustomImCross onClick={() => dispatch(closeRequestModal())} />
 
           <CustomAiFillEdit />
           <Typography size="28" color="black" fontWeight="900">

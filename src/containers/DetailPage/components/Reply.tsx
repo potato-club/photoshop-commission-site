@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { formatDate } from 'src/utils/formatDate';
 import { useTextMoreView } from 'src/hooks';
 import { CheckModifyDate } from './CheckModifyDate';
+import { customColor } from "src/constants/customColor";
 
 type Props = {
   writer: string;
@@ -48,6 +49,10 @@ export const Reply = ({ writer, createdDate, modifiedDate, text }: Props) => {
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  padding: 16px 0;
+  :not(:last-child) {
+    border-bottom: 1px solid ${customColor.gray}80;
+  }
 `;
 
 const WriterWrapper = styled.div`

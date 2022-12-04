@@ -1,11 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-type Props = {
-  totalComment : number;
-};
-export function CommentHeader({ totalComment }:Props) {
+import { RootState } from "src/redux-toolkit/store";
+export function CommentHeader() {
+  const detailData = useSelector((state: RootState) => state.detailData.data);
+  const {totalComment} = detailData;
   return (
     <Container>
       <Typography size="20" fontWeight="bold">

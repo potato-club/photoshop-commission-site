@@ -1,17 +1,16 @@
-import React from 'react'
+import React from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { formatDate } from "src/utils/formatDate";
 import { CheckModifyDate } from './CheckModifyDate';
-type Props = {
-  title: string;
-  writer: string;
-  createdDate: string;
-  modifiedDate: string;
-  state: string;
-};
-export function Header({ title, writer, createdDate, modifiedDate, state }: Props) {
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux-toolkit/store';
+import { BoardMenu } from './BoardMenu';
+
+export function Header() {
+  const detailData = useSelector((state: RootState) => state.detailData.data);
+  const { title, writer, createdDate, modifiedDate, state } = detailData;
+
   return (
     <Container>
       <Typography size="12" color="gray">
@@ -35,14 +34,11 @@ export function Header({ title, writer, createdDate, modifiedDate, state }: Prop
         <Typography size="20" color="purple">
           {state}
         </Typography>
-        <Typography size="12" color="gray">
-          신고하기
-        </Typography>
+        <BoardMenu />
       </SpaceBetween>
     </Container>
   );
 }
-
 
 const Container = styled.div`
   display: flex;
@@ -66,4 +62,8 @@ const WriterWrapper = styled.div`
   flex-direction: column;
   align-items: flex-end;
   gap: 4px 0;
+`;
+
+const MenuWrapper = styled.div`
+  position: relative;
 `;
