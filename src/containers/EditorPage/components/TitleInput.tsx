@@ -1,22 +1,24 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 type Props = {
-  setTitle: Dispatch<SetStateAction<string>>;
+  register: UseFormRegister<FieldValues>;
+  errors: Partial<FieldErrorsImpl>;
 };
-export function TitleInput({ setTitle }:Props) {
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
+export function TitleInput({ register, errors }: Props) {
   return (
     <Container>
-      <div style={{marginLeft: '12px'}}>
+      <div style={{ marginLeft: '12px' }}>
         <Typography size="20" fontWeight="bold">
           글 제목
         </Typography>
       </div>
-      <Input placeholder="제목을 입력해주세요" onChange={onChange} />
+      <Input
+        placeholder="제목을 입력해주세요"
+        {...register('title', { required: '제목을 입력해주세요' })}
+      />
     </Container>
   );
 }

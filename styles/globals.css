@@ -169,6 +169,10 @@ a {
   text-decoration: none;
 }
 
+button {
+  border: none;
+}
+
 .errorWrapper {
   position: absolute;
   top: 35px;

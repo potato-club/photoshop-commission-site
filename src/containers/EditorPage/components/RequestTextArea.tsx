@@ -1,20 +1,25 @@
 import React, { ChangeEvent, Dispatch, FormEvent, SetStateAction } from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
+import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+
 import styled from 'styled-components';
 type Props = {
-  setRequest: Dispatch<SetStateAction<string>>;
-}
-export function TextArea({ setRequest }:Props) {
-  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setRequest(e.target.value);
-  };
+  register: UseFormRegister<FieldValues>;
+  errors: Partial<FieldErrorsImpl>;
+};
+export function RequestTextArea({ register, errors }: Props) {
   return (
     <Container>
-        <Typography size="20" fontWeight="bold">
-          의뢰 내용
-        </Typography>
-      <Input placeholder="제목을 입력해주세요" onChange={onChange} />
+      <Typography size="20" fontWeight="bold">
+        의뢰 내용
+      </Typography>
+      <TextArea
+        {...register('introduction', {
+          required: '내용를 입력해주세요',
+        })}
+        placeholder="의뢰내용을 입력해주세요"
+      />
     </Container>
   );
 }
@@ -28,7 +33,7 @@ const Container = styled.div`
 `;
 
 
-const Input = styled.textarea`
+const TextArea = styled.textarea`
   margin-left: 30px;
   border-radius: 10px;
   width: 100%;

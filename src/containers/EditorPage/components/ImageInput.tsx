@@ -1,11 +1,14 @@
 import React, { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 type Props = {
+  register: UseFormRegister<FieldValues>;
+  errors: Partial<FieldErrorsImpl>;
   setImages: React.Dispatch<React.SetStateAction<File[] | undefined>>;
 };
-export function ImageInput({ setImages }: Props) {
+export function ImageInput({ register, errors, setImages }: Props) {
   const [fileNames, setFileNames] = useState<string[]>([]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

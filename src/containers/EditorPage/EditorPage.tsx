@@ -4,7 +4,7 @@ import { Typography } from 'src/components/Typography';
 import {
   TitleInput,
   ImageInput,
-  TextArea,
+  RequestTextArea,
   WriteButton,
   SecretSelectInput,
 } from './components';
@@ -13,64 +13,80 @@ import { boardApi } from '../../apis/board';
 import { useCookies } from 'src/hooks/useCookies';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { imageOpenType } from 'src/types/imageOpen.type';
+import { FieldValues, useForm } from 'react-hook-form';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
 export function EditorPage() {
-  const [title, setTitle] = useState('');
+   const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+
   const [images, setImages] = useState<File[]>();
-  const [request, setRequest] = useState('');
-  const [imageOpen, setImageOpen] = useState<imageOpenType>(imageOpenType.open);
   const { getCookie } = useCookies();
   const { getSessionStorage } = useSessionStorage();
 
-  
 
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
+  // useEffect(() => {
+  //   console.log(images);
+  // }, [images]);
 
-  const onClick = async () => {
-    if (!title) {
-      alert('제목을 입력해주세요');
-      return;
-    }
-    if (!images) {
-      alert('사진을 등록해주세요');
-      return;
-    }
+  const submit = async (data: FieldValues) => {
     try {
-      const frm = new FormData();
-      frm.append('title', title);
-      frm.append('context', request);
-      frm.append('imageOpen', imageOpen);
-
-      images.forEach(data => {
-        frm.append('image', data);
-      });
-
-      const data = await boardApi.create(
-        frm,
-        getSessionStorage('access'),
-        getCookie('refresh'),
-      );
-      console.log(data);
-
-
-      // console.log(data);
-      // console.log(frm)
-
-      // console.log(getSessionStorage('access'));
-      // console.log(getCookie('refresh'));
-
-      // accessToken: getSessionStorage('access'),
-      // refreshToken: getCookie('refresh')
-
-      // alert('등록완료');
+      console.log(data)
     } catch (error) {
       console.log(error);
     }
-  };
+  };  
+
+  // useEffect(() => {
+  //   console.log(images);
+  // }, [images]);
+
+  // const onClick = async () => {
+  //   if (!title) {
+  //     alert('제목을 입력해주세요');
+  //     return;
+  //   }
+  //   if (!images) {
+  //     alert('사진을 등록해주세요');
+  //     return;
+  //   }
+  //   try {
+  //     const frm = new FormData();
+  //     frm.append('title', title);
+  //     frm.append('context', request);
+  //     frm.append('imageOpen', imageOpen);
+
+  //     images.forEach(data => {
+  //       frm.append('image', data);
+  //     });
+
+  //     const data = await boardApi.create(
+  //       frm,
+  //       getSessionStorage('access'),
+  //       getCookie('refresh'),
+  //     );
+  //     console.log(data);
+
+
+  //     // console.log(data);
+  //     // console.log(frm)
+
+  //     // console.log(getSessionStorage('access'));
+  //     // console.log(getCookie('refresh'));
+
+  //     // accessToken: getSessionStorage('access'),
+  //     // refreshToken: getCookie('refresh')
+
+  //     // alert('등록완료');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <Container>
@@ -79,12 +95,12 @@ export function EditorPage() {
           글 작성
         </Typography>
       </Title>
-      <InputContainer>
-        <TitleInput setTitle={setTitle} />
-        <ImageInput setImages={setImages} />
-        <SecretSelectInput imageOpen={imageOpen} setImageOpen={setImageOpen} />
-        <TextArea setRequest={setRequest} />
-        <WriteButton onClick={onClick} />
+      <InputContainer onSubmit={handleSubmit(submit)}>
+        <TitleInput register={register} errors={errors} />
+        <ImageInput setImages={setImages} register={register} errors={errors} />
+        <SecretSelectInput control={control} errors={errors} />
+        <RequestTextArea register={register} errors={errors} />
+        <WriteButton />
       </InputContainer>
     </Container>
   );
@@ -106,7 +122,7 @@ const Title = styled.div`
   margin: 100px 0;
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;

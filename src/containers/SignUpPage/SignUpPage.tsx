@@ -93,7 +93,6 @@ const Form = styled.form`
 const SignUpButton = styled.button`
   display: flex;
   justify-content: center;
-  border: none;
   align-items: center;
   width: 140px;
   height: 50px;
