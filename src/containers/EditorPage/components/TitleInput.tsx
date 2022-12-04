@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';

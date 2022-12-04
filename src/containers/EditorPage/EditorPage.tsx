@@ -8,85 +8,52 @@ import {
   WriteButton,
   SecretSelectInput,
 } from './components';
-import axios from 'axios';
 import { boardApi } from '../../apis/board';
 import { useCookies } from 'src/hooks/useCookies';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
-import { imageOpenType } from 'src/types/imageOpen.type';
 import { FieldValues, useForm } from 'react-hook-form';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
 export function EditorPage() {
-   const {
+  const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
 
-  const [images, setImages] = useState<File[]>();
   const { getCookie } = useCookies();
   const { getSessionStorage } = useSessionStorage();
 
-
-  // useEffect(() => {
-  //   console.log(images);
-  // }, [images]);
-
   const submit = async (data: FieldValues) => {
+    const {title, request, imageOpen, image} = data;
     try {
-      console.log(data)
+      const frm = new FormData();
+
+      frm.append('title', title);
+      frm.append('context', request);
+      frm.append('imageOpen', imageOpen);
+
+      for(let i = 0; i < image.length; ++i) {
+        frm.append('image', image[i]);
+      }
+
+      const data = await boardApi.create(
+        frm,
+        getSessionStorage('access'),
+        getCookie('refresh'),
+      );
+      console.log(data);
+
+
+      alert('등록완료');
     } catch (error) {
       console.log(error);
     }
-  };  
+  };
 
-  // useEffect(() => {
-  //   console.log(images);
-  // }, [images]);
-
-  // const onClick = async () => {
-  //   if (!title) {
-  //     alert('제목을 입력해주세요');
-  //     return;
-  //   }
-  //   if (!images) {
-  //     alert('사진을 등록해주세요');
-  //     return;
-  //   }
-  //   try {
-  //     const frm = new FormData();
-  //     frm.append('title', title);
-  //     frm.append('context', request);
-  //     frm.append('imageOpen', imageOpen);
-
-  //     images.forEach(data => {
-  //       frm.append('image', data);
-  //     });
-
-  //     const data = await boardApi.create(
-  //       frm,
-  //       getSessionStorage('access'),
-  //       getCookie('refresh'),
-  //     );
-  //     console.log(data);
-
-
-  //     // console.log(data);
-  //     // console.log(frm)
-
-  //     // console.log(getSessionStorage('access'));
-  //     // console.log(getCookie('refresh'));
-
-  //     // accessToken: getSessionStorage('access'),
-  //     // refreshToken: getCookie('refresh')
-
-  //     // alert('등록완료');
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  
 
   return (
     <Container>
@@ -97,7 +64,7 @@ export function EditorPage() {
       </Title>
       <InputContainer onSubmit={handleSubmit(submit)}>
         <TitleInput register={register} errors={errors} />
-        <ImageInput setImages={setImages} register={register} errors={errors} />
+        <ImageInput register={register} errors={errors} />
         <SecretSelectInput control={control} errors={errors} />
         <RequestTextArea register={register} errors={errors} />
         <WriteButton />
