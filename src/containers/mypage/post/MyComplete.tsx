@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { CustomPagination, Typography } from 'src/components/index';
 import { dummyList } from 'src/dummy/dummyList';
 import React, { useMemo, useState } from 'react';
-import { MyCardList } from '../components/post/MyCardList';
+import { MyCardList } from './components/MyCardList';
 
 export const MyComplete = () => {
   const [page, setPage] = useState(1);

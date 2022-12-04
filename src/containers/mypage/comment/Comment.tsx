@@ -1,8 +1,8 @@
 import { Typography } from 'src/components/Typography';
-import { MyPageLayout } from './components/MyPageLayout';
 import * as S from './Comment.style';
-import { CommentList } from './components/comments/CommentList';
-import { commentsDummy } from 'src/dummy/myPage';
+import { MyPageLayout } from '../components/MyPageLayout';
+import { CommentList } from './components/CommentList';
+import { commentsDummy } from './dummy/comment';
 
 export const Comment = () => {
   return (

@@ -5,7 +5,7 @@ import { MyCard } from './MyCard';
 type Props = {
   offset: number;
   limit: number;
-  list: IDummyList[];
+  list: any[];
 };
 
 export const MyCardList = ({ list, offset, limit }: Props) => {

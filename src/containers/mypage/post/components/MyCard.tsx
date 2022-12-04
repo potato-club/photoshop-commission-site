@@ -47,7 +47,7 @@ export const MyCard = ({ id, title, writer, date, imageUrls }: IDummyList) => {
         </div>
         <div>
           <Typography size="16" color="lightBlue" fontWeight="900">
-            {formatDate(date)}
+            {formatDate(String(date))}
           </Typography>
         </div>
       </NameDateBox>

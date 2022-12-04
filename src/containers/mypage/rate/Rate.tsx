@@ -1,36 +1,9 @@
 import { Typography } from 'src/components/Typography';
-import { MyPageLayout } from './components/MyPageLayout';
-import { CommentList } from './components/rate/CommentList';
+import { MyPageLayout } from '../components/MyPageLayout';
+import { CommentList } from './components/CommentList';
+import { DUMMY_RATE } from './dummy/rate';
 import * as S from './Rate.style';
 
-const dummy = {
-  rate: 3.2,
-  clear: 4,
-  comment: [
-    {
-      id: 1,
-      name: '당근먹는기사',
-      content: '키아아ㅏ아 ㅏ쥑인다ㅏ아ㅏㅏ',
-      date: '2020-03-02',
-      rate: 4.2,
-    },
-    {
-      id: 2,
-      name: '당근먹는기사2',
-      content:
-        '키아아ㅏ아 ㅏ쥑인다ㅏ아ㅏㅏ존나길래 글써버리기이ㅣ이이ㅣ ㅣ키ㅑ아아아 이게 데이터 낭비지ㅣ이ㅣㅣ',
-      date: '2020-03-02',
-      rate: 4.2,
-    },
-    {
-      id: 3,
-      name: '당근먹는기사3',
-      content: '키아아ㅏ아 ㅏ쥑인다ㅏ아ㅏㅏ',
-      date: '2020-03-02',
-      rate: 4.2,
-    },
-  ],
-};
 export const Rate = () => {
   return (
     <MyPageLayout>
@@ -38,7 +11,7 @@ export const Rate = () => {
         <S.RateContainer>
           <S.RateDataWrapper>
             <Typography size="48" fontWeight="bold" color="blue">
-              {dummy.rate}
+              {DUMMY_RATE.rate}
             </Typography>
           </S.RateDataWrapper>
           <S.RatePerWrapper>
@@ -51,11 +24,11 @@ export const Rate = () => {
           </S.ClearTextWrapper>
           <S.ClearDataWrapper>
             <Typography size="20" fontWeight="bold" color="blue">
-              {dummy.clear}
+              {DUMMY_RATE.clear}
             </Typography>
           </S.ClearDataWrapper>
         </S.ClearQuestContainer>
-        <CommentList list={dummy.comment} />
+        <CommentList list={DUMMY_RATE.comment} />
       </S.Container>
     </MyPageLayout>
   );

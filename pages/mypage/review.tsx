@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { MyReview } from 'src/containers/mypage/MyReview';
+import { MyReview } from 'src/containers/mypage/my-review/MyReview';
 
 const ReviewPage: NextPage = () => {
   return <MyReview />;

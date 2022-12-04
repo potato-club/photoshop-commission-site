@@ -5,7 +5,7 @@ import { all } from 'src/constants/all/all';
 import { dummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
 import { MyPageLayout } from '../components/MyPageLayout';
-import { MyCardList } from '../components/post/MyCardList';
+import { MyCardList } from './components/MyCardList';
 
 type RequestBoardProps = {
   state: 'before' | 'doing' | 'complete';

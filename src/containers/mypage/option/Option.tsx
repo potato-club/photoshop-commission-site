@@ -1,5 +1,5 @@
-import { MyPageLayout } from './components/MyPageLayout';
-import { CustomButton } from './components/option/CustomButton';
+import { MyPageLayout } from '../components/MyPageLayout';
+import { CustomButton } from './components/CustomButton';
 import * as S from './Option.style';
 export const Option = () => {
   const handleLogout = () => {};

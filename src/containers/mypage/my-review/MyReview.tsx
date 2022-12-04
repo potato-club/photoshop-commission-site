@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CustomPagination, Typography } from 'src/components';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { MyPageLayout } from './components/MyPageLayout';
+import { MyPageLayout } from '../components/MyPageLayout';
 
 export const MyReview = () => {
   const [page, setPage] = useState(1);
@@ -57,7 +57,6 @@ export const MyReview = () => {
           activePage={page}
           onChange={handlePageChange}
           totalItemsCount={20}
-          perPage={8}
         />
       </Container>
     </MyPageLayout>
