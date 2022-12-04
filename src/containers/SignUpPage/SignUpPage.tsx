@@ -10,35 +10,34 @@ import {
 } from './components';
 import { signUpApi } from 'src/apis';
 import { useRouter } from 'next/router';
-import { useLocalStorage } from 'src/hooks/useLocalStorage';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
-
-
+import { FieldValues, useForm } from 'react-hook-form';
 
 export function SignUpPage() {
-  const [nickname, setNickname] = useState('');
-  const [doubleNameCheck, setDoubleNameCheck] = useState<boolean>(false);
-  const [selectedJob, setSelectedJob] = useState('USER');
-  const [aboutMe, setAboutMe] = useState('');
-  const router = useRouter();
+  // Todo 우선 submit 하면 자동으로 중복검사 하게끔하고, 이전방법이 낫겠다 싶으면 닉네임만 제어컴포넌트로 바꿔서 중복확인 버튼 사용하기
+  // const [doubleNameCheck, setDoubleNameCheck] = useState<boolean>(false);
   const { setSessionStorage, getSessionStorage, removeSessionStorage } =
     useSessionStorage();
+  const router = useRouter();
 
-  const signUp = async () => {
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+
+  const signUp = async (data: FieldValues) => {
+    const { nickname, userRole, introduction } = data;
+    console.log(data)
     try {
-      if(!doubleNameCheck) {
-        alert("닉네임 중복확인을 해주세요!");
-        return;
-      }
-      console.log('nickname :', nickname);
-      console.log('introduction :', aboutMe);
-      console.log('userRole :', selectedJob);
-      console.log('토큰', getSessionStorage('serialCode'));
+      // * 닉네임 중복확인 완료
+      // * introduction 빈값 체크 완료
 
       const { data } = await signUpApi.signUp({
         nickname,
-        introduction: aboutMe,
-        userRole: selectedJob,
+        userRole,
+        introduction,
         serialCode: getSessionStorage('serialCode'),
       });
       removeSessionStorage('serialCode');
@@ -48,33 +47,21 @@ export function SignUpPage() {
       console.log(err);
     }
   };
-  
-  useEffect(() => {
-    setDoubleNameCheck(false);
-  }, [nickname])
 
   return (
     <Container>
       <Title />
       <Line />
-      <InfoWrapper>
-        <NicknameInput
-          nickname={nickname}
-          setNickname={setNickname}
-          doubleNameCheck={doubleNameCheck}
-          setDoubleNameCheck={setDoubleNameCheck}
-        />
-        <JobSelectInput
-          selectedJob={selectedJob}
-          setSelectedJob={setSelectedJob}
-        />
-        <TextAreaComponent setAboutMe={setAboutMe} />
-        <SignUpButton onClick={() => signUp()}>
+      <Form onSubmit={handleSubmit(signUp)}>
+        <NicknameInput register={register} errors={errors}/>
+        <JobSelectInput control={control} errors={errors}/>
+        <TextAreaComponent register={register} errors={errors}/>
+        <SignUpButton type="submit">
           <Typography size="20" color="white">
             가입하기
           </Typography>
         </SignUpButton>
-      </InfoWrapper>
+      </Form>
     </Container>
   );
 }
@@ -94,7 +81,7 @@ const Line = styled.div`
   border-bottom: 1px solid ${customColor.gray};
 `;
 
-const InfoWrapper = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 80px;
@@ -103,9 +90,10 @@ const InfoWrapper = styled.div`
   margin-top: 80px;
 `;
 
-const SignUpButton = styled.div`
+const SignUpButton = styled.button`
   display: flex;
   justify-content: center;
+  border: none;
   align-items: center;
   width: 140px;
   height: 50px;

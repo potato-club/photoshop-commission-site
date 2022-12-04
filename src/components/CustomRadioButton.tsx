@@ -8,7 +8,7 @@ type Props = {
   id: string;
   label: string;
   name: string;
-  selectedValue: imageOpenType;
+  selectedValue: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   gap: number;
   marginLeft?: number;
@@ -28,7 +28,7 @@ type Props = {
  *
  */
 
-export default function CustomRadioButton(props: Props) {
+export function CustomRadioButton(props: Props) {
   const {
     id,
     label,

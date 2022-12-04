@@ -1,29 +1,44 @@
 import React, { ChangeEvent, ChangeEventHandler } from 'react';
+import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
+import { ErrorMessage } from '@hookform/error-message';
+
 type Props = {
-  setAboutMe: React.Dispatch<React.SetStateAction<string>>;
+  register: UseFormRegister<FieldValues>;
+  errors: Partial<FieldErrorsImpl>;
 };
-export function TextAreaComponent({ setAboutMe }: Props) {
-  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-    setAboutMe(value);
-  };
+export function TextAreaComponent({ register, errors }: Props) {
+
   return (
     <Container>
-        <Typography size="20" fontWeight="bold">
-          자기소개
-        </Typography>
+      <Typography size="20" fontWeight="bold">
+        자기소개
+      </Typography>
       <InputWrapper>
         <TextArea
-          onChange={onChange}
-          placeholder="자기소개를 입력해주세요" />
+          {...register('introduction', {
+            required: '소개를 입력해주세요',
+          })}
+          placeholder="자기소개를 입력해주세요"
+        />
         <Caption>
           <Typography size="12" fontWeight="bold">
             닉네임과 자기소개는 마이페이지에서 이후에 수정가능합니다
           </Typography>
         </Caption>
+        <ErrorMessage
+          errors={errors}
+          name="introduction"
+          render={({ message }) => (
+            <ErrorWrapper>
+              <Typography size="16" color="danger">
+                {message}
+              </Typography>
+            </ErrorWrapper>
+          )}
+        />
       </InputWrapper>
     </Container>
   );
@@ -41,11 +56,12 @@ const InputWrapper = styled.div`
   flex-direction: column;
   gap: 4px;
   width: 100%;
+  position: relative;
 `;
 
 const Caption = styled.div`
   position: absolute;
-  top: 345px;
+  bottom: -20px;
   right: 0;
   div {
     right: 0;
@@ -67,4 +83,10 @@ const TextArea = styled.textarea`
     outline: none;
   }
   resize: none;
+`;
+
+const ErrorWrapper = styled.div`
+  position: absolute;
+  bottom: -20px;
+  left: 40px;
 `;

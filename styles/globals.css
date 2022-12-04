@@ -168,3 +168,9 @@ body {
 a {
   text-decoration: none;
 }
+
+.errorWrapper {
+  position: absolute;
+  top: 35px;
+  left: 50px;
+}

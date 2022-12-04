@@ -11,11 +11,11 @@ export function TitleInput({ setTitle }:Props) {
   };
   return (
     <Container>
-      <LeftMargin>
+      <div style={{marginLeft: '12px'}}>
         <Typography size="20" fontWeight="bold">
           글 제목
         </Typography>
-      </LeftMargin>
+      </div>
       <Input placeholder="제목을 입력해주세요" onChange={onChange} />
     </Container>
   );
@@ -42,8 +42,4 @@ const Input = styled.input`
   ::placeholder {
     color: ${customColor.gray};
   }
-`;
-
-const LeftMargin = styled.div`
-  margin-left: 12px;
 `;

@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomRadioButton from 'src/components/CustomRadioButton';
+import { CustomRadioButton } from 'src/components/CustomRadioButton';
 import { Typography } from 'src/components/Typography';
 import { imageOpenType } from 'src/types/imageOpen.type';
 import styled from 'styled-components';
