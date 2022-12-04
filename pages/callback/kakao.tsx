@@ -24,6 +24,7 @@ export default function CheckToken() {
         '이전에 회원가입이 제대로 진행되지 않았습니다. 다시 로그인 해주세요.',
       );
       router.push('/main');
+      return;
     }
 
     // 받는거(최초 로그인일때) : 이메일, 메세지
