@@ -5,61 +5,58 @@ import { FaPaperPlane } from 'react-icons/fa';
 import { boardApi } from 'src/apis/board';
 import { useRouter } from 'next/router';
 import { useGetToken } from 'src/hooks/useGetToken';
+import { FieldValues, useForm } from 'react-hook-form';
 
 type Props = {
   type: 'Board' | 'Comment';
   parentId?: number;
 };
 export function CustomInput({ type, parentId }: Props) {
-  const [comment, setComment] = useState<string>();
-  const { query: {id} } = useRouter();
+  const {
+    query: { id },
+  } = useRouter();
   const { access, refresh } = useGetToken();
 
-  const commentSubmit = async () => {
-    if (!comment) {
-      alert('내용을 입력해주세요!'); // Todo : alert 창 뭐로 할건지 등등
-      return;
-    }
-    const data = parentId
-      ? await boardApi.postReply(
-          id,
-          { comment, parentId },
-          access,
-          refresh,
-        )
+  const { register, handleSubmit } = useForm();
+
+  const commentSubmit = async (data: FieldValues) => {
+    const { comment } = data;
+
+    const res = parentId
+      ? await boardApi.postReply(id, { comment, parentId }, access, refresh)
       : await boardApi.postComment(id, { comment }, access, refresh);
-      console.log(data);
+    console.log(res);
   };
   return (
-    <Container type={type}>
+    <Container option={type} onSubmit={handleSubmit(commentSubmit)}>
       <Input
         spellCheck={false}
-        type={type}
+        option={type}
         placeholder="작성할 댓글을 입력해주세요..."
-        onChange={e => setComment(e.target.value)}
+        {...register('comment', { required: true })}
       />
-      <SubMitButton type={type}>
-        <FaPaperPlane size={24} onClick={() => commentSubmit()} />
+      <SubMitButton option={type} type="submit">
+        <FaPaperPlane size={24} />
       </SubMitButton>
     </Container>
   );
 }
 
 type StyleProps = {
-  type: 'Board' | 'Comment';
+  option: 'Board' | 'Comment';
 };
-const Container = styled.div<StyleProps>`
+const Container = styled.form<StyleProps>`
   position: relative;
   width: 100%;
   max-width: 1178px;
-  padding-left: ${({ type }) => (type === 'Board' ? '12px' : '160px')};
-  padding-right: ${({ type }) => (type === 'Board' ? '12px' : 0)};
+  padding-left: ${({ option }) => (option === 'Board' ? '12px' : '160px')};
+  padding-right: ${({ option }) => (option === 'Board' ? '12px' : 0)};
   margin-bottom: 20px;
 `;
 const Input = styled.textarea<StyleProps>`
   width: 100%;
   box-sizing: border-box;
-  height: ${({ type }) => (type === 'Board' ? '100px' : '40px')};
+  height: ${({ option }) => (option === 'Board' ? '100px' : '40px')};
   padding: 12px 80px 0 16px;
   outline: none;
   border: none;
@@ -72,12 +69,12 @@ const Input = styled.textarea<StyleProps>`
   resize: none;
 `;
 
-const SubMitButton = styled.div<StyleProps>`
+const SubMitButton = styled.button<StyleProps>`
   position: absolute;
-  height: 100%;
+  height: auto;
+  background-color: transparent;
   display: flex;
-  top: ${({ type }) => type === 'Comment' && '0'};
-  bottom: ${({ type }) => type === 'Board' && '12px'};
-  right: ${({ type }) => (type === 'Board' ? '24px' : '12px')};
-  align-items: ${({ type }) => (type === 'Board' ? 'flex-end' : 'center')};
+  bottom: ${({ option }) => option === 'Board' ? '12px' : '8px'};
+  right: ${({ option }) => (option === 'Board' ? '24px' : '12px')};
+  align-items: ${({ option }) => (option === 'Board' ? 'flex-end' : 'center')};
 `;
