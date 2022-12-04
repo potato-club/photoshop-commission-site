@@ -3,7 +3,7 @@ import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { ErrorMessage } from '@hookform/error-message';
+import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 
 type Props = {
   register: UseFormRegister<FieldValues>;
@@ -28,17 +28,7 @@ export function TextAreaComponent({ register, errors }: Props) {
             닉네임과 자기소개는 마이페이지에서 이후에 수정가능합니다
           </Typography>
         </Caption>
-        <ErrorMessage
-          errors={errors}
-          name="introduction"
-          render={({ message }) => (
-            <ErrorWrapper>
-              <Typography size="16" color="danger">
-                {message}
-              </Typography>
-            </ErrorWrapper>
-          )}
-        />
+        <CustomErrorMessage errors={errors} name="introduction" leftPosition="40" bottomPosition='-20'/>
       </InputWrapper>
     </Container>
   );

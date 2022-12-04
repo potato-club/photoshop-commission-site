@@ -4,7 +4,7 @@ import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import { signUpApi } from 'src/apis';
 import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
+import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 
 type Props = {
   register: UseFormRegister<FieldValues>;
@@ -22,7 +22,7 @@ export function NicknameInput({ register, errors }: Props) {
 
   return (
     <Container>
-      <div style={{marginLeft: '12px'}}>
+      <div style={{ marginLeft: '12px' }}>
         <Typography size="20" fontWeight="bold">
           닉네임
         </Typography>
@@ -43,16 +43,10 @@ export function NicknameInput({ register, errors }: Props) {
                 최대 8글자
               </Typography>
             </Caption>
-            <ErrorMessage
+            <CustomErrorMessage
               errors={errors}
               name="nickname"
-              render={({ message }) => (
-                <ErrorWrapper>
-                  <Typography size="16" color="danger">
-                    {message}
-                  </Typography>
-                </ErrorWrapper>
-              )}
+              leftPosition="50"
             />
           </div>
         </InputWrapper>

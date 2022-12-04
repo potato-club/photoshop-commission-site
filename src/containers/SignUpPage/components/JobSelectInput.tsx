@@ -8,7 +8,7 @@ import {
 import { CustomRadioButton } from 'src/components/CustomRadioButton';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
-import { ErrorMessage } from '@hookform/error-message';
+import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 
 type Props = {
   control: Control<FieldValues>;
@@ -55,17 +55,7 @@ export function JobSelectInput({ control, errors }: Props) {
             />
           )}
         />
-        <ErrorMessage
-          errors={errors}
-          name="userRole"
-          render={({ message }) => (
-            <ErrorWrapper>
-              <Typography size="16" color="danger">
-                {message}
-              </Typography>
-            </ErrorWrapper>
-          )}
-        />
+        <CustomErrorMessage errors={errors} name="userRole" leftPosition='65'/>
       </RadioWrapper>
     </Container>
   );
@@ -84,9 +74,4 @@ const RadioWrapper = styled.div`
   display: flex;
 `;
 
-const ErrorWrapper = styled.div`
-  position: absolute;
-  top: 35px;
-  left: 65px;
-`;
 
