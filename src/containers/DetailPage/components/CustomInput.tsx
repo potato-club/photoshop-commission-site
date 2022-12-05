@@ -66,7 +66,6 @@ const Input = styled.textarea<StyleProps>`
   ::placeholder {
     color: ${customColor.gray};
   }
-  resize: none;
 `;
 
 const SubMitButton = styled.button<StyleProps>`

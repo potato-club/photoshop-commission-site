@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/redux-toolkit/store';
-import { CommentAndReply } from './components';
+import { CommentAndReply } from '.';
 
 export const CommentList = () => {
   const commentList = useSelector(
