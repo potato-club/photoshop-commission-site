@@ -5,6 +5,7 @@ import { ModifyPage } from 'src/containers/modifyPage/ModifyPage';
 import { useCheckWriter } from 'src/hooks/useCheckWriter';
 import { useGetDetail } from 'src/hooks/useGetDetail';
 import { useGetToken } from 'src/hooks/useGetToken';
+import { errorModal } from 'src/utils/interactionModal';
 
 const Modify: NextPage = () => {
   const router = useRouter();
@@ -17,8 +18,11 @@ const Modify: NextPage = () => {
   const checkMyPost = async () => {
     const data = await checkWriter();
     if (!data) {
-      alert('글 수정, 삭제는 작성자 본인만 할 수 있습니다.');
-      router.back();
+      await errorModal(
+        '글 수정, 삭제는 작성자 본인만 할 수 있습니다.',
+        '이전페이지로 이동합니다');
+      router.push('/main');
+      return;
     }
     setCheck(true);
     getData();
