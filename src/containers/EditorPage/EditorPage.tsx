@@ -27,12 +27,13 @@ export function EditorPage() {
   const { getSessionStorage } = useSessionStorage();
 
   const submit = async (data: FieldValues) => {
-    const {title, request, imageOpen, image} = data;
+    const {title, context, imageOpen, image} = data;
+    console.log(data);
     try {
       const frm = new FormData();
 
       frm.append('title', title);
-      frm.append('context', request);
+      frm.append('context', context);
       frm.append('imageOpen', imageOpen);
 
       for(let i = 0; i < image.length; ++i) {

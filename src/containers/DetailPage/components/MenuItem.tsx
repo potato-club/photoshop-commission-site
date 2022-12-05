@@ -29,7 +29,7 @@ export const MenuItem = ({ myPost }: Props) => {
     <Container>
       {myPost ? (
         <Wrapper>
-          <Content>
+          <Content onClick={() => router.push(`/modify/${router.query.id}`)}>
             <Typography size="16" fontWeight="bold">
               수정하기
             </Typography>
@@ -59,6 +59,7 @@ const Container = styled.div`
   top: 20px;
   right: 0;
   background-color: ${customColor.white};
+  z-index: 9;
 `;
 
 const Wrapper = styled.div`

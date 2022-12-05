@@ -14,7 +14,7 @@ import {
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/redux-toolkit/store';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
-import { CommentList } from './CommentList';
+import { CommentList } from './components/CommentList';
 
 export function DetailPage() {
   const myPost = useSelector((state: RootState) => state.detailData.myPost);

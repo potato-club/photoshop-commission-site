@@ -17,14 +17,12 @@ export function RequestTextArea({ register, errors }: Props) {
       </Typography>
       <InputWrapper>
         <TextArea
-          {...register('introduction', {
-            required: '내용를 입력해주세요',
-          })}
-          placeholder="의뢰내용을 입력해주세요"
+          {...register('context')}
+          placeholder="내용을 입력해주세요"
         />
         <CustomErrorMessage
           errors={errors}
-          name="introduction"
+          name="context"
           leftPosition="30"
           bottomPosition="-20"
         />
@@ -57,7 +55,6 @@ const TextArea = styled.textarea`
   padding: 20px;
   margin-top: -20px;
   font-weight: bold;
-  resize: none;
   ::placeholder {
     color: ${customColor.gray};
   }

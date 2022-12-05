@@ -17,9 +17,11 @@ export function Header() {
         {`<< 홈 < ${state} 게시글`}
       </Typography>
       <SpaceBetween>
-        <Typography size="32" color="black" fontWeight="bold">
-          {title}
-        </Typography>
+        <TitleWrapper>
+          <Typography size="32" color="black" fontWeight="bold">
+            {title}
+          </Typography>
+        </TitleWrapper>
         <WriterWrapper>
           <Typography size="16" color="black">
             {writer}
@@ -61,9 +63,11 @@ const WriterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  align-self: flex-start;
   gap: 4px 0;
 `;
 
-const MenuWrapper = styled.div`
-  position: relative;
+const TitleWrapper = styled.div`
+  width: 100%;
+  max-width: 800px;
 `;

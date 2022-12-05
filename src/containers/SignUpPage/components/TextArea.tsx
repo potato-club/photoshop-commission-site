@@ -72,7 +72,6 @@ const TextArea = styled.textarea`
   :focus {
     outline: none;
   }
-  resize: none;
 `;
 
 const ErrorWrapper = styled.div`

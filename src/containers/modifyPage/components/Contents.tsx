@@ -2,19 +2,20 @@ import Image from 'next/image';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Typography } from 'src/components/Typography';
-import { ImageType } from 'src/types/image.type';
-import { imageOpenType } from 'src/types/imageOpen.type';
 import styled from 'styled-components';
 import { RootState } from "src/redux-toolkit/store";
-
-export function Contents() {
+import { FieldValues, UseFormRegister } from 'react-hook-form';
+type Props = {
+  register: UseFormRegister<FieldValues>;
+};
+export function Contents({register}:Props) {
   const detailData = useSelector((state: RootState) => state.detailData.data);
-  const {imageUrls, contents, imageOpen} = detailData;
+  const {imageUrls, contents} = detailData;
   return (
     <Container>
-      {imageOpen === imageOpenType.open && imageUrls && (
-        <ImgContainer>
-          {imageUrls.map((data, index) => (
+      <ImgContainer>
+        {imageUrls &&
+          imageUrls.map((data, index) => (
             <Image
               width={630}
               height={470}
@@ -23,10 +24,13 @@ export function Contents() {
               alt="img"
             />
           ))}
-        </ImgContainer>
-      )}
+      </ImgContainer>
       <TextWrapper>
-        <Typography size="16">{contents}</Typography>
+        <TextArea
+          defaultValue={contents}
+          placeholder="내용을 입력해주세요"
+          {...register('contents')}
+        />
       </TextWrapper>
     </Container>
   );
@@ -49,4 +53,12 @@ const ImgContainer = styled.div`
 
 const TextWrapper = styled.div`
   margin: 80px 40px 0px 40px;
+`;
+
+const TextArea = styled.textarea`
+  font-size: 32px;
+  padding: 8px;
+  width: 100%;
+  font-weight: bold;
+  height: 400px;
 `;
