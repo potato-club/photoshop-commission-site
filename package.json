@@ -29,6 +29,7 @@
     "redux": "^4.2.0",
     "styled-components": "^5.3.5",
     "styled-reset": "^4.3.4",
+    "sweetalert2": "^11.6.15",
     "universal-cookie": "^4.0.4"
   },
   "devDependencies": {

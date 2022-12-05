@@ -4,6 +4,7 @@ import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
 import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
+import { errorModal, infoModal } from 'src/utils/interactionModal';
 import styled from 'styled-components';
 type Props = {
   register: UseFormRegister<FieldValues>;
@@ -21,7 +22,7 @@ export function ImageInput({ register, errors }: Props) {
     e.preventDefault();
     setThumbnails([]); // 취소했을때 썸네일도 지워야함
     if (e.target.files!.length > 3) {
-      alert('이미지는 최대 3개까지 등록할 수 있습니다.');
+      errorModal('이미지는 최대 3개까지 등록할 수 있습니다.');
       return;
     }
 
@@ -34,6 +35,7 @@ export function ImageInput({ register, errors }: Props) {
         };
       }
     }
+    infoModal('사진파일 등록 완료!', 'success');
   };
 
   return (

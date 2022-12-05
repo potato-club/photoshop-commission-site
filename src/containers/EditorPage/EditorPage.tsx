@@ -12,10 +12,13 @@ import { boardApi } from '../../apis/board';
 import { useCookies } from 'src/hooks/useCookies';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { FieldValues, useForm } from 'react-hook-form';
+import { infoModal } from 'src/utils/interactionModal';
+import { useRouter } from 'next/router';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
 export function EditorPage() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -27,7 +30,7 @@ export function EditorPage() {
   const { getSessionStorage } = useSessionStorage();
 
   const submit = async (data: FieldValues) => {
-    const {title, context, imageOpen, image} = data;
+    const { title, context, imageOpen, image } = data;
     console.log(data);
     try {
       const frm = new FormData();
@@ -36,7 +39,7 @@ export function EditorPage() {
       frm.append('context', context);
       frm.append('imageOpen', imageOpen);
 
-      for(let i = 0; i < image.length; ++i) {
+      for (let i = 0; i < image.length; ++i) {
         frm.append('image', image[i]);
       }
 
@@ -45,16 +48,13 @@ export function EditorPage() {
         getSessionStorage('access'),
         getCookie('refresh'),
       );
-      console.log(data);
-
-
-      alert('등록완료');
+      infoModal('등록이 완료되었습니다.', 'success', '', () => {
+        router.push('/main');
+      });
     } catch (error) {
       console.log(error);
     }
   };
-
-  
 
   return (
     <Container>

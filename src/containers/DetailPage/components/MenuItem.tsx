@@ -5,6 +5,7 @@ import { Typography } from 'src/components';
 import { useRouter } from 'next/router';
 import { boardApi } from 'src/apis/board';
 import { useGetToken } from 'src/hooks/useGetToken';
+import { checkModal, infoModal } from 'src/utils/interactionModal';
 type Props = {
   myPost: boolean;
 };
@@ -13,9 +14,17 @@ export const MenuItem = ({ myPost }: Props) => {
   const { access, refresh } = useGetToken();
   const remove = async () => {
     try {
-      const { data } = await boardApi.delete(router.query.id, access, refresh);
-      console.log(data);
-      router.push('/main');
+      const check = await checkModal('삭제 하시겠습니까?');
+      if (check) {
+        const { data } = await boardApi.delete(
+          router.query.id,
+          access,
+          refresh,
+        );
+        console.log(data);
+        await infoModal('삭제가 완료 되었습니다.', 'success');
+        router.push('/main');
+      }
     } catch (e) {
       console.log(e);
     }
