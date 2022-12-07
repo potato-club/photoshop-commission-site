@@ -13,6 +13,7 @@ export const useGetDetail = () => {
     ['getItem', router.query.id],
     () => boardApi.getDetail(router.query.id),
     {
+      enabled: router.isReady,
       onSuccess: ({ data }) => {
         setData({
           boardNo: data.id,

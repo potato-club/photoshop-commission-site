@@ -14,7 +14,7 @@ export const useCheckWriter = () => {
     ['checkWriter', router.query.id, access, refresh],
     () => checkApi.checkWriter({ id: router.query.id }, access, refresh),
     {
-      enabled: !!access && !!refresh,
+      enabled: !!access && !!refresh && router.isReady,
       onSuccess: ({ data }) => {
         setMyPost(data);
         return data;
