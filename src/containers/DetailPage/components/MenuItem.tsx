@@ -6,28 +6,25 @@ import { useRouter } from 'next/router';
 import { boardApi } from 'src/apis/board';
 import { useGetToken } from 'src/hooks/useGetToken';
 import { checkModal, infoModal } from 'src/utils/interactionModal';
+import { useMutation } from 'react-query';
 type Props = {
   myPost: boolean;
 };
 export const MenuItem = ({ myPost }: Props) => {
   const router = useRouter();
   const { access, refresh } = useGetToken();
-  const remove = async () => {
-    try {
-      const check = await checkModal('삭제 하시겠습니까?');
-      if (check) {
-        const { data } = await boardApi.delete(
-          router.query.id,
-          access,
-          refresh,
-        );
-        console.log(data);
-        await infoModal('삭제가 완료 되었습니다.', 'success');
-        router.push('/main');
-      }
-    } catch (e) {
-      console.log(e);
+
+  const { mutate } = useMutation(() => boardApi.delete(router.query.id, access, refresh), {
+    onSuccess: () => {
+      infoModal('삭제가 완료 되었습니다.' , 'success'); // 확인버튼 누르고 메인페이지 보낼거면 await
+      router.push('/main');
+    },
+    onError: () => {
+      alert('글 삭제 오류');
     }
+  });
+  const removeCheck = () => {
+    checkModal('삭제 하시겠습니까?', () => mutate());
   };
 
   const update = () => {
@@ -43,7 +40,7 @@ export const MenuItem = ({ myPost }: Props) => {
               수정하기
             </Typography>
           </Content>
-          <Content onClick={() => remove()}>
+          <Content onClick={() => removeCheck()}>
             <Typography size="16" fontWeight="bold">
               삭제하기
             </Typography>
