@@ -30,7 +30,7 @@ export function DetailPage({ detailData, myPost }: Props) {
         <Contents imageOpen={imageOpen} imageUrls={imageUrls} contents={contents}/>
         <ModalWrapper>
           {myPost && <ConfirmModalBtn />}
-          {job === 'designer' && <RequestModalBtn />}
+          {job === 'ARTIST' && <RequestModalBtn />}
         </ModalWrapper>
         <CommentContainer>
           <CommentHeader totalComment={totalComment}/>

@@ -1,9 +1,6 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { confirmModal, requestModal } from './slice';
+import { configureStore } from '@reduxjs/toolkit';
 const store = configureStore({
   reducer: {
-    confirmModal: confirmModal.reducer,
-    requestModal: requestModal.reducer
   },
 });
 
