@@ -28,7 +28,7 @@ export function DetailPage() {
         <Contents />
         <ModalWrapper>
           {myPost && <ConfirmModalBtn />}
-          {job === 'designer' && <RequestModalBtn />}
+          {job === 'ARTIST' && <RequestModalBtn />}
         </ModalWrapper>
         <CommentContainer>
           <CommentHeader />
