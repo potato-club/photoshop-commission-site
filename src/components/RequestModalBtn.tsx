@@ -1,21 +1,20 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { customColor } from 'src/constants/customColor';
-import { openRequestModal } from 'src/redux-toolkit/slice/requestModal';
+import useModal from 'src/hooks/useModal';
 import styled from 'styled-components';
 import RequestModal from './RequestModal';
 import { Typography } from './Typography';
 
 export const RequestModalBtn = () => {
-  const dispatch = useDispatch();
+  const { isOpen, handleOpenModal, handleClosetModal } = useModal();
   return (
     <>
-      <Button onClick={() => dispatch(openRequestModal())}>
+      <Button onClick={() => handleOpenModal()}>
         <Typography color="white" size="16" fontWeight="700">
           의뢰 신청하기
         </Typography>
       </Button>
-      <RequestModal />
+      <RequestModal isOpen={isOpen} handleClosetModal={handleClosetModal}/>
     </>
   );
 };

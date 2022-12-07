@@ -2,20 +2,19 @@ import React from 'react';
 import { customColor } from 'src/constants/customColor';
 import styled from 'styled-components';
 import { Typography } from './Typography';
-import { useDispatch } from "react-redux";
-import { openConfirmModal } from 'src/redux-toolkit/slice/confirmModal';
 import ConfirmModal from './ConfirmModal';
+import useModal from 'src/hooks/useModal';
 
 export const ConfirmModalBtn = () => {
-  const dispatch = useDispatch();
+  const { isOpen, handleOpenModal, handleClosetModal } = useModal();
   return (
     <>
-      <Button onClick={() => dispatch(openConfirmModal())}>
+      <Button onClick={() => handleOpenModal()}>
         <Typography color="black" size="16" fontWeight="700">
           요청 확인하기
         </Typography>
       </Button>
-      <ConfirmModal />
+      <ConfirmModal isOpen={isOpen} handleClosetModal={handleClosetModal} />
     </>
   );
 };
