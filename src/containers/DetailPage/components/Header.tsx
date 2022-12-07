@@ -10,7 +10,7 @@ type Props = {
   writer: string;
   createdDate: string;
   modifiedDate: string;
-  myPost: boolean;
+  myPost?: boolean;
 };
 
 export function Header({ state, title, writer, createdDate, modifiedDate, myPost} : Props) {
@@ -39,7 +39,7 @@ export function Header({ state, title, writer, createdDate, modifiedDate, myPost
         <Typography size="20" color="purple">
           {state}
         </Typography>
-        <BoardMenu myPost={myPost}/>
+        {myPost !== undefined && <BoardMenu myPost={myPost}/>}
       </SpaceBetween>
     </Container>
   );

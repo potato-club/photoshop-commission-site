@@ -6,12 +6,15 @@ import { boardApi } from 'src/apis/board';
 import { useRouter } from 'next/router';
 import { useGetToken } from 'src/hooks/useGetToken';
 import { FieldValues, useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
+import { infoModal } from 'src/utils/interactionModal';
 
 type Props = {
   type: 'Board' | 'Comment';
   parentId?: number;
 };
 export function CustomInput({ type, parentId }: Props) {
+  const queryClient = useQueryClient();
   const {
     query: { id },
   } = useRouter();
@@ -19,14 +22,24 @@ export function CustomInput({ type, parentId }: Props) {
 
   const { register, handleSubmit } = useForm();
 
-  const commentSubmit = async (data: FieldValues) => {
-    const { comment } = data;
+  const { mutate } = useMutation(
+    (comment: FieldValues) =>
+      parentId
+        ? boardApi.postReply(id, { comment, parentId }, access, refresh)
+        : boardApi.postComment(id, { comment }, access, refresh),
+    {
+      onSuccess: () => {
+        infoModal('댓글 등록이 완료되었습니다.', 'success');
+        queryClient.invalidateQueries('getItem');
+      },
+      onError: () => {},
+    },
+  );
 
-    const res = parentId
-      ? await boardApi.postReply(id, { comment, parentId }, access, refresh)
-      : await boardApi.postComment(id, { comment }, access, refresh);
-    console.log(res);
+  const commentSubmit = async (data: FieldValues) => {
+    mutate(data.comment);
   };
+
   return (
     <Container option={type} onSubmit={handleSubmit(commentSubmit)}>
       <Input
@@ -73,7 +86,7 @@ const SubMitButton = styled.button<StyleProps>`
   height: auto;
   background-color: transparent;
   display: flex;
-  bottom: ${({ option }) => option === 'Board' ? '12px' : '8px'};
+  bottom: ${({ option }) => (option === 'Board' ? '12px' : '8px')};
   right: ${({ option }) => (option === 'Board' ? '24px' : '12px')};
   align-items: ${({ option }) => (option === 'Board' ? 'flex-end' : 'center')};
 `;

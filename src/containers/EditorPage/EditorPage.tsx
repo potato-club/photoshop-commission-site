@@ -9,11 +9,11 @@ import {
   SecretSelectInput,
 } from './components';
 import { boardApi } from '../../apis/board';
-import { useCookies } from 'src/hooks/useCookies';
-import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { FieldValues, useForm } from 'react-hook-form';
 import { infoModal } from 'src/utils/interactionModal';
 import { useRouter } from 'next/router';
+import { useMutation } from 'react-query';
+import { useGetToken } from 'src/hooks/useGetToken';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
@@ -26,34 +26,35 @@ export function EditorPage() {
     formState: { errors },
   } = useForm();
 
-  const { getCookie } = useCookies();
-  const { getSessionStorage } = useSessionStorage();
+  const { access, refresh } = useGetToken();
+
+  const { mutate } = useMutation(
+    (frm: FieldValues) => boardApi.create(frm, access, refresh),
+    {
+      onSuccess: () => {
+        infoModal('등록이 완료되었습니다.', 'success', '', () => {
+          router.push('main');
+        });
+      },
+      onError: () => {
+        alert('글작성 오류');
+      },
+    },
+  );
 
   const submit = async (data: FieldValues) => {
     const { title, context, imageOpen, image } = data;
-    console.log(data);
-    try {
-      const frm = new FormData();
+    const frm = new FormData();
 
-      frm.append('title', title);
-      frm.append('context', context);
-      frm.append('imageOpen', imageOpen);
+    frm.append('title', title);
+    frm.append('context', context);
+    frm.append('imageOpen', imageOpen);
 
-      for (let i = 0; i < image.length; ++i) {
-        frm.append('image', image[i]);
-      }
-
-      const data = await boardApi.create(
-        frm,
-        getSessionStorage('access'),
-        getCookie('refresh'),
-      );
-      infoModal('등록이 완료되었습니다.', 'success', '', () => {
-        router.push('/main');
-      });
-    } catch (error) {
-      console.log(error);
+    for (let i = 0; i < image.length; ++i) {
+      frm.append('image', image[i]);
     }
+
+    mutate(frm);
   };
 
   return (

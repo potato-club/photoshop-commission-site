@@ -16,7 +16,7 @@ import { CommentList } from './components/CommentList';
 import { BoardType } from 'src/types/board.type';
 type Props = {
   detailData : BoardType;
-  myPost: boolean;
+  myPost?: boolean;
 }
 export function DetailPage({ detailData, myPost }: Props) {
   const { getSessionStorage } = useSessionStorage();

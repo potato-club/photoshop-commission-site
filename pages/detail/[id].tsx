@@ -1,30 +1,14 @@
 import React, { useEffect } from 'react';
 import { DetailPage } from 'src/containers';
-import { useRouter } from 'next/router';
-import { useGetToken } from 'src/hooks/useGetToken';
 import { useGetDetail } from 'src/hooks/useGetDetail';
 import { useCheckWriter } from 'src/hooks/useCheckWriter';
 
 export default function Detail() {
-  const router = useRouter();
-  const { access, refresh } = useGetToken();
-  const { data, getData } = useGetDetail();
-  const { myPost, checkWriter } = useCheckWriter();
-
-  useEffect(() => {
-    if (!router.isReady) return;
-    getData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router]);
-
-  useEffect(() => {
-    if (!router.isReady || !access || !refresh) return;
-    checkWriter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [router, access, refresh]);
+  const { data } = useGetDetail();
+  const { myPost } = useCheckWriter();
 
 
-  return <>{data && myPost !== undefined && <DetailPage detailData={data} myPost={myPost} />}</>;
+  return <>{data && <DetailPage detailData={data} myPost={myPost} />}</>;
 }
 
 //////////////////////////////////// * get ServerSideProps 쓰는 코드 ///////////////////////////////////////

@@ -9,11 +9,10 @@ export const useGetDetail = () => {
   const router = useRouter();
   const [data, setData] = useState<BoardType>();
 
-  const { refetch: getData } = useQuery(
-    'getItem',
+  useQuery(
+    ['getItem', router.query.id],
     () => boardApi.getDetail(router.query.id),
     {
-      enabled: false,
       onSuccess: ({ data }) => {
         setData({
           boardNo: data.id,
@@ -57,6 +56,5 @@ export const useGetDetail = () => {
 
   return {
     data,
-    getData
   };
 };
