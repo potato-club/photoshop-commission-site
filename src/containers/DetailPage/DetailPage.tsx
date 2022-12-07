@@ -11,28 +11,30 @@ import {
   ConfirmModalBtn,
   RequestModalBtn,
 } from '../../../src/components/index';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux-toolkit/store';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { CommentList } from './components/CommentList';
-
-export function DetailPage() {
-  const myPost = useSelector((state: RootState) => state.detailData.myPost);
+import { BoardType } from 'src/types/board.type';
+type Props = {
+  detailData : BoardType;
+  myPost?: boolean;
+}
+export function DetailPage({ detailData, myPost }: Props) {
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
+  const {title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList} = detailData;
 
   return (
     <Container>
       <Wrapper>
-        <Header />
-        <Contents />
+        <Header state={state} title={title} writer={writer} createdDate={createdDate} modifiedDate={modifiedDate} myPost={myPost}/>
+        <Contents imageOpen={imageOpen} imageUrls={imageUrls} contents={contents}/>
         <ModalWrapper>
           {myPost && <ConfirmModalBtn />}
           {job === 'ARTIST' && <RequestModalBtn />}
         </ModalWrapper>
         <CommentContainer>
-          <CommentHeader />
-          <CommentList />
+          <CommentHeader totalComment={totalComment}/>
+          <CommentList commentList={commentList}/>
         </CommentContainer>
         <Line />
         <CustomInput type="Board" />

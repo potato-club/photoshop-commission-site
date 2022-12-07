@@ -1,16 +1,14 @@
 import Image from 'next/image';
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
-import { RootState } from "src/redux-toolkit/store";
 import { FieldValues, UseFormRegister } from 'react-hook-form';
+import { ImageType } from 'src/types/image.type';
 type Props = {
   register: UseFormRegister<FieldValues>;
+  imageUrls:ImageType[];
+  contents: string;
 };
-export function Contents({register}:Props) {
-  const detailData = useSelector((state: RootState) => state.detailData.data);
-  const {imageUrls, contents} = detailData;
+export function Contents({register, imageUrls, contents}:Props) {
   return (
     <Container>
       <ImgContainer>

@@ -1,14 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AiOutlineMore } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux-toolkit/store';
 import styled from 'styled-components';
 import { MenuItem } from './MenuItem';
-
-export const BoardMenu = () => {
+type Props = {
+  myPost: boolean;
+}
+export const BoardMenu = ({myPost}:Props) => {
   const [menuToggle, setMenuToggle] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const myPost = useSelector((state: RootState) => state.detailData.myPost);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleCloseModal);

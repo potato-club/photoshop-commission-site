@@ -3,14 +3,17 @@ import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { CheckModifyDate } from './CheckModifyDate';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux-toolkit/store';
 import { BoardMenu } from './BoardMenu';
+type Props = {
+  state: string;
+  title: string;
+  writer: string;
+  createdDate: string;
+  modifiedDate: string;
+  myPost?: boolean;
+};
 
-export function Header() {
-  const detailData = useSelector((state: RootState) => state.detailData.data);
-  const { title, writer, createdDate, modifiedDate, state } = detailData;
-
+export function Header({ state, title, writer, createdDate, modifiedDate, myPost} : Props) {
   return (
     <Container>
       <Typography size="12" color="gray">
@@ -36,7 +39,7 @@ export function Header() {
         <Typography size="20" color="purple">
           {state}
         </Typography>
-        <BoardMenu />
+        {myPost !== undefined && <BoardMenu myPost={myPost}/>}
       </SpaceBetween>
     </Container>
   );

@@ -1,27 +1,36 @@
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+import { useQuery } from 'react-query';
 import { checkApi } from 'src/apis/check';
-import { checkMyPost } from 'src/redux-toolkit/slice/detailData';
 import { useGetToken } from './useGetToken';
-import { detailData } from "./../redux-toolkit/slice/detailData";
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux-toolkit/store';
+import { useState, useEffect } from "react";
+
 
 export const useCheckWriter = () => {
   const router = useRouter();
-  const dispatch = useDispatch();
   const { access, refresh } = useGetToken();
+  const [myPost, setMyPost] = useState<boolean>();
 
-  const checkWriter = async () => {
-    const { data } = await checkApi.checkWriter(
-      { id: router.query.id },
-      access,
-      refresh,
-    );
-    dispatch(checkMyPost(data));
-    return data;
-  };
+  useQuery(
+    ['checkWriter', router.query.id, access, refresh],
+    () => checkApi.checkWriter({ id: router.query.id }, access, refresh),
+    {
+      enabled: !!access && !!refresh && router.isReady,
+      onSuccess: ({ data }) => {
+        setMyPost(data);
+        return data;
+      },
+      onError: error => {
+        alert('사용자정보 체크오류');
+        return false;
+      },
+    },
+  );
+
+  useEffect(() => {
+    console.log(myPost);
+  }, [myPost])
+
   return {
-    checkWriter,
+    myPost,
   };
 };
