@@ -2,25 +2,21 @@ import React from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux-toolkit/store';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 type Props = {
   register: UseFormRegister<FieldValues>;
+  title: string;
 }
-export function Header({register}:Props) {
-  const detailData = useSelector((state: RootState) => state.detailData.data);
-  const { title } = detailData;
-
+export function Header({ register, title }: Props) {
   return (
     <Container>
       <Typography size="24" color="gray">
         수정페이지
       </Typography>
-      <Input 
-      defaultValue={title}
-      placeholder="제목을 입력해주세요"
-      {...register('title', {required: true})}
+      <Input
+        defaultValue={title}
+        placeholder="제목을 입력해주세요"
+        {...register('title', { required: true })}
       />
     </Container>
   );

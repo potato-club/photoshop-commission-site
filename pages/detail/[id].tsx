@@ -2,19 +2,14 @@ import React, { useEffect } from 'react';
 import { DetailPage } from 'src/containers';
 import { useRouter } from 'next/router';
 import { useGetToken } from 'src/hooks/useGetToken';
-import { useDispatch } from 'react-redux';
-import {
-  exitDetail,
-} from 'src/redux-toolkit/slice/detailData';
 import { useGetDetail } from 'src/hooks/useGetDetail';
 import { useCheckWriter } from 'src/hooks/useCheckWriter';
 
 export default function Detail() {
   const router = useRouter();
   const { access, refresh } = useGetToken();
-  const dispatch = useDispatch();
-  const { getData } = useGetDetail();
-  const { checkWriter } = useCheckWriter();
+  const { data, getData } = useGetDetail();
+  const { myPost, checkWriter } = useCheckWriter();
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -28,14 +23,8 @@ export default function Detail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, access, refresh]);
 
-  useEffect(() => {
-    return () => {
-      dispatch(exitDetail());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  return <DetailPage />;
+  return <>{data && myPost !== undefined && <DetailPage detailData={data} myPost={myPost} />}</>;
 }
 
 //////////////////////////////////// * get ServerSideProps 쓰는 코드 ///////////////////////////////////////

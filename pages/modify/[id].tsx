@@ -9,7 +9,7 @@ import { errorModal } from 'src/utils/interactionModal';
 
 const Modify: NextPage = () => {
   const router = useRouter();
-  const { getData } = useGetDetail();
+  const { data, getData } = useGetDetail();
   const { access, refresh } = useGetToken();
   const [check, setCheck] = useState(false);
 
@@ -20,7 +20,8 @@ const Modify: NextPage = () => {
     if (!data) {
       await errorModal(
         '글 수정, 삭제는 작성자 본인만 할 수 있습니다.',
-        '이전페이지로 이동합니다');
+        '이전페이지로 이동합니다',
+      );
       router.push('/main');
       return;
     }
@@ -35,7 +36,17 @@ const Modify: NextPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router, access, refresh]);
 
-  return <>{router.isReady && check && <ModifyPage />}</>;
+  return (
+    <>
+      {data && check && (
+        <ModifyPage
+          imageUrls={data.imageUrls}
+          title={data.title}
+          contents={data.contents}
+        />
+      )}
+    </>
+  );
 };
 
 export default Modify;

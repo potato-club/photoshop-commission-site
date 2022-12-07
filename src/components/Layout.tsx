@@ -7,8 +7,14 @@ export const Layout = ({ children }: LayoutType) => {
   return (
     <div style={{ height: '100%' }}>
       <Header />
+      <Wrapper>
       {children}
+      </Wrapper>
       <Footer />
     </div>
   );
 };
+
+const Wrapper = styled.div`
+  min-height: 100vh;
+`;

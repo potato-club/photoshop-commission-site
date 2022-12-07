@@ -3,19 +3,38 @@ import styled from 'styled-components';
 import { customColor } from 'src/constants';
 import { FieldValues, useForm } from 'react-hook-form';
 import { Header, Contents, Buttons } from './components';
-
-export const ModifyPage = () => {
+import { BoardType } from 'src/types/board.type';
+import { ImageType } from 'src/types/image.type';
+type Props = {
+  title: string;
+  imageUrls: ImageType[];
+  contents: string;
+};
+export const ModifyPage = ({ title, imageUrls, contents }: Props) => {
   const { register, handleSubmit } = useForm();
-  const submit = async(data:FieldValues) => {
+  const submit = async (data: FieldValues) => {
     // 로직
     console.log(data);
-  }
+  };
+
+  // boardNo: number;
+  // title: string;
+  // state: string;
+  // writer: string;
+  // createdDate: string;
+  // modifiedDate: string;
+  // imageUrls: ImageType[];
+  // imageOpen: imageOpenType;
+  // contents: string;
+  // totalComment: number;
+  // commentList: CommentType[];
+
   return (
     <Container>
       <Wrapper>
         <form onSubmit={handleSubmit(submit)}>
-          <Header register={register} />
-          <Contents register={register} />
+          <Header register={register} title={title}/>
+          <Contents register={register} imageUrls={imageUrls} contents={contents}/>
           <Line />
           <Buttons />
         </form>
