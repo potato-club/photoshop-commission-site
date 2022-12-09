@@ -49,11 +49,15 @@ export const MainRequestBoard = ({ state }: MainRequestBoardProps) => {
   };
 
   useEffect(() => {
-    const findData = (type: string) => {
-      getData(type);
-    };
-    findData(state);
-  }, []);
+    // const findData = (type: string) => {
+    //   getData(type);
+    // };
+    // findData(state);
+
+    (() => {
+      getData(state);
+    })();
+  }, [state]);
 
   useEffect(() => console.log(data), [data]);
 
