@@ -1,13 +1,12 @@
 import React from 'react';
 import { CustomRadioButton } from 'src/components/CustomRadioButton';
 import { Typography } from 'src/components/Typography';
-import { imageOpenType } from 'src/types/imageOpen.type';
 import styled from 'styled-components';
 import {
   Control,
   Controller,
   FieldErrorsImpl,
-  FieldValues
+  FieldValues,
 } from 'react-hook-form';
 import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 
@@ -25,7 +24,7 @@ export function SecretSelectInput({ control, errors }: Props) {
         <Controller
           name="imageOpen"
           control={control}
-          rules={{ required: '직업을 선택해주세요' }}
+          rules={{ required: '공개여부를 선택해주세요' }}
           render={({ field: { onChange, value } }) => (
             <CustomRadioButton
               id="OPEN"
@@ -42,7 +41,7 @@ export function SecretSelectInput({ control, errors }: Props) {
         <Controller
           name="imageOpen"
           control={control}
-          rules={{ required: '직업을 선택해주세요' }}
+          rules={{ required: '공개여부를 선택해주세요' }}
           render={({ field: { onChange, value } }) => (
             <CustomRadioButton
               id="NOT_OPEN"
@@ -71,6 +70,7 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   max-width: 900px;
+  white-space: nowrap;
 `;
 
 const InputWrapper = styled.div`
