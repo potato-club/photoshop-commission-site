@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Typography } from 'src/components/Typography';
+import styled from 'styled-components';
 import { MyPageLayout } from '../components/MyPageLayout';
 import { InfoItem } from './components/InfoItem';
 import { ProfileLayout } from './components/ProfileLayout';
 import { useProfile } from './Profile.hook';
-import * as S from './Profile.style';
 
 export const Profile = () => {
   const {
@@ -19,14 +19,14 @@ export const Profile = () => {
   } = useProfile();
   return (
     <MyPageLayout>
-      <S.Container>
-        <S.Wrapper>
+      <Container>
+        <Wrapper>
           <ProfileLayout
             title="개인정보"
             handleClickButton={handleInfoChange}
             isChangeState={isInfoChange}
           >
-            <S.ItemWrapper>
+            <ItemWrapper>
               <InfoItem header="닉네임">
                 {isInfoChange ? (
                   <input
@@ -60,28 +60,52 @@ export const Profile = () => {
                   4.3
                 </Typography>
               </InfoItem>
-            </S.ItemWrapper>
+            </ItemWrapper>
           </ProfileLayout>
-        </S.Wrapper>
-        <S.Wrapper>
+        </Wrapper>
+        <Wrapper>
           <ProfileLayout
             title="자기소개"
             handleClickButton={handleIntroduceChange}
             isChangeState={isIntroduceChange}
           >
-            <S.IntroduceBoxWrapper>
+            <IntroduceBoxWrapper>
               {isIntroduceChange ? (
-                <S.CustomIntroduceInput
+                <CustomIntroduceInput
                   value={introduce}
                   onChange={handleChangeIntroduce}
                 />
               ) : (
                 <div>{introduce}</div>
               )}
-            </S.IntroduceBoxWrapper>
+            </IntroduceBoxWrapper>
           </ProfileLayout>
-        </S.Wrapper>
-      </S.Container>
+        </Wrapper>
+      </Container>
     </MyPageLayout>
   );
 };
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+const Wrapper = styled.div`
+  margin-bottom: 50px;
+  width: 100%;
+  height: 100%;
+`;
+
+const ItemWrapper = styled.div`
+  padding: 30px 50px;
+`;
+
+const IntroduceBoxWrapper = styled.div`
+  padding: 10px 20px;
+`;
+const CustomIntroduceInput = styled.textarea`
+  width: 100%;
+  height: 100px;
+  resize: none;
+`;

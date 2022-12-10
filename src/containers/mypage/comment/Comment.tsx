@@ -1,14 +1,15 @@
 import { Typography } from 'src/components/Typography';
-import * as S from './Comment.style';
 import { MyPageLayout } from '../components/MyPageLayout';
 import { CommentList } from './components/CommentList';
 import { commentsDummy } from './dummy/comment';
+import styled from 'styled-components';
+import { customColor } from 'src/constants';
 
 export const Comment = () => {
   return (
     <MyPageLayout>
-      <S.Container>
-        <S.HeaderWrapper>
+      <Container>
+        <HeaderWrapper>
           <Typography size="16" fontWeight="bold">
             내가 쓴 댓글
           </Typography>
@@ -16,9 +17,24 @@ export const Comment = () => {
           <Typography size="16" color="blue" fontWeight="bold">
             ({commentsDummy.count})
           </Typography>
-        </S.HeaderWrapper>
+        </HeaderWrapper>
         <CommentList list={commentsDummy.list} />
-      </S.Container>
+      </Container>
     </MyPageLayout>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  padding-bottom: 12px;
+  border-bottom: 1px solid ${customColor.gray};
+`;

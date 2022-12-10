@@ -1,28 +1,40 @@
+import styled from 'styled-components';
 import { MyPageLayout } from '../components/MyPageLayout';
 import { CustomButton } from './components/CustomButton';
-import * as S from './Option.style';
 export const Option = () => {
-  const handleLogout = () => {};
+  const handleClickLogout = () => {};
+  const handleClickSignout = () => {};
   return (
     <MyPageLayout>
-      <S.Container>
-        <S.ButtonWrapper>
+      <Container>
+        <ButtonWrapper>
           <CustomButton
-            handleClick={handleLogout}
+            handleClick={handleClickLogout}
             style={{ color: 'blue', borderColor: 'blue' }}
           >
             로그아웃
           </CustomButton>
-        </S.ButtonWrapper>
-        <S.ButtonWrapper>
+        </ButtonWrapper>
+        <ButtonWrapper>
           <CustomButton
-            handleClick={handleLogout}
+            handleClick={handleClickSignout}
             style={{ color: 'white', backgroundColor: 'blue' }}
           >
             회원탈퇴
           </CustomButton>
-        </S.ButtonWrapper>
-      </S.Container>
+        </ButtonWrapper>
+      </Container>
     </MyPageLayout>
   );
 };
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+`;
+const ButtonWrapper = styled.div`
+  margin-top: 5px;
+  margin-bottom: 5px;
+`;

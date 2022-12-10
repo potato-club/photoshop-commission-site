@@ -3,7 +3,7 @@ export const pathName = {
   MAIN: '/main',
   EDITOR: '/editor',
   SIGNUP: '/signUp',
-  MOREVIEW : '/moreView',
+  MOREVIEW: '/moreView',
   detail: '/detail',
   MYPAGE: {
     POST: {
@@ -16,5 +16,6 @@ export const pathName = {
     OPTION: '/mypage/option',
     PROFILE: '/mypage/profile',
     RATE: '/mypage/rate',
-  }
-}
+    REVIEW: '/mypage/review',
+  },
+};

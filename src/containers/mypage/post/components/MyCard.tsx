@@ -29,7 +29,7 @@ export const MyCard = ({ id, title, writer, date, imageUrls }: IDummyList) => {
       <ThemeBox>
         <Link href={`/detail/${id}`} passHref>
           <A>
-            <Typography size="16" color="black">
+            <Typography size="14" color="black">
               {theme}
             </Typography>
           </A>
@@ -39,14 +39,14 @@ export const MyCard = ({ id, title, writer, date, imageUrls }: IDummyList) => {
         <div>
           <Link href={`/detail/${id}`} passHref>
             <A>
-              <Typography size="16" color="blue" fontWeight="900">
+              <Typography size="14" color="blue" fontWeight="900">
                 {writer}
               </Typography>
             </A>
           </Link>
         </div>
         <div>
-          <Typography size="16" color="lightBlue" fontWeight="900">
+          <Typography size="14" color="lightBlue" fontWeight="900">
             {formatDate(String(date))}
           </Typography>
         </div>
@@ -64,6 +64,10 @@ const Container = styled.div`
   margin-left: 12.25px;
   margin-right: 12.25px;
   margin-bottom: 36px;
+  padding: 5px;
+  :hover {
+    background-color: #e1e1e1;
+  }
 `;
 
 const PhotoBox = styled.div`

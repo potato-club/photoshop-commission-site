@@ -14,7 +14,7 @@ export const NavItem = ({ name, pathName, route }: NavItemType) => {
       <Link href={pathName}>
         <a style={{ textDecoration: 'none' }}>
           <Typography
-            size="24"
+            size="20"
             color={route === pathName ? 'black' : 'gray'}
             fontWeight={route === pathName ? 'bold' : 'none'}
           >

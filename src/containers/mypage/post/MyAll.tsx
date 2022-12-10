@@ -11,15 +11,19 @@ type RequestBoardProps = {
   state: 'before' | 'doing' | 'complete';
 };
 
+const BEFORE = 'before';
+const DOING = 'doing';
+const COMPLETE = 'complete';
+
 const LIMIT_LENGTH = 4;
 
 export const MyAll = () => {
   return (
     <MyPageLayout>
       <Container>
-        <RequestBoard state="before" />
-        <RequestBoard state="doing" />
-        <RequestBoard state="complete" />
+        <RequestBoard state={BEFORE} />
+        <RequestBoard state={DOING} />
+        <RequestBoard state={COMPLETE} />
       </Container>
     </MyPageLayout>
   );
@@ -30,9 +34,9 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
     <RequestBox>
       <Title>
         <Typography size="24" fontWeight="900">
-          {state === 'before' && all.before}
-          {state === 'doing' && all.doing}
-          {state === 'complete' && all.complete}
+          {state === BEFORE && all.before}
+          {state === DOING && all.doing}
+          {state === COMPLETE && all.complete}
         </Typography>
         <Plus>
           <Link href={`/mypage/post/${state}`} passHref>

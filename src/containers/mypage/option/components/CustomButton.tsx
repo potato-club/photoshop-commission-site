@@ -14,7 +14,7 @@ export const CustomButton = ({ children, handleClick, style }: Props) => {
   return (
     <ButtonWrapper onClick={handleClick} props={style}>
       <Typography
-        size={'16'}
+        size={'14'}
         color={style?.color ? style.color : 'gray'}
         fontWeight="bold"
       >
@@ -25,7 +25,7 @@ export const CustomButton = ({ children, handleClick, style }: Props) => {
 };
 
 const ButtonWrapper = styled.button<{ props: Props['style'] }>`
-  width: 120px;
+  width: 100px;
   height: 40px;
   background-color: ${({ props }) =>
     props?.backgroundColor

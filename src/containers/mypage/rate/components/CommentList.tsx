@@ -19,16 +19,16 @@ export const CommentList = ({ list }: Props) => {
         {list.map(props => (
           <ItemWrapper key={props.id}>
             <NameWrapper>
-              <Typography size="16">{props.name}</Typography>
+              <Typography size="14">{props.name}</Typography>
             </NameWrapper>
             <ContentWrapper>
-              <Typography size="16">{props.content}</Typography>
+              <Typography size="14">{props.content}</Typography>
             </ContentWrapper>
             <DateWrapper>
-              <Typography size="16">{props.date}</Typography>
+              <Typography size="14">{props.date}</Typography>
             </DateWrapper>
             <RateWrapper>
-              <Typography size="16" color="blue" fontWeight="bold">
+              <Typography size="14" color="blue" fontWeight="bold">
                 {props.rate}
               </Typography>
             </RateWrapper>
@@ -61,6 +61,9 @@ const ItemWrapper = styled.div`
   align-items: center;
   height: 70px;
   border-bottom: 1px solid ${customColor.gray};
+  :hover {
+    background-color: #ebebeb;
+  }
 `;
 
 const NameWrapper = styled.div`

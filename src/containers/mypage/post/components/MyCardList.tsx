@@ -1,4 +1,3 @@
-import { IDummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
 import { MyCard } from './MyCard';
 

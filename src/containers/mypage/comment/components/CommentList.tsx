@@ -13,17 +13,17 @@ export const CommentList = ({ list }: Props) => {
         <ListWrapper key={data.id}>
           <LeftWrapper>
             <ContentWrapper>
-              <Typography size="16">{data.content}</Typography>
+              <Typography size="14">{data.content}</Typography>
             </ContentWrapper>
             <BoardWrapper>
-              <Typography size="16" color="gray">
+              <Typography size="14" color="gray">
                 {data.Board}
               </Typography>
             </BoardWrapper>
           </LeftWrapper>
           <RightWrapper>
             <DateWrapper>
-              <Typography size="16">{data.date}</Typography>
+              <Typography size="14">{data.date}</Typography>
             </DateWrapper>
           </RightWrapper>
         </ListWrapper>
@@ -46,6 +46,9 @@ const ListWrapper = styled.div`
   padding-left: 10px;
   padding-right: 10px;
   border-bottom: 1px solid ${customColor.gray};
+  :hover {
+    background-color: #ebebeb;
+  }
 `;
 
 const LeftWrapper = styled.div`

@@ -35,6 +35,10 @@ export const useProfile = () => {
   const handleIntroduceChange = async () => {
     try {
       if (isIntroduceChange) {
+        if (introduce === '') {
+          //Todo: 자기소개 공백안된다고 경고모달 들어가야함
+          return;
+        }
         //Todo: API에 저장하기
         setIsIntroduceChange(false);
       } else {

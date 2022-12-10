@@ -67,22 +67,18 @@ const ReviewItem = () => {
   return (
     <ItemContainer>
       <Item style={{ flex: 0.3 }}>
-        <Typography size="16">2022.03.18</Typography>
+        <Typography size="14">2022.03.18</Typography>
       </Item>
       <ItemBoardTitle style={{ flex: 1 }}>
-        <Typography size="16">아니 피자좀 없애주세요 제에에ㅔ에에발</Typography>
+        <Typography size="14">아니 피자좀 없애주세요 제에에ㅔ에에발</Typography>
       </ItemBoardTitle>
       <ItemDesigner style={{ flex: 0.4 }}>
-        <Typography size="16" color="blue" fontWeight="bold">
+        <Typography size="14" color="blue" fontWeight="bold">
           양파버리는소년
         </Typography>
       </ItemDesigner>
       <Item style={{ flex: 0.3 }}>
-        <Button>
-          <Typography size="16" color="white">
-            의뢰완료 버튼
-          </Typography>
-        </Button>
+        <Button>의뢰완료 버튼</Button>
       </Item>
     </ItemContainer>
   );
@@ -116,9 +112,12 @@ const Header = styled.div`
 
 const ItemContainer = styled.div`
   display: flex;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  border-top: 1px solid #8d8d8d;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid #d5d5d5;
+  :hover {
+    background-color: #ebebeb;
+  }
 `;
 const Item = styled.div`
   display: flex;
@@ -149,8 +148,14 @@ const Button = styled.button`
   border-radius: 10px;
   border: none;
   padding: 10px 15px;
-  background-color: ${customColor.danger};
+  background-color: ${customColor.white};
+  border: 1px solid ${customColor.blue};
+  color: ${customColor.blue};
+
   :hover {
     cursor: pointer;
+    background-color: ${customColor.blue};
+    border: 1px solid ${customColor.blue};
+    color: ${customColor.white};
   }
 `;
