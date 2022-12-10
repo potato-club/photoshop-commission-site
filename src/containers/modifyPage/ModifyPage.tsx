@@ -7,6 +7,8 @@ import { ImageType } from 'src/types/image.type';
 import { boardApi } from 'src/apis/board';
 import { useRouter } from 'next/router';
 import { useGetToken } from 'src/hooks/useGetToken';
+import { useMutation } from 'react-query';
+import { infoModal } from 'src/utils/interactionModal';
 
 type Props = {
   title: string;
@@ -20,21 +22,33 @@ export const ModifyPage = ({ title, imageUrls, contents }: Props) => {
     control,
     formState: { errors },
   } = useForm();
-  const { query: { id } } = useRouter();
+  const router = useRouter();
   const { access, refresh } = useGetToken();
+
+  const { mutate } = useMutation(
+    (frm: FieldValues) =>
+      boardApi.update(router.query.id, frm, access, refresh),
+    {
+      onSuccess: () => {
+        infoModal('수정이 완료되었습니다.', 'success', '', () => {
+          router.push('/main');
+        });
+      },
+      onError: () => {
+        alert('글수정 오류');
+      },
+    },
+  );
+
   const submit = async (data: FieldValues) => {
     const { title, contents, imageOpen } = data;
     const frm = new FormData();
     frm.append('title', title);
     frm.append('context', contents);
     frm.append('imageOpen', imageOpen);
-    try {
-      const res = await boardApi.update(id, frm, access, refresh);
-      console.log(res);
-    } catch(e) {
-      console.log(e);
-    }
+    mutate(frm);
   };
+  
   return (
     <Container>
       <Wrapper>
@@ -77,9 +91,4 @@ const Wrapper = styled.div`
 const Line = styled.div`
   margin-bottom: 20px;
   border-bottom: 1px solid ${customColor.gray};
-`;
-
-const InputWrapper = styled.div`
-  display: flex;
-  position: relative;
 `;

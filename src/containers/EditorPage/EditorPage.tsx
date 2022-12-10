@@ -33,7 +33,7 @@ export function EditorPage() {
     {
       onSuccess: () => {
         infoModal('등록이 완료되었습니다.', 'success', '', () => {
-          router.push('main');
+          router.push('/main');
         });
       },
       onError: () => {
