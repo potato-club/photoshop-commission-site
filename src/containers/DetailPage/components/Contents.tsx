@@ -1,19 +1,27 @@
 import Image from 'next/image';
 import React from 'react';
 import { Typography } from 'src/components/Typography';
+import { ImageType } from 'src/types/image.type';
+import { imageOpenType } from 'src/types/imageOpen.type';
 import styled from 'styled-components';
 type Props = {
-  imageUrls: string[];
+  imageOpen: imageOpenType;
+  imageUrls: ImageType[];
   contents: string;
-  imageSecret: boolean;
-};
-export function Contents({ contents, imageUrls, imageSecret }: Props) {
+}
+export function Contents({imageOpen, imageUrls, contents}:Props) {
   return (
     <Container>
-      {!imageSecret && (
+      {imageOpen === imageOpenType.open && imageUrls && (
         <ImgContainer>
           {imageUrls.map((data, index) => (
-            <Image width={630} height={470} key={index} src={data} alt="img" />
+            <Image
+              width={630}
+              height={470}
+              key={index}
+              src={data.fileUrl}
+              alt="img"
+            />
           ))}
         </ImgContainer>
       )}

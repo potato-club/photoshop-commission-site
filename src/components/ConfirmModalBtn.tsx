@@ -2,17 +2,20 @@ import React from 'react';
 import { customColor } from 'src/constants/customColor';
 import styled from 'styled-components';
 import { Typography } from './Typography';
+import ConfirmModal from './ConfirmModal';
+import useModal from 'src/hooks/useModal';
 
-interface IModalBtn {
-  handleModal: () => void;
-}
-export const ConfirmModalBtn = ({ handleModal }: IModalBtn) => {
+export const ConfirmModalBtn = () => {
+  const { isOpen, handleOpenModal, handleClosetModal } = useModal();
   return (
-    <Button onClick={handleModal}>
-      <Typography color="black" size="16" fontWeight="700">
-        요청 확인하기
-      </Typography>
-    </Button>
+    <>
+      <Button onClick={() => handleOpenModal()}>
+        <Typography color="black" size="16" fontWeight="700">
+          요청 확인하기
+        </Typography>
+      </Button>
+      <ConfirmModal isOpen={isOpen} handleClosetModal={handleClosetModal} />
+    </>
   );
 };
 

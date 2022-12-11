@@ -1,11 +1,10 @@
 import React from 'react'
 import { Typography } from 'src/components/Typography';
-import { customColor } from 'src/constants';
 import styled from 'styled-components';
 type Props = {
-  totalComment : number;
+  totalComment: number;
 };
-export function CommentHeader({ totalComment }:Props) {
+export function CommentHeader({totalComment}: Props) {
   return (
     <Container>
       <Typography size="20" fontWeight="bold">

@@ -5,98 +5,48 @@ import {
   Contents,
   Header,
   CommentHeader,
-  Comment,
   CustomInput,
 } from './components';
-import { BoardType } from 'src/types/board.type';
 import {
   ConfirmModalBtn,
-  ConfirmModal,
   RequestModalBtn,
-  RequestModal,
 } from '../../../src/components/index';
-import useModal from 'src/hooks/useModal';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { CommentList } from './components/CommentList';
+import { BoardType } from 'src/types/board.type';
 type Props = {
-  data: BoardType;
-};
-export function DetailPage({ data }: Props) {
-  const {
-    requestModalOpen,
-    handleCloseRequestModal,
-    handleRequestModal,
-    confirmModalOpen,
-    handleCloseConfirmModal,
-    handleConfirmModal,
-  } = useModal();
-  const {
-    title,
-    state,
-    writer,
-    date,
-    imageUrls,
-    imageSecret,
-    contents,
-    totalComment,
-    commentList,
-  } = data;
+  detailData : BoardType;
+  myPost?: boolean;
+}
+export function DetailPage({ detailData, myPost }: Props) {
+  const { getSessionStorage } = useSessionStorage();
+  const job = getSessionStorage('job');
+  const {title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList} = detailData;
+
   return (
     <Container>
       <Wrapper>
-        <Header title={title} writer={writer} date={date} state={state} />
-        <Contents
-          imageUrls={imageUrls}
-          contents={contents}
-          imageSecret={imageSecret}
-        />
+        <Header state={state} title={title} writer={writer} createdDate={createdDate} modifiedDate={modifiedDate} myPost={myPost}/>
+        <Contents imageOpen={imageOpen} imageUrls={imageUrls} contents={contents}/>
+        <ModalWrapper>
+          {myPost && <ConfirmModalBtn />}
+          {job === 'ARTIST' && <RequestModalBtn />}
+        </ModalWrapper>
         <CommentContainer>
-          <CommentHeader totalComment={totalComment} />
-          {commentList.map(comment => (
-            <Comment
-              key={comment.CommentNo}
-              writer={comment.writer}
-              date={comment.date}
-              text={comment.contents}
-              good={comment.good}
-              reply={comment.reply}
-              type="Comment"
-            />
-          ))}
-          <ModalWrapper>
-            <div style={{ marginBottom: '15px' }}>
-              <ConfirmModalBtn handleModal={handleConfirmModal} />
-              <ConfirmModal
-                modalOpen={confirmModalOpen}
-                handleCloseModal={handleCloseConfirmModal}
-              />
-            </div>
-            <div>
-              <RequestModalBtn handleModal={handleRequestModal} />
-              <RequestModal
-                modalOpen={requestModalOpen}
-                handleCloseModal={handleCloseRequestModal}
-              />
-            </div>
-          </ModalWrapper>
+          <CommentHeader totalComment={totalComment}/>
+          <CommentList commentList={commentList}/>
         </CommentContainer>
-        <Line></Line>
+        <Line />
         <CustomInput type="Board" />
       </Wrapper>
     </Container>
   );
 }
 
-export default DetailPage;
-
 const ModalWrapper = styled.div`
-  position: absolute;
-  top: -85px;
-  right: 12px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  &:nth-child(0) {
-    margin-bottom: 10px;
-  }
 `;
 
 const Container = styled.div`
@@ -112,9 +62,6 @@ const Wrapper = styled.div`
   max-width: 1178px;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
-  border-left: 1px solid ${customColor.gray};
-  border-right: 1px solid ${customColor.gray};
   padding-bottom: 400px;
 `;
 

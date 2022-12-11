@@ -1,43 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
-import { TitleInput, ImageInput, TextArea, WriteButton, SecretSelectInput } from './components';
-import axios from 'axios';
+import {
+  TitleInput,
+  ImageInput,
+  RequestTextArea,
+  WriteButton,
+  SecretSelectInput,
+} from './components';
+import { boardApi } from '../../apis/board';
+import { FieldValues, useForm } from 'react-hook-form';
+import { infoModal } from 'src/utils/interactionModal';
+import { useRouter } from 'next/router';
+import { useMutation } from 'react-query';
+import { useGetToken } from 'src/hooks/useGetToken';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
 export function EditorPage() {
-  const [title, setTitle] = useState('');
-  const [images, setImages] = useState<FormData>();
-  const [request, setRequest] = useState('');
-  const [secret, setSecret] = useState<boolean>(false);
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
+  const { access, refresh } = useGetToken();
 
-  const onClick = () => {
-    // axios({
-    //   method: 'POST',
-    //   url: testUrl,
-    //   data: {
-    //     title,
-    //     contentsPicture: images,
-    //     contentsText: request,
-    //   },
-    // })
-    //   .then(res => {
-    //     console.log(res);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-    if(!title) {
-      alert("제목을 입력해주세요");
-      return;
+  const { mutate } = useMutation(
+    (frm: FieldValues) => boardApi.create(frm, access, refresh),
+    {
+      onSuccess: () => {
+        infoModal('등록이 완료되었습니다.', 'success', '', () => {
+          router.push('/main');
+        });
+      },
+      onError: () => {
+        alert('글작성 오류');
+      },
+    },
+  );
+
+  const submit = async (data: FieldValues) => {
+    const { title, context, imageOpen, image } = data;
+    const frm = new FormData();
+
+    frm.append('title', title);
+    frm.append('context', context);
+    frm.append('imageOpen', imageOpen);
+
+    for (let i = 0; i < image.length; ++i) {
+      frm.append('image', image[i]);
     }
-    if(!images) {
-      alert("사진을 등록해주세요");
-      return;
-    }
-    alert("등록완료");
+
+    mutate(frm);
   };
 
   return (
@@ -47,12 +64,12 @@ export function EditorPage() {
           글 작성
         </Typography>
       </Title>
-      <InputContainer>
-        <TitleInput setTitle={setTitle} />
-        <ImageInput images={images} setImages={setImages} />
-        <SecretSelectInput secret={secret} setSecret={setSecret} />
-        <TextArea setRequest={setRequest} />
-        <WriteButton onClick={onClick} />
+      <InputContainer onSubmit={handleSubmit(submit)}>
+        <TitleInput register={register} errors={errors} />
+        <ImageInput register={register} errors={errors} />
+        <SecretSelectInput control={control} errors={errors} />
+        <RequestTextArea register={register} errors={errors} />
+        <WriteButton />
       </InputContainer>
     </Container>
   );
@@ -74,7 +91,7 @@ const Title = styled.div`
   margin: 100px 0;
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -106,7 +106,8 @@ body {
   overflow-x: clip;
 }
 ol,
-ul {
+ul,
+li {
   list-style: none;
 }
 blockquote,
@@ -131,6 +132,12 @@ body {
 }
 #__next {
   height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .pagination {
@@ -163,4 +170,22 @@ body {
   left: 0;
   right: 0;
   bottom: -25px;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+}
+
+.errorWrapper {
+  position: absolute;
+  top: 35px;
+  left: 50px;
+}
+
+textarea {
+  resize: none;
 }

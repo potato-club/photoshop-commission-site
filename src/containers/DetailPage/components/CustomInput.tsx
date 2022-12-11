@@ -2,47 +2,74 @@ import React, { useState } from 'react';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { FaPaperPlane } from 'react-icons/fa';
+import { boardApi } from 'src/apis/board';
+import { useRouter } from 'next/router';
+import { useGetToken } from 'src/hooks/useGetToken';
+import { FieldValues, useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
+import { infoModal } from 'src/utils/interactionModal';
 
-// Todo : 타입 받아서 게시글 댓글창인지, 대댓글 댓글창인지 확인해야하고,
-// Todo : 아마 보내는 API 도 다를거같음. (게시글 댓글달기, 대댓글 댓글달기 => 얘기 해봐야함)
 type Props = {
   type: 'Board' | 'Comment';
+  parentId?: number;
 };
-export function CustomInput({ type }: Props) {
-  const [comment, setComment] = useState<string>();
+export function CustomInput({ type, parentId }: Props) {
+  const queryClient = useQueryClient();
+  const {
+    query: { id },
+  } = useRouter();
+  const { access, refresh } = useGetToken();
 
-  const clickWrite = () => {
-    alert('입력버튼 클릭\n값: ' + comment);
+  const { register, handleSubmit } = useForm();
+
+  const { mutate } = useMutation(
+    (comment: FieldValues) =>
+      parentId
+        ? boardApi.postReply(id, { comment, parentId }, access, refresh)
+        : boardApi.postComment(id, { comment }, access, refresh),
+    {
+      onSuccess: () => {
+        infoModal('댓글 등록이 완료되었습니다.', 'success');
+        queryClient.invalidateQueries('getItem');
+      },
+      onError: () => {},
+    },
+  );
+
+  const commentSubmit = async (data: FieldValues) => {
+    mutate(data.comment);
   };
+
   return (
-    <Container type={type}>
+    <Container option={type} onSubmit={handleSubmit(commentSubmit)}>
       <Input
         spellCheck={false}
-        type={type}
+        option={type}
         placeholder="작성할 댓글을 입력해주세요..."
-        onChange={e => setComment(e.target.value)}
+        {...register('comment', { required: true })}
       />
-      <SubMitButton type={type}>
-        <FaPaperPlane size={24} onClick={() => clickWrite()} />
+      <SubMitButton option={type} type="submit">
+        <FaPaperPlane size={24} />
       </SubMitButton>
     </Container>
   );
 }
 
 type StyleProps = {
-  type: 'Board' | 'Comment';
+  option: 'Board' | 'Comment';
 };
-const Container = styled.div<StyleProps>`
+const Container = styled.form<StyleProps>`
   position: relative;
   width: 100%;
   max-width: 1178px;
-  padding-right: 12px;
-  padding-left: ${({ type }) => (type === 'Board' ? '12px' : '92px')};
+  padding-left: ${({ option }) => (option === 'Board' ? '12px' : '160px')};
+  padding-right: ${({ option }) => (option === 'Board' ? '12px' : 0)};
+  margin-bottom: 20px;
 `;
 const Input = styled.textarea<StyleProps>`
   width: 100%;
   box-sizing: border-box;
-  height: ${({ type }) => (type === 'Board' ? '100px' : '40px')};
+  height: ${({ option }) => (option === 'Board' ? '100px' : '40px')};
   padding: 12px 80px 0 16px;
   outline: none;
   border: none;
@@ -52,15 +79,14 @@ const Input = styled.textarea<StyleProps>`
   ::placeholder {
     color: ${customColor.gray};
   }
-  resize: none;
 `;
 
-const SubMitButton = styled.div<StyleProps>`
+const SubMitButton = styled.button<StyleProps>`
   position: absolute;
-  height: 100%;
-  right: 24px;
+  height: auto;
+  background-color: transparent;
   display: flex;
-  top: ${({ type }) => type === 'Comment' && '0'};
-  bottom: ${({ type }) => type === 'Board' && '12px'};
-  align-items: ${({ type }) => (type === 'Board' ? 'flex-end' : 'center')};
+  bottom: ${({ option }) => (option === 'Board' ? '12px' : '8px')};
+  right: ${({ option }) => (option === 'Board' ? '24px' : '12px')};
+  align-items: ${({ option }) => (option === 'Board' ? 'flex-end' : 'center')};
 `;

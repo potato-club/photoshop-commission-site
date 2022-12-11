@@ -24,26 +24,22 @@ const customStyles = {
     background: '#ffffff80',
   },
 };
-
-interface IRequestModal {
-  modalOpen: boolean;
-  handleCloseModal: () => void;
-}
-export const RequestModal = ({
-  modalOpen,
-  handleCloseModal,
-}: IRequestModal) => {
+type Props = {
+  isOpen: boolean;
+  handleClosetModal: () => void;
+};
+export const RequestModal = ({ isOpen, handleClosetModal }: Props) => {
   return (
     <div>
       <Modal
         ariaHideApp={false}
-        isOpen={modalOpen}
-        onRequestClose={handleCloseModal}
+        isOpen={isOpen}
+        onRequestClose={() => handleClosetModal()}
         style={customStyles}
         contentLabel="Example Modal"
       >
         <Container>
-          <CustomImCross onClick={handleCloseModal} />
+          <CustomImCross onClick={() => handleClosetModal()} />
 
           <CustomAiFillEdit />
           <Typography size="28" color="black" fontWeight="900">
@@ -55,7 +51,7 @@ export const RequestModal = ({
                 예
               </Typography>
             </Button>
-            <Button color={customColor.danger}>
+            <Button color={customColor.danger} onClick={()=>handleClosetModal()}>
               <Typography size="16" color="white">
                 아니요
               </Typography>

@@ -1,19 +1,15 @@
 import { Card } from '../components/index';
-import { IDummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
+import { IData } from '../containers/mainPage/components/MainRequestBoard';
 
 interface CardListType {
-  offset: number;
-  limit: number;
-  list: IDummyList[];
+  list: IData[];
 }
 
-export const CardList = ({ list, offset, limit }: CardListType) => {
+export const CardList = ({ list }: CardListType) => {
   return (
     <CardBox>
-      {list.slice(offset, offset + limit).map(cardInfo => (
-        <Card key={cardInfo.id} {...cardInfo} />
-      ))}
+      {list && list.map(cardInfo => <Card key={cardInfo.id} {...cardInfo} />)}
     </CardBox>
   );
 };

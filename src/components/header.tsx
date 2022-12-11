@@ -107,8 +107,26 @@ const LoginImage = styled(BiLogIn)`
   ${iconStyles}
 `;
 const UserImage = styled(FaUserAlt)`
-  ${iconStyles}
+  width: 45px;
+  height: 45px;
+  color: white;
+  padding: 8px 8px;
+  border: 4px solid white;
+  border-radius: 100%;
+  :hover {
+    color: gray;
+    border: 4px solid gray;
+  }
 `;
 const AlertImage = styled(FaBell)`
-  ${iconStyles}
+  width: 45px;
+  height: 45px;
+  color: white;
+  padding: 8px 8px;
+  border: 4px solid white;
+  border-radius: 100%;
+  :hover {
+    border: 4px solid gray;
+    color: gray;
+  }
 `;

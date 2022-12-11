@@ -3,67 +3,52 @@ import styled from 'styled-components';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import { signUpApi } from 'src/apis';
-import { BsCheckLg } from 'react-icons/bs';
-import { ImCross } from 'react-icons/im';
+import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 
 type Props = {
-  nickname: string;
-  setNickname: React.Dispatch<React.SetStateAction<string>>;
-  doubleNameCheck: boolean;
-  setDoubleNameCheck: React.Dispatch<React.SetStateAction<boolean>>;
+  register: UseFormRegister<FieldValues>;
+  errors: Partial<FieldErrorsImpl>;
 };
-export function NicknameInput({
-  nickname,
-  setNickname,
-  doubleNameCheck,
-  setDoubleNameCheck,
-}: Props) {
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setNickname(value);
-  };
-
-  const checkDuplication = async () => {
+export function NicknameInput({ register, errors }: Props) {
+  const checkDuplication = async (nickname: string) => {
     const { data } = await signUpApi.checkNickname({
       params: {
         nickname,
       },
     });
-    setDoubleNameCheck(data);
+    return data ? true : '닉네임이 중복되었습니다';
   };
+
   return (
     <Container>
-      <LeftMargin>
+      <div style={{ marginLeft: '12px' }}>
         <Typography size="20" fontWeight="bold">
           닉네임
         </Typography>
-      </LeftMargin>
+      </div>
       <Wrapper>
         <InputWrapper>
           <div style={{ position: 'relative' }}>
             <Input
-              onChange={onChange}
               placeholder="닉네임을 입력해주세요"
               maxLength={8}
+              {...register('nickname', {
+                required: '이름을 입력해주세요',
+                validate: checkDuplication,
+              })}
             />
             <Caption>
               <Typography size="12" fontWeight="bold">
                 최대 8글자
               </Typography>
             </Caption>
+            <CustomErrorMessage
+              errors={errors}
+              name="nickname"
+              leftPosition="50"
+            />
           </div>
-          <CheckButton onClick={() => checkDuplication()}>
-            <Typography size="12" fontWeight="bold" color="blue">
-              중복확인
-            </Typography>
-          </CheckButton>
-          <IconWrapper>
-            {doubleNameCheck ? (
-              <BsCheckLg size={20} color="#1ebd08" />
-            ) : (
-              <ImCross size={20} color="#f13737" />
-            )}
-          </IconWrapper>
         </InputWrapper>
       </Wrapper>
     </Container>
@@ -80,15 +65,6 @@ const Container = styled.div`
 const InputWrapper = styled.div`
   display: flex;
   gap: 8px;
-`;
-
-const CheckButton = styled.button`
-  display: flex;
-  border: 1px solid ${customColor.blue};
-  background-color: white;
-  cursor: pointer;
-  padding: 8px 20px;
-  border-radius: 10px;
 `;
 
 const Wrapper = styled.div`
@@ -121,12 +97,8 @@ const Caption = styled.div`
   right: 0;
 `;
 
-const LeftMargin = styled.div`
-  margin-left: 12px;
-`;
-
-const IconWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const ErrorWrapper = styled.div`
+  position: absolute;
+  top: 35px;
+  left: 50px;
 `;

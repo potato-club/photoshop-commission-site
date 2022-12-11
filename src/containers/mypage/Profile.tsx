@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Typography } from 'src/components/Typography';
+import { errorModal } from 'src/utils/interactionModal';
 import { MyPageLayout } from './components/MyPageLayout';
 import { InfoItem, ProfileLayout } from './components/profile';
 import * as S from './Profile.style';
@@ -21,10 +22,12 @@ export const Profile = () => {
     try {
       if (isInfoChange) {
         if (nickname.length > 8) {
-          alert('닉네임은 8글자 이하로 설정해주세요');
+          // alert('닉네임은 8글자 이하로 설정해주세요');
+          errorModal('닉네임은 8글자 이하로 설정해주세요');
           return;
         } else if (nickname.length === 0) {
-          alert('닉네임을 입력해주세요.');
+          // alert('닉네임을 입력해주세요.');
+          errorModal('닉네임을 입력해주세요.');
           return;
         }
         //Todo: API에 저장하기

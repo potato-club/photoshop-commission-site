@@ -1,45 +1,49 @@
-import React from 'react'
+import React from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
-import { formatDate } from "src/utils/formatDate";
+import { CheckModifyDate } from './CheckModifyDate';
+import { BoardMenu } from './BoardMenu';
 type Props = {
+  state: string;
   title: string;
   writer: string;
-  date: Date;
-  state: string;
-}
-export function Header({ title, writer, date, state }: Props) {
+  createdDate: string;
+  modifiedDate: string;
+  myPost?: boolean;
+};
+
+export function Header({ state, title, writer, createdDate, modifiedDate, myPost} : Props) {
   return (
     <Container>
       <Typography size="12" color="gray">
         {`<< 홈 < ${state} 게시글`}
       </Typography>
       <SpaceBetween>
-        <Typography size="32" color="black" fontWeight="bold">
-          {title}
-        </Typography>
+        <TitleWrapper>
+          <Typography size="32" color="black" fontWeight="bold">
+            {title}
+          </Typography>
+        </TitleWrapper>
         <WriterWrapper>
           <Typography size="16" color="black">
             {writer}
           </Typography>
-          <Typography size="12" color="black">
-            {formatDate(date)}
-          </Typography>
+          <CheckModifyDate
+            createdDate={createdDate}
+            modifiedDate={modifiedDate}
+          />
         </WriterWrapper>
       </SpaceBetween>
       <SpaceBetween>
         <Typography size="20" color="purple">
           {state}
         </Typography>
-        <Typography size="12" color="gray">
-          신고하기
-        </Typography>
+        {myPost !== undefined && <BoardMenu myPost={myPost}/>}
       </SpaceBetween>
     </Container>
   );
 }
-
 
 const Container = styled.div`
   display: flex;
@@ -62,5 +66,11 @@ const WriterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  align-self: flex-start;
   gap: 4px 0;
+`;
+
+const TitleWrapper = styled.div`
+  width: 100%;
+  max-width: 800px;
 `;

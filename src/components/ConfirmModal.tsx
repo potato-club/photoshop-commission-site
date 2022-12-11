@@ -23,15 +23,11 @@ const customStyles = {
     background: '#ffffff80',
   },
 };
-
-interface IRequestModal {
-  modalOpen: boolean;
-  handleCloseModal: () => void;
-}
-export const ConfirmModal = ({
-  modalOpen,
-  handleCloseModal,
-}: IRequestModal) => {
+type Props = {
+  isOpen: boolean;
+  handleClosetModal: () => void;
+};
+export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
   const list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]; // 신청자 리스트 정보(dummy)받아와야함
   const offset = 5;
   const [page, setPage] = useState(1);
@@ -48,8 +44,8 @@ export const ConfirmModal = ({
     <div>
       <Modal
         ariaHideApp={false}
-        isOpen={modalOpen}
-        onRequestClose={handleCloseModal}
+        isOpen={isOpen}
+        onRequestClose={() => handleClosetModal()}
         style={customStyles}
         contentLabel="Example Modal"
       >
@@ -60,10 +56,13 @@ export const ConfirmModal = ({
                 신청자 리스트
               </NewTypography>
             </Theme>
-            <CustomImCross onClick={handleCloseModal} size={24} />
+            <CustomImCross
+              onClick={() => handleClosetModal()}
+              size={24}
+            />
           </Header>
           <Guide>
-            <Typography color='danger' size='12' fontWeight='900'>
+            <Typography color="danger" size="12" fontWeight="900">
               의뢰는 1명에게만 맡길 수 있습니다.
             </Typography>
           </Guide>
