@@ -15,7 +15,7 @@ interface IImage {
 }
 export interface IData {
   id: number;
-  createDate: String;
+  createDate: string;
   nickname: string;
   title: string;
   imageOpen: imageOpenType;

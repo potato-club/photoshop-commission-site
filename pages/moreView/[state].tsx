@@ -1,11 +1,11 @@
 import { NextPage } from 'next';
 import React from 'react';
-import StatePage from 'src/containers/mainPage/StatePage';
+import MoreViewPage from 'src/containers/MoreViewPage/MoreViewPage';
 
 const State: NextPage = () => {
   return (
     <>
-      <StatePage />
+      <MoreViewPage />
     </>
   );
 };
