@@ -1,12 +1,10 @@
 import { Typography } from '../components/index';
 import styled from 'styled-components';
-import { List } from 'src/constants/sidebox/SideboxList';
-import { RootState } from 'src/redux-toolkit/store';
-import { dummyUser } from "src/dummy/dummyUser";
+import { dummyUser } from 'src/dummy/dummyUser';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 
 export const SideBox = () => {
-  const {getSessionStorage} = useSessionStorage();
+  const { getSessionStorage } = useSessionStorage();
 
   return (
     <AdvertiseBox>
@@ -15,17 +13,17 @@ export const SideBox = () => {
           <User color="blue" size="20" fontWeight="900">
             {getSessionStorage('nickName')}
           </User>
-          {' ' + List.user}
+          &nbsp;님
         </Typography>
         <br />
         <Typography size="16" fontWeight="900">
-          {List.grade}
+          평점
         </Typography>
         <Typography size="16" fontWeight="900">
           <User color="blue" size="20" fontWeight="900">
             {dummyUser.score}
           </User>
-          {List.score}
+          /5.0
         </Typography>
       </TopBox>
 
@@ -33,7 +31,7 @@ export const SideBox = () => {
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
         <Top size="16" fontWeight="900" color="white">
-          {List.top}
+          Top
         </Top>
       </BottomBtn>
     </AdvertiseBox>
