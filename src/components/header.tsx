@@ -3,12 +3,16 @@ import { Typography } from '../components/index';
 import { HeaderName } from 'src/constants/header/HeaderName';
 import styled, { css } from 'styled-components';
 import { FaUserAlt, FaBell } from 'react-icons/fa';
-import { BiLogIn, BiLogOut } from 'react-icons/bi';
+import { FiLogOut, FiLogIn } from 'react-icons/fi';
 import { pathName } from 'src/constants/pathName';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
 
 export const Header = () => {
   const router = useRouter();
+  const { getSessionStorage, removeSessionStorage } = useSessionStorage();
+  const [login, setLogin] = useState(false);
   const callKaKaoLoginHandler = () => {
     router.push({
       pathname: process.env.NEXT_PUBLIC_PATHNAME,
@@ -19,12 +23,19 @@ export const Header = () => {
       },
     });
   };
-  const checkSession = () => {
-    if (typeof window !== 'undefined') {
-      console.log(localStorage.getItem('session'));
-      return localStorage.getItem('session');
-    }
+
+  const logOut = () => {
+    removeSessionStorage('access');
+    location.reload();
   };
+
+  useEffect(() => {
+    if (getSessionStorage('access') === '') {
+      setLogin(false);
+    } else {
+      setLogin(true);
+    }
+  }, [getSessionStorage]);
 
   return (
     <HeaderBox>
@@ -37,8 +48,12 @@ export const Header = () => {
           </Theme>
         </Link>
         <Icons>
-          <div onClick={() => callKaKaoLoginHandler()}>
-            {checkSession() ? <LogoutImage /> : <LoginImage />}
+          <div>
+            {!login ? (
+              <LoginImage onClick={() => callKaKaoLoginHandler()} />
+            ) : (
+              <LogoutImage onClick={() => logOut()} />
+            )}
           </div>
 
           <Link href={pathName.MYPAGE.PROFILE}>
@@ -61,17 +76,17 @@ export const Header = () => {
 export default Header;
 
 const iconStyles = css`
-  width: 20px;
-  height: 20px;
+  width: 45px;
+  height: 45px;
   color: white;
   padding: 8px 8px;
   border: 4px solid white;
   border-radius: 100%;
   :hover {
-    color: gray;
     border: 4px solid gray;
+    color: gray;
   }
-  margin-right: 5px;
+  margin-right: 8px;
 `;
 
 export const HeaderBox = styled.div`
@@ -100,33 +115,15 @@ const Icons = styled.div`
   justify-content: space-between;
 `;
 
-const LogoutImage = styled(BiLogOut)`
+const LogoutImage = styled(FiLogOut)`
   ${iconStyles}
 `;
-const LoginImage = styled(BiLogIn)`
+const LoginImage = styled(FiLogIn)`
   ${iconStyles}
 `;
 const UserImage = styled(FaUserAlt)`
-  width: 45px;
-  height: 45px;
-  color: white;
-  padding: 8px 8px;
-  border: 4px solid white;
-  border-radius: 100%;
-  :hover {
-    color: gray;
-    border: 4px solid gray;
-  }
+  ${iconStyles}
 `;
 const AlertImage = styled(FaBell)`
-  width: 45px;
-  height: 45px;
-  color: white;
-  padding: 8px 8px;
-  border: 4px solid white;
-  border-radius: 100%;
-  :hover {
-    border: 4px solid gray;
-    color: gray;
-  }
+  ${iconStyles}
 `;
