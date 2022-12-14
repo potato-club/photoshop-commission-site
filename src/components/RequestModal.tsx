@@ -10,12 +10,8 @@ const customStyles = {
   content: {
     top: '50%',
     left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: '20px',
-    marginTop: '10px',
     height: '250px',
     width: '450px',
     overflow: 'hidden',
@@ -38,7 +34,7 @@ export const RequestModal = ({ isOpen, handleClosetModal }: Props) => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <Container>
+        <Wrapper>
           <CustomImCross onClick={() => handleClosetModal()} />
 
           <CustomAiFillEdit />
@@ -57,7 +53,7 @@ export const RequestModal = ({ isOpen, handleClosetModal }: Props) => {
               </Typography>
             </Button>
           </ButtonWrapper>
-        </Container>
+        </Wrapper>
       </Modal>
     </div>
   );
@@ -100,7 +96,7 @@ const CustomImCross = styled(ImCross)`
     color: ${customColor.gray};
   }
 `;
-const Container = styled.div`
+const Wrapper = styled.div`
   align-items: center;
   background-color: white;
   position: relative;
