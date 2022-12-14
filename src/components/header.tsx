@@ -6,13 +6,14 @@ import { FaUserAlt, FaBell } from 'react-icons/fa';
 import { FiLogOut, FiLogIn } from 'react-icons/fi';
 import { pathName } from 'src/constants/pathName';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useGetToken } from 'src/hooks/useGetToken';
+import { infoModal } from 'src/utils/interactionModal';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 
 export const Header = () => {
   const router = useRouter();
-  const { getSessionStorage, removeSessionStorage } = useSessionStorage();
-  const [login, setLogin] = useState(false);
+  const { access, refresh, resetToken } = useGetToken();
+  const { removeSessionStorage, setSessionStorage } = useSessionStorage();
   const callKaKaoLoginHandler = () => {
     router.push({
       pathname: process.env.NEXT_PUBLIC_PATHNAME,
@@ -25,17 +26,11 @@ export const Header = () => {
   };
 
   const logOut = () => {
-    removeSessionStorage('access');
-    location.reload();
+    resetToken();
+    removeSessionStorage('job');
+    setSessionStorage('nickname', 'GUEST');
+    infoModal('로그아웃이 완료되었습니다.', 'success');
   };
-
-  useEffect(() => {
-    if (getSessionStorage('access') === '') {
-      setLogin(false);
-    } else {
-      setLogin(true);
-    }
-  }, [getSessionStorage]);
 
   return (
     <HeaderBox>
@@ -49,7 +44,7 @@ export const Header = () => {
         </Link>
         <Icons>
           <div>
-            {!login ? (
+            {!access || !refresh ? (
               <LoginImage onClick={() => callKaKaoLoginHandler()} />
             ) : (
               <LogoutImage onClick={() => logOut()} />
