@@ -13,6 +13,7 @@ import { useRouter } from 'next/router';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useCookies } from 'src/hooks/useCookies';
+import { infoModal } from 'src/utils/interactionModal';
 
 export function SignUpPage() {
   // Todo 우선 submit 하면 자동으로 중복검사 하게끔하고, 이전방법이 낫겠다 싶으면 닉네임만 제어컴포넌트로 바꿔서 중복확인 버튼 사용하기
@@ -47,6 +48,7 @@ export function SignUpPage() {
       setCookie('refresh', headers.refreshtoken);
       setSessionStorage('nickName', data.nickname[0]);
       setSessionStorage('job', data.userRole[0]);
+      infoModal('회원가입이 완료되었습니다', 'success')
       router.push('/main');
     } catch (err) {
       console.log(err);
