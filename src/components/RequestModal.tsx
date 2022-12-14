@@ -35,9 +35,12 @@ export const RequestModal = ({ isOpen, handleClosetModal }: Props) => {
         contentLabel="Example Modal"
       >
         <Wrapper>
-          <CustomImCross onClick={() => handleClosetModal()} />
-
-          <CustomAiFillEdit />
+          <IconWrapper justify="flex-end">
+            <CustomImCross onClick={() => handleClosetModal()} />
+          </IconWrapper>
+          <IconWrapper justify="center">
+            <AiFillEdit size={48} />
+          </IconWrapper>
           <Typography size="28" color="black" fontWeight="900">
             등록 하시겠습니까?
           </Typography>
@@ -47,7 +50,10 @@ export const RequestModal = ({ isOpen, handleClosetModal }: Props) => {
                 예
               </Typography>
             </Button>
-            <Button color={customColor.danger} onClick={()=>handleClosetModal()}>
+            <Button
+              color={customColor.danger}
+              onClick={() => handleClosetModal()}
+            >
               <Typography size="16" color="white">
                 아니요
               </Typography>
@@ -61,15 +67,36 @@ export const RequestModal = ({ isOpen, handleClosetModal }: Props) => {
 
 export default RequestModal;
 
-const CustomAiFillEdit = styled(AiFillEdit)`
-  margin: 20px 0px 20px 0px;
-  font-size: 48px;
+const Wrapper = styled.div`
+  align-items: center;
+  background-color: white;
+  position: relative;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
 `;
+
+const IconWrapper = styled.div<{ justify?: string }>`
+  width: 100%;
+  display: flex;
+  justify-content: ${({ justify }) => justify};
+`;
+
+const CustomImCross = styled(ImCross)`
+  cursor: pointer;
+  :hover {
+    transform: scale(1.1);
+  }
+  :active {
+    transform: scale(0.9);
+  }
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  margin-top: 40px;
 `;
 const Button = styled.button<{ color: string; margin?: boolean }>`
   width: ${prop => (prop.margin ? '40px' : '70px')};
@@ -78,30 +105,13 @@ const Button = styled.button<{ color: string; margin?: boolean }>`
   margin-right: ${prop => (prop.margin ? '10px' : '0px')};
   border: none;
   border-radius: 5px;
-  &:active {
+  :active {
     position: relative;
     top: 1px;
     left: 0.5px;
   }
-  &:hover {
+  :hover {
     background-color: black;
     cursor: pointer;
   }
-`;
-const CustomImCross = styled(ImCross)`
-  cursor: pointer;
-  position: absolute;
-  right: 0;
-  &:hover {
-    color: ${customColor.gray};
-  }
-`;
-const Wrapper = styled.div`
-  align-items: center;
-  background-color: white;
-  position: relative;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
 `;
