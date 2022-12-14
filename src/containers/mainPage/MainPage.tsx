@@ -31,12 +31,12 @@ const Container = styled.div`
   padding: 140px 0;
   display: flex;
   flex-direction: column;
+  gap: 160px 0;
 `;
 
 const WriteBox = styled.div`
   width: 100%;
-  height: 140px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 150px;
+  align-items: center;
 `;
