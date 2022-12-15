@@ -56,7 +56,9 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
           (data: { nickname: string }) => data['nickname'],
         );
         setList(nicknames);
-        setTotalElement(totalElements);
+        if (totalElement !== totalElements) {
+          setTotalElement(totalElements);
+        }
       },
       onError: error => {
         alert('리스트 가져오기 오류');
@@ -76,25 +78,25 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
       >
         <Wrapper>
           <Header>
-              <Typography color="blue" size="16" fontWeight='bold'>
-                신청자 리스트
-              </Typography>
+            <Typography color="blue" size="16" fontWeight="bold">
+              신청자 리스트
+            </Typography>
             <CustomImCross onClick={() => handleClosetModal()} size={24} />
           </Header>
           <Guide>
-            <Typography color="danger" size="12" fontWeight='bold'>
+            <Typography color="danger" size="12" fontWeight="bold">
               의뢰는 1명에게만 맡길 수 있습니다.
             </Typography>
           </Guide>
           {list.map((data, i) => (
             <List key={i}>
               <NickName>
-                <Typography color="black" size="16" fontWeight='bold'>
+                <Typography color="black" size="16" fontWeight="bold">
                   {data}
                 </Typography>
               </NickName>
               <CommissionBtn onClick={SelectDesigner}>
-                <Typography color="white" size="16" fontWeight='bold'>
+                <Typography color="white" size="16" fontWeight="bold">
                   의뢰 맡기기
                 </Typography>
               </CommissionBtn>
@@ -162,7 +164,7 @@ const Date = styled.div`
 const NickName = styled.div`
   width: 140px;
   text-align: center;
-    div {
+  div {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -178,4 +180,3 @@ const List = styled.div`
 const Guide = styled.div`
   text-align: end;
 `;
-
