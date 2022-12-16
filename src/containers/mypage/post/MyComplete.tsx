@@ -18,7 +18,7 @@ export const MyComplete = () => {
   return (
     <MyPageLayout>
       <Container>
-        <Typography size="24" fontWeight="900">
+        <Typography size="24" fontWeight="bold">
           의뢰완료
         </Typography>
         <div>

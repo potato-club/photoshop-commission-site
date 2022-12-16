@@ -6,43 +6,19 @@ import {
   CustomPagination,
 } from 'src/components/index';
 import { dummyList } from 'src/dummy/dummyList';
-import { all } from 'src/constants/all/all';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { stateApi } from 'src/apis/moreViewPage';
 import Hr from './components/Hr';
 import Title from './components/Title';
 import SignUp from './components/SignUp';
-import { useQuery } from 'react-query';
-import { IData } from '../mainPage/components/MainRequestBoard';
+import { useMoreViewData } from 'src/hooks/useMoreViewData';
 
 const StatePage = () => {
   const [page, setPage] = useState(1);
   const router = useRouter();
   const { state } = router.query;
-  const [data, setData] = useState<IData[]>([]);
-  const [theme, setTheme] = useState('');
-
-  useQuery(
-    ['moreView', state, page],
-    async () => {
-      if (state === 'before') {
-        setTheme(all.before + ' ' + all.post);
-        return await stateApi.getBeforeAll(page);
-      } else if (state === 'doing') {
-        setTheme(all.doing + ' ' + all.post);
-        return await stateApi.getCompleteAll(page);
-      } else if (state === 'complete') {
-        setTheme(all.complete + ' ' + all.post);
-        return await stateApi.getRequestingAll(page);
-      }
-    },
-    {
-      onSuccess: res => setData(res?.data.content),
-      enabled: !!state && !!page,
-    },
-  );
-
+  const { data, theme, setData } = useMoreViewData(state as string, page);
+  
   useEffect(() => {
     console.log(data);
   }, [data]);
@@ -55,11 +31,11 @@ const StatePage = () => {
   return (
     <Container>
       <Post>
-        <Typography size="40" color="blue" fontWeight="900">
+        <Typography size="40" color="blue" fontWeight="bold">
           {theme}
         </Typography>
       </Post>
-      <Title setData={setData} page={page} state={state as string} />
+      {/* <Title setData={setData} page={page} state={state as string} /> */}
       <Hr />
       <CardListWrap>
         <CardList list={data} />

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { mainApi } from 'src/apis/mainPage';
+import { IData } from 'src/containers/mainPage/components/MainRequestBoard';
 
 export const useMainData = (state: string) => {
-  const [data, setData] = useState<any>([]);
+  const [data, setData] = useState<IData[]>([]);
 
   useQuery(
     ['state', state],
@@ -13,14 +14,14 @@ export const useMainData = (state: string) => {
       } else if (state === 'doing') {
         return await mainApi.getRequesting();
       } else if (state === 'complete') {
-        return await mainApi.getComplete();
+        // return await mainApi.getComplete();
       }
     },
     {
-      onSuccess: res => res && setData(res),
+      onSuccess: res => res && setData(res.data),
       onError: err => console.log(err),
     },
   );
 
-  return data;
+  return { data };
 };

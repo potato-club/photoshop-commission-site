@@ -42,7 +42,7 @@ export const RequestModal = ({ isOpen, handleClosetModal }: Props) => {
           <CustomImCross onClick={() => handleClosetModal()} />
 
           <CustomAiFillEdit />
-          <Typography size="28" color="black" fontWeight="900">
+          <Typography size="28" color="black" fontWeight="bold">
             등록 하시겠습니까?
           </Typography>
           <ButtonWrapper>

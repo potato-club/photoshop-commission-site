@@ -27,10 +27,10 @@ const IntroPage = () => {
         data-aos-duration="1000"
         data-aos-offset="300"
       >
-        <Typography size="48" fontWeight="900">
+        <Typography size="48" fontWeight="bold">
           소중한 사진들을 편집하는데
         </Typography>
-        <Typography size="48" fontWeight="900">
+        <Typography size="48" fontWeight="bold">
           어려움을 느끼신다면?
         </Typography>
       </HeaderTextBox>
@@ -47,7 +47,7 @@ const IntroPage = () => {
             height="640px"
             alt="이미지가 없습니다.."
           />
-          <Typography size="24" fontWeight="900">
+          <Typography size="24" fontWeight="bold">
             Before
           </Typography>
         </ImageBox>
@@ -62,7 +62,7 @@ const IntroPage = () => {
             height="640px"
             alt="이미지가 없습니다.."
           />
-          <Typography size="24" fontWeight="900">
+          <Typography size="24" fontWeight="bold">
             After
           </Typography>
         </ImageBox>
@@ -72,10 +72,10 @@ const IntroPage = () => {
         data-aos-duration="1000"
         data-aos-offset="300"
       >
-        <Typography size="60" fontWeight="900">
+        <Typography size="60" fontWeight="bold">
           또는, 고객의 요구사항대로
         </Typography>
-        <Typography size="60" fontWeight="900">
+        <Typography size="60" fontWeight="bold">
           편집하는 역량을 기르고 싶다면?
         </Typography>
       </SectionTextBox>
@@ -97,12 +97,12 @@ const IntroPage = () => {
         data-aos-duration="1000"
         data-aos-offset="300"
       >
-        <Typography size="60" fontWeight="900">
+        <Typography size="60" fontWeight="bold">
           이곳에서 시도해보세요
         </Typography>
         <br />
         <br />
-        <Typography size="80" fontWeight="900" color="blue">
+        <Typography size="80" fontWeight="bold" color="blue">
           가나다 포토샵
         </Typography>
       </FooterTextBox>
@@ -110,7 +110,7 @@ const IntroPage = () => {
         <Link href="/main">
           <a>
             <LoginBtn>
-              <Typography size="16" fontWeight="900" color="lightBlue">
+              <Typography size="16" fontWeight="bold" color="lightBlue">
                 로그인 및 회원가입
               </Typography>
             </LoginBtn>
@@ -119,7 +119,7 @@ const IntroPage = () => {
         <Link href="/main">
           <a>
             <GoToBtn>
-              <Typography size="16" fontWeight="900" color="white">
+              <Typography size="16" fontWeight="bold" color="white">
                 게시글 보러가기
               </Typography>
             </GoToBtn>

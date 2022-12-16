@@ -1,11 +1,9 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Filter } from 'src/constants/all/filter';
+import { Filter } from 'src/constants/filter';
 import { BiSearchAlt2 } from 'react-icons/bi';
-import axios from 'axios';
-import { useQuery } from 'react-query';
-import { stateApi } from 'src/apis/moreViewPage';
 import { IData } from 'src/containers/mainPage/components/MainRequestBoard';
+import { useMoreViewFilterData } from 'src/hooks/useMoreViewFilterData';
 
 interface ITitle {
   setData: React.Dispatch<React.SetStateAction<IData[]>>;
@@ -13,39 +11,9 @@ interface ITitle {
   state: string;
 }
 const Title = ({ setData, page, state }: ITitle) => {
-  const [text, setText] = useState(''); // 필터링 값
   const [selected, setSelected] = useState('title');
-  useQuery(
-    ['resetFilter', state],
-    async () => {
-      if (state === 'before') {
-        return await stateApi.getBeforeAll(page);
-      } else if (state === 'doing') {
-        return await stateApi.getCompleteAll(page);
-      } else if (state === 'complete') {
-        return await stateApi.getRequestingAll(page);
-      }
-    },
-    {
-      enabled: text === '',
-      onSuccess: res => setData(res && res.data.content),
-    },
-  );
-
-  useQuery(
-    ['filter', selected, text, page],
-    async () => {
-      if (selected === 'nickname') {
-        return await stateApi.getFilterNickName(text, page);
-      } else if (selected === 'title') {
-        return await stateApi.getFilterTitle(text, page);
-      }
-    },
-    {
-      enabled: !!selected && !!page && !!text && text !== '',
-      onSuccess: res => setData(res?.data.content),
-    },
-  );
+  const [text, setText] = useState(''); // 필터링 값
+  const { filterData } = useMoreViewFilterData({ state, page, selected, text });
 
   const onChangeInput = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -59,6 +27,10 @@ const Title = ({ setData, page, state }: ITitle) => {
     },
     [setSelected],
   );
+
+  useEffect(() => {
+    setData(filterData);
+  }, [filterData, setData]);
 
   return (
     <Container>

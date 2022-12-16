@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
 import { Typography } from 'src/components/Typography';
-import { all } from 'src/constants/all/all';
 import { pathName } from 'src/constants/pathName';
 import styled from 'styled-components';
 
@@ -9,15 +8,15 @@ const SignUp = () => {
   return (
     <SignUpBox>
       <SignUpComment>
-        <Typography size="40" color="blue" fontWeight="900">
-          {all.comment}
+        <Typography size="40" color="blue" fontWeight="bold">
+          원하시는 사진을 수정하고 싶으시다면 지금 바로 신청해주세요!
         </Typography>
       </SignUpComment>
       <Link href={pathName.EDITOR} passHref>
         <A>
           <SignUpBtn>
-            <Typography size="20" color="white" fontWeight="900">
-              {all.writeBtn}
+            <Typography size="20" color="white" fontWeight="bold">
+              의뢰 작성하기
             </Typography>
           </SignUpBtn>
         </A>
