@@ -2,24 +2,26 @@ import { Typography } from '../components/index';
 import styled from 'styled-components';
 import { dummyUser } from 'src/dummy/dummyUser';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { useCurrentMode } from 'src/hooks/useCurrentMode';
 
 export const SideBox = () => {
   const { getSessionStorage } = useSessionStorage();
+  const { fontColor } = useCurrentMode();
 
   return (
     <AdvertiseBox>
       <TopBox>
-        <Typography size="16" fontWeight="900">
+        <Typography size="16" fontWeight="900" color={fontColor}>
           <User color="blue" size="20" fontWeight="900">
             {getSessionStorage('nickname')}
           </User>
           &nbsp;님
         </Typography>
         <br />
-        <Typography size="16" fontWeight="900">
+        <Typography size="16" fontWeight="900" color={fontColor}>
           평점
         </Typography>
-        <Typography size="16" fontWeight="900">
+        <Typography size="16" fontWeight="900" color={fontColor}>
           <User color="blue" size="20" fontWeight="900">
             {dummyUser.score}
           </User>
