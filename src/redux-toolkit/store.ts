@@ -1,6 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
+import backgroundColorReducer from './slice/settingModeSlice';
+
 const store = configureStore({
   reducer: {
+    darkModeOnOff: backgroundColorReducer,
   },
 });
 

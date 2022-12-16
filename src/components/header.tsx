@@ -4,13 +4,20 @@ import { HeaderName } from 'src/constants/header/HeaderName';
 import styled, { css } from 'styled-components';
 import { FaUserAlt, FaBell } from 'react-icons/fa';
 import { FiLogOut, FiLogIn } from 'react-icons/fi';
+import { BsBrightnessHigh } from 'react-icons/bs';
+import { MdOutlineDarkMode } from 'react-icons/md';
 import { pathName } from 'src/constants/pathName';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useGetToken } from 'src/hooks/useGetToken';
 import { infoModal } from 'src/utils/interactionModal';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { blackMode, whiteMode } from 'src/redux-toolkit/slice/settingModeSlice';
+import { useCurrentMode } from 'src/hooks/useCurrentMode';
 
 export const Header = () => {
+  const dispatch = useDispatch();
+  const { backgroundColor } = useCurrentMode();
   const router = useRouter();
   const { access, refresh, resetToken } = useGetToken();
   const { removeSessionStorage, setSessionStorage } = useSessionStorage();
@@ -29,7 +36,9 @@ export const Header = () => {
     resetToken();
     removeSessionStorage('job');
     setSessionStorage('nickname', 'GUEST');
-    infoModal('로그아웃이 완료되었습니다.', 'success');
+    infoModal('로그아웃이 완료되었습니다.', 'success', undefined, () =>
+      location.reload(),
+    );
   };
 
   return (
@@ -62,6 +71,11 @@ export const Header = () => {
               <AlertImage />
             </a>
           </Link>
+          {backgroundColor === 'white' ? (
+            <BrightImage onClick={() => dispatch(blackMode())} />
+          ) : (
+            <DarkImage onClick={() => dispatch(whiteMode())} />
+          )}
         </Icons>
       </ContentBox>
     </HeaderBox>
@@ -105,7 +119,6 @@ const Theme = styled.a`
 
 const Icons = styled.div`
   display: flex;
-  width: 100px;
   align-items: center;
   justify-content: space-between;
 `;
@@ -120,5 +133,11 @@ const UserImage = styled(FaUserAlt)`
   ${iconStyles}
 `;
 const AlertImage = styled(FaBell)`
+  ${iconStyles}
+`;
+const DarkImage = styled(MdOutlineDarkMode)`
+  ${iconStyles}
+`;
+const BrightImage = styled(BsBrightnessHigh)`
   ${iconStyles}
 `;
