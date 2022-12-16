@@ -1,33 +1,61 @@
 import React from 'react';
 import Link from 'next/link';
 import { Typography } from 'src/components';
-import { all } from 'src/constants/all/all';
-import { pathName } from 'src/constants/pathName';
 import styled from 'styled-components';
+import { useGetToken } from 'src/hooks/useGetToken';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { useRouter } from 'next/router';
+import { customColor } from 'src/constants';
 
 const Write = () => {
+  const { access, refresh } = useGetToken();
+  const { getSessionStorage } = useSessionStorage();
+  const job = getSessionStorage('job');
+  const isArtist = access && refresh && job === 'ARTIST';
+  const router = useRouter();
+
+  const callKaKaoLoginHandler = () => {
+    router.push({
+      pathname: process.env.NEXT_PUBLIC_PATHNAME,
+      query: {
+        response_type: process.env.NEXT_PUBLIC_RESPONSE_TYPE,
+        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
+        redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI,
+      },
+    });
+  };
+
+  const checkRoute = () => {
+    if (!access || !refresh) {
+      callKaKaoLoginHandler();
+    } else if (isArtist) {
+      router.push('/moreView/before');
+    } else {
+      router.push('/editor');
+    }
+  };
+
   return (
-    <Link href={pathName.EDITOR} passHref>
-      <WriteBtn>
-        <Typography size="20" color="white" fontWeight="900">
-          {all.writeBtn}
-        </Typography>
-      </WriteBtn>
-    </Link>
+    <WriteBtn onClick={checkRoute}>
+      <Typography size="20" color="white" fontWeight="bold">
+        {isArtist ? '커미션 활동하기' : '의뢰 작성하기'}
+      </Typography>
+    </WriteBtn>
   );
 };
 
 export default Write;
 
 const WriteBtn = styled.button`
-  margin: 60px auto 0 auto;
-  width: 185px;
-  background-color: rgba(7, 104, 159, 1);
+  margin-top: 60px;
+  background-color: ${customColor.blue};
   border-radius: 10px;
-  padding: 10px 27px;
-  border: none;
+  padding: 10px 28px;
+  cursor: pointer;
   :hover {
-    background-color: black;
-    cursor: pointer;
+    transform: scale(1.01);
+  }
+  :active {
+    transform: scale(0.99);
   }
 `;

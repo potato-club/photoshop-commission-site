@@ -11,7 +11,7 @@ export const SideBox = () => {
       <TopBox>
         <Typography size="16" fontWeight="900">
           <User color="blue" size="20" fontWeight="900">
-            {getSessionStorage('nickName')}
+            {getSessionStorage('nickname')}
           </User>
           &nbsp;님
         </Typography>

@@ -41,7 +41,7 @@ export default MainRequestBoard;
 
 const RequestBox = styled.div`
   width: 100%;
-  margin-bottom: 150px;
+  min-height: 638px;
 `;
 
 const Hr = styled.hr`
