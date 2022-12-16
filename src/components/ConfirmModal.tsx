@@ -52,17 +52,14 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
         <Container>
           <Header>
             <Theme>
-              <NewTypography color="blue" size="16" fontWeight="900">
+              <NewTypography color="blue" size="16" fontWeight="bold">
                 신청자 리스트
               </NewTypography>
             </Theme>
-            <CustomImCross
-              onClick={() => handleClosetModal()}
-              size={24}
-            />
+            <CustomImCross onClick={() => handleClosetModal()} size={24} />
           </Header>
           <Guide>
-            <Typography color="danger" size="12" fontWeight="900">
+            <Typography color="danger" size="12" fontWeight="bold">
               의뢰는 1명에게만 맡길 수 있습니다.
             </Typography>
           </Guide>
@@ -76,12 +73,12 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
                 </Typography>
               </Date>
               <NickName>
-                <Typography color="black" size="16" fontWeight="900">
+                <Typography color="black" size="16" fontWeight="bold">
                   임송재
                 </Typography>
               </NickName>
               <CommissionBtn onClick={SelectDesigner}>
-                <Typography color="white" size="16" fontWeight="900">
+                <Typography color="white" size="16" fontWeight="bold">
                   의뢰 맡기기
                 </Typography>
               </CommissionBtn>
@@ -155,7 +152,6 @@ const Theme = styled.div`
   right: 0;
   margin: 0 auto;
   width: fit-content;
-  font-weight: 900;
 `;
 const Header = styled.div`
   width: 100%;

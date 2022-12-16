@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
 import { Typography } from 'src/components';
-import { all } from 'src/constants/all/all';
 import { pathName } from 'src/constants/pathName';
 import { useCurrentMode } from 'src/hooks/useCurrentMode';
 import styled from 'styled-components';
@@ -11,16 +10,16 @@ const Title = ({ state }: MainRequestBoardProps) => {
   const { fontColor } = useCurrentMode();
   return (
     <TitleBox>
-      <Typography size="24" fontWeight="900" color={fontColor}>
-        {state === 'before' && all.before}
-        {state === 'doing' && all.doing}
-        {state === 'complete' && all.complete}
+      <Typography size="24" fontWeight="bold" color={fontColor}>
+        {state === 'before' && '의뢰전'}
+        {state === 'doing' && '의뢰중'}
+        {state === 'complete' && '의뢰완료'}
       </Typography>
       <Plus>
         <Link href={`${pathName.MOREVIEW}/${state}`} passHref>
           <A>
-            <Typography size="16" fontWeight="900">
-              {all.plus}
+            <Typography size="16" fontWeight="bold">
+              더보기
             </Typography>
           </A>
         </Link>

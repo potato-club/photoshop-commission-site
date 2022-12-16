@@ -29,7 +29,7 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
   return (
     <RequestBox>
       <Title>
-        <Typography size="24" fontWeight="900">
+        <Typography size="24" fontWeight="bold">
           {state === 'before' && all.before}
           {state === 'doing' && all.doing}
           {state === 'complete' && all.complete}
@@ -37,7 +37,7 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
         <Plus>
           <Link href={`/mypage/post/${state}`} passHref>
             <A>
-              <Typography size="16" fontWeight="900">
+              <Typography size="16" fontWeight="bold">
                 {all.plus}
               </Typography>
             </A>

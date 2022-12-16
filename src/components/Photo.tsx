@@ -17,7 +17,11 @@ const Photo = ({ id, image, imageOpen }: IPhoto) => {
       <Link href={`/detail/${id}`} passHref>
         <a>
           <NewImage
-            src={imageOpen === imageOpenType.open && image ? image[0].fileUrl : '/image92.png'}
+            src={
+              imageOpen === imageOpenType.open && image
+                ? image[0].fileUrl
+                : '../../image92.png'
+            }
             width="270px"
             height="192px"
             alt="비공개"

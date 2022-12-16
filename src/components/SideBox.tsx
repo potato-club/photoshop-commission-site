@@ -11,18 +11,18 @@ export const SideBox = () => {
   return (
     <AdvertiseBox>
       <TopBox>
-        <Typography size="16" fontWeight="900" color={fontColor}>
-          <User color="blue" size="20" fontWeight="900">
+        <Typography size="16" fontWeight="bold" color={fontColor}>
+          <User color="blue" size="20" fontWeight="bold">
             {getSessionStorage('nickname')}
           </User>
           &nbsp;님
         </Typography>
         <br />
-        <Typography size="16" fontWeight="900" color={fontColor}>
+        <Typography size="16" fontWeight="bold" color={fontColor}>
           평점
         </Typography>
-        <Typography size="16" fontWeight="900" color={fontColor}>
-          <User color="blue" size="20" fontWeight="900">
+        <Typography size="16" fontWeight="bold" color={fontColor}>
+          <User color="blue" size="20" fontWeight="bold">
             {dummyUser.score}
           </User>
           /5.0
@@ -32,7 +32,7 @@ export const SideBox = () => {
       <BottomBtn
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       >
-        <Top size="16" fontWeight="900" color="white">
+        <Top size="16" fontWeight="bold" color="white">
           Top
         </Top>
       </BottomBtn>

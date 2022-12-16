@@ -46,7 +46,7 @@ export const Header = () => {
       <ContentBox>
         <Link href={pathName.MAIN} passHref>
           <Theme>
-            <Typography color="white" size="32" fontWeight="900">
+            <Typography color="white" size="32" fontWeight="bold">
               {HeaderName.name}
             </Typography>
           </Theme>
