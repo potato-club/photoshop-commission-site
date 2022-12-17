@@ -5,10 +5,6 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Typography } from 'src/components';
 import { customColor } from 'src/constants';
-import { useSelector } from "react-redux";
-import { RootState } from 'src/redux-toolkit/store';
-import { useDispatch } from 'react-redux';
-import { closeRequestModal } from 'src/redux-toolkit/slice/requestModal';
 
 const customStyles = {
   content: {
@@ -28,24 +24,25 @@ const customStyles = {
     background: '#ffffff80',
   },
 };
-
-export const RequestModal = () => {
-  const modalOpen = useSelector((state:RootState) => state.requestModal.value);
-  const dispatch = useDispatch();
+type Props = {
+  isOpen: boolean;
+  handleClosetModal: () => void;
+};
+export const RequestModal = ({ isOpen, handleClosetModal }: Props) => {
   return (
     <div>
       <Modal
         ariaHideApp={false}
-        isOpen={modalOpen}
-        onRequestClose={() => dispatch(closeRequestModal())}
+        isOpen={isOpen}
+        onRequestClose={() => handleClosetModal()}
         style={customStyles}
         contentLabel="Example Modal"
       >
         <Container>
-          <CustomImCross onClick={() => dispatch(closeRequestModal())} />
+          <CustomImCross onClick={() => handleClosetModal()} />
 
           <CustomAiFillEdit />
-          <Typography size="28" color="black" fontWeight="900">
+          <Typography size="28" color="black" fontWeight="bold">
             등록 하시겠습니까?
           </Typography>
           <ButtonWrapper>
@@ -54,7 +51,7 @@ export const RequestModal = () => {
                 예
               </Typography>
             </Button>
-            <Button color={customColor.danger}>
+            <Button color={customColor.danger} onClick={()=>handleClosetModal()}>
               <Typography size="16" color="white">
                 아니요
               </Typography>

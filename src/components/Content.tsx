@@ -18,7 +18,7 @@ export const Content = ({ theme, content, href }: ContentType) => {
       <li>
         <Link href={href} passHref>
           <Page>
-            <NewTypography size="20" color="blue" fontWeight="900">
+            <NewTypography size="20" color="blue" fontWeight="bold">
               {theme}
             </NewTypography>
           </Page>

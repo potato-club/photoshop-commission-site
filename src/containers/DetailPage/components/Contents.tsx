@@ -1,18 +1,18 @@
 import Image from 'next/image';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Typography } from 'src/components/Typography';
 import { ImageType } from 'src/types/image.type';
 import { imageOpenType } from 'src/types/imageOpen.type';
 import styled from 'styled-components';
-import { RootState } from "src/redux-toolkit/store";
-
-export function Contents() {
-  const detailData = useSelector((state: RootState) => state.detailData.data);
-  const {imageUrls, contents, imageOpen} = detailData;
+type Props = {
+  imageOpen: imageOpenType;
+  imageUrls: ImageType[];
+  contents: string;
+}
+export function Contents({imageOpen, imageUrls, contents}:Props) {
   return (
     <Container>
-      {imageOpen === imageOpenType.open && (
+      {imageOpen === imageOpenType.open && imageUrls && (
         <ImgContainer>
           {imageUrls.map((data, index) => (
             <Image

@@ -1,22 +1,28 @@
-import React, { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import React from 'react';
+import { FieldErrorsImpl, FieldValues, UseFormRegister } from 'react-hook-form';
+import { CustomErrorMessage } from 'src/components/CustomErrorMessage';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 type Props = {
-  setTitle: Dispatch<SetStateAction<string>>;
+  register: UseFormRegister<FieldValues>;
+  errors: Partial<FieldErrorsImpl>;
 };
-export function TitleInput({ setTitle }:Props) {
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
+export function TitleInput({ register, errors }: Props) {
   return (
     <Container>
-      <LeftMargin>
+      <div style={{ marginLeft: '12px' }}>
         <Typography size="20" fontWeight="bold">
           글 제목
         </Typography>
-      </LeftMargin>
-      <Input placeholder="제목을 입력해주세요" onChange={onChange} />
+      </div>
+      <InputWrapper>
+        <Input
+          placeholder="제목을 입력해주세요"
+          {...register('title', { required: '제목을 입력해주세요' })}
+        />
+        <CustomErrorMessage errors={errors} name="title" leftPosition="30" />
+      </InputWrapper>
     </Container>
   );
 }
@@ -27,6 +33,10 @@ const Container = styled.div`
   width: 100%;
   max-width: 900px;
   white-space: nowrap;
+`;
+const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 const Input = styled.input`
@@ -42,8 +52,4 @@ const Input = styled.input`
   ::placeholder {
     color: ${customColor.gray};
   }
-`;
-
-const LeftMargin = styled.div`
-  margin-left: 12px;
 `;

@@ -3,23 +3,28 @@ import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { CheckModifyDate } from './CheckModifyDate';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux-toolkit/store';
 import { BoardMenu } from './BoardMenu';
+type Props = {
+  state: string;
+  title: string;
+  writer: string;
+  createdDate: string;
+  modifiedDate: string;
+  myPost?: boolean;
+};
 
-export function Header() {
-  const detailData = useSelector((state: RootState) => state.detailData.data);
-  const { title, writer, createdDate, modifiedDate, state } = detailData;
-
+export function Header({ state, title, writer, createdDate, modifiedDate, myPost} : Props) {
   return (
     <Container>
       <Typography size="12" color="gray">
         {`<< 홈 < ${state} 게시글`}
       </Typography>
       <SpaceBetween>
-        <Typography size="32" color="black" fontWeight="bold">
-          {title}
-        </Typography>
+        <TitleWrapper>
+          <Typography size="32" color="black" fontWeight="bold">
+            {title}
+          </Typography>
+        </TitleWrapper>
         <WriterWrapper>
           <Typography size="16" color="black">
             {writer}
@@ -34,7 +39,7 @@ export function Header() {
         <Typography size="20" color="purple">
           {state}
         </Typography>
-        <BoardMenu />
+        {myPost !== undefined && <BoardMenu myPost={myPost}/>}
       </SpaceBetween>
     </Container>
   );
@@ -61,9 +66,11 @@ const WriterWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  align-self: flex-start;
   gap: 4px 0;
 `;
 
-const MenuWrapper = styled.div`
-  position: relative;
+const TitleWrapper = styled.div`
+  width: 100%;
+  max-width: 800px;
 `;

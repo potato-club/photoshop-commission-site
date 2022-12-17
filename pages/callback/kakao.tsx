@@ -24,6 +24,7 @@ export default function CheckToken() {
         '이전에 회원가입이 제대로 진행되지 않았습니다. 다시 로그인 해주세요.',
       );
       router.push('/main');
+      return;
     }
 
     // 받는거(최초 로그인일때) : 이메일, 메세지
@@ -39,7 +40,7 @@ export default function CheckToken() {
       console.log('리프레쉬 토큰', headers.refreshtoken);
       setSessionStorage('access', headers.authorization);
       setCookie('refresh', headers.refreshtoken);
-      setSessionStorage('nickName', data.nickname[0]);
+      setSessionStorage('nickname', data.nickname[0]);
       setSessionStorage('job', data.userRole[0])
       router.push('/main');
       return;

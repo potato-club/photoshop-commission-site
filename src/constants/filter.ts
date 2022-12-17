@@ -2,17 +2,13 @@ interface filter {
   value: string;
   label: string;
 }
-export const dummyFilter: filter[] = [
+export const Filter: filter[] = [
   {
     value: 'title',
     label: '제목',
   },
   {
-    value: 'writer',
+    value: 'nickname',
     label: '작성자',
-  },
-  {
-    value: 'date',
-    label: '날짜',
   },
 ];

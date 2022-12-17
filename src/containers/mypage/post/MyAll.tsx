@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { pathName } from 'src/constants/pathName';
 import { Typography } from 'src/components';
-import { all } from 'src/constants/all/all';
 import { dummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
 import { MyPageLayout } from '../components/MyPageLayout';
@@ -33,16 +32,16 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
   return (
     <RequestBox>
       <Title>
-        <Typography size="24" fontWeight="900">
-          {state === BEFORE && all.before}
-          {state === DOING && all.doing}
-          {state === COMPLETE && all.complete}
+        <Typography size="24" fontWeight="bold">
+          {state === BEFORE && '의뢰전'}
+          {state === DOING && '의뢰중'}
+          {state === COMPLETE && '의뢰완료'}
         </Typography>
         <Plus>
           <Link href={`/mypage/post/${state}`} passHref>
             <A>
-              <Typography size="16" fontWeight="900">
-                {all.plus}
+              <Typography size="16" fontWeight="bold">
+                더보기
               </Typography>
             </A>
           </Link>

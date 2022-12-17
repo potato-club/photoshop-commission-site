@@ -4,72 +4,57 @@ import { Typography } from 'src/components/Typography';
 import {
   TitleInput,
   ImageInput,
-  TextArea,
+  RequestTextArea,
   WriteButton,
   SecretSelectInput,
 } from './components';
-import axios from 'axios';
 import { boardApi } from '../../apis/board';
-import { useCookies } from 'src/hooks/useCookies';
-import { useSessionStorage } from 'src/hooks/useSessionStorage';
-import { imageOpenType } from 'src/types/imageOpen.type';
+import { FieldValues, useForm } from 'react-hook-form';
+import { infoModal } from 'src/utils/interactionModal';
+import { useRouter } from 'next/router';
+import { useMutation } from 'react-query';
+import { useGetToken } from 'src/hooks/useGetToken';
 
 // const testUrl = 'http://localhost:3000/board/create';
 
 export function EditorPage() {
-  const [title, setTitle] = useState('');
-  const [images, setImages] = useState<File[]>();
-  const [request, setRequest] = useState('');
-  const [imageOpen, setImageOpen] = useState<imageOpenType>(imageOpenType.open);
-  const { getCookie } = useCookies();
-  const { getSessionStorage } = useSessionStorage();
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
 
-  
+  const { access, refresh } = useGetToken();
 
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
+  const { mutate } = useMutation(
+    (frm: FieldValues) => boardApi.create(frm, access, refresh),
+    {
+      onSuccess: () => {
+        infoModal('등록이 완료되었습니다.', 'success', '', () => {
+          router.push('/main');
+        });
+      },
+      onError: () => {
+        alert('글작성 오류');
+      },
+    },
+  );
 
-  const onClick = async () => {
-    if (!title) {
-      alert('제목을 입력해주세요');
-      return;
+  const submit = async (data: FieldValues) => {
+    const { title, context, imageOpen, image } = data;
+    const frm = new FormData();
+
+    frm.append('title', title);
+    frm.append('context', context);
+    frm.append('imageOpen', imageOpen);
+
+    for (let i = 0; i < image.length; ++i) {
+      frm.append('image', image[i]);
     }
-    if (!images) {
-      alert('사진을 등록해주세요');
-      return;
-    }
-    try {
-      const frm = new FormData();
-      frm.append('title', title);
-      frm.append('context', request);
-      frm.append('imageOpen', imageOpen);
 
-      images.forEach(data => {
-        frm.append('image', data);
-      });
-
-      const data = await boardApi.create(
-        frm,
-        getSessionStorage('access'),
-        getCookie('refresh'),
-      );
-      console.log(data);
-
-
-      // console.log(data);
-      // console.log(frm)
-
-      // console.log(getSessionStorage('access'));
-      // console.log(getCookie('refresh'));
-
-      // accessToken: getSessionStorage('access'),
-      // refreshToken: getCookie('refresh')
-
-      // alert('등록완료');
-    } catch (error) {
-      console.log(error);
-    }
+    mutate(frm);
   };
 
   return (
@@ -79,12 +64,12 @@ export function EditorPage() {
           글 작성
         </Typography>
       </Title>
-      <InputContainer>
-        <TitleInput setTitle={setTitle} />
-        <ImageInput setImages={setImages} />
-        <SecretSelectInput imageOpen={imageOpen} setImageOpen={setImageOpen} />
-        <TextArea setRequest={setRequest} />
-        <WriteButton onClick={onClick} />
+      <InputContainer onSubmit={handleSubmit(submit)}>
+        <TitleInput register={register} errors={errors} />
+        <ImageInput register={register} errors={errors} />
+        <SecretSelectInput control={control} errors={errors} />
+        <RequestTextArea register={register} errors={errors} />
+        <WriteButton />
       </InputContainer>
     </Container>
   );
@@ -106,7 +91,7 @@ const Title = styled.div`
   margin: 100px 0;
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;

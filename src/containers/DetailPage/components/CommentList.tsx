@@ -1,12 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux-toolkit/store';
-import { CommentAndReply } from './components';
-
-export const CommentList = () => {
-  const commentList = useSelector(
-    (state: RootState) => state.detailData.data.commentList,
-  );
+import { CommentType } from 'src/types/comments.type';
+import { CommentAndReply } from '.';
+type Props = {
+  commentList: CommentType[];
+};
+export const CommentList = ({ commentList }: Props) => {
   return (
     <>
       {commentList &&
