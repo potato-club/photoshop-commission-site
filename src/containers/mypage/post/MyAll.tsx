@@ -5,36 +5,81 @@ import { dummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
 import { MyPageLayout } from '../components/MyPageLayout';
 import { MyCardList } from './components/MyCardList';
+import { useQueryMyPostBefore } from './hooks/useQueryMyPostBefore';
+import { MyPost } from './types/post.type';
+import { useQueryMyPostComplete } from './hooks/useQueryMyPostComplete';
+import { useQueryMyPostRequesting } from './hooks/useQueryMyPostRequesting';
+import { LoadingMessage } from '../components/LoadingMessage';
+import { ErrorMessage } from '../components/ErrorMessage';
 
 type RequestBoardProps = {
-  state: 'before' | 'doing' | 'complete';
+  state: 'before' | 'requesting' | 'complete';
+  list: MyPost[];
+  isLoading: boolean;
+  isError: boolean;
 };
 
 const BEFORE = 'before';
-const DOING = 'doing';
+const REQUESTING = 'requesting';
 const COMPLETE = 'complete';
 
 const LIMIT_LENGTH = 4;
 
 export const MyAll = () => {
+  const {
+    list: listBefore,
+    isError: isErrorBefore,
+    isLoading: isLoadingBefore,
+  } = useQueryMyPostBefore();
+  const {
+    list: listComplete,
+    isError: isErrorComplete,
+    isLoading: isLoadingComplete,
+  } = useQueryMyPostComplete();
+  const {
+    list: listRequesting,
+    isError: isErrorRequesting,
+    isLoading: isLoadingRequesting,
+  } = useQueryMyPostRequesting();
+
   return (
     <MyPageLayout>
       <Container>
-        <RequestBoard state={BEFORE} />
-        <RequestBoard state={DOING} />
-        <RequestBoard state={COMPLETE} />
+        <RequestBoard
+          state={BEFORE}
+          list={listBefore}
+          isLoading={isLoadingBefore}
+          isError={isErrorBefore}
+        />
+        <RequestBoard
+          state={REQUESTING}
+          list={listRequesting}
+          isLoading={isLoadingRequesting}
+          isError={isErrorRequesting}
+        />
+        <RequestBoard
+          state={COMPLETE}
+          list={listComplete}
+          isLoading={isLoadingComplete}
+          isError={isErrorComplete}
+        />
       </Container>
     </MyPageLayout>
   );
 };
 
-const RequestBoard = ({ state }: RequestBoardProps) => {
+const RequestBoard = ({
+  state,
+  list,
+  isLoading,
+  isError,
+}: RequestBoardProps) => {
   return (
     <RequestBox>
       <Title>
         <Typography size="24" fontWeight="bold">
           {state === BEFORE && '의뢰전'}
-          {state === DOING && '의뢰중'}
+          {state === REQUESTING && '의뢰중'}
           {state === COMPLETE && '의뢰완료'}
         </Typography>
         <Plus>
@@ -48,7 +93,27 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
         </Plus>
       </Title>
       <Hr />
-      <MyCardList list={dummyList} offset={0} limit={LIMIT_LENGTH} />
+
+      {isLoading && (
+        <MesssageWrapper>
+          <LoadingMessage>게시글을 불러오고 있습니다</LoadingMessage>
+        </MesssageWrapper>
+      )}
+      {isError && (
+        <MesssageWrapper>
+          <ErrorMessage>게시글을 불러오는데 실패했습니다</ErrorMessage>
+        </MesssageWrapper>
+      )}
+      {!isLoading && !isError && list.length === 0 && (
+        <MesssageWrapper>
+          <Typography size="16" fontWeight="bold">
+            게시글이 없습니다
+          </Typography>
+        </MesssageWrapper>
+      )}
+      {list.length !== 0 && (
+        <MyCardList list={list} offset={0} limit={LIMIT_LENGTH} />
+      )}
     </RequestBox>
   );
 };
@@ -56,6 +121,7 @@ const RequestBoard = ({ state }: RequestBoardProps) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const RequestBox = styled.div`
@@ -67,6 +133,7 @@ const Title = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 10px;
 `;
 
 const Plus = styled.span`
@@ -83,4 +150,9 @@ const Hr = styled.hr`
 const A = styled.a`
   text-decoration: none;
   text-align: center;
+`;
+
+const MesssageWrapper = styled.div`
+  width: 100%;
+  padding-top: 80px;
 `;

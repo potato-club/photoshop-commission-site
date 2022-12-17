@@ -3,24 +3,24 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { myPageApi } from 'src/apis/myPage';
 import { useGetToken } from 'src/hooks/useGetToken';
-import { Profile } from '../types/profile.type';
+import { MyPost } from '../types/post.type';
 
-export const useQueryGetProfile = () => {
+export const useQueryMyPostComplete = () => {
   const router = useRouter();
   const { access, refresh } = useGetToken();
-  const [profile, setProfile] = useState<Profile>();
+  const [list, setList] = useState<MyPost[]>([]);
 
   const { isLoading, isError } = useQuery(
-    ['getProfile'],
-    () => myPageApi.profile.get(access, refresh),
+    ['getMyPostComplete'],
+    () => myPageApi.myPost.complete(access, refresh),
     {
       enabled: router.isReady,
       retry: 0,
       onSuccess: ({ data }) => {
-        setProfile(data);
+        setList(data);
       },
     },
   );
 
-  return { profile, isLoading, isError };
+  return { list, isLoading, isError };
 };
