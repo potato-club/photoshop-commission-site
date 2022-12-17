@@ -1,25 +1,27 @@
-import { ChangeEvent, ChangeEventHandler, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { errorModal } from 'src/utils/interactionModal';
+import { useQueryGetProfile } from './hooks/useQueryGetProfileApi';
 
 export const useProfile = () => {
-  const [nickname, setNickname] = useState('');
-  const [introduce, setIntroduce] = useState('안녕하세요.');
+  const [inputNickname, setInputNickname] = useState('');
+  const [inputIntroduce, setInputIntroduce] = useState('안녕하세요.');
   const [isInfoChange, setIsInfoChange] = useState(false);
   const [isIntroduceChange, setIsIntroduceChange] = useState(false);
+  const { profile, isLoading, isError } = useQueryGetProfile();
 
   const handleChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
+    setInputNickname(e.target.value);
   };
   const handleChangeIntroduce = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setIntroduce(e.target.value);
+    setInputIntroduce(e.target.value);
   };
   const handleInfoChange = async () => {
     try {
       if (isInfoChange) {
-        if (nickname.length > 8) {
+        if (inputNickname.length > 8) {
           errorModal('닉네임은 8글자 이하로 설정해주세요');
           return;
-        } else if (nickname.length === 0) {
+        } else if (inputNickname.length === 0) {
           errorModal('닉네임을 입력해주세요.');
           return;
         }
@@ -36,8 +38,7 @@ export const useProfile = () => {
   const handleIntroduceChange = async () => {
     try {
       if (isIntroduceChange) {
-        if (introduce === '') {
-          //Todo: 자기소개 공백안된다고 경고모달 들어가야함
+        if (inputIntroduce === '') {
           errorModal('자기소개를 작성해주세요');
           return;
         }
@@ -52,8 +53,11 @@ export const useProfile = () => {
   };
 
   return {
-    nickname,
-    introduce,
+    profile,
+    isLoading,
+    isError,
+    inputNickname,
+    inputIntroduce,
     isInfoChange,
     isIntroduceChange,
     handleChangeNickname,

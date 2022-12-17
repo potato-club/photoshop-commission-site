@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
+import { ErrorMessage } from '../components/ErrorMessage';
+import { LoadingMessage } from '../components/LoadingMessage';
 import { MyPageLayout } from '../components/MyPageLayout';
 import { InfoItem } from './components/InfoItem';
 import { ProfileLayout } from './components/ProfileLayout';
@@ -8,8 +9,11 @@ import { useProfile } from './Profile.hook';
 
 export const Profile = () => {
   const {
-    nickname,
-    introduce,
+    profile,
+    isLoading,
+    isError,
+    inputNickname,
+    inputIntroduce,
     isInfoChange,
     isIntroduceChange,
     handleChangeNickname,
@@ -17,6 +21,24 @@ export const Profile = () => {
     handleInfoChange,
     handleIntroduceChange,
   } = useProfile();
+  if (isLoading) {
+    return (
+      <MyPageLayout>
+        <Container>
+          <LoadingMessage>내 정보를 불러오고 있습니다</LoadingMessage>
+        </Container>
+      </MyPageLayout>
+    );
+  }
+  if (isError) {
+    return (
+      <MyPageLayout>
+        <Container>
+          <ErrorMessage>내 정보를 불러오는데 실패했습니다</ErrorMessage>
+        </Container>
+      </MyPageLayout>
+    );
+  }
   return (
     <MyPageLayout>
       <Container>
@@ -30,34 +52,34 @@ export const Profile = () => {
               <InfoItem header="닉네임">
                 {isInfoChange ? (
                   <input
-                    value={nickname}
+                    value={inputNickname}
                     placeholder="닉네임은 8글자 이하"
                     onChange={handleChangeNickname}
                   />
                 ) : (
                   <Typography size="16" color="black" fontWeight="bold">
-                    {nickname === '' ? '양파먹는소녀' : nickname}
+                    {profile?.nickname}
                   </Typography>
                 )}
               </InfoItem>
               <InfoItem header="이메일">
                 <Typography size="16" color="black" fontWeight="bold">
-                  ohbaya@naver.com
+                  {profile?.email}
                 </Typography>
               </InfoItem>
               <InfoItem header="최초 가입일">
                 <Typography size="16" color="black" fontWeight="bold">
-                  2020.02.20
+                  {profile?.createdDate}
                 </Typography>
               </InfoItem>
               <InfoItem header="직업">
                 <Typography size="16" color="black" fontWeight="bold">
-                  client
+                  {profile?.userRole}
                 </Typography>
               </InfoItem>
               <InfoItem header="평점">
                 <Typography size="16" color="blue" fontWeight="bold">
-                  4.3
+                  {profile?.grade}
                 </Typography>
               </InfoItem>
             </ItemWrapper>
@@ -72,11 +94,11 @@ export const Profile = () => {
             <IntroduceBoxWrapper>
               {isIntroduceChange ? (
                 <CustomIntroduceInput
-                  value={introduce}
+                  value={inputIntroduce}
                   onChange={handleChangeIntroduce}
                 />
               ) : (
-                <div>{introduce}</div>
+                <div> {profile?.introduction}</div>
               )}
             </IntroduceBoxWrapper>
           </ProfileLayout>

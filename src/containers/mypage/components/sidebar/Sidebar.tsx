@@ -1,15 +1,44 @@
 import { useRouter } from 'next/router';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
+import { pathName } from 'src/constants/pathName';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import styled from 'styled-components';
 import { NavItem } from './NavItem';
 
-type SideBarType = {
-  NavItemInfo: { name: string; pathName: string }[];
-  nickName: string;
-};
+const NavItemInfo = [
+  {
+    name: '프로필',
+    pathName: pathName.MYPAGE.PROFILE,
+  },
+  {
+    name: '평점',
+    pathName: pathName.MYPAGE.RATE,
+  },
+  {
+    name: '후기 남기기',
+    pathName: pathName.MYPAGE.REVIEW,
+  },
+  {
+    name: '작성 글',
+    pathName: pathName.MYPAGE.POST.ALL,
+  },
+  {
+    name: '작성 댓글',
+    pathName: pathName.MYPAGE.COMMENT,
+  },
+  {
+    name: '설정',
+    pathName: pathName.MYPAGE.OPTION,
+  },
+];
 
-export const SideBar = ({ NavItemInfo, nickName }: SideBarType) => {
+const NICKNAME = 'nickname';
+
+export const SideBar = () => {
+  const { getSessionStorage } = useSessionStorage();
+  const nickName = getSessionStorage(NICKNAME);
+
   const route = useRouter();
   return (
     <Wrapper>

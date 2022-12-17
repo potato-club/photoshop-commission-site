@@ -1,35 +1,5 @@
 import { SideBar } from './sidebar/Sidebar';
 import styled from 'styled-components';
-import { pathName } from 'src/constants/pathName';
-
-const nickName = '양파먹는소녀';
-
-const NavItemInfo = [
-  {
-    name: '프로필',
-    pathName: pathName.MYPAGE.PROFILE,
-  },
-  {
-    name: '평점',
-    pathName: pathName.MYPAGE.RATE,
-  },
-  {
-    name: '후기 남기기',
-    pathName: pathName.MYPAGE.REVIEW,
-  },
-  {
-    name: '작성 글',
-    pathName: pathName.MYPAGE.POST.ALL,
-  },
-  {
-    name: '작성 댓글',
-    pathName: pathName.MYPAGE.COMMENT,
-  },
-  {
-    name: '설정',
-    pathName: pathName.MYPAGE.OPTION,
-  },
-];
 
 type MyPageLayoutType = React.PropsWithChildren<{}>;
 
@@ -37,7 +7,7 @@ export const MyPageLayout = ({ children }: MyPageLayoutType) => {
   return (
     <Container>
       <SideBarWrapper>
-        <SideBar nickName={nickName} NavItemInfo={NavItemInfo} />
+        <SideBar />
       </SideBarWrapper>
       <Wrapper>{children}</Wrapper>
     </Container>
