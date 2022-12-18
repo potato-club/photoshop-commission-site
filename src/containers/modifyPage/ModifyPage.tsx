@@ -23,11 +23,10 @@ export const ModifyPage = ({ title, imageUrls, contents }: Props) => {
     formState: { errors },
   } = useForm();
   const router = useRouter();
-  const { access, refresh } = useGetToken();
 
   const { mutate } = useMutation(
     (frm: FieldValues) =>
-      boardApi.update(router.query.id, frm, access, refresh),
+      boardApi.update(router.query.id, frm),
     {
       onSuccess: () => {
         infoModal('수정이 완료되었습니다.', 'success', '', () => {

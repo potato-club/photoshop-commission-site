@@ -26,10 +26,8 @@ export function EditorPage() {
     formState: { errors },
   } = useForm();
 
-  const { access, refresh } = useGetToken();
-
   const { mutate } = useMutation(
-    (frm: FieldValues) => boardApi.create(frm, access, refresh),
+    (frm: FieldValues) => boardApi.create(frm),
     {
       onSuccess: () => {
         infoModal('등록이 완료되었습니다.', 'success', '', () => {
