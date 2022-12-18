@@ -1,24 +1,19 @@
 import React from 'react';
 import { customColor } from 'src/constants/customColor';
-import useModal from 'src/hooks/useModal';
 import { checkModal, infoModal } from 'src/utils/interactionModal';
 import styled from 'styled-components';
 import { Typography } from './Typography';
-import { AiFillEdit } from 'react-icons/ai';
 import { useMutation, useQueryClient } from 'react-query';
 import { requestApi } from 'src/apis/request';
 import { useRouter } from 'next/router';
-import { useGetToken } from 'src/hooks/useGetToken';
 
 export const RequestModalBtn = () => {
   // const { isOpen, handleOpenModal, handleClosetModal } = useModal();
   const router = useRouter();
-  const { access, refresh } = useGetToken();
   const queryClient = useQueryClient();
 
-
   const { mutate } = useMutation(
-    () => requestApi.acceptRequest(router.query.id, access, refresh),
+    () => requestApi.acceptRequest(router.query.id),
     {
       onSuccess: () => {
         infoModal('커미션 신청이 완료되었습니다.', 'success');

@@ -11,8 +11,8 @@ export const useCheckWriter = () => {
   const [myPost, setMyPost] = useState<boolean>();
 
   useQuery(
-    ['checkWriter', router.query.id, access, refresh],
-    () => checkApi.checkWriter({ id: router.query.id }, access, refresh),
+    ['checkWriter', router.query.id],
+    () => checkApi.checkWriter({ id: router.query.id }),
     {
       enabled: !!access && !!refresh && router.isReady,
       onSuccess: ({ data }) => {

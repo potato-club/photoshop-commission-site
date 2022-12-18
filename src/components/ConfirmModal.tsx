@@ -48,7 +48,7 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
   useQuery(
     ['getRequestList', router.query.id, access, refresh, page],
     () =>
-      requestApi.getRequestUserList(router.query.id, { page }, access, refresh),
+      requestApi.getRequestUserList(router.query.id, { page }),
     {
       enabled: isOpen,
       onSuccess: ({ data: { content, totalElements } }) => {

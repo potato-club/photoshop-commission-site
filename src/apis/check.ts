@@ -1,9 +1,9 @@
 import api from './common';
 
 export const checkApi = {
-  checkJob: async (accessToken: any, refreshToken: any) =>
-    api.getWithParamsToken('check/enum', undefined, accessToken, refreshToken),
+  checkJob: async () =>
+    api.getWithParamsToken('check/enum', undefined),
 
-  checkWriter: async (id:any, accessToken: any, refreshToken: any) =>
-    api.getWithParamsToken('check/writer', id, accessToken, refreshToken)
+  checkWriter: async (id:any) =>
+    api.getWithParamsToken('check/writer', id)
 };

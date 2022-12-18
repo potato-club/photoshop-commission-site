@@ -18,15 +18,14 @@ export function CustomInput({ type, parentId }: Props) {
   const {
     query: { id },
   } = useRouter();
-  const { access, refresh } = useGetToken();
 
   const { register, handleSubmit, reset } = useForm();
 
   const { mutate } = useMutation(
     (comment: FieldValues) =>
       parentId
-        ? boardApi.postReply(id, { comment, parentId }, access, refresh)
-        : boardApi.postComment(id, { comment }, access, refresh),
+        ? boardApi.postReply(id, { comment, parentId })
+        : boardApi.postComment(id, { comment }),
     {
       onSuccess: () => {
         reset();

@@ -12,9 +12,8 @@ type Props = {
 };
 export const MenuItem = ({ myPost }: Props) => {
   const router = useRouter();
-  const { access, refresh } = useGetToken();
 
-  const { mutate } = useMutation(() => boardApi.delete(router.query.id, access, refresh), {
+  const { mutate } = useMutation(() => boardApi.delete(router.query.id), {
     onSuccess: () => {
       infoModal('삭제가 완료 되었습니다.' , 'success'); // 확인버튼 누르고 메인페이지 보낼거면 await
       router.push('/main');
