@@ -1,56 +1,32 @@
 import Link from 'next/link';
 import { formatDate } from 'src/utils/formatDate';
-import { IDummyList } from 'src/dummy/dummyList';
 import styled from 'styled-components';
 import Image from 'next/image';
 import { useMemo } from 'react';
 import { Typography } from 'src/components';
+import { MyPost } from '../types/post.type';
+import Photo from 'src/components/Photo';
+import Theme from 'src/components/Theme';
+import NameAndDate from 'src/components/NameAndDate';
 
-export const MyCard = ({ id, title, writer, date, imageUrls }: IDummyList) => {
+type Props = {
+  post: MyPost;
+};
+
+export const MyCard = ({ post }: Props) => {
   const theme = useMemo(
-    () => (title.length >= 30 ? title.substring(0, 30) + '...' : title),
-    [title],
+    () =>
+      post.title.length >= 30
+        ? post.title.substring(0, 30) + '...'
+        : post.title,
+    [post],
   );
 
   return (
     <Container>
-      <PhotoBox>
-        <Link href={`/detail/${id}`} passHref>
-          <A>
-            <NewImage
-              src={imageUrls}
-              width="191px"
-              height="143px"
-              alt="비공개"
-            />
-          </A>
-        </Link>
-      </PhotoBox>
-      <ThemeBox>
-        <Link href={`/detail/${id}`} passHref>
-          <A>
-            <Typography size="14" color="black">
-              {theme}
-            </Typography>
-          </A>
-        </Link>
-      </ThemeBox>
-      <NameDateBox>
-        <div>
-          <Link href={`/detail/${id}`} passHref>
-            <A>
-              <Typography size="14" color="blue" fontWeight="bold">
-                {writer}
-              </Typography>
-            </A>
-          </Link>
-        </div>
-        <div>
-          <Typography size="14" color="lightBlue" fontWeight="bold">
-            {formatDate(String(date))}
-          </Typography>
-        </div>
-      </NameDateBox>
+      <Photo id={post.id} image={post.image} imageOpen={post.imageOpen} />
+      <Theme id={post.id} title={post.title} />
+      <NameAndDate id={post.id} nickname={post.nickname} />
     </Container>
   );
 };
@@ -67,6 +43,7 @@ const Container = styled.div`
   padding: 5px;
   :hover {
     background-color: #e1e1e1;
+    border-radius: 10px;
   }
 `;
 

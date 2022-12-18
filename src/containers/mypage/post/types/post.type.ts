@@ -1,9 +1,11 @@
+import { imageOpenType } from 'src/types/imageOpen.type';
+
 export type MyPost = {
   createdDate: string;
   id: number;
   image: ImageFile[];
 
-  imageOpen: string;
+  imageOpen: imageOpenType;
   nickname: string;
   questEnum: string;
   title: string;

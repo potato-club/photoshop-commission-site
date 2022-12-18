@@ -104,14 +104,14 @@ const RequestBoard = ({
           <ErrorMessage>게시글을 불러오는데 실패했습니다</ErrorMessage>
         </MesssageWrapper>
       )}
-      {!isLoading && !isError && list.length === 0 && (
+      {list && !isLoading && !isError && list.length === 0 && (
         <MesssageWrapper>
           <Typography size="16" fontWeight="bold">
             게시글이 없습니다
           </Typography>
         </MesssageWrapper>
       )}
-      {list.length !== 0 && (
+      {list && list.length !== 0 && (
         <MyCardList list={list} offset={0} limit={LIMIT_LENGTH} />
       )}
     </RequestBox>
@@ -153,6 +153,9 @@ const A = styled.a`
 `;
 
 const MesssageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   padding-top: 80px;
 `;

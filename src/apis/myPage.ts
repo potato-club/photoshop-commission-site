@@ -8,7 +8,7 @@ export const myPageApi = {
         accessToken,
         refreshToken,
       );
-      return response.data;
+      return response;
     },
   },
   myPost: {
@@ -18,7 +18,7 @@ export const myPageApi = {
         accessToken,
         refreshToken,
       );
-      return response.data;
+      return response;
     },
     beforeAll: async (page: number, accessToken: any, refreshToken: any) => {
       const response = await api.getWithParamsToken(
@@ -27,7 +27,7 @@ export const myPageApi = {
         accessToken,
         refreshToken,
       );
-      return response.data;
+      return response;
     },
     complete: async (accessToken: any, refreshToken: any) => {
       const response = await api.getWithToken(
@@ -35,7 +35,7 @@ export const myPageApi = {
         accessToken,
         refreshToken,
       );
-      return response.data;
+      return response;
     },
     completeAll: async (page: number, accessToken: any, refreshToken: any) => {
       const response = await api.getWithParamsToken(
@@ -44,7 +44,7 @@ export const myPageApi = {
         accessToken,
         refreshToken,
       );
-      return response.data;
+      return response;
     },
     requesting: async (accessToken: any, refreshToken: any) => {
       const response = await api.getWithToken(
@@ -52,7 +52,7 @@ export const myPageApi = {
         accessToken,
         refreshToken,
       );
-      return response.data;
+      return response;
     },
     requestingAll: async (
       page: number,
@@ -65,7 +65,7 @@ export const myPageApi = {
         accessToken,
         refreshToken,
       );
-      return response.data;
+      return response;
     },
   },
 };

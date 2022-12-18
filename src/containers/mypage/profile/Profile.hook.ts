@@ -8,7 +8,6 @@ export const useProfile = () => {
   const [isInfoChange, setIsInfoChange] = useState(false);
   const [isIntroduceChange, setIsIntroduceChange] = useState(false);
   const { profile, isLoading, isError } = useQueryGetProfile();
-
   const handleChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
     setInputNickname(e.target.value);
   };
