@@ -74,7 +74,7 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
         isOpen={isOpen}
         onRequestClose={() => handleClosetModal()}
         style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Confirm Modal"
       >
         <Wrapper>
           <Header>

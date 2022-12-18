@@ -9,9 +9,10 @@ type Props = {
   marginTop?: string;
   marginBottom?: string;
   leftPosition?: string;
+  rightPosition?: string;
   bottomPosition?: string;
 };
-export const CustomErrorMessage = ({ errors, name, marginTop, marginBottom, leftPosition,bottomPosition}: Props) => {
+export const CustomErrorMessage = ({ errors, name, marginTop, rightPosition, marginBottom, leftPosition,bottomPosition}: Props) => {
   return (
     <ErrorMessage
       errors={errors}
@@ -21,6 +22,7 @@ export const CustomErrorMessage = ({ errors, name, marginTop, marginBottom, left
           marginTop={marginTop}
           marginBottom={marginBottom}
           leftPosition={leftPosition}
+          rightPosition={rightPosition}
           bottomPosition={bottomPosition}
         >
           <Typography size="16" color="danger">
@@ -35,6 +37,7 @@ type StyledProps = {
   marginTop?: string;
   marginBottom?: string;
   leftPosition?: string;
+  rightPosition?: string;
   bottomPosition?: string;
 };
 const ErrorWrapper = styled.div<StyledProps>`
@@ -43,6 +46,7 @@ const ErrorWrapper = styled.div<StyledProps>`
   ${({ marginTop }) => (marginTop ? `margin-top: ${marginTop}px` : '')};
   ${({ marginBottom }) => (marginBottom ? `margin-top: ${marginBottom}px` : '')};
   ${({ leftPosition }) => (leftPosition ? `left: ${leftPosition}px` : '')};
+  ${({ rightPosition }) => (rightPosition ? `right: ${rightPosition}px` : '')};
   ${({ bottomPosition }) => (bottomPosition ? `bottom: ${bottomPosition}px;` : '')};
   width: max-content;
 `;
