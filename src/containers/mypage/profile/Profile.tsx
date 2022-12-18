@@ -12,12 +12,12 @@ export const Profile = () => {
     profile,
     isLoading,
     isError,
-    inputNickname,
-    inputIntroduce,
+
     isInfoChange,
+    nicknameRef,
+    introduceRef,
     isIntroduceChange,
-    handleChangeNickname,
-    handleChangeIntroduce,
+
     handleInfoChange,
     handleIntroduceChange,
   } = useProfile();
@@ -52,9 +52,9 @@ export const Profile = () => {
               <InfoItem header="닉네임">
                 {isInfoChange ? (
                   <input
-                    value={inputNickname}
+                    ref={nicknameRef}
+                    value={profile?.nickname}
                     placeholder="닉네임은 8글자 이하"
-                    onChange={handleChangeNickname}
                   />
                 ) : (
                   <Typography size="16" color="black" fontWeight="bold">
@@ -94,8 +94,8 @@ export const Profile = () => {
             <IntroduceBoxWrapper>
               {isIntroduceChange ? (
                 <CustomIntroduceInput
-                  value={inputIntroduce}
-                  onChange={handleChangeIntroduce}
+                  ref={introduceRef}
+                  value={profile?.introduction}
                 />
               ) : (
                 <div> {profile?.introduction}</div>
