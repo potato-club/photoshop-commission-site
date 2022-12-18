@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
 import { FaPaperPlane } from 'react-icons/fa';
@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useGetToken } from 'src/hooks/useGetToken';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import { infoModal } from 'src/utils/interactionModal';
+import { errorModal, infoModal } from 'src/utils/interactionModal';
 
 type Props = {
   type: 'Board' | 'Comment';
@@ -20,7 +20,7 @@ export function CustomInput({ type, parentId }: Props) {
   } = useRouter();
   const { access, refresh } = useGetToken();
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const { mutate } = useMutation(
     (comment: FieldValues) =>
@@ -29,10 +29,13 @@ export function CustomInput({ type, parentId }: Props) {
         : boardApi.postComment(id, { comment }, access, refresh),
     {
       onSuccess: () => {
+        reset();
         infoModal('댓글 등록이 완료되었습니다.', 'success');
         queryClient.invalidateQueries('getItem');
       },
-      onError: () => {},
+      onError: () => {
+        errorModal('댓글작성 오류');
+      },
     },
   );
 

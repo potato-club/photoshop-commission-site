@@ -9,14 +9,6 @@ export default {
   getWithParams: async (url: string, params: any) =>
     await axios.get(setting.baseUrl + url, params),
 
-  getWithToken: async (url: string, accessToken: any, refreshToken: any) =>
-    await axios.get(setting.baseUrl + url, {
-      headers: {
-        authorization: accessToken,
-        refreshToken,
-      },
-    }),
-
   getWithParamsToken: async (
     url: string,
     params: any,
