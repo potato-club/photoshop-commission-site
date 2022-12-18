@@ -15,14 +15,14 @@ const NameAndDate = ({ id, nickname }: INameAndDate) => {
       <div>
         <Link href={`/detail/${id}`} passHref>
           <a>
-            <Typography size="16" color="blue" fontWeight="900">
+            <Typography size="16" color="blue" fontWeight="bold">
               {nickname}
             </Typography>
           </a>
         </Link>
       </div>
       <div>
-        <Typography size="16" color="lightBlue" fontWeight="900">
+        <Typography size="16" color="lightBlue" fontWeight="bold">
           {/* {createDate} */}
         </Typography>
       </div>

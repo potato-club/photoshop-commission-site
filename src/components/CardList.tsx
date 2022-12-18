@@ -9,9 +9,7 @@ interface CardListType {
 export const CardList = ({ list }: CardListType) => {
   return (
     <CardBox>
-      {list.map(cardInfo => (
-        <Card key={cardInfo.id} {...cardInfo} />
-      ))}
+      {list && list.map(cardInfo => <Card key={cardInfo.id} {...cardInfo} />)}
     </CardBox>
   );
 };

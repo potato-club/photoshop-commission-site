@@ -14,8 +14,13 @@ export function useCookies() {
     return cookies.get(name);
   };
 
+  const removeCookie = (name:string) => {
+    cookies.remove(name, {path: '/'});
+  }
+
   return {
     setCookie,
-    getCookie
+    getCookie,
+    removeCookie
   };
 }

@@ -10,10 +10,10 @@ export const stateApi = {
     api.get(`main/requesting/all?page=${page}`),
 
   getFilterNickName: async (keyword: string, page: number) => {
-    api.get(`filter/nickname?keyword=${keyword}&page=${page}`);
+    return await api.get(`filter/nickname?keyword=${keyword}&page=${page}`);
   },
 
   getFilterTitle: async (keyword: string, page: number) => {
-    api.get(`filter/title?keyword=${keyword}&page=${page}`);
+    return await api.get(`filter/title?keyword=${keyword}&page=${page}`);
   },
 };

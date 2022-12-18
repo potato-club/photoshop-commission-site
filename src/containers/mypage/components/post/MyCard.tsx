@@ -39,14 +39,14 @@ export const MyCard = ({ id, title, writer, date, imageUrls }: IDummyList) => {
         <div>
           <Link href={`/detail/${id}`} passHref>
             <A>
-              <Typography size="16" color="blue" fontWeight="900">
+              <Typography size="16" color="blue" fontWeight="bold">
                 {writer}
               </Typography>
             </A>
           </Link>
         </div>
         <div>
-          <Typography size="16" color="lightBlue" fontWeight="900">
+          <Typography size="16" color="lightBlue" fontWeight="bold">
             {formatDate(date)}
           </Typography>
         </div>

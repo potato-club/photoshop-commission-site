@@ -8,13 +8,13 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = new QueryClient();
   return (
-    // <Provider store={store}>
+    <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
       </QueryClientProvider>
-    // </Provider>
+    </Provider>
   );
 }
 
