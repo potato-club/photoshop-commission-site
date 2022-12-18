@@ -17,7 +17,6 @@ export const useCheckWriter = () => {
       enabled: !!access && !!refresh && router.isReady,
       onSuccess: ({ data }) => {
         setMyPost(data);
-        return data;
       },
       onError: error => {
         alert('사용자정보 체크오류');

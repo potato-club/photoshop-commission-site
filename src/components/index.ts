@@ -9,5 +9,4 @@ export { CustomPagination } from './CustomPagination';
 export { MainRequestBoard } from '../containers/mainPage/components/MainRequestBoard';
 export { ConfirmModal } from './ConfirmModal';
 export { ConfirmModalBtn } from './ConfirmModalBtn';
-export { RequestModal } from './RequestModal';
 export { RequestModalBtn } from './RequestModalBtn';

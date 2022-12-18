@@ -38,7 +38,7 @@ const Container = styled.div`
   height: 279px;
   background-color: rgba(7, 104, 159, 0.14);
   position: relative;
-  width: 100vw;
+  width: 100%;
   margin-bottom: 90px;
 `;
 
@@ -50,7 +50,8 @@ const Wrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  width: 1178px;
+  width: 100%;
+  max-width: 1178px;
   list-style: none;
   margin: 0 auto;
 `;

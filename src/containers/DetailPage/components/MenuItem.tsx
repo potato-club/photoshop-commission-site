@@ -27,10 +27,6 @@ export const MenuItem = ({ myPost }: Props) => {
     checkModal('삭제 하시겠습니까?', () => mutate());
   };
 
-  const update = () => {
-    // 수정하기 페이지로 보내기 (쿼리도 같이 보내기)
-  };
-
   return (
     <Container>
       {myPost ? (
