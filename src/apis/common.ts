@@ -3,15 +3,13 @@ import { setting } from 'src/constants/setting';
 import { tokenService } from 'src/libs/tokenService';
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  get: async (url: string) => await axios.get(setting.baseUrl + url),
+  // get: async (url: string) => await axios.get(setting.baseUrl + url),
 
-  getWithParams: async (url: string, params: any) =>
+  get: async (url: string, params?: any) =>
     await axios.get(setting.baseUrl + url, params),
-
-  getWithParamsToken: async (url: string, params: any) => {
+  getWithAuth: async (url: string, params?: any) => {
     const accessToken = tokenService.getAccessToken();
     const refreshToken = tokenService.getRefreshToken();
-
     return await axios.get(setting.baseUrl + url, {
       params,
       headers: {
@@ -24,12 +22,9 @@ export default {
   post: async (url: string, data: any) =>
     await axios.post(setting.baseUrl + url, data),
 
-  postWithToken: async (url: string, data: any) => {
+  postWithAuth: async (url: string, data?: any) => {
     const accessToken = tokenService.getAccessToken();
     const refreshToken = tokenService.getRefreshToken();
-
-    console.log(accessToken)
-    console.log(refreshToken);
 
     return await axios.post(setting.baseUrl + url, data, {
       headers: {
@@ -39,7 +34,7 @@ export default {
     });
   },
 
-  put: async (url: string, data: any) => {
+  put: async (url: string, data?: any) => {
     const accessToken = tokenService.getAccessToken();
     const refreshToken = tokenService.getRefreshToken();
 

@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { DetailPage } from 'src/containers';
 import { useGetDetail } from 'src/hooks/useGetDetail';
-import { useCheckWriter } from 'src/hooks/useCheckWriter';
 
 export default function Detail() {
   const { data } = useGetDetail();
-  const { myPost } = useCheckWriter();
 
 
-  return <>{data && <DetailPage detailData={data} myPost={myPost} />}</>;
+  return <>{data && <DetailPage detailData={data} />}</>;
 }
 
 //////////////////////////////////// * get ServerSideProps 쓰는 코드 ///////////////////////////////////////

@@ -6,7 +6,6 @@ import { Header, Contents, Buttons } from './components';
 import { ImageType } from 'src/types/image.type';
 import { boardApi } from 'src/apis/board';
 import { useRouter } from 'next/router';
-import { useGetToken } from 'src/hooks/useGetToken';
 import { useMutation } from 'react-query';
 import { infoModal } from 'src/utils/interactionModal';
 
