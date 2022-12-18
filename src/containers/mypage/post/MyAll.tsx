@@ -91,15 +91,13 @@ const RequestBoard = ({
       </Title>
       <Hr />
 
-      {list && list.length !== 0 && (
-        <MyCardList
-          list={list}
-          offset={0}
-          limit={LIMIT_LENGTH}
-          isLoading={isLoading}
-          isError={isError}
-        />
-      )}
+      <MyCardList
+        list={list}
+        offset={0}
+        limit={LIMIT_LENGTH}
+        isLoading={isLoading}
+        isError={isError}
+      />
     </RequestBox>
   );
 };

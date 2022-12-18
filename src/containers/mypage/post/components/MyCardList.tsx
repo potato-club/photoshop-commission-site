@@ -20,6 +20,7 @@ export const MyCardList = ({
   isLoading,
   isError,
 }: Props) => {
+  console.log(list);
   if (isLoading)
     return (
       <MesssageWrapper>
@@ -36,7 +37,7 @@ export const MyCardList = ({
   if (list && !isLoading && !isError && list.length === 0)
     return (
       <MesssageWrapper>
-        <Typography size="16" fontWeight="bold">
+        <Typography size="16" fontWeight="bold" color="gray">
           게시글이 없습니다
         </Typography>
       </MesssageWrapper>
