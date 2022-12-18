@@ -5,20 +5,21 @@ import { useGetToken } from './useGetToken';
 import { useState, useEffect } from 'react';
 import { useSessionStorage } from './useSessionStorage';
 
-export const useCheckWriter = () => {
+export const useCheckSelectedArtist = () => {
   const router = useRouter();
   const { access, refresh } = useGetToken();
-  const [myPost, setMyPost] = useState<boolean>();
+  const [selectedArtist, setSelectedArtist] = useState<boolean>();
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
 
   useQuery(
-    ['checkWriter', router.query.id],
-    () => checkApi.checkWriter({ id: router.query.id }),
+    ['checkSelectedArtist', router.query.id],
+    () => checkApi.checkSelectedArtist(router.query.id),
     {
-      enabled: !!access && !!refresh && router.isReady && job === 'USER',
-      onSuccess: ({ data }) => {
-        setMyPost(data);
+      enabled: !!access && !!refresh && router.isReady && job === 'ARTIST',
+      onSuccess: ({data}) => {
+        console.log(data);
+        setSelectedArtist(data);
       },
       onError: error => {
         alert('사용자정보 체크오류');
@@ -28,10 +29,10 @@ export const useCheckWriter = () => {
   );
 
   useEffect(() => {
-    console.log(myPost);
-  }, [myPost]);
+    console.log(selectedArtist);
+  }, [selectedArtist]);
 
   return {
-    myPost,
+    selectedArtist,
   };
 };

@@ -14,14 +14,18 @@ import {
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { CommentList } from './components/CommentList';
 import { BoardType } from 'src/types/board.type';
+import { useCheckSelectedArtist } from 'src/hooks/useCheckSelectedArtist';
+import { UploadModalBtn } from './components/UploadModalBtn';
+import { useCheckWriter } from 'src/hooks/useCheckWriter';
 type Props = {
   detailData : BoardType;
-  myPost?: boolean;
 }
-export function DetailPage({ detailData, myPost }: Props) {
+export function DetailPage({ detailData }: Props) {
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
   const {title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList} = detailData;
+  const { selectedArtist } = useCheckSelectedArtist();
+  const { myPost } = useCheckWriter();
 
   return (
     <Container>
@@ -31,6 +35,7 @@ export function DetailPage({ detailData, myPost }: Props) {
         <ModalWrapper>
           {myPost && <ConfirmModalBtn />}
           {job === 'ARTIST' && <RequestModalBtn />}
+          {selectedArtist && <UploadModalBtn />}
         </ModalWrapper>
         <CommentContainer>
           <CommentHeader totalComment={totalComment}/>

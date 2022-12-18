@@ -13,7 +13,6 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { infoModal } from 'src/utils/interactionModal';
 import { useRouter } from 'next/router';
 import { useMutation } from 'react-query';
-import { useGetToken } from 'src/hooks/useGetToken';
 
 // const testUrl = 'http://localhost:3000/board/create';
 

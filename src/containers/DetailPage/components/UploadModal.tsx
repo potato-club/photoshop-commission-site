@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import { Typography } from 'src/components';

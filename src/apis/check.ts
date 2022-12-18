@@ -8,5 +8,5 @@ export const checkApi = {
     api.getWithAuth('check/writer', id),
 
   checkSelectedArtist: async (id:any) =>
-    api.get(`check/${id}/artist`)
+    api.getWithAuth(`check/${id}/artist`)
 };
