@@ -3,8 +3,9 @@ import api from './common';
 export const myPageApi = {
   profile: {
     get: async (accessToken: any, refreshToken: any) => {
-      const response = await api.getWithToken(
+      const response = await api.getWithParamsToken(
         'mypage',
+        undefined,
         accessToken,
         refreshToken,
       );
@@ -13,25 +14,30 @@ export const myPageApi = {
   },
   myPost: {
     before: async (accessToken: any, refreshToken: any) => {
-      const response = await api.getWithToken(
+      const response = await api.getWithParamsToken(
         'mypage/before',
+        undefined,
         accessToken,
         refreshToken,
       );
       return response;
     },
-    beforeAll: async (page: number, accessToken: any, refreshToken: any) => {
+    beforeAll: async (page: any, accessToken: any, refreshToken: any) => {
       const response = await api.getWithParamsToken(
         'mypage/before/all',
-        page,
+        { page },
         accessToken,
         refreshToken,
       );
+      if (response.data) {
+        response.data = response.data.content;
+      }
       return response;
     },
     complete: async (accessToken: any, refreshToken: any) => {
-      const response = await api.getWithToken(
+      const response = await api.getWithParamsToken(
         'mypage/complete',
+        undefined,
         accessToken,
         refreshToken,
       );
@@ -40,15 +46,19 @@ export const myPageApi = {
     completeAll: async (page: number, accessToken: any, refreshToken: any) => {
       const response = await api.getWithParamsToken(
         'mypage/complete/all',
-        page,
+        { page },
         accessToken,
         refreshToken,
       );
+      if (response.data) {
+        response.data = response.data.content;
+      }
       return response;
     },
     requesting: async (accessToken: any, refreshToken: any) => {
-      const response = await api.getWithToken(
+      const response = await api.getWithParamsToken(
         'mypage/requesting',
+        undefined,
         accessToken,
         refreshToken,
       );
@@ -61,10 +71,13 @@ export const myPageApi = {
     ) => {
       const response = await api.getWithParamsToken(
         'mypage/requesting/all',
-        page,
+        { page },
         accessToken,
         refreshToken,
       );
+      if (response.data) {
+        response.data = response.data.content;
+      }
       return response;
     },
   },

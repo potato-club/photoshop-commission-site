@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
-import { MyDoing } from 'src/containers/mypage/post/MyDoing';
+import { MyRequesting } from 'src/containers/mypage/post/MyRequesting';
 
 const postDoing: NextPage = () => {
-  return <MyDoing />;
+  return <MyRequesting />;
 };
 
 export default postDoing;

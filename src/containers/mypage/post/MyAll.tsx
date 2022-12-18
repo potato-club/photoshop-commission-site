@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { pathName } from 'src/constants/pathName';
 import { Typography } from 'src/components';
-import { dummyList } from 'src/dummy/dummyList';
+
 import styled from 'styled-components';
 import { MyPageLayout } from '../components/MyPageLayout';
 import { MyCardList } from './components/MyCardList';
@@ -9,8 +8,6 @@ import { useQueryMyPostBefore } from './hooks/useQueryMyPostBefore';
 import { MyPost } from './types/post.type';
 import { useQueryMyPostComplete } from './hooks/useQueryMyPostComplete';
 import { useQueryMyPostRequesting } from './hooks/useQueryMyPostRequesting';
-import { LoadingMessage } from '../components/LoadingMessage';
-import { ErrorMessage } from '../components/ErrorMessage';
 
 type RequestBoardProps = {
   state: 'before' | 'requesting' | 'complete';
@@ -94,25 +91,14 @@ const RequestBoard = ({
       </Title>
       <Hr />
 
-      {isLoading && (
-        <MesssageWrapper>
-          <LoadingMessage>게시글을 불러오고 있습니다</LoadingMessage>
-        </MesssageWrapper>
-      )}
-      {isError && (
-        <MesssageWrapper>
-          <ErrorMessage>게시글을 불러오는데 실패했습니다</ErrorMessage>
-        </MesssageWrapper>
-      )}
-      {list && !isLoading && !isError && list.length === 0 && (
-        <MesssageWrapper>
-          <Typography size="16" fontWeight="bold">
-            게시글이 없습니다
-          </Typography>
-        </MesssageWrapper>
-      )}
       {list && list.length !== 0 && (
-        <MyCardList list={list} offset={0} limit={LIMIT_LENGTH} />
+        <MyCardList
+          list={list}
+          offset={0}
+          limit={LIMIT_LENGTH}
+          isLoading={isLoading}
+          isError={isError}
+        />
       )}
     </RequestBox>
   );

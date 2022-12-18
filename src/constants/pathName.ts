@@ -10,7 +10,7 @@ export const pathName = {
       ALL: '/mypage/post/all',
       BEFORE: '/mypage/post/before',
       COMPLETE: '/mypage/post/complete',
-      DOING: '/mypage/post/doing',
+      DOING: '/mypage/post/requesting',
     },
     COMMENT: '/mypage/comment',
     OPTION: '/mypage/option',
