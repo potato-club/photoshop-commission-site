@@ -45,7 +45,8 @@ export const HeaderBox = styled.div`
 
 const ContentBox = styled.div`
   display: flex;
-  width: 1178px;
+  width: 100%;
+  max-width: 1178px;
   justify-content: space-between;
   align-items: center;
   height: 100%;
