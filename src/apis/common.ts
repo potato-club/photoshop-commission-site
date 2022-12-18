@@ -28,9 +28,6 @@ export default {
     const accessToken = tokenService.getAccessToken();
     const refreshToken = tokenService.getRefreshToken();
 
-    console.log(accessToken)
-    console.log(refreshToken);
-
     return await axios.post(setting.baseUrl + url, data, {
       headers: {
         authorization: accessToken,

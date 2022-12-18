@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { MyPageLayout } from '../components/MyPageLayout';
 import { CustomButton } from './components/CustomButton';
+import { useOption } from './Option.hook';
 export const Option = () => {
-  const handleClickLogout = () => {};
-  const handleClickSignout = () => {};
+  const { handleClickLogout, handleClickSignout } = useOption();
+
   return (
     <MyPageLayout>
       <Container>
