@@ -46,7 +46,7 @@ export function SignUpPage() {
       removeSessionStorage('serialCode');
       setSessionStorage('access', headers.authorization);
       setCookie('refresh', headers.refreshtoken);
-      setSessionStorage('nickName', data.nickname[0]);
+      setSessionStorage('nickname', data.nickname[0]);
       setSessionStorage('job', data.userRole[0]);
       infoModal('회원가입이 완료되었습니다', 'success')
       router.push('/main');
