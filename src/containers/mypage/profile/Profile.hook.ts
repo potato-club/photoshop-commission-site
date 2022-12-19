@@ -12,9 +12,10 @@ export const useProfile = () => {
   const [introduce, setIntroduce] = useState('');
 
   const { refetch } = useQueryEditProfile({
-    nickname: nickname === '' ? undefined : nickname,
-    introduction: introduce === '' ? undefined : introduce,
-    userRole: role === '' ? undefined : role,
+    nickname: nickname === '' || !isInfoChange ? undefined : nickname,
+    introduction:
+      introduce === '' || !isIntroduceChange ? undefined : introduce,
+    userRole: role === '' || !isInfoChange ? undefined : role,
   });
 
   useEffect(() => {
