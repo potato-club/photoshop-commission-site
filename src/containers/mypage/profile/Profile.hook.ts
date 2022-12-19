@@ -1,6 +1,6 @@
-import { ChangeEvent, LegacyRef, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { errorModal } from 'src/utils/interactionModal';
-import { useQueryEditProfile } from './hooks/useQueryEditProfileApi copy';
+import { useQueryEditProfile } from './hooks/useQueryEditProfileApi';
 import { useQueryGetProfile } from './hooks/useQueryGetProfileApi';
 
 export const useProfile = () => {

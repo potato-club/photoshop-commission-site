@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { myPageApi } from 'src/apis/myPage';
-import { useGetToken } from 'src/hooks/useGetToken';
 import { Profile } from '../types/profile.type';
 
 export const useQueryGetProfile = () => {
