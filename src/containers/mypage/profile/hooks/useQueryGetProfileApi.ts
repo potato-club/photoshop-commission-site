@@ -7,12 +7,11 @@ import { Profile } from '../types/profile.type';
 
 export const useQueryGetProfile = () => {
   const router = useRouter();
-  const { access, refresh } = useGetToken();
   const [profile, setProfile] = useState<Profile>();
 
   const { isLoading, isError } = useQuery(
     ['getProfile'],
-    () => myPageApi.profile.get(access, refresh),
+    () => myPageApi.profile.get(),
     {
       enabled: router.isReady,
       retry: 0,

@@ -1,3 +1,4 @@
+import { CustomRadioButton } from 'src/components/CustomRadioButton';
 import { Typography } from 'src/components/Typography';
 import styled from 'styled-components';
 import { ErrorMessage } from '../components/ErrorMessage';
@@ -12,14 +13,16 @@ export const Profile = () => {
     profile,
     isLoading,
     isError,
-
     isInfoChange,
-    nicknameRef,
-    introduceRef,
+    nickname,
+    introduce,
     isIntroduceChange,
-
-    handleInfoChange,
-    handleIntroduceChange,
+    role,
+    handleChangeRole,
+    handleClickInfo,
+    handleClickIntroduce,
+    handleChangeIntroduce,
+    handleChangeNickname,
   } = useProfile();
   if (isLoading) {
     return (
@@ -45,16 +48,16 @@ export const Profile = () => {
         <Wrapper>
           <ProfileLayout
             title="개인정보"
-            handleClickButton={handleInfoChange}
+            handleClickButton={handleClickInfo}
             isChangeState={isInfoChange}
           >
             <ItemWrapper>
               <InfoItem header="닉네임">
                 {isInfoChange ? (
                   <input
-                    ref={nicknameRef}
-                    value={profile?.nickname}
+                    value={nickname}
                     placeholder="닉네임은 8글자 이하"
+                    onChange={handleChangeNickname}
                   />
                 ) : (
                   <Typography size="16" color="black" fontWeight="bold">
@@ -73,9 +76,34 @@ export const Profile = () => {
                 </Typography>
               </InfoItem>
               <InfoItem header="직업">
-                <Typography size="16" color="black" fontWeight="bold">
-                  {profile?.userRole}
-                </Typography>
+                {isInfoChange ? (
+                  <>
+                    <CustomRadioButton
+                      id="USER"
+                      label="의뢰자"
+                      name="userRole"
+                      selectedValue={role}
+                      onChange={handleChangeRole}
+                      gap={10}
+                      marginLeft={65}
+                      marginRight={20}
+                    />
+                    <CustomRadioButton
+                      id="ARTIST"
+                      label="디자이너"
+                      name="userRole"
+                      selectedValue={role}
+                      onChange={handleChangeRole}
+                      gap={10}
+                      marginLeft={65}
+                      marginRight={20}
+                    />
+                  </>
+                ) : (
+                  <Typography size="16" color="black" fontWeight="bold">
+                    {profile?.userRole}
+                  </Typography>
+                )}
               </InfoItem>
               <InfoItem header="평점">
                 <Typography size="16" color="blue" fontWeight="bold">
@@ -88,14 +116,14 @@ export const Profile = () => {
         <Wrapper>
           <ProfileLayout
             title="자기소개"
-            handleClickButton={handleIntroduceChange}
+            handleClickButton={handleClickIntroduce}
             isChangeState={isIntroduceChange}
           >
             <IntroduceBoxWrapper>
               {isIntroduceChange ? (
                 <CustomIntroduceInput
-                  ref={introduceRef}
-                  value={profile?.introduction}
+                  value={introduce}
+                  onChange={handleChangeIntroduce}
                 />
               ) : (
                 <div> {profile?.introduction}</div>

@@ -1,9 +1,14 @@
 import api from './common';
+import { EditProfileType } from './myPage.type';
 
 export const myPageApi = {
   profile: {
     get: async () => {
       const response = await api.getWithParamsToken('mypage', undefined);
+      return response;
+    },
+    edit: async (params: EditProfileType) => {
+      const response = await api.put('mypage/update', params);
       return response;
     },
   },

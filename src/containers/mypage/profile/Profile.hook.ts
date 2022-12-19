@@ -1,28 +1,40 @@
 import { ChangeEvent, LegacyRef, useEffect, useRef, useState } from 'react';
 import { errorModal } from 'src/utils/interactionModal';
+import { useQueryEditProfile } from './hooks/useQueryEditProfileApi copy';
 import { useQueryGetProfile } from './hooks/useQueryGetProfileApi';
 
 export const useProfile = () => {
   const [isInfoChange, setIsInfoChange] = useState(false);
   const [isIntroduceChange, setIsIntroduceChange] = useState(false);
   const { profile, isLoading, isError } = useQueryGetProfile();
-  const nicknameRef = useRef<HTMLInputElement>(null);
-  const introduceRef = useRef<HTMLTextAreaElement>(null);
+  const [role, setRole] = useState<string>('');
+  const [nickname, setNickname] = useState('');
+  const [introduce, setIntroduce] = useState('');
 
-  const handleInfoChange = async () => {
+  const { refetch } = useQueryEditProfile({
+    nickname: nickname === '' ? undefined : nickname,
+    introduction: introduce === '' ? undefined : introduce,
+    userRole: role === '' ? undefined : role,
+  });
+
+  useEffect(() => {
+    if (profile && isInfoChange) setRole(profile?.userRole);
+  }, [isInfoChange, profile]);
+
+  const handleClickInfo = async () => {
     try {
       if (isInfoChange) {
-        if (nicknameRef.current!.value.length > 8) {
+        if (nickname.length > 8) {
           errorModal('닉네임은 8글자 이하로 설정해주세요');
           return;
-        } else if (nicknameRef.current!.value === '') {
+        } else if (nickname === '') {
           errorModal('닉네임을 입력해주세요.');
           return;
         }
-        //Todo: API에 저장하기
-
+        refetch();
         setIsInfoChange(false);
       } else {
+        setNickname(profile?.nickname ?? '');
         setIsInfoChange(true);
       }
     } catch (e) {
@@ -30,34 +42,47 @@ export const useProfile = () => {
     }
   };
 
-  const handleIntroduceChange = async () => {
+  const handleClickIntroduce = async () => {
     try {
       if (isIntroduceChange) {
-        if (introduceRef.current!.value === '') {
+        if (introduce === '') {
           errorModal('자기소개를 작성해주세요');
           return;
         }
-        //Todo: API에 저장하기
+        refetch();
         setIsIntroduceChange(false);
       } else {
-        introduceRef.current!.value = profile?.introduction ?? '';
+        setIntroduce(profile?.introduction ?? '');
         setIsIntroduceChange(true);
       }
     } catch (e) {
       console.log('handleIntroduceChange ERROR: ', e);
     }
   };
-
+  const handleChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRole(event.currentTarget.value);
+  };
+  const handleChangeNickname = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNickname(event.currentTarget.value);
+  };
+  const handleChangeIntroduce = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setIntroduce(event.currentTarget.value);
+  };
   return {
     profile,
     isLoading,
     isError,
-
+    nickname,
+    introduce,
     isInfoChange,
     isIntroduceChange,
-    nicknameRef,
-    introduceRef,
-    handleInfoChange,
-    handleIntroduceChange,
+    role,
+    handleChangeRole,
+    handleClickInfo,
+    handleClickIntroduce,
+    handleChangeIntroduce,
+    handleChangeNickname,
   };
 };
