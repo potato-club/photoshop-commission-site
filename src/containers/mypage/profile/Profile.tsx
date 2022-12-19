@@ -1,5 +1,6 @@
 import { CustomRadioButton } from 'src/components/CustomRadioButton';
 import { Typography } from 'src/components/Typography';
+import { customColor } from 'src/constants/customColor';
 import styled from 'styled-components';
 import { ErrorMessage } from '../components/ErrorMessage';
 import { LoadingMessage } from '../components/LoadingMessage';
@@ -54,7 +55,7 @@ export const Profile = () => {
             <ItemWrapper>
               <InfoItem header="닉네임">
                 {isInfoChange ? (
-                  <input
+                  <ProfileInput
                     value={nickname}
                     placeholder="닉네임은 8글자 이하"
                     onChange={handleChangeNickname}
@@ -85,7 +86,7 @@ export const Profile = () => {
                       selectedValue={role}
                       onChange={handleChangeRole}
                       gap={10}
-                      marginLeft={65}
+                      marginLeft={0}
                       marginRight={20}
                     />
                     <CustomRadioButton
@@ -95,8 +96,8 @@ export const Profile = () => {
                       selectedValue={role}
                       onChange={handleChangeRole}
                       gap={10}
-                      marginLeft={65}
-                      marginRight={20}
+                      marginLeft={0}
+                      marginRight={0}
                     />
                   </>
                 ) : (
@@ -135,6 +136,22 @@ export const Profile = () => {
     </MyPageLayout>
   );
 };
+const ProfileInput = styled.input`
+  border-radius: 10px;
+  border: 1px solid ${customColor.black};
+  padding: 0 10px;
+  width: 280px;
+  height: 30px;
+  font-size: 16px;
+  :focus {
+    outline: none;
+  }
+  ::placeholder {
+    font-weight: bold;
+    color: ${customColor.gray};
+  }
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
