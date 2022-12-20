@@ -20,7 +20,6 @@ export const MyCardList = ({
   isLoading,
   isError,
 }: Props) => {
-  console.log(list);
   if (isLoading)
     return (
       <MesssageWrapper>
