@@ -9,12 +9,12 @@ export const UploadModalBtn = () => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   return (
     <>
-      <Button onClick={() => handleOpenModal()}>
+      <Button onClick={handleOpenModal}>
         <Typography color="black" size="16" fontWeight="bold">
           작업파일 업로드
         </Typography>
-        <UploadModal isOpen={isOpen} handleCloseModal={handleCloseModal}/>
       </Button>
+      <UploadModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
     </>
   );
 };

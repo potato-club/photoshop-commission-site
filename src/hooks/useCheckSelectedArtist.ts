@@ -17,8 +17,7 @@ export const useCheckSelectedArtist = () => {
     () => checkApi.checkSelectedArtist(router.query.id),
     {
       enabled: !!access && !!refresh && router.isReady && job === 'ARTIST',
-      onSuccess: ({data}) => {
-        console.log('아티스트 체크',data);
+      onSuccess: ({ data }) => {
         setSelectedArtist(data);
       },
       onError: error => {
