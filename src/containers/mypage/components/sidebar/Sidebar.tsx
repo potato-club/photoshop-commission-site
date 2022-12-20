@@ -6,14 +6,10 @@ import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import styled from 'styled-components';
 import { NavItem } from './NavItem';
 
-const NavItemInfo = [
+const UserNavItemInfo = [
   {
     name: '프로필',
     pathName: pathName.MYPAGE.PROFILE,
-  },
-  {
-    name: '평점',
-    pathName: pathName.MYPAGE.RATE,
   },
   {
     name: '후기 남기기',
@@ -33,12 +29,39 @@ const NavItemInfo = [
   },
 ];
 
-const NICKNAME = 'nickname';
+const ArtistNavItemInfo = [
+  {
+    name: '프로필',
+    pathName: pathName.MYPAGE.PROFILE,
+  },
+  {
+    name: '평점',
+    pathName: pathName.MYPAGE.RATE,
+  },
+  {
+    name: '의뢰 받은 글',
+    pathName: pathName.MYPAGE.MY_QUEST,
+  },
+  {
+    name: '작성 글',
+    pathName: pathName.MYPAGE.POST.ALL,
+  },
+  {
+    name: '작성 댓글',
+    pathName: pathName.MYPAGE.COMMENT,
+  },
+  {
+    name: '설정',
+    pathName: pathName.MYPAGE.OPTION,
+  },
+];
 
+const NICKNAME = 'nickname';
+const JOB = 'job';
 export const SideBar = () => {
   const { getSessionStorage } = useSessionStorage();
   const nickName = getSessionStorage(NICKNAME);
-
+  const job = getSessionStorage(JOB);
   const route = useRouter();
   return (
     <Wrapper>
@@ -48,14 +71,24 @@ export const SideBar = () => {
         </Typography>
       </TitleWrapper>
       <NavList>
-        {NavItemInfo.map(({ name, pathName }, i) => (
-          <NavItem
-            key={i}
-            name={name}
-            pathName={pathName}
-            route={route.pathname}
-          />
-        ))}
+        {job === 'USER' &&
+          UserNavItemInfo.map(({ name, pathName }, i) => (
+            <NavItem
+              key={i}
+              name={name}
+              pathName={pathName}
+              route={route.pathname}
+            />
+          ))}
+        {job === 'ARTIST' &&
+          ArtistNavItemInfo.map(({ name, pathName }, i) => (
+            <NavItem
+              key={i}
+              name={name}
+              pathName={pathName}
+              route={route.pathname}
+            />
+          ))}
       </NavList>
       <BottomNavWrapper>
         <BottomNavItem>

@@ -12,6 +12,17 @@ export const myPageApi = {
       return response;
     },
   },
+  myQuest: {
+    list: async (page: number) => {
+      const response = await api.getWithParamsToken('mypage/participate', {
+        page,
+      });
+      if (response.data) {
+        response.data = response.data.content;
+      }
+      return response;
+    },
+  },
   myPost: {
     before: async () => {
       const response = await api.getWithParamsToken('mypage/before', undefined);

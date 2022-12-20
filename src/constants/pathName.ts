@@ -17,5 +17,6 @@ export const pathName = {
     PROFILE: '/mypage/profile',
     RATE: '/mypage/rate',
     REVIEW: '/mypage/review',
+    MY_QUEST: '/mypage/myQuest',
   },
 };

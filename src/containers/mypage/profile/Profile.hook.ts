@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { errorModal } from 'src/utils/interactionModal';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { errorModal, infoModal } from 'src/utils/interactionModal';
 import { useQueryEditProfile } from './hooks/useQueryEditProfileApi';
 import { useQueryGetProfile } from './hooks/useQueryGetProfileApi';
 
@@ -10,6 +11,7 @@ export const useProfile = () => {
   const [role, setRole] = useState<string>('');
   const [nickname, setNickname] = useState('');
   const [introduce, setIntroduce] = useState('');
+  const { setSessionStorage } = useSessionStorage();
 
   const { refetch } = useQueryEditProfile({
     nickname: nickname === '' || !isInfoChange ? undefined : nickname,
@@ -34,6 +36,11 @@ export const useProfile = () => {
         }
         refetch();
         setIsInfoChange(false);
+        infoModal('회원정보가 수정되었습니다.', 'success', undefined, () => {
+          setSessionStorage('nickname', nickname);
+          setSessionStorage('job', role);
+          location.reload();
+        });
       } else {
         setNickname(profile?.nickname ?? '');
         setIsInfoChange(true);
@@ -52,6 +59,9 @@ export const useProfile = () => {
         }
         refetch();
         setIsIntroduceChange(false);
+        infoModal('회원정보가 수정되었습니다.', 'success', undefined, () =>
+          location.reload(),
+        );
       } else {
         setIntroduce(profile?.introduction ?? '');
         setIsIntroduceChange(true);
