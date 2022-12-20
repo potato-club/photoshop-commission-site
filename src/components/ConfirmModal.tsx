@@ -26,9 +26,9 @@ const customStyles = {
 };
 type Props = {
   isOpen: boolean;
-  handleClosetModal: () => void;
+  handleCloseModal: () => void;
 };
-export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
+export const ConfirmModal = ({ isOpen, handleCloseModal }: Props) => {
   const [page, setPage] = useState(1);
   const [totalElement, setTotalElement] = useState(0);
   const [list, setList] = useState([]);
@@ -48,7 +48,7 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
         onSuccess: () => {
           infoModal('신청이 완료되었습니다.', 'success');
           queryClient.invalidateQueries('getItem');
-          handleClosetModal();
+          handleCloseModal();
         },
         onError: (error) => {
           alert('커미션 신청 오류');
@@ -89,7 +89,7 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
       <Modal
         ariaHideApp={false}
         isOpen={isOpen}
-        onRequestClose={() => handleClosetModal()}
+        onRequestClose={() => handleCloseModal()}
         style={customStyles}
         contentLabel="Confirm Modal"
       >
@@ -98,7 +98,7 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
             <Typography color="blue" size="16" fontWeight="bold">
               신청자 리스트
             </Typography>
-            <CustomImCross onClick={() => handleClosetModal()} size={24} />
+            <CustomImCross onClick={() => handleCloseModal()} size={24} />
           </Header>
           <Guide>
             <Typography color="danger" size="12" fontWeight="bold">

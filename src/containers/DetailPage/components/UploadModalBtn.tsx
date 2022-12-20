@@ -6,14 +6,14 @@ import { Typography } from 'src/components';
 import { UploadModal } from './UploadModal';
 
 export const UploadModalBtn = () => {
-  const { isOpen, handleOpenModal, handleClosetModal } = useModal();
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   return (
     <>
       <Button onClick={() => handleOpenModal()}>
         <Typography color="black" size="16" fontWeight="bold">
           작업파일 업로드
         </Typography>
-        <UploadModal isOpen={isOpen} handleClosetModal={handleClosetModal}/>
+        <UploadModal isOpen={isOpen} handleCloseModal={handleCloseModal}/>
       </Button>
     </>
   );

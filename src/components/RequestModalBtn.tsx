@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
 
 export const RequestModalBtn = () => {
-  // const { isOpen, handleOpenModal, handleClosetModal } = useModal();
   const router = useRouter();
   const queryClient = useQueryClient();
 

@@ -22,9 +22,9 @@ const customStyles = {
 };
 type Props = {
   isOpen: boolean;
-  handleClosetModal: () => void;
+  handleCloseModal: () => void;
 };
-export const UploadModal = ({ isOpen, handleClosetModal }: Props) => {
+export const UploadModal = ({ isOpen, handleCloseModal }: Props) => {
   const {
     register,
     handleSubmit,
@@ -39,7 +39,7 @@ export const UploadModal = ({ isOpen, handleClosetModal }: Props) => {
     <Modal
       ariaHideApp={false}
       isOpen={isOpen}
-      onRequestClose={() => handleClosetModal()}
+      onRequestClose={() => handleCloseModal()}
       style={customStyles}
       contentLabel="Upload Modal"
     >
@@ -54,7 +54,7 @@ export const UploadModal = ({ isOpen, handleClosetModal }: Props) => {
               backgroundColor={customColor.white}
               borderColor={customColor.blue}
               onClick={() => {
-                handleClosetModal();
+                handleCloseModal();
               }}
             >
               <Typography size="16" color="blue">
