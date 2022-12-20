@@ -18,7 +18,7 @@ export const useCheckSelectedArtist = () => {
     {
       enabled: !!access && !!refresh && router.isReady && job === 'ARTIST',
       onSuccess: ({data}) => {
-        console.log(data);
+        console.log('아티스트 체크',data);
         setSelectedArtist(data);
       },
       onError: error => {
