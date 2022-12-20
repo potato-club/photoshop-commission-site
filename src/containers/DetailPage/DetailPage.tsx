@@ -17,6 +17,8 @@ import { BoardType } from 'src/types/board.type';
 import { useCheckSelectedArtist } from 'src/hooks/useCheckSelectedArtist';
 import { UploadModalBtn } from './components/UploadModalBtn';
 import { useCheckWriter } from 'src/hooks/useCheckWriter';
+import { useCheckOutput } from 'src/hooks/useCheckOutput';
+import { OutputModalBtn } from './components/outputModalBtn';
 type Props = {
   detailData : BoardType;
 }
@@ -26,6 +28,7 @@ export function DetailPage({ detailData }: Props) {
   const {title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList} = detailData;
   const { selectedArtist } = useCheckSelectedArtist();
   const { myPost } = useCheckWriter();
+  const { output } = useCheckOutput();
 
   return (
     <Container>
@@ -35,7 +38,8 @@ export function DetailPage({ detailData }: Props) {
         <ModalWrapper>
           {myPost && state === 'BEFORE' && <ConfirmModalBtn />}
           {job === 'ARTIST' && state === 'BEFORE' && <RequestModalBtn />}
-          {selectedArtist && <UploadModalBtn />}
+          {(!output || output.image?.length === 0) && selectedArtist && <UploadModalBtn />}
+          {state !== 'BEFORE' && output && <OutputModalBtn />}
         </ModalWrapper>
         <CommentContainer>
           <CommentHeader totalComment={totalComment}/>
@@ -52,6 +56,7 @@ const ModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  gap: 12px 0;
 `;
 
 const Container = styled.div`

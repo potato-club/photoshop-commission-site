@@ -3,6 +3,8 @@ import React from 'react';
 import { Typography } from 'src/components/Typography';
 import { ImageType } from 'src/types/image.type';
 import { imageOpenType } from 'src/types/imageOpen.type';
+import { fileDownload } from 'src/utils/filedown';
+import { checkModal } from 'src/utils/interactionModal';
 import styled from 'styled-components';
 type Props = {
   imageOpen: imageOpenType;
@@ -10,12 +12,16 @@ type Props = {
   contents: string;
 }
 export function Contents({imageOpen, imageUrls, contents}:Props) {
+  const checkDownload = (filename: string) => {
+    checkModal('원본사진을 다운하시겠습니까?', () => fileDownload(filename), undefined, undefined, '게시글의 사진과 크기차이가 있을 수 있습니다');
+  }
   return (
     <Container>
       {imageOpen === imageOpenType.open && imageUrls && (
         <ImgContainer>
           {imageUrls.map((data, index) => (
             <Image
+              onClick={() => checkDownload(data.fileName)}
               width={630}
               height={470}
               key={index}

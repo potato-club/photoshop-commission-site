@@ -42,7 +42,7 @@ export const UploadModal = ({ isOpen, handleCloseModal }: Props) => {
     {
       onSuccess: (data) => {
         infoModal('업로드가 완료되었습니다.', 'success');
-        queryClient.invalidateQueries('getItem');
+        queryClient.invalidateQueries('checkOutput');
         handleCloseModal();
         console.log(data);
       },
