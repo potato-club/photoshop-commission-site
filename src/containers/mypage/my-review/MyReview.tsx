@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { CustomPagination, Typography } from 'src/components';
 import { customColor } from 'src/constants';
+import useModal from 'src/hooks/useModal';
 import styled from 'styled-components';
 import { MyPageLayout } from '../components/MyPageLayout';
+import ModalPostReview from './modals/ModalPostReview';
 
 export const MyReview = () => {
   const [page, setPage] = useState(1);
@@ -64,6 +66,7 @@ export const MyReview = () => {
 };
 
 const ReviewItem = () => {
+  const { isOpen, handleOpenModal, handleClosetModal } = useModal();
   return (
     <ItemContainer>
       <Item style={{ flex: 0.3 }}>
@@ -78,8 +81,9 @@ const ReviewItem = () => {
         </Typography>
       </ItemDesigner>
       <Item style={{ flex: 0.3 }}>
-        <Button>의뢰완료 버튼</Button>
+        <Button onClick={handleOpenModal}>후기남기기</Button>
       </Item>
+      <ModalPostReview isOpen={isOpen} handleClosetModal={handleClosetModal} />
     </ItemContainer>
   );
 };

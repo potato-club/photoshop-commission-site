@@ -14,21 +14,21 @@ export const CommentList = ({ list, isLoading, isError }: Props) => {
   if (isLoading)
     return (
       <MesssageWrapper>
-        <LoadingMessage>게시글을 불러오고 있습니다</LoadingMessage>
+        <LoadingMessage>평점 리스트를 불러오고 있습니다</LoadingMessage>
       </MesssageWrapper>
     );
 
   if (isError)
     return (
       <MesssageWrapper>
-        <ErrorMessage>게시글을 불러오는데 실패했습니다</ErrorMessage>
+        <ErrorMessage>평점 리스트를 불러오는데 실패했습니다</ErrorMessage>
       </MesssageWrapper>
     );
   if (list && !isLoading && !isError && list.length === 0)
     return (
       <MesssageWrapper>
         <Typography size="16" fontWeight="bold" color="gray">
-          게시글이 없습니다
+          평점 리스트가 없습니다
         </Typography>
       </MesssageWrapper>
     );

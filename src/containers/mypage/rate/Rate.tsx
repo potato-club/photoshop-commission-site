@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import { MyPageLayout } from '../components/MyPageLayout';
 import { CommentList } from './components/CommentList';
-import { DUMMY_RATE } from './dummy/rate';
 import { useRate } from './Rate.hook';
 
 export const Rate = () => {

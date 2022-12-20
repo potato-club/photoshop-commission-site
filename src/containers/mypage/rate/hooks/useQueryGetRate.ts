@@ -14,7 +14,7 @@ export const useQueryGetRate = (page: number) => {
   const [list, setList] = useState<RateReview[]>([]);
 
   const { isLoading, isError } = useQuery(
-    ['getMyPostBeforeAll', page],
+    ['GetRate', page],
     () => myPageApi.rate.list(page),
     {
       enabled: router.isReady,
