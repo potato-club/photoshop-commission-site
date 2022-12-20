@@ -4,10 +4,11 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { CustomPagination, Typography } from 'src/components';
 import { customColor } from 'src/constants';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { requestApi } from 'src/apis/request';
 import { useRouter } from 'next/router';
 import { useGetToken } from 'src/hooks/useGetToken';
+import { checkModal, infoModal } from 'src/utils/interactionModal';
 
 const customStyles = {
   content: {
@@ -30,6 +31,8 @@ type Props = {
 export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
   const [page, setPage] = useState(1);
   const [totalElement, setTotalElement] = useState(0);
+  const [list, setList] = useState([]);
+  const queryClient = useQueryClient();
 
   const router = useRouter();
   const { access, refresh } = useGetToken();
@@ -38,11 +41,25 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
     setPage(page);
   };
 
-  const [list, setList] = useState([]);
 
-  function SelectDesigner() {
-    // axios.post('api', data).then(res => console.log(res));
-    console.log(list);
+    const { mutate } = useMutation(
+      (nickname: string) => requestApi.chooseArtist(router.query.id, {nickname}),
+      {
+        onSuccess: () => {
+          infoModal('신청이 완료되었습니다.', 'success');
+          queryClient.invalidateQueries('getItem');
+          handleClosetModal();
+        },
+        onError: (error) => {
+          alert('커미션 신청 오류');
+          console.log(error)
+        },
+      },
+    );
+
+
+  function SelectDesigner(nickname:string) {
+    checkModal(`${nickname}님에게 신청하시겠습니까?`, () => mutate(nickname));
   }
 
   useQuery(
@@ -95,7 +112,7 @@ export const ConfirmModal = ({ isOpen, handleClosetModal }: Props) => {
                   {data}
                 </Typography>
               </NickName>
-              <CommissionBtn onClick={SelectDesigner}>
+              <CommissionBtn onClick={() => SelectDesigner(data)}>
                 <Typography color="white" size="16" fontWeight="bold">
                   의뢰 맡기기
                 </Typography>

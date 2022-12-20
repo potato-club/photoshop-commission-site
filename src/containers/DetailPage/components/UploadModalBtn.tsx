@@ -24,7 +24,6 @@ const Button = styled.button`
   padding: 10px 15px;
   background-color: ${customColor.gray};
   font-size: 16px;
-  width: 135px;
   border-radius: 10px;
   cursor: pointer;
   &:hover {

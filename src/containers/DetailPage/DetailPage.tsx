@@ -33,8 +33,8 @@ export function DetailPage({ detailData }: Props) {
         <Header state={state} title={title} writer={writer} createdDate={createdDate} modifiedDate={modifiedDate} myPost={myPost}/>
         <Contents imageOpen={imageOpen} imageUrls={imageUrls} contents={contents}/>
         <ModalWrapper>
-          {myPost && <ConfirmModalBtn />}
-          {job === 'ARTIST' && <RequestModalBtn />}
+          {myPost && state === 'BEFORE' && <ConfirmModalBtn />}
+          {job === 'ARTIST' && state === 'BEFORE' && <RequestModalBtn />}
           {selectedArtist && <UploadModalBtn />}
         </ModalWrapper>
         <CommentContainer>
