@@ -24,11 +24,13 @@ export const MyBefore = () => {
           isLoading={isLoading}
           isError={isError}
         />
-        <CustomPagination
-          activePage={page}
-          onChange={handleChangePage}
-          totalItemsCount={list.length}
-        />
+        {list.length !== 0 && (
+          <CustomPagination
+            activePage={page}
+            onChange={handleChangePage}
+            totalItemsCount={list.length}
+          />
+        )}
       </Container>
     </MyPageLayout>
   );

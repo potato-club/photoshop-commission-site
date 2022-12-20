@@ -12,6 +12,22 @@ export const myPageApi = {
       return response;
     },
   },
+  rate: {
+    myGrade: async () => {
+      const response = await api.getWithParamsToken('mypage/grade', undefined);
+
+      return response;
+    },
+    list: async (page: number) => {
+      const response = await api.getWithParamsToken('mypage/review', {
+        page,
+      });
+      if (response.data) {
+        response.data = response.data.content;
+      }
+      return response;
+    },
+  },
   myQuest: {
     list: async (page: number) => {
       const response = await api.getWithParamsToken('mypage/participate', {

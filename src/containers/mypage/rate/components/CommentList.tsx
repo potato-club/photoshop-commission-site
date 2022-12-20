@@ -1,13 +1,38 @@
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
-import { RateCommentType } from 'src/types/comment.type';
 import styled from 'styled-components';
-
+import { ErrorMessage } from '../../components/ErrorMessage';
+import { LoadingMessage } from '../../components/LoadingMessage';
+import { RateReview } from '../hooks/useQueryGetRate';
 type Props = {
-  list: RateCommentType[];
+  list: RateReview[];
+  isLoading: boolean;
+  isError: boolean;
 };
 
-export const CommentList = ({ list }: Props) => {
+export const CommentList = ({ list, isLoading, isError }: Props) => {
+  if (isLoading)
+    return (
+      <MesssageWrapper>
+        <LoadingMessage>게시글을 불러오고 있습니다</LoadingMessage>
+      </MesssageWrapper>
+    );
+
+  if (isError)
+    return (
+      <MesssageWrapper>
+        <ErrorMessage>게시글을 불러오는데 실패했습니다</ErrorMessage>
+      </MesssageWrapper>
+    );
+  if (list && !isLoading && !isError && list.length === 0)
+    return (
+      <MesssageWrapper>
+        <Typography size="16" fontWeight="bold" color="gray">
+          게시글이 없습니다
+        </Typography>
+      </MesssageWrapper>
+    );
+
   return (
     <Container>
       <HeaderWrapper>
@@ -16,20 +41,20 @@ export const CommentList = ({ list }: Props) => {
         </Typography>
       </HeaderWrapper>
       <ListContainer>
-        {list.map(props => (
-          <ItemWrapper key={props.id}>
+        {list.map((props, i) => (
+          <ItemWrapper key={i}>
             <NameWrapper>
-              <Typography size="14">{props.name}</Typography>
+              <Typography size="14">{props.nickname}</Typography>
             </NameWrapper>
             <ContentWrapper>
               <Typography size="14">{props.content}</Typography>
             </ContentWrapper>
             <DateWrapper>
-              <Typography size="14">{props.date}</Typography>
+              <Typography size="14">{props.createdDate}</Typography>
             </DateWrapper>
             <RateWrapper>
               <Typography size="14" color="blue" fontWeight="bold">
-                {props.rate}
+                {props.grade}
               </Typography>
             </RateWrapper>
           </ItemWrapper>
@@ -38,7 +63,13 @@ export const CommentList = ({ list }: Props) => {
     </Container>
   );
 };
-
+const MesssageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 80px;
+`;
 const Container = styled.div`
   width: 100%;
 `;
