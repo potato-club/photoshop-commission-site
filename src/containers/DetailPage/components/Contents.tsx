@@ -17,7 +17,7 @@ export function Contents({imageOpen, imageUrls, contents}:Props) {
   }
   return (
     <Container>
-      {imageOpen === imageOpenType.open && imageUrls && (
+      {imageUrls && (
         <ImgContainer>
           {imageUrls.map((data, index) => (
             <Image

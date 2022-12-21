@@ -18,7 +18,7 @@ import { useCheckSelectedArtist } from 'src/hooks/useCheckSelectedArtist';
 import { UploadModalBtn } from './components/UploadModalBtn';
 import { useCheckWriter } from 'src/hooks/useCheckWriter';
 import { useCheckOutput } from 'src/hooks/useCheckOutput';
-import { OutputModalBtn } from './components/outputModalBtn';
+import { OutputModalBtn } from './components/OutputModalBtn';
 type Props = {
   detailData : BoardType;
 }
