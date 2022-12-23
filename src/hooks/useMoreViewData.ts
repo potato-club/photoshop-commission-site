@@ -5,6 +5,7 @@ import { IData } from 'src/containers/mainPage/components/MainRequestBoard';
 
 export const useMoreViewData = (state: string, page: number) => {
   const [data, setData] = useState<IData[]>([]);
+  const [total, setTotal] = useState();
   const [theme, setTheme] = useState('');
 
   useQuery(
@@ -22,10 +23,13 @@ export const useMoreViewData = (state: string, page: number) => {
       }
     },
     {
-      onSuccess: res => setData(res?.data.content),
+      onSuccess: res => {
+        setTotal(res?.data.totalElements);
+        setData(res?.data.content);
+      },
       enabled: !!state && !!page,
     },
   );
 
-  return { data, theme, setData };
+  return { data, theme, setData, total };
 };

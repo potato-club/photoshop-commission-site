@@ -5,7 +5,6 @@ import {
   SideBox,
   CustomPagination,
 } from 'src/components/index';
-import { dummyList } from 'src/dummy/dummyList';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Hr from './components/Hr';
@@ -17,11 +16,15 @@ const StatePage = () => {
   const [page, setPage] = useState(1);
   const router = useRouter();
   const { state } = router.query;
-  const { data, theme, setData } = useMoreViewData(state as string, page);
-  
+  const { data, theme, setData, total } = useMoreViewData(
+    state as string,
+    page,
+  );
+
   useEffect(() => {
     console.log(data);
-  }, [data]);
+    console.log(total);
+  }, [data, total]);
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -35,7 +38,7 @@ const StatePage = () => {
           {theme}
         </Typography>
       </Post>
-      {/* <Title setData={setData} page={page} state={state as string} /> */}
+      <Title setData={setData} page={page} state={state as string} />
       <Hr />
       <CardListWrap>
         <CardList list={data} />
@@ -44,8 +47,8 @@ const StatePage = () => {
         itemClass="page"
         activePage={page}
         onChange={handlePageChange}
-        totalItemsCount={dummyList.length}
-        itemsCountPerPage={15}
+        totalItemsCount={total || 0}
+        itemsCountPerPage={16}
       />
       <SignUp />
       <SideBox />

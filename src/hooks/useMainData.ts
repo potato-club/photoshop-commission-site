@@ -14,7 +14,7 @@ export const useMainData = (state: string) => {
       } else if (state === 'doing') {
         return await mainApi.getRequesting();
       } else if (state === 'complete') {
-        // return await mainApi.getComplete();
+        return await mainApi.getComplete();
       }
     },
     {
