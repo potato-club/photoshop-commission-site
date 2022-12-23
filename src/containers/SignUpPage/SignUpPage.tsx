@@ -106,11 +106,4 @@ const SignUpButton = styled.button`
   background-color: ${customColor.blue};
   border-radius: 10px;
   align-self: flex-end;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
 `;

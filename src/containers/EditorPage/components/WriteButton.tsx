@@ -30,11 +30,4 @@ const ButtonWrapper = styled.button`
   height: 50px;
   background-color: ${customColor.blue};
   border-radius: 10px;
-  cursor: pointer;
-  :hover {
-    transform: scale(0.99);
-  }
-  :active {
-    transform: scale(1.01);
-  }
 `;

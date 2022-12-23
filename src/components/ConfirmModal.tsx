@@ -164,18 +164,7 @@ const CommissionBtn = styled.button`
   background-color: ${customColor.blue};
   border-radius: 16px;
   padding: 8px 20px;
-  cursor: pointer;
-  :hover {
-    background-color: ${customColor.lightBlue};
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
   transition: background-color 200ms ease;
-`;
-const Date = styled.div`
-  text-align: center;
 `;
 
 const NickName = styled.div`

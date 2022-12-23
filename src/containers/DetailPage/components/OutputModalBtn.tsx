@@ -25,7 +25,6 @@ const Button = styled.button`
   background-color: ${customColor.gray};
   font-size: 16px;
   border-radius: 10px;
-  cursor: pointer;
   &:hover {
     background-color: ${customColor.danger};
   }

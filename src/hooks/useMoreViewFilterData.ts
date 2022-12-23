@@ -23,9 +23,9 @@ export const useMoreViewFilterData = ({
       if (state === 'before') {
         return await stateApi.getBeforeAll(page);
       } else if (state === 'doing') {
-        return await stateApi.getCompleteAll(page);
-      } else if (state === 'complete') {
         return await stateApi.getRequestingAll(page);
+      } else if (state === 'complete') {
+        return await stateApi.getCompleteAll(page);
       }
     },
     {

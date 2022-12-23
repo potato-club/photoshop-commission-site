@@ -46,13 +46,6 @@ const Button = styled.button<ButtonStyle>`
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 10px;
   align-self: flex-end;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
   ${({ borderColor }) =>
     borderColor ? `border: 1px solid ${borderColor}` : ''}
 `;

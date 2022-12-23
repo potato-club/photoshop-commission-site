@@ -41,11 +41,4 @@ const WriteBtn = styled.button`
   background-color: ${customColor.blue};
   border-radius: 10px;
   padding: 10px 28px;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
 `;

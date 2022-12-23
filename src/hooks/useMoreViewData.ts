@@ -16,10 +16,10 @@ export const useMoreViewData = (state: string, page: number) => {
         return await stateApi.getBeforeAll(page);
       } else if (state === 'doing') {
         setTheme('의뢰중 게시글');
-        return await stateApi.getCompleteAll(page);
+        return await stateApi.getRequestingAll(page);
       } else if (state === 'complete') {
         setTheme('의뢰완료 게시글');
-        return await stateApi.getRequestingAll(page);
+        return await stateApi.getCompleteAll(page);
       }
     },
     {

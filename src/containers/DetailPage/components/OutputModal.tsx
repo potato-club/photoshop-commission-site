@@ -59,14 +59,14 @@ export const OutputModal = ({ isOpen, handleCloseModal }: Props) => {
         {output && output.image?.length !== 0 ? (
           output.image?.map((data: ImageType, i) => (
             <List key={i}>
-              <NickName>
+              <ImageWrapper>
                 <Image
                   src={data.fileUrl}
                   width={100}
                   height={100}
                   alt="thumbnail"
                 />
-              </NickName>
+              </ImageWrapper>
               <CommissionBtn onClick={() => checkDownload(data.fileName)}>
                 <Typography color="white" size="16" fontWeight="bold">
                   결과물 다운로드
@@ -119,28 +119,12 @@ const CommissionBtn = styled.button`
   background-color: ${customColor.blue};
   border-radius: 16px;
   padding: 8px 20px;
-  cursor: pointer;
-  :hover {
-    background-color: ${customColor.lightBlue};
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
   transition: background-color 200ms ease;
 `;
-const Date = styled.div`
-  text-align: center;
-`;
 
-const NickName = styled.div`
+const ImageWrapper = styled.div`
   width: 140px;
   text-align: center;
-  div {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
 `;
 const List = styled.div`
   width: 100%;
@@ -151,12 +135,6 @@ const List = styled.div`
 
 const Guide = styled.div`
   text-align: end;
-`;
-
-const ImageWrapper = styled.div`
-  border-radius: 24px;
-  padding: 8px;
-  background-color: ${customColor.lightBlue};
 `;
 
 const NotOutput = styled.div`

@@ -10,7 +10,7 @@ interface ITitle {
   page: number;
   state: string;
 }
-const Title = ({ setData, page, state }: ITitle) => {
+const FilterBox = ({ setData, page, state }: ITitle) => {
   const [selected, setSelected] = useState('title');
   const [text, setText] = useState(''); // 필터링 값
   const { filterData } = useMoreViewFilterData({ state, page, selected, text });
@@ -54,7 +54,7 @@ const Title = ({ setData, page, state }: ITitle) => {
   );
 };
 
-export default Title;
+export default FilterBox;
 
 const Container = styled.div`
   display: flex;
