@@ -19,4 +19,8 @@ export const requestApi = {
   // 커미션 파일 업로드 (디자이너)
   uploadFile: async (id: any, data: any) =>
     api.postWithAuth(`list/${id}/upload`, data),
+
+  // 작업파일 확인하기
+  viewOutput: async(id:any) => 
+    api.getWithAuth(`list/${id}/output`)
 };

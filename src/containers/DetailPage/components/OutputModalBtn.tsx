@@ -3,18 +3,18 @@ import { customColor } from 'src/constants/customColor';
 import styled from 'styled-components';
 import useModal from 'src/hooks/useModal';
 import { Typography } from 'src/components';
-import { UploadModal } from './UploadModal';
+import { OutputModal } from './OutputModal';
 
-export const UploadModalBtn = () => {
+export const OutputModalBtn = () => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   return (
     <>
       <Button onClick={handleOpenModal}>
         <Typography color="black" size="16" fontWeight="bold">
-          작업파일 업로드
+          결과물 보기
         </Typography>
       </Button>
-      <UploadModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
+      <OutputModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
     </>
   );
 };

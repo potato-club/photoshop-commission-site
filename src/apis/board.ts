@@ -12,7 +12,7 @@ export const boardApi = {
   delete: async (id: any) => api.delete(`list/${id}`),
 
   // 게시글 불러오기 (디테일)
-  getDetail: async (id: any) => api.get(`list/${id}`),
+  getDetail: async (id: any) => api.getWithAuth(`list/${id}`),
 
   // 댓글 작성
   postComment: async (id: any, data: any) =>
