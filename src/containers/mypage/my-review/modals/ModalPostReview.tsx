@@ -1,10 +1,13 @@
 import { ImCross } from 'react-icons/im';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Typography } from 'src/components';
 import { customColor } from 'src/constants';
 import { errorModal } from 'src/utils/interactionModal';
+import { Rating } from 'react-simple-star-rating';
+import { useQueryPostReview } from '../hooks/useQueryPostReview';
+import { MyReviewType } from '../hooks/useQueryGetMyReview';
 
 const customStyles = {
   content: {
@@ -23,16 +26,33 @@ const customStyles = {
 type Props = {
   isOpen: boolean;
   handleClosetModal: () => void;
+  item: MyReviewType;
 };
-const ModalPostReview = ({ isOpen, handleClosetModal }: Props) => {
+
+const ModalPostReview = ({ isOpen, handleClosetModal, item }: Props) => {
   const reviewInputRef = useRef<HTMLTextAreaElement>(null);
+  const [rate, setRate] = useState(0);
+  const { refetch, isError, isLoading } = useQueryPostReview({
+    roomId: item.roomId,
+    content: reviewInputRef && reviewInputRef.current!.value,
+    grade: String(rate),
+  });
 
   const handleClickSubmitReview = () => {
     if (reviewInputRef) {
       if (reviewInputRef.current!.value === '')
         errorModal('후기를 입력해주세요');
+      else {
+        refetch();
+        location.reload();
+      }
     }
   };
+
+  const handleRating = (rate: number) => {
+    setRate(rate);
+  };
+
   return (
     <Modal
       ariaHideApp={false}
@@ -57,7 +77,7 @@ const ModalPostReview = ({ isOpen, handleClosetModal }: Props) => {
             </Label>
             <Content>
               <Typography color="black" size="16">
-                아니 피자좀 없애주세요
+                {item.title}
               </Typography>
             </Content>
           </Row>
@@ -69,7 +89,7 @@ const ModalPostReview = ({ isOpen, handleClosetModal }: Props) => {
             </Label>
             <Content>
               <Typography color="black" size="16">
-                요다요
+                {item.selectedArtistNickname}
               </Typography>
             </Content>
           </Row>
@@ -79,7 +99,16 @@ const ModalPostReview = ({ isOpen, handleClosetModal }: Props) => {
                 평점
               </Typography>
             </Label>
-            <Content>평점 버튼 만들기 귀찮다</Content>
+            <Content>
+              <Rating
+                onClick={handleRating}
+                size={40}
+                allowFraction
+                transition
+                fillColor="orange"
+                emptyColor="gray"
+              />
+            </Content>
           </Row>
           <Row>
             <Label>

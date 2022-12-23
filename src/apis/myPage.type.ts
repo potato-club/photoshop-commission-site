@@ -3,3 +3,9 @@ export type EditProfileType = {
   introduction?: string;
   userRole?: string;
 };
+
+export type PostReviewType = {
+  roomId: string;
+  content: string;
+  grade: string;
+};

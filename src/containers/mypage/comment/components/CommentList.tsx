@@ -1,29 +1,57 @@
+import { isError } from 'react-query';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';
+import { ErrorMessage } from '../../components/ErrorMessage';
+import { LoadingMessage } from '../../components/LoadingMessage';
+import { MyCommentType } from '../hooks/useQueryGetMyComment';
 
 type Props = {
-  list: { id: number; content: string; Board: string; date: string }[];
+  list: MyCommentType[];
+  isLoading: boolean;
+  isError: boolean;
 };
 
-export const CommentList = ({ list }: Props) => {
+export const CommentList = ({ list, isLoading, isError }: Props) => {
+  if (isLoading)
+    return (
+      <MesssageWrapper>
+        <LoadingMessage>게시글을 불러오고 있습니다</LoadingMessage>
+      </MesssageWrapper>
+    );
+
+  if (isError)
+    return (
+      <MesssageWrapper>
+        <ErrorMessage>게시글을 불러오는데 실패했습니다</ErrorMessage>
+      </MesssageWrapper>
+    );
+  if (list && !isLoading && !isError && list.length === 0)
+    return (
+      <MesssageWrapper>
+        <Typography size="16" fontWeight="bold" color="gray">
+          게시글이 없습니다
+        </Typography>
+      </MesssageWrapper>
+    );
+
   return (
     <Container>
-      {list.map(data => (
-        <ListWrapper key={data.id}>
+      {list.map((data, i) => (
+        <ListWrapper key={i}>
           <LeftWrapper>
             <ContentWrapper>
-              <Typography size="14">{data.content}</Typography>
+              <Typography size="14">{data.comment}</Typography>
             </ContentWrapper>
             <BoardWrapper>
               <Typography size="14" color="gray">
-                {data.Board}
+                {data.title}
               </Typography>
             </BoardWrapper>
           </LeftWrapper>
           <RightWrapper>
             <DateWrapper>
-              <Typography size="14">{data.date}</Typography>
+              <Typography size="14">{data.modifiedDate}</Typography>
             </DateWrapper>
           </RightWrapper>
         </ListWrapper>
@@ -31,7 +59,13 @@ export const CommentList = ({ list }: Props) => {
     </Container>
   );
 };
-
+const MesssageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 80px;
+`;
 const Container = styled.div`
   height: 100%;
   width: 100%;

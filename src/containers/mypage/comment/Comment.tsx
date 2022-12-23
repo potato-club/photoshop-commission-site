@@ -1,11 +1,17 @@
 import { Typography } from 'src/components/Typography';
 import { MyPageLayout } from '../components/MyPageLayout';
 import { CommentList } from './components/CommentList';
-import { commentsDummy } from './dummy/comment';
 import styled from 'styled-components';
 import { customColor } from 'src/constants';
+import { useQueryGetMyComment } from './hooks/useQueryGetMyComment';
+import { CustomPagination } from 'src/components';
+import { usePagination } from '../post/hooks/usePagination';
 
 export const Comment = () => {
+  const { page, offset, handleChangePage } = usePagination();
+
+  const { list, isError, isLoading } = useQueryGetMyComment(page);
+
   return (
     <MyPageLayout>
       <Container>
@@ -15,10 +21,17 @@ export const Comment = () => {
           </Typography>
 
           <Typography size="16" color="blue" fontWeight="bold">
-            ({commentsDummy.count})
+            ({list.length})
           </Typography>
         </HeaderWrapper>
-        <CommentList list={commentsDummy.list} />
+        <CommentList list={list} isError={isError} isLoading={isLoading} />
+        {list.length !== 0 && (
+          <CustomPagination
+            activePage={page}
+            onChange={handleChangePage}
+            totalItemsCount={list.length}
+          />
+        )}
       </Container>
     </MyPageLayout>
   );

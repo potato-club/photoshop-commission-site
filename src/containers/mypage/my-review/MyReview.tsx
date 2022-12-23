@@ -3,17 +3,19 @@ import { CustomPagination, Typography } from 'src/components';
 import { customColor } from 'src/constants';
 import useModal from 'src/hooks/useModal';
 import styled from 'styled-components';
+import { ErrorMessage } from '../components/ErrorMessage';
+import { LoadingMessage } from '../components/LoadingMessage';
 import { MyPageLayout } from '../components/MyPageLayout';
+import { usePagination } from '../post/hooks/usePagination';
+import { MyReviewType, useQueryGetMyReview } from './hooks/useQueryGetMyReview';
 import ModalPostReview from './modals/ModalPostReview';
 
+type ReviewItemProps = {
+  item: MyReviewType;
+};
 export const MyReview = () => {
-  const [page, setPage] = useState(1);
-
-  const handlePageChange = (page: number) => {
-    setPage(page);
-    window.scrollTo(0, 0);
-  };
-
+  const { page, offset, handleChangePage } = usePagination();
+  const { list, isLoading, isError } = useQueryGetMyReview(page);
   return (
     <MyPageLayout>
       <Container>
@@ -48,42 +50,85 @@ export const MyReview = () => {
               </Typography>
             </Header>
           </ListHeader>
-          <ReviewItem />
-          <ReviewItem />
-          <ReviewItem />
-          <ReviewItem />
-          <ReviewItem />
-          <ReviewItem />
+          <ReviewList list={list} isLoading={isLoading} isError={isError} />
         </ListTableContainer>
-        <CustomPagination
-          activePage={page}
-          onChange={handlePageChange}
-          totalItemsCount={20}
-        />
+        {list.length !== 0 && (
+          <CustomPagination
+            activePage={page}
+            onChange={handleChangePage}
+            totalItemsCount={list.length}
+          />
+        )}
       </Container>
     </MyPageLayout>
   );
 };
+type ReviewListProps = {
+  list: MyReviewType[];
+  isLoading: boolean;
+  isError: boolean;
+};
+const ReviewList = ({ list, isLoading, isError }: ReviewListProps) => {
+  if (isLoading)
+    return (
+      <MesssageWrapper>
+        <LoadingMessage>게시글을 불러오고 있습니다</LoadingMessage>
+      </MesssageWrapper>
+    );
 
-const ReviewItem = () => {
+  if (isError)
+    return (
+      <MesssageWrapper>
+        <ErrorMessage>게시글을 불러오는데 실패했습니다</ErrorMessage>
+      </MesssageWrapper>
+    );
+  if (list && !isLoading && !isError && list.length === 0)
+    return (
+      <MesssageWrapper>
+        <Typography size="16" fontWeight="bold" color="gray">
+          게시글이 없습니다
+        </Typography>
+      </MesssageWrapper>
+    );
+
+  return (
+    <>
+      {list.map((item, i) => (
+        <ReviewItem key={i} item={item} />
+      ))}
+    </>
+  );
+};
+const MesssageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 80px;
+`;
+const ReviewItem = ({ item }: ReviewItemProps) => {
   const { isOpen, handleOpenModal, handleClosetModal } = useModal();
   return (
     <ItemContainer>
       <Item style={{ flex: 0.3 }}>
-        <Typography size="14">2022.03.18</Typography>
+        <Typography size="14">{item.createdDate}</Typography>
       </Item>
       <ItemBoardTitle style={{ flex: 1 }}>
-        <Typography size="14">아니 피자좀 없애주세요 제에에ㅔ에에발</Typography>
+        <Typography size="14">{item.title}</Typography>
       </ItemBoardTitle>
       <ItemDesigner style={{ flex: 0.4 }}>
         <Typography size="14" color="blue" fontWeight="bold">
-          양파버리는소년
+          {item.selectedArtistNickname}
         </Typography>
       </ItemDesigner>
       <Item style={{ flex: 0.3 }}>
         <Button onClick={handleOpenModal}>후기남기기</Button>
       </Item>
-      <ModalPostReview isOpen={isOpen} handleClosetModal={handleClosetModal} />
+      <ModalPostReview
+        isOpen={isOpen}
+        handleClosetModal={handleClosetModal}
+        item={item}
+      />
     </ItemContainer>
   );
 };

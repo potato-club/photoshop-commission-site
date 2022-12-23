@@ -1,5 +1,5 @@
 import api from './common';
-import { EditProfileType } from './myPage.type';
+import { EditProfileType, PostReviewType } from './myPage.type';
 
 export const myPageApi = {
   profile: {
@@ -85,5 +85,37 @@ export const myPageApi = {
       }
       return response;
     },
+  },
+  myComment: {
+    list: async (page: number) => {
+      const response = await api.getWithParamsToken('mypage/comments', {
+        page,
+      });
+      if (response.data) {
+        response.data = response.data.content;
+      }
+      return response;
+    },
+  },
+  myReview: {
+    list: async (page: number) => {
+      const response = await api.getWithParamsToken('mypage/boards', {
+        page,
+      });
+      if (response.data) {
+        response.data = response.data.content;
+      }
+      return response;
+    },
+    post: async (param: PostReviewType) => {
+      const response = await api.postWithToken('mypage/review/write', param);
+
+      return response;
+    },
+  },
+  signOut: async () => {
+    const response = await api.delete('mypage/resign');
+
+    return response;
   },
 };
