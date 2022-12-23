@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { CustomPagination, Typography } from 'src/components';
 import { customColor } from 'src/constants';
 import useModal from 'src/hooks/useModal';
@@ -107,7 +106,7 @@ const MesssageWrapper = styled.div`
   padding-top: 80px;
 `;
 const ReviewItem = ({ item }: ReviewItemProps) => {
-  const { isOpen, handleOpenModal, handleClosetModal } = useModal();
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   return (
     <ItemContainer>
       <Item style={{ flex: 0.3 }}>
@@ -126,7 +125,7 @@ const ReviewItem = ({ item }: ReviewItemProps) => {
       </Item>
       <ModalPostReview
         isOpen={isOpen}
-        handleClosetModal={handleClosetModal}
+        handleClosetModal={handleCloseModal}
         item={item}
       />
     </ItemContainer>

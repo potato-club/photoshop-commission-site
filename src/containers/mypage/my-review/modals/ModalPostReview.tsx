@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import { Typography } from 'src/components';
 import { customColor } from 'src/constants';
-import { errorModal } from 'src/utils/interactionModal';
+import { errorModal, infoModal } from 'src/utils/interactionModal';
 import { Rating } from 'react-simple-star-rating';
 import { useQueryPostReview } from '../hooks/useQueryPostReview';
 import { MyReviewType } from '../hooks/useQueryGetMyReview';
@@ -15,7 +15,7 @@ const customStyles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: '20px',
-    height: '360px',
+    height: '410px',
     width: '700px',
     overflow: 'hidden',
   },
@@ -32,27 +32,31 @@ type Props = {
 const ModalPostReview = ({ isOpen, handleClosetModal, item }: Props) => {
   const reviewInputRef = useRef<HTMLTextAreaElement>(null);
   const [rate, setRate] = useState(0);
+  const [review, setReview] = useState('');
+
   const { refetch, isError, isLoading } = useQueryPostReview({
-    roomId: item.roomId,
-    content: reviewInputRef && reviewInputRef.current!.value,
+    roomId: String(item.roomId),
+    content: review,
     grade: String(rate),
   });
 
   const handleClickSubmitReview = () => {
-    if (reviewInputRef) {
-      if (reviewInputRef.current!.value === '')
-        errorModal('후기를 입력해주세요');
-      else {
-        refetch();
-        location.reload();
-      }
+    if (review === '') errorModal('후기를 입력해주세요');
+    else {
+      refetch();
+      infoModal('후기가 작성되었습니다.', 'success', undefined, () =>
+        location.reload(),
+      );
     }
   };
-
   const handleRating = (rate: number) => {
     setRate(rate);
   };
-
+  const handleChangeReview = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setReview(event.currentTarget.value);
+  };
   return (
     <Modal
       ariaHideApp={false}
@@ -116,7 +120,10 @@ const ModalPostReview = ({ isOpen, handleClosetModal, item }: Props) => {
                 후기
               </Typography>
             </Label>
-            <Input ref={reviewInputRef} placeholder="후기을 입력해주세요" />
+            <Input
+              onChange={handleChangeReview}
+              placeholder="후기을 입력해주세요"
+            />
           </Row>
         </Body>
         <Footer>
