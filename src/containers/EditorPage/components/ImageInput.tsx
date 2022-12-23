@@ -20,7 +20,8 @@ export function ImageInput({ register, errors }: Props) {
 
   const addImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setThumbnails([]); // 취소했을때 썸네일도 지워야함
+    setThumbnails([]); // 기존 썸네일 초기화
+
     if (e.target.files!.length > 3) {
       errorModal('이미지는 최대 3개까지 등록할 수 있습니다.');
       return;
@@ -34,8 +35,8 @@ export function ImageInput({ register, errors }: Props) {
           setThumbnails(prev => [...prev, String(fileReader.result)]);
         };
       }
+      infoModal('사진파일 등록 완료!', 'success');
     }
-    infoModal('사진파일 등록 완료!', 'success');
   };
 
   return (
@@ -60,7 +61,12 @@ export function ImageInput({ register, errors }: Props) {
             사진 등록
           </Typography>
         </Label>
-          <CustomErrorMessage errors={errors} name="image" leftPosition="30" bottomPosition='-24'/>
+        <CustomErrorMessage
+          errors={errors}
+          name="image"
+          leftPosition="30"
+          bottomPosition="-24"
+        />
       </InputWrapper>
 
       <ThumbnailContainer>

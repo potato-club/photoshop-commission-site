@@ -14,14 +14,21 @@ import {
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { CommentList } from './components/CommentList';
 import { BoardType } from 'src/types/board.type';
+import { useCheckSelectedArtist } from 'src/hooks/useCheckSelectedArtist';
+import { UploadModalBtn } from './components/UploadModalBtn';
+import { useCheckWriter } from 'src/hooks/useCheckWriter';
+import { useCheckOutput } from 'src/hooks/useCheckOutput';
+import { OutputModalBtn } from './components/OutputModalBtn';
 type Props = {
   detailData : BoardType;
-  myPost?: boolean;
 }
-export function DetailPage({ detailData, myPost }: Props) {
+export function DetailPage({ detailData }: Props) {
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
   const {title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList} = detailData;
+  const { selectedArtist } = useCheckSelectedArtist();
+  const { myPost } = useCheckWriter();
+  const { output } = useCheckOutput();
 
   return (
     <Container>
@@ -29,8 +36,10 @@ export function DetailPage({ detailData, myPost }: Props) {
         <Header state={state} title={title} writer={writer} createdDate={createdDate} modifiedDate={modifiedDate} myPost={myPost}/>
         <Contents imageOpen={imageOpen} imageUrls={imageUrls} contents={contents}/>
         <ModalWrapper>
-          {myPost && <ConfirmModalBtn />}
-          {job === 'ARTIST' && <RequestModalBtn />}
+          {myPost && state === 'BEFORE' && <ConfirmModalBtn />}
+          {job === 'ARTIST' && state === 'BEFORE' && <RequestModalBtn />}
+          {(!output || output.image?.length === 0) && selectedArtist && <UploadModalBtn />}
+          {state !== 'BEFORE' && output && <OutputModalBtn />}
         </ModalWrapper>
         <CommentContainer>
           <CommentHeader totalComment={totalComment}/>
@@ -47,6 +56,7 @@ const ModalWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  gap: 12px 0;
 `;
 
 const Container = styled.div`

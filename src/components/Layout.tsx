@@ -19,4 +19,5 @@ export const Layout = ({ children }: LayoutType) => {
 const Wrapper = styled.div<{ color: string }>`
   min-height: 100vh;
   background-color: ${({ color }) => color};
+  overflow: auto;
 `;

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { FaPaperPlane } from 'react-icons/fa';
 import { boardApi } from 'src/apis/board';
 import { useRouter } from 'next/router';
-import { useGetToken } from 'src/hooks/useGetToken';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { errorModal, infoModal } from 'src/utils/interactionModal';
