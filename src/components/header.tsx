@@ -46,7 +46,7 @@ export const Header = () => {
             </a>
           </Link>
 
-          <Link href="/alert">
+          {/* <Link href="/alert">
             <a>
               <AlertImage />
             </a>
@@ -55,7 +55,7 @@ export const Header = () => {
             <BrightImage onClick={() => dispatch(blackMode())} />
           ) : (
             <DarkImage onClick={() => dispatch(whiteMode())} />
-          )}
+          )} */}
         </Icons>
       </ContentBox>
     </HeaderBox>
