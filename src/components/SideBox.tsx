@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { dummyUser } from 'src/dummy/dummyUser';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { useCurrentMode } from 'src/hooks/useCurrentMode';
+import { customColor } from 'src/constants';
 
 export const SideBox = () => {
   const { getSessionStorage } = useSessionStorage();
@@ -59,13 +60,13 @@ const AdvertiseBox = styled.div`
 const TopBox = styled.div`
   margin-bottom: 10px;
   width: 100%;
-  box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0px;
+  box-shadow: ${customColor.black}25 4px 4px 4px 0px;
   padding: 15px 15px;
   border-radius: 25px;
 `;
 const BottomBtn = styled.button`
   width: 100%;
-  background-color: rgba(7, 104, 159, 1);
+  background-color: ${customColor.blue};
   padding: 3px;
   border-radius: 25px;
   border: 0;

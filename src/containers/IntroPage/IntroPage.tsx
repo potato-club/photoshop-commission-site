@@ -143,12 +143,12 @@ const Container = styled.div`
 const Btn = styled.button`
   width: 500px;
   height: 50px;
-  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 4px 4px 0px ${customColor.black}25;
   border-radius: 25px;
   &:active {
     position: relative;
     top: 2px;
-    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 4px 0px ${customColor.black}25;
   }
 `;
 const GoToBtn = styled(Btn)`

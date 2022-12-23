@@ -13,6 +13,7 @@ import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { blackMode, whiteMode } from 'src/redux-toolkit/slice/settingModeSlice';
 import { useCurrentMode } from 'src/hooks/useCurrentMode';
 import { useKaKaoLogin } from 'src/hooks/useKaKaoLogin';
+import { customColor } from 'src/constants';
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -72,13 +73,13 @@ const iconStyles = css`
   border-radius: 100%;
   :hover {
     border: 4px solid gray;
-    color: gray;
+    color: ${customColor.gray};
   }
   margin-right: 8px;
 `;
 
 export const HeaderBox = styled.div`
-  background-color: rgba(7, 104, 159, 1);
+  background-color: ${customColor.blue};
   width: 100%;
   height: 60px;
 `;

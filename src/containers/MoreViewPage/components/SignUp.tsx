@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { Typography } from 'src/components/Typography';
+import { customColor } from 'src/constants';
 import { pathName } from 'src/constants/pathName';
 import styled from 'styled-components';
 
@@ -43,7 +44,7 @@ const SignUpComment = styled.div`
 const SignUpBtn = styled.button`
   margin: 60px auto 0 auto;
   width: 185px;
-  background-color: rgba(7, 104, 159, 1);
+  background-color: ${customColor.blue};
   border-radius: 10px;
   padding: 10px 27px;
   border: none;
