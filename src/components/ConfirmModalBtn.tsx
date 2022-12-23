@@ -6,7 +6,7 @@ import ConfirmModal from './ConfirmModal';
 import useModal from 'src/hooks/useModal';
 
 export const ConfirmModalBtn = () => {
-  const { isOpen, handleOpenModal, handleClosetModal } = useModal();
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
   return (
     <>
       <Button onClick={() => handleOpenModal()}>
@@ -14,7 +14,7 @@ export const ConfirmModalBtn = () => {
           요청 확인하기
         </Typography>
       </Button>
-      <ConfirmModal isOpen={isOpen} handleClosetModal={handleClosetModal} />
+      <ConfirmModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
     </>
   );
 };
