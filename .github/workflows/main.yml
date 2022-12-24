@@ -1,4 +1,4 @@
-name: deploy-front
+name: test
 
 on:
   push:
@@ -19,7 +19,6 @@ jobs:
           NEXT_PUBLIC_PATHNAME: ${{ secrets.NEXT_PUBLIC_PATHNAME }}
           NEXT_PUBLIC_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}
           NEXT_PUBLIC_RESPONSE_TYPE: ${{ secrets.NEXT_PUBLIC_RESPONSE_TYPE }}
-
 
       - uses: jakejarvis/s3-sync-action@master
         with:
