@@ -1,13 +1,32 @@
 import { Typography } from '../components/index';
 import styled from 'styled-components';
-import { dummyUser } from 'src/dummy/dummyUser';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { useCurrentMode } from 'src/hooks/useCurrentMode';
 import { customColor } from 'src/constants';
+import { useQuery } from 'react-query';
+import { useState } from 'react';
+import { myPageApi } from 'src/apis/myPage';
 
 export const SideBox = () => {
   const { getSessionStorage } = useSessionStorage();
   const { fontColor } = useCurrentMode();
+  const [score, setScore] = useState();
+  useQuery(['getGrade'], () => myPageApi.rate.myGrade(), {
+    onSuccess: ({ data }) => {
+      setScore(data);
+    },
+  });
+
+  // const { isLoading, isError } = useQuery(
+  //   ['getMyComment', page],
+  //   () => myPageApi.myComment.list(page),
+  //   {
+  //     enabled: router.isReady,
+  //     onSuccess: ({ data }) => {
+  //       setList(data);
+  //     },
+  //   },
+  // );
 
   return (
     <AdvertiseBox>
@@ -19,15 +38,19 @@ export const SideBox = () => {
           &nbsp;님
         </Typography>
         <br />
-        <Typography size="16" fontWeight="bold" color={fontColor}>
-          평점
-        </Typography>
-        <Typography size="16" fontWeight="bold" color={fontColor}>
-          <User color="blue" size="20" fontWeight="bold">
-            {dummyUser.score}
-          </User>
-          /5.0
-        </Typography>
+        {score && (
+          <>
+            <Typography size="16" fontWeight="bold" color={fontColor}>
+              평점
+            </Typography>
+            <Typography size="16" fontWeight="bold" color={fontColor}>
+              <User color="blue" size="20" fontWeight="bold">
+                {score}
+              </User>
+              /5.0
+            </Typography>
+          </>
+        )}
       </TopBox>
 
       <BottomBtn

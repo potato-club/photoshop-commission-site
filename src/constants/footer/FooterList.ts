@@ -26,13 +26,13 @@ export const FooterList = [
     theme: 'ABOUT',
     content: [
       {
-        text: '공지사항',
+        text: '인트로페이지',
         href: '/',
       },
-      {
-        text: '이용약관',
-        href: '/',
-      },
+      // {
+      //   text: '이용약관',
+      //   href: '/',
+      // },
     ],
     href: '/about',
   },

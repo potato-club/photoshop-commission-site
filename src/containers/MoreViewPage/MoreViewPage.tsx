@@ -46,7 +46,6 @@ const StatePage = () => {
         totalItemsCount={total || 0}
         itemsCountPerPage={16}
       />
-      <SignUp />
       <SideBox />
     </Container>
   );

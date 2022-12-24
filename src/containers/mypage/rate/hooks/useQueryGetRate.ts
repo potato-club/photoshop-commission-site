@@ -17,6 +17,7 @@ export const useQueryGetRate = (page: number) => {
     ['GetRate', page],
     () => myPageApi.rate.list(page),
     {
+      retry: 0,
       enabled: router.isReady,
       onSuccess: ({ data }) => {
         setList(data);

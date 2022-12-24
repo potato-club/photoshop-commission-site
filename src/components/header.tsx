@@ -32,13 +32,13 @@ export const Header = () => {
           </Theme>
         </Link>
         <Icons>
-          <div>
+          {/* <div>
             {!access || !refresh ? (
               <LoginImage onClick={login} />
             ) : (
               <LogoutImage onClick={logout} />
             )}
-          </div>
+          </div> */}
 
           <Link href={pathName.MYPAGE.PROFILE}>
             <a>

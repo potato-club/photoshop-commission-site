@@ -11,6 +11,7 @@ export const useQueryGetGradeApi = () => {
     ['getGrade'],
     () => myPageApi.rate.myGrade(),
     {
+      retry: 0,
       enabled: router.isReady,
       onSuccess: ({ data }) => {
         setGrade(data);
