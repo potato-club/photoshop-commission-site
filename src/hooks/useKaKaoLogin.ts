@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { infoModal } from 'src/utils/interactionModal';
-import { useGetToken } from './useGetToken';
+import { useLoginToken } from './useLoginToken';
 import { useSessionStorage } from './useSessionStorage';
 
 export const useKaKaoLogin = () => {
   const router = useRouter();
-  const { resetToken } = useGetToken();
+  const { resetToken } = useLoginToken();
   const { setSessionStorage, removeSessionStorage } = useSessionStorage();
 
   const login = () => {

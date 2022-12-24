@@ -8,7 +8,7 @@ import { BsBrightnessHigh } from 'react-icons/bs';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { pathName } from 'src/constants/pathName';
 import { useDispatch } from 'react-redux';
-import { useGetToken } from 'src/hooks/useGetToken';
+import { useLoginToken } from 'src/hooks/useLoginToken';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { blackMode, whiteMode } from 'src/redux-toolkit/slice/settingModeSlice';
 import { useCurrentMode } from 'src/hooks/useCurrentMode';
@@ -18,7 +18,7 @@ import { customColor } from 'src/constants';
 export const Header = () => {
   const dispatch = useDispatch();
   const { backgroundColor } = useCurrentMode();
-  const { access, refresh } = useGetToken();
+  const { access, refresh } = useLoginToken();
   const {login, logout} = useKaKaoLogin();
 
   return (

@@ -30,7 +30,6 @@ export function SignUpPage() {
 
   const signUp = async (data: FieldValues) => {
     const { nickname, userRole, introduction } = data;
-    console.log(data);
     try {
       // * 닉네임 중복확인 완료
       // * introduction 빈값 체크 완료

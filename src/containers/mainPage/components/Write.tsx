@@ -1,14 +1,14 @@
 import React from 'react';
 import { Typography } from 'src/components';
 import styled from 'styled-components';
-import { useGetToken } from 'src/hooks/useGetToken';
+import { useLoginToken } from 'src/hooks/useLoginToken';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { useRouter } from 'next/router';
 import { customColor } from 'src/constants';
 import { useKaKaoLogin } from 'src/hooks/useKaKaoLogin';
 
 const Write = () => {
-  const { access, refresh } = useGetToken();
+  const { access, refresh } = useLoginToken();
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
   const isArtist = access && refresh && job === 'ARTIST';

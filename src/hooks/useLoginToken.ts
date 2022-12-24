@@ -2,7 +2,7 @@ import React from 'react';
 import { useCookies } from './useCookies';
 import { useSessionStorage } from './useSessionStorage';
 
-export function useGetToken() {
+export function useLoginToken() {
     const { getCookie, removeCookie } = useCookies();
     const { getSessionStorage, removeSessionStorage } = useSessionStorage();
     const access = getSessionStorage('access');

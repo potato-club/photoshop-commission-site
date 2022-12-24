@@ -32,8 +32,6 @@ export default function CheckToken() {
 
     // 최초 로그인이 아닐때 : 액세스토큰
     if (headers) {
-      console.log('액세스 토큰', headers.authorization);
-      console.log('리프레쉬 토큰', headers.refreshtoken);
       setSessionStorage('access', headers.authorization);
       setCookie('refresh', headers.refreshtoken);
       setSessionStorage('nickname', data.nickname[0]);
@@ -46,10 +44,8 @@ export default function CheckToken() {
   useEffect(() => {
     if (!router.isReady) return;
     if (!code) {
-      console.log('카카오에서 코드를 받는데 실패함');
+      alert('카카오에서 코드를 받는데 실패함');
     } else {
-      console.log('카카오 코드있음');
-      console.log(String(code));
       checkUser();
     }
   }, [router.isReady, code, checkUser]);

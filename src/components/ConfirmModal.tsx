@@ -7,7 +7,7 @@ import { customColor } from 'src/constants';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { requestApi } from 'src/apis/request';
 import { useRouter } from 'next/router';
-import { useGetToken } from 'src/hooks/useGetToken';
+import { useLoginToken } from 'src/hooks/useLoginToken';
 import { checkModal, infoModal } from 'src/utils/interactionModal';
 
 const customStyles = {
@@ -35,7 +35,7 @@ export const ConfirmModal = ({ isOpen, handleCloseModal }: Props) => {
   const queryClient = useQueryClient();
 
   const router = useRouter();
-  const { access, refresh } = useGetToken();
+  const { access, refresh } = useLoginToken();
 
   const handlePageChange = (page: number) => {
     setPage(page);

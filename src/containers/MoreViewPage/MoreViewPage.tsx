@@ -21,11 +21,6 @@ const StatePage = () => {
     page,
   );
 
-  useEffect(() => {
-    console.log(data);
-    console.log(total);
-  }, [data, total]);
-
   const handlePageChange = (page: number) => {
     setPage(page);
     window.scrollTo(0, 0);

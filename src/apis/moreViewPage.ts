@@ -14,6 +14,6 @@ export const stateApi = {
   },
 
   getFilterTitle: async (keyword: string, page: number) => {
-    return await api.get(`filter/title`, {keyword, page});
+    return await api.get(`filter/title`, { keyword, page });
   },
 };

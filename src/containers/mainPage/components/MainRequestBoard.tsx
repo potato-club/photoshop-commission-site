@@ -26,8 +26,6 @@ export interface IData {
 export const MainRequestBoard = ({ state }: MainRequestBoardProps) => {
   const { data } = useMainData(state);
 
-  useEffect(() => console.log(data), [data]);
-
   return (
     <RequestBox>
       <Title state={state} />
