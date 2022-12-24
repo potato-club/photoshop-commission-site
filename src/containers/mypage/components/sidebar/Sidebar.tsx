@@ -91,7 +91,7 @@ export const SideBar = () => {
           ))}
       </NavList>
       <BottomNavWrapper>
-        <BottomNavItem>
+        {/* <BottomNavItem>
           <Typography size="12" color="gray">
             로그아웃
           </Typography>
@@ -100,7 +100,7 @@ export const SideBar = () => {
           <Typography size="12" color="gray">
             고객문의
           </Typography>
-        </BottomNavItem>
+        </BottomNavItem> */}
       </BottomNavWrapper>
     </Wrapper>
   );
