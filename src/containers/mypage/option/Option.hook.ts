@@ -16,7 +16,7 @@ export const useOption = () => {
     removeSessionStorage('job');
     setSessionStorage('nickname', 'GUEST');
     infoModal('로그아웃이 완료되었습니다.', 'success', undefined, () => {
-      router.push(pathName.INDEX);
+      router.push(pathName.MAIN);
     });
   };
   const handleClickSignout = () => {

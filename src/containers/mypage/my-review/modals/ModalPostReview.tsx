@@ -107,7 +107,8 @@ const ModalPostReview = ({ isOpen, handleClosetModal, item }: Props) => {
               <Rating
                 onClick={handleRating}
                 size={40}
-                allowFraction
+                allowHalfIcon
+                ratingValue={rate}
                 transition
                 fillColor="orange"
                 emptyColor="gray"
