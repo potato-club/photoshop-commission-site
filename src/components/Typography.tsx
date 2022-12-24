@@ -14,6 +14,7 @@ export type TypographyProps = React.PropsWithChildren<{
     | '24'
     | '20'
     | '16'
+    | '14'
     | '12'
     | '8'
     | '4';
