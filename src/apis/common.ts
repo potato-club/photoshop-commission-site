@@ -4,7 +4,7 @@ import { tokenService } from 'src/libs/tokenService';
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   get: async (url: string, params?: any) =>
-    await axios.get(setting.baseUrl + url, params),
+    await axios.get(setting.baseUrl + url, { params }),
 
   getWithAuth: async (url: string, params?: any) => {
     const accessToken = tokenService.getAccessToken();
@@ -19,7 +19,7 @@ export default {
         },
       });
     } else {
-      return await axios.get(setting.baseUrl + url, params);
+      return await axios.get(setting.baseUrl + url, { params });
     }
   },
 

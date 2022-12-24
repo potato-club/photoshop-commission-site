@@ -12,11 +12,7 @@ export default function CheckToken() {
   const { setCookie } = useCookies();
 
   const checkUser = useCallback(async () => {
-    const { data, headers } = await signUpApi.checkUser({
-      params: {
-        code,
-      },
-    });
+    const { data, headers } = await signUpApi.checkUser({ code });
 
     // 회원가입을 제대로 하지 않고 중간에 나갔을때 : fail
     if (data.fail) {
@@ -41,7 +37,7 @@ export default function CheckToken() {
       setSessionStorage('access', headers.authorization);
       setCookie('refresh', headers.refreshtoken);
       setSessionStorage('nickname', data.nickname[0]);
-      setSessionStorage('job', data.userRole[0])
+      setSessionStorage('job', data.userRole[0]);
       router.push('/main');
       return;
     }
