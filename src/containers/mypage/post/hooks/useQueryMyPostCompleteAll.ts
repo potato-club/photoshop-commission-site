@@ -13,7 +13,6 @@ export const useQueryMyPostCompleteAll = (page: number) => {
     () => myPageApi.myPost.completeAll(page),
     {
       enabled: router.isReady,
-      retry: 0,
       onSuccess: ({ data }) => {
         setList(data);
       },

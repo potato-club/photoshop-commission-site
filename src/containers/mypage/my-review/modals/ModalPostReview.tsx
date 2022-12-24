@@ -8,6 +8,7 @@ import { errorModal, infoModal } from 'src/utils/interactionModal';
 import { Rating } from 'react-simple-star-rating';
 import { useQueryPostReview } from '../hooks/useQueryPostReview';
 import { MyReviewType } from '../hooks/useQueryGetMyReview';
+import { useQueryClient } from 'react-query';
 
 const customStyles = {
   content: {
@@ -33,20 +34,22 @@ const ModalPostReview = ({ isOpen, handleClosetModal, item }: Props) => {
   const reviewInputRef = useRef<HTMLTextAreaElement>(null);
   const [rate, setRate] = useState(0);
   const [review, setReview] = useState('');
+  const queryClient = useQueryClient();
 
-  const { refetch, isError, isLoading } = useQueryPostReview({
+
+  const { mutate } = useQueryPostReview({
     roomId: String(item.roomId),
     content: review,
     grade: String(rate),
   });
 
-  const handleClickSubmitReview = () => {
+  const handleClickSubmitReview = async() => {
     if (review === '') errorModal('후기를 입력해주세요');
     else {
-      refetch();
-      infoModal('후기가 작성되었습니다.', 'success', undefined, () =>
-        location.reload(),
-      );
+      mutate();
+      infoModal('후기가 작성되었습니다.', 'success');
+      handleClosetModal();
+      queryClient.invalidateQueries('getMyReview');
     }
   };
   const handleRating = (rate: number) => {

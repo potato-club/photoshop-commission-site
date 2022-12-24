@@ -16,8 +16,6 @@ import { useCookies } from 'src/hooks/useCookies';
 import { infoModal } from 'src/utils/interactionModal';
 
 export function SignUpPage() {
-  // Todo 우선 submit 하면 자동으로 중복검사 하게끔하고, 이전방법이 낫겠다 싶으면 닉네임만 제어컴포넌트로 바꿔서 중복확인 버튼 사용하기
-  // const [doubleNameCheck, setDoubleNameCheck] = useState<boolean>(false);
   const { setSessionStorage, getSessionStorage, removeSessionStorage } =
     useSessionStorage();
   const { setCookie } = useCookies();

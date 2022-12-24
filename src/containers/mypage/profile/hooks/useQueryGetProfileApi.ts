@@ -13,7 +13,6 @@ export const useQueryGetProfile = () => {
     () => myPageApi.profile.get(),
     {
       enabled: router.isReady,
-      retry: 0,
       onSuccess: ({ data }) => {
         setProfile(data);
       },

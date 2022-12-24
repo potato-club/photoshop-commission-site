@@ -39,7 +39,7 @@ export function CustomInput({ type, parentId }: Props) {
 
   const commentSubmit = async (data: FieldValues) => {
     // Todo : 나중에 내가 쓴 댓글인지 확인하는 api 나오고 detailPage 에서 수정, 삭제 구현되면 텍스트 수정해야함
-    checkModal('댓글을 등록하시겠습니까?', () => mutate(data.comment), undefined, undefined, '작성한 댓글은 마이페이지에서 삭제할 수 있습니다.');
+    checkModal('댓글을 등록하시겠습니까?', () => mutate(data.comment));
   };
 
   return (

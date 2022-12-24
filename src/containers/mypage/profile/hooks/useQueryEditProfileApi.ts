@@ -13,7 +13,6 @@ export const useQueryEditProfile = (params: EditProfileType) => {
     () => myPageApi.profile.edit(params),
     {
       enabled: false,
-      retry: 0,
       onSuccess: ({ data }) => {
         setProfile(data);
       },

@@ -70,24 +70,24 @@ type ReviewListProps = {
 const ReviewList = ({ list, isLoading, isError }: ReviewListProps) => {
   if (isLoading)
     return (
-      <MesssageWrapper>
+      <MessageWrapper>
         <LoadingMessage>게시글을 불러오고 있습니다</LoadingMessage>
-      </MesssageWrapper>
+      </MessageWrapper>
     );
 
   if (isError)
     return (
-      <MesssageWrapper>
+      <MessageWrapper>
         <ErrorMessage>게시글을 불러오는데 실패했습니다</ErrorMessage>
-      </MesssageWrapper>
+      </MessageWrapper>
     );
   if (list && !isLoading && !isError && list.length === 0)
     return (
-      <MesssageWrapper>
+      <MessageWrapper>
         <Typography size="16" fontWeight="bold" color="gray">
           게시글이 없습니다
         </Typography>
-      </MesssageWrapper>
+      </MessageWrapper>
     );
 
   return (
@@ -98,12 +98,12 @@ const ReviewList = ({ list, isLoading, isError }: ReviewListProps) => {
     </>
   );
 };
-const MesssageWrapper = styled.div`
+const MessageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 80px;
+  padding: 80px;
 `;
 const ReviewItem = ({ item }: ReviewItemProps) => {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();

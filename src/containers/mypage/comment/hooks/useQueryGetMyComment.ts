@@ -17,7 +17,6 @@ export const useQueryGetMyComment = (page: number) => {
     () => myPageApi.myComment.list(page),
     {
       enabled: router.isReady,
-      retry: 0,
       onSuccess: ({ data }) => {
         setList(data);
       },

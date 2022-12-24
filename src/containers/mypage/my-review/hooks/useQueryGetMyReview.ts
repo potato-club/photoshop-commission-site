@@ -18,7 +18,6 @@ export const useQueryGetMyReview = (page: number) => {
     () => myPageApi.myReview.list(page),
     {
       enabled: router.isReady,
-      retry: 0,
       onSuccess: ({ data }) => {
         setList(data);
       },

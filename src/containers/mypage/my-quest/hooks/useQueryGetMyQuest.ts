@@ -13,7 +13,6 @@ export const useQueryGetMyQuest = (page: number) => {
     () => myPageApi.myQuest.list(page),
     {
       enabled: router.isReady,
-      retry: 0,
       onSuccess: ({ data }) => {
         setList(data);
       },
