@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
+import { imageOpenType } from 'src/types/imageOpen.type';
 import styled from 'styled-components';
 
 type Props = {
@@ -27,7 +28,7 @@ type Props = {
  *
  */
 
-export default function CustomRadioButton(props: Props) {
+export function CustomRadioButton(props: Props) {
   const {
     id,
     label,

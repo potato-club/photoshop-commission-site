@@ -1,8 +1,12 @@
 import { customColorType, customColor } from 'src/constants/customColor';
 import styled from 'styled-components';
+import { useCurrentMode } from 'src/hooks/useCurrentMode';
+
 
 export type TypographyProps = React.PropsWithChildren<{
   size:
+    | '80'
+    | '60'
     | '48'
     | '44'
     | '40'
@@ -12,6 +16,7 @@ export type TypographyProps = React.PropsWithChildren<{
     | '24'
     | '20'
     | '16'
+    | '14'
     | '12'
     | '8'
     | '4';
@@ -22,7 +27,8 @@ export type TypographyProps = React.PropsWithChildren<{
   fontHidden?: boolean;
 }>;
 export const Typography = (props: TypographyProps) => {
-  return <TypographyText {...props}>{props.children}</TypographyText>;
+  const { fontColor } = useCurrentMode();
+  return <TypographyText {...props} defaultColor={fontColor}>{props.children}</TypographyText>;
 };
 
 export const handleColor = (color: keyof customColorType) => {
@@ -30,10 +36,12 @@ export const handleColor = (color: keyof customColorType) => {
     if (keyStore === color) return customColor[keyStore];
   }
 };
-
-const TypographyText = styled.div<TypographyProps>`
+type typographyDefault = {
+  defaultColor: string;
+}
+const TypographyText = styled.div<TypographyProps & typographyDefault>`
   font-size: ${({ size }) => size + 'px'};
-  color: ${({ color }) => (color ? handleColor(color) : customColor.black)};
+  color: ${({ color, defaultColor }) => (color ? handleColor(color) : defaultColor)};
   text-align: ${({ textAlign }) => textAlign};
   font-weight: ${({ fontWeight }) => fontWeight};
   ${({ fontHeight }) =>

@@ -1,19 +1,33 @@
 import Image from 'next/image';
 import React from 'react';
 import { Typography } from 'src/components/Typography';
+import { ImageType } from 'src/types/image.type';
+import { imageOpenType } from 'src/types/imageOpen.type';
+import { fileDownload } from 'src/utils/filedown';
+import { checkModal } from 'src/utils/interactionModal';
 import styled from 'styled-components';
 type Props = {
-  imageUrls: string[];
+  imageOpen: imageOpenType;
+  imageUrls: ImageType[];
   contents: string;
-  imageSecret: boolean;
-};
-export function Contents({ contents, imageUrls, imageSecret }: Props) {
+}
+export function Contents({imageOpen, imageUrls, contents}:Props) {
+  const checkDownload = (filename: string) => {
+    checkModal('원본사진을 다운하시겠습니까?', () => fileDownload(filename), undefined, undefined, '게시글의 사진과 크기차이가 있을 수 있습니다');
+  }
   return (
     <Container>
-      {!imageSecret && (
+      {imageUrls && (
         <ImgContainer>
           {imageUrls.map((data, index) => (
-            <Image width={630} height={470} key={index} src={data} alt="img" />
+            <Image
+              onClick={() => checkDownload(data.fileName)}
+              width={630}
+              height={470}
+              key={index}
+              src={data.fileUrl}
+              alt="img"
+            />
           ))}
         </ImgContainer>
       )}

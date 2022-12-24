@@ -8,33 +8,64 @@ import {
   TextAreaComponent,
   Title,
 } from './components';
+import { signUpApi } from 'src/apis';
+import { useRouter } from 'next/router';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { FieldValues, useForm } from 'react-hook-form';
+import { useCookies } from 'src/hooks/useCookies';
+import { infoModal } from 'src/utils/interactionModal';
 
 export function SignUpPage() {
-  const [nickname, setNickname] = useState('');
-  const [selectedJob, setSelectedJob] = useState('requester');
-  const [aboutMe, setAboutMe] = useState('');
+  const { setSessionStorage, getSessionStorage, removeSessionStorage } =
+    useSessionStorage();
+  const { setCookie } = useCookies();
+  const router = useRouter();
 
-  const signUp = () => {
-    alert('가입하기 버튼 클릭');
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+
+  const signUp = async (data: FieldValues) => {
+    const { nickname, userRole, introduction } = data;
+    try {
+      // * 닉네임 중복확인 완료
+      // * introduction 빈값 체크 완료
+
+      const { data, headers } = await signUpApi.signUp({
+        nickname,
+        userRole,
+        introduction,
+        serialCode: getSessionStorage('serialCode'),
+      });
+      removeSessionStorage('serialCode');
+      setSessionStorage('access', headers.authorization);
+      setCookie('refresh', headers.refreshtoken);
+      setSessionStorage('nickname', data.nickname[0]);
+      setSessionStorage('job', data.userRole[0]);
+      infoModal('회원가입이 완료되었습니다', 'success')
+      router.push('/main');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <Container>
       <Title />
       <Line />
-      <InfoWrapper>
-        <NicknameInput setNickname={setNickname} />
-        <JobSelectInput
-          selectedJob={selectedJob}
-          setSelectedJob={setSelectedJob}
-        />
-        <TextAreaComponent setAboutMe={setAboutMe} />
-        <SignUpButton onClick={() => signUp()}>
+      <Form onSubmit={handleSubmit(signUp)}>
+        <NicknameInput register={register} errors={errors} />
+        <JobSelectInput control={control} errors={errors} />
+        <TextAreaComponent register={register} errors={errors} />
+        <SignUpButton type="submit">
           <Typography size="20" color="white">
             가입하기
           </Typography>
         </SignUpButton>
-      </InfoWrapper>
+      </Form>
     </Container>
   );
 }
@@ -54,7 +85,7 @@ const Line = styled.div`
   border-bottom: 1px solid ${customColor.gray};
 `;
 
-const InfoWrapper = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 80px;
@@ -63,7 +94,7 @@ const InfoWrapper = styled.div`
   margin-top: 80px;
 `;
 
-const SignUpButton = styled.div`
+const SignUpButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,11 +103,4 @@ const SignUpButton = styled.div`
   background-color: ${customColor.blue};
   border-radius: 10px;
   align-self: flex-end;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
 `;

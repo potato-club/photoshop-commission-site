@@ -6,4 +6,7 @@ export { Header } from './header';
 export { Typography } from './Typography';
 export { SideBox } from './SideBox';
 export { CustomPagination } from './CustomPagination';
-export { MainRequestBoard } from './MainRequestBoard';
+export { MainRequestBoard } from '../containers/mainPage/components/MainRequestBoard';
+export { ConfirmModal } from './ConfirmModal';
+export { ConfirmModalBtn } from './ConfirmModalBtn';
+export { RequestModalBtn } from './RequestModalBtn';

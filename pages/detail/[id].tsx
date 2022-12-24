@@ -1,19 +1,37 @@
-import { useRouter } from 'next/router';
-import React from 'react'
-import { Typography } from 'src/components/Typography';
+import React, { useEffect } from 'react';
 import { DetailPage } from 'src/containers';
-import { boardDummy } from 'src/dummy/boardDummy';
+import { useGetDetail } from 'src/hooks/useGetDetail';
+
 export default function Detail() {
-  const router = useRouter();
+  const { data } = useGetDetail();
 
-  if(!router.query.id) return <Typography size='16'>로딩중...</Typography>;
 
-    // Todo : api 를 통해 id 에 대한 게시글을 요청
-  const data = boardDummy.filter(data => data.boardNo === Number(router.query.id))[0];
-
-  // 오류페이지
-  if(data === undefined) return <Typography size='16'>페이지가 없습니다.</Typography>
-
-  
-  return <DetailPage data={data} />;
+  return <>{data && <DetailPage detailData={data} />}</>;
 }
+
+//////////////////////////////////// * get ServerSideProps 쓰는 코드 ///////////////////////////////////////
+
+// export default function Detail(data: BoardType) {
+//   console.log(data)
+//   return <DetailPage data={data} />;
+// }
+
+// export const getServerSideProps: GetServerSideProps = async context => { // Todo S3 로 배포하게 되면 이 방법 말고 CSR 로 할 예정
+//   const { data } = await boardApi.getDetail(context.query.id);
+
+//   return {
+//     props: {
+//       boardNo: data.id,
+//       title: data.title,
+//       state: data.questEnum,
+//       writer: data.nickname,
+//       createdDate: data.createdDate,
+//       modifiedDate: data.modifiedDate,
+//       imageUrls: data.image || [],
+//       imageOpen: data.imageOpen,
+//       contents: data.context,
+//       totalComment: data.comments.length || 0,
+//       commentList: data.comments || [],
+//     },
+//   };
+// };

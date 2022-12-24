@@ -12,27 +12,13 @@ interface ContentType {
   href: string;
 }
 
-const Page = styled.a`
-  display: inline-block;
-  margin-bottom: 9px;
-  text-decoration: none;
-`;
-
-const NewTypography = styled(Typography)`
-  padding: 5px 0 5px 0;
-  display: inline-block;
-  :hover {
-    font-weight: 900;
-  }
-`;
-
 export const Content = ({ theme, content, href }: ContentType) => {
   return (
     <ul>
       <li>
         <Link href={href} passHref>
           <Page>
-            <NewTypography size="20" color="blue" fontWeight="900">
+            <NewTypography size="20" color="blue" fontWeight="bold">
               {theme}
             </NewTypography>
           </Page>
@@ -41,7 +27,7 @@ export const Content = ({ theme, content, href }: ContentType) => {
 
       {content?.map((element, index) => (
         <li key={index}>
-          <Link href={`/main/${element.href}`} passHref>
+          <Link href={`${element.href}`} passHref>
             <a>
               <NewTypography size="12" color="gray">
                 {element.text}
@@ -55,3 +41,17 @@ export const Content = ({ theme, content, href }: ContentType) => {
 };
 
 export default Content;
+
+const Page = styled.a`
+  display: inline-block;
+  margin-bottom: 9px;
+  text-decoration: none;
+`;
+
+const NewTypography = styled(Typography)`
+  padding: 5px 0 5px 0;
+  display: inline-block;
+  :hover {
+    font-weight: 900;
+  }
+`;

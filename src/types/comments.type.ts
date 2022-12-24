@@ -3,14 +3,21 @@ export type CommentType = {
   writer: string;
   date: Date;
   contents: string;
-  good: number;
   reply: ReplyType[];
+  boardListId: number;
+  children: ReplyType[];
+  comment: string;
+  createdDate: string;
+  modifiedDate: string;
+  id: number;
+  nickname: string;
+  parent: boolean;
 };
 
 export type ReplyType = {
-  replyNo: number;
-  writer: string;
-  date: Date;
-  contents: string;
-  good: number;
+  comment: string;
+  createdDate: string;
+  modifiedDate: string;
+  id: number;
+  nickname: string;
 };

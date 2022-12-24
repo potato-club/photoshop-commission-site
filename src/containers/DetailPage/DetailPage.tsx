@@ -1,32 +1,49 @@
-
 import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
-import { Contents, Header, CommentHeader, Comment, CustomInput } from './components';
+import {
+  Contents,
+  Header,
+  CommentHeader,
+  CustomInput,
+} from './components';
+import {
+  ConfirmModalBtn,
+  RequestModalBtn,
+} from '../../../src/components/index';
+import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { CommentList } from './components/CommentList';
 import { BoardType } from 'src/types/board.type';
+import { useCheckSelectedArtist } from 'src/hooks/useCheckSelectedArtist';
+import { UploadModalBtn } from './components/UploadModalBtn';
+import { useCheckWriter } from 'src/hooks/useCheckWriter';
+import { useCheckOutput } from 'src/hooks/useCheckOutput';
+import { OutputModalBtn } from './components/OutputModalBtn';
 type Props = {
-  data: BoardType;
-};
-export function DetailPage({ data }: Props) {
-  const {title, state, writer, date, imageUrls, imageSecret, contents, totalComment, commentList} = data;
+  detailData : BoardType;
+}
+export function DetailPage({ detailData }: Props) {
+  const { getSessionStorage } = useSessionStorage();
+  const job = getSessionStorage('job');
+  const {title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList} = detailData;
+  const { selectedArtist } = useCheckSelectedArtist();
+  const { myPost } = useCheckWriter();
+  const { output } = useCheckOutput();
+
   return (
     <Container>
       <Wrapper>
-        <Header title={title} writer={writer} date={date} state={state} />
-        <Contents imageUrls={imageUrls} contents={contents} imageSecret={imageSecret} />
+        <Header state={state} title={title} writer={writer} createdDate={createdDate} modifiedDate={modifiedDate} myPost={myPost}/>
+        <Contents imageOpen={imageOpen} imageUrls={imageUrls} contents={contents}/>
+        <ModalWrapper>
+          {myPost && state === 'BEFORE' && <ConfirmModalBtn />}
+          {job === 'ARTIST' && state === 'BEFORE' && <RequestModalBtn />}
+          {(!output || output.image?.length === 0) && selectedArtist && <UploadModalBtn />}
+          {state !== 'BEFORE' && output && <OutputModalBtn />}
+        </ModalWrapper>
         <CommentContainer>
-          <CommentHeader totalComment={totalComment} />
-          {commentList.map(comment => (
-            <Comment
-              key={comment.CommentNo}
-              writer={comment.writer}
-              date={comment.date}
-              text={comment.contents}
-              good={comment.good}
-              reply={comment.reply}
-              type="Comment"
-            />
-          ))}
+          <CommentHeader totalComment={totalComment}/>
+          <CommentList commentList={commentList}/>
         </CommentContainer>
         <Line />
         <CustomInput type="Board" />
@@ -34,6 +51,14 @@ export function DetailPage({ data }: Props) {
     </Container>
   );
 }
+
+const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px 0;
+`;
+
 const Container = styled.div`
   width: 100%;
   display: flex;
@@ -47,45 +72,13 @@ const Wrapper = styled.div`
   max-width: 1178px;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
-  border-left: 1px solid ${customColor.gray};
-  border-right: 1px solid ${customColor.gray};
   padding-bottom: 400px;
 `;
 
 const CommentContainer = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const InputWrapper = styled.div`
   position: relative;
-`;
-const Input = styled.input`
-  width: 100%;
-  box-sizing: border-box;
-  height: 40px;
-  padding: 0 80px 0 16px;
-  outline: none;
-  border: none;
-  border-top: 1px solid ${customColor.gray};
-  border-bottom: 1px solid ${customColor.gray};
-  font-size: 16px;
-  ::placeholder {
-    color: ${customColor.gray};
-  }
-`;
-
-const SubMitButton = styled.div`
-  position: absolute;
-  width: 60px;
-  height: 100%;
-  top: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${customColor.blue};
 `;
 
 const Line = styled.div`

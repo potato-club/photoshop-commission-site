@@ -103,9 +103,11 @@ section {
 }
 body {
   line-height: 1;
+  overflow-x: clip;
 }
 ol,
-ul {
+ul,
+li {
   list-style: none;
 }
 blockquote,
@@ -132,13 +134,18 @@ body {
   height: 100%;
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: padding, font-size 0.3s ease;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
-  margin-bottom: 130px;
-  margin-top: 130px;
   text-align: center;
-  font-size: 30px;
+  font-size: 20px;
 }
 .pagination li {
   margin-right: 5px;
@@ -148,13 +155,46 @@ body {
   text-decoration: none;
 }
 .pagination li.active a {
-  color: rgba(7, 104, 159, 1);
+  color: black;
   text-decoration: none;
 }
 .pagination li a:hover {
-  color: rgba(7, 104, 159, 1);
+  color: black;
 }
 .pagination li:nth-child(-n + 2) a,
 .pagination li:nth-last-child(-n + 2) a {
   color: black;
+}
+
+.testPage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -25px;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  transform: scale(1.01);
+}
+
+button:active {
+  transform: scale(0.99);
+}
+
+.errorWrapper {
+  position: absolute;
+  top: 35px;
+  left: 50px;
+}
+
+textarea {
+  resize: none;
 }
