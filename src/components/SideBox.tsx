@@ -10,7 +10,7 @@ import { myPageApi } from 'src/apis/myPage';
 export const SideBox = () => {
   const { getSessionStorage } = useSessionStorage();
   const { fontColor } = useCurrentMode();
-  const [score, setScore] = useState();
+  const [score, setScore] = useState('');
   useQuery(['getGrade'], () => myPageApi.rate.myGrade(), {
     onSuccess: ({ data }) => {
       setScore(data);
@@ -38,16 +38,13 @@ export const SideBox = () => {
           &nbsp;님
         </Typography>
         <br />
-        {score && (
+        {score !== '' && (
           <>
             <Typography size="16" fontWeight="bold" color={fontColor}>
               평점
             </Typography>
             <Typography size="16" fontWeight="bold" color={fontColor}>
-              <User color="blue" size="20" fontWeight="bold">
-                {score}
-              </User>
-              /5.0
+              <span style={{ color: customColor.blue }}>{score}</span> / 5.0
             </Typography>
           </>
         )}
