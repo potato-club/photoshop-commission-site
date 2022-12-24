@@ -12,11 +12,7 @@ export default function CheckToken() {
   const { setCookie } = useCookies();
 
   const checkUser = useCallback(async () => {
-    const { data, headers } = await signUpApi.checkUser({
-      params: {
-        code,
-      },
-    });
+    const { data, headers } = await signUpApi.checkUser({ code });
 
     // 회원가입을 제대로 하지 않고 중간에 나갔을때 : fail
     if (data.fail) {
@@ -36,12 +32,10 @@ export default function CheckToken() {
 
     // 최초 로그인이 아닐때 : 액세스토큰
     if (headers) {
-      console.log('액세스 토큰', headers.authorization);
-      console.log('리프레쉬 토큰', headers.refreshtoken);
       setSessionStorage('access', headers.authorization);
       setCookie('refresh', headers.refreshtoken);
       setSessionStorage('nickname', data.nickname[0]);
-      setSessionStorage('job', data.userRole[0])
+      setSessionStorage('job', data.userRole[0]);
       router.push('/main');
       return;
     }
@@ -50,10 +44,8 @@ export default function CheckToken() {
   useEffect(() => {
     if (!router.isReady) return;
     if (!code) {
-      console.log('카카오에서 코드를 받는데 실패함');
+      alert('카카오에서 코드를 받는데 실패함');
     } else {
-      console.log('카카오 코드있음');
-      console.log(String(code));
       checkUser();
     }
   }, [router.isReady, code, checkUser]);

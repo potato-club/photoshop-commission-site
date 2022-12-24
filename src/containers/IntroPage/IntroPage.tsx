@@ -6,8 +6,10 @@ import Link from 'next/link';
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useKaKaoLogin } from 'src/hooks/useKaKaoLogin';
 
 const IntroPage = () => {
+  const { login } = useKaKaoLogin();
   useEffect(() => {
     AOS.init();
   });
@@ -103,19 +105,15 @@ const IntroPage = () => {
         <br />
         <br />
         <Typography size="80" fontWeight="bold" color="blue">
-          가나다 포토샵
+          이지 포토
         </Typography>
       </FooterTextBox>
       <BtnBox>
-        <Link href="/main">
-          <a>
-            <LoginBtn>
-              <Typography size="16" fontWeight="bold" color="lightBlue">
-                로그인 및 회원가입
-              </Typography>
-            </LoginBtn>
-          </a>
-        </Link>
+        <LoginBtn onClick={login}>
+          <Typography size="16" fontWeight="bold" color="lightBlue">
+            로그인 및 회원가입
+          </Typography>
+        </LoginBtn>
         <Link href="/main">
           <a>
             <GoToBtn>
@@ -132,24 +130,34 @@ const IntroPage = () => {
 
 export default IntroPage;
 
+const Container = styled.div`
+  width: 100%;
+  display: flex;
+  max-width: 1178px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+`;
+
 const Btn = styled.button`
   width: 500px;
   height: 50px;
-  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 4px 4px 0px ${customColor.black}25;
   border-radius: 25px;
   &:active {
     position: relative;
     top: 2px;
-    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 2px 2px 4px 0px ${customColor.black}25;
   }
 `;
 const GoToBtn = styled(Btn)`
-  background-color: rgba(162, 170, 242, 1);
+  background-color: ${customColor.purple};
   border: none;
   margin-bottom: 400px;
 `;
 const LoginBtn = styled(Btn)`
-  border: solid rgba(162, 213, 242, 1);
+  border: solid ${customColor.lightBlue};
   border-width: 5px;
   background-color: ${customColor.white};
   margin-bottom: 20px;
@@ -186,11 +194,4 @@ const HeaderTextBox = styled(TextBox)`
 
 const HeaderImageBox = styled.div`
   margin: 40px 0 50px 0;
-`;
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  overflow-y: hidden;
 `;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { myPageApi } from 'src/apis/myPage';
 import { PostReviewType } from 'src/apis/myPage.type';
 import { MyPost } from '../../post/types/post.type';
@@ -7,18 +7,14 @@ import { MyPost } from '../../post/types/post.type';
 type Props = PostReviewType;
 export const useQueryPostReview = (params: PostReviewType) => {
   const [list, setList] = useState<MyPost[]>([]);
+  const queryClient = useQueryClient();
 
-  const { refetch, isLoading, isError } = useQuery(
-    ['postReview', params],
-    () => myPageApi.myReview.post(params),
-    {
-      enabled: false,
-      retry: 0,
-      onSuccess: ({ data }) => {
-        setList(data);
-      },
+  const { mutate } = useMutation(() => myPageApi.myReview.post(params), {
+    onSuccess: ({ data }) => {
+      setList(data);
+      queryClient.invalidateQueries('getMyReview');
     },
-  );
+  });
 
-  return { refetch, list, isLoading, isError };
+  return { mutate };
 };

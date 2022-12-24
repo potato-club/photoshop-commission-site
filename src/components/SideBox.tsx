@@ -1,12 +1,32 @@
 import { Typography } from '../components/index';
 import styled from 'styled-components';
-import { dummyUser } from 'src/dummy/dummyUser';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { useCurrentMode } from 'src/hooks/useCurrentMode';
+import { customColor } from 'src/constants';
+import { useQuery } from 'react-query';
+import { useState } from 'react';
+import { myPageApi } from 'src/apis/myPage';
 
 export const SideBox = () => {
   const { getSessionStorage } = useSessionStorage();
   const { fontColor } = useCurrentMode();
+  const [score, setScore] = useState('');
+  useQuery(['getGrade'], () => myPageApi.rate.myGrade(), {
+    onSuccess: ({ data }) => {
+      setScore(data);
+    },
+  });
+
+  // const { isLoading, isError } = useQuery(
+  //   ['getMyComment', page],
+  //   () => myPageApi.myComment.list(page),
+  //   {
+  //     enabled: router.isReady,
+  //     onSuccess: ({ data }) => {
+  //       setList(data);
+  //     },
+  //   },
+  // );
 
   return (
     <AdvertiseBox>
@@ -18,15 +38,16 @@ export const SideBox = () => {
           &nbsp;님
         </Typography>
         <br />
-        <Typography size="16" fontWeight="bold" color={fontColor}>
-          평점
-        </Typography>
-        <Typography size="16" fontWeight="bold" color={fontColor}>
-          <User color="blue" size="20" fontWeight="bold">
-            {dummyUser.score}
-          </User>
-          /5.0
-        </Typography>
+        {score !== '' && (
+          <>
+            <Typography size="16" fontWeight="bold" color={fontColor}>
+              평점
+            </Typography>
+            <Typography size="16" fontWeight="bold" color={fontColor}>
+              <span style={{ color: customColor.blue }}>{score}</span> / 5.0
+            </Typography>
+          </>
+        )}
       </TopBox>
 
       <BottomBtn
@@ -59,13 +80,13 @@ const AdvertiseBox = styled.div`
 const TopBox = styled.div`
   margin-bottom: 10px;
   width: 100%;
-  box-shadow: rgba(0, 0, 0, 0.25) 4px 4px 4px 0px;
+  box-shadow: ${customColor.black}25 4px 4px 4px 0px;
   padding: 15px 15px;
   border-radius: 25px;
 `;
 const BottomBtn = styled.button`
   width: 100%;
-  background-color: rgba(7, 104, 159, 1);
+  background-color: ${customColor.blue};
   padding: 3px;
   border-radius: 25px;
   border: 0;

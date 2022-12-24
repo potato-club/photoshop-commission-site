@@ -13,7 +13,6 @@ export const useQueryMyPostBeforeAll = (page: number) => {
     () => myPageApi.myPost.beforeAll(page),
     {
       enabled: router.isReady,
-      retry: 0,
       onSuccess: ({ data }) => {
         setList(data);
       },

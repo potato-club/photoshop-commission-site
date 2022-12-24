@@ -68,13 +68,5 @@ const Button = styled.button`
   background-color: ${customColor.blue};
   font-size: 16px;
   border-radius: 12px;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.01);
-    background-color: ${customColor.lightBlue};
-  }
-  :active {
-    transform: scale(0.99);
-  }
   transition: background-color 200ms ease;
 `;

@@ -4,7 +4,7 @@ import { customColor } from 'src/constants/customColor';
 import { Typography } from 'src/components';
 import { useRouter } from 'next/router';
 import { boardApi } from 'src/apis/board';
-import { useGetToken } from 'src/hooks/useGetToken';
+import { useLoginToken } from 'src/hooks/useLoginToken';
 import { checkModal, infoModal } from 'src/utils/interactionModal';
 import { useMutation } from 'react-query';
 type Props = {

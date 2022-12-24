@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { customColorType } from 'src/constants/customColor';
+import { customColor, customColorType } from 'src/constants/customColor';
 
 interface IInitialState {
   mode: {
@@ -29,7 +29,7 @@ export const settingModeSlice = createSlice({
     blackMode(state) {
       state.mode = {
         fontColor: 'white',
-        backgroundColor: 'black',
+        backgroundColor: `${customColor.black}D0`,
       };
     },
   },

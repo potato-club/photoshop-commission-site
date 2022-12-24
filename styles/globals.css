@@ -138,6 +138,7 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: padding, font-size 0.3s ease;
 }
 
 .pagination {
@@ -178,6 +179,14 @@ a {
 
 button {
   border: none;
+  cursor: pointer;
+}
+button:hover {
+  transform: scale(1.01);
+}
+
+button:active {
+  transform: scale(0.99);
 }
 
 .errorWrapper {

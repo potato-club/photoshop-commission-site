@@ -3,6 +3,7 @@ import { FooterList } from 'src/constants/footer/FooterList';
 import { Email } from 'src/constants/footer/FooterEmail';
 import { Content } from '../components/index';
 import styled from 'styled-components';
+import { customColor } from 'src/constants';
 
 export const Footer = () => {
   return (
@@ -36,7 +37,7 @@ export default Footer;
 
 const Container = styled.div`
   height: 279px;
-  background-color: rgba(7, 104, 159, 0.14);
+  background-color: ${customColor.blue}35;
   position: relative;
   width: 100%;
   margin-bottom: 90px;
@@ -60,7 +61,7 @@ const EmailBox = styled.div`
   width: 1178px;
   position: relative;
   margin: 0 auto;
-  color: rgba(173, 173, 173, 1);
+  color: ${customColor.gray};
   font-size: 12px;
   height: 30px;
 `;
@@ -81,7 +82,7 @@ const Emails = styled.span`
 const Line = styled.hr`
   border: 0;
   height: 0.5px;
-  background: rgba(173, 173, 173, 1);
+  background: ${customColor.gray};
 `;
 
 const ContentBox = styled.div`

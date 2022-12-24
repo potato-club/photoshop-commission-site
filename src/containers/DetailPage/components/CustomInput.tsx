@@ -6,7 +6,7 @@ import { boardApi } from 'src/apis/board';
 import { useRouter } from 'next/router';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
-import { errorModal, infoModal } from 'src/utils/interactionModal';
+import { checkModal, errorModal, infoModal } from 'src/utils/interactionModal';
 
 type Props = {
   type: 'Board' | 'Comment';
@@ -32,13 +32,14 @@ export function CustomInput({ type, parentId }: Props) {
         queryClient.invalidateQueries('getItem');
       },
       onError: () => {
-        errorModal('댓글작성 오류');
+        errorModal('댓글작성 오류', '로그인 정보가 올바르지 않습니다');
       },
     },
   );
 
   const commentSubmit = async (data: FieldValues) => {
-    mutate(data.comment);
+    // Todo : 나중에 내가 쓴 댓글인지 확인하는 api 나오고 detailPage 에서 수정, 삭제 구현되면 텍스트 수정해야함
+    checkModal('댓글을 등록하시겠습니까?', () => mutate(data.comment));
   };
 
   return (

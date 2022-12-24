@@ -8,38 +8,18 @@ import { BsBrightnessHigh } from 'react-icons/bs';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { pathName } from 'src/constants/pathName';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
-import { useGetToken } from 'src/hooks/useGetToken';
-import { infoModal } from 'src/utils/interactionModal';
+import { useLoginToken } from 'src/hooks/useLoginToken';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { blackMode, whiteMode } from 'src/redux-toolkit/slice/settingModeSlice';
 import { useCurrentMode } from 'src/hooks/useCurrentMode';
+import { useKaKaoLogin } from 'src/hooks/useKaKaoLogin';
+import { customColor } from 'src/constants';
 
 export const Header = () => {
   const dispatch = useDispatch();
   const { backgroundColor } = useCurrentMode();
-  const router = useRouter();
-  const { access, refresh, resetToken } = useGetToken();
-  const { removeSessionStorage, setSessionStorage } = useSessionStorage();
-  const callKaKaoLoginHandler = () => {
-    router.push({
-      pathname: process.env.NEXT_PUBLIC_PATHNAME,
-      query: {
-        response_type: process.env.NEXT_PUBLIC_RESPONSE_TYPE,
-        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
-        redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI,
-      },
-    });
-  };
-
-  const logOut = () => {
-    resetToken();
-    removeSessionStorage('job');
-    setSessionStorage('nickname', 'GUEST');
-    infoModal('로그아웃이 완료되었습니다.', 'success', undefined, () =>
-      location.reload(),
-    );
-  };
+  const { access, refresh } = useLoginToken();
+  const {login, logout} = useKaKaoLogin();
 
   return (
     <HeaderBox>
@@ -52,13 +32,13 @@ export const Header = () => {
           </Theme>
         </Link>
         <Icons>
-          <div>
+          {/* <div>
             {!access || !refresh ? (
-              <LoginImage onClick={() => callKaKaoLoginHandler()} />
+              <LoginImage onClick={login} />
             ) : (
-              <LogoutImage onClick={() => logOut()} />
+              <LogoutImage onClick={logout} />
             )}
-          </div>
+          </div> */}
 
           <Link href={pathName.MYPAGE.PROFILE}>
             <a>
@@ -66,7 +46,7 @@ export const Header = () => {
             </a>
           </Link>
 
-          <Link href="/alert">
+          {/* <Link href="/alert">
             <a>
               <AlertImage />
             </a>
@@ -75,7 +55,7 @@ export const Header = () => {
             <BrightImage onClick={() => dispatch(blackMode())} />
           ) : (
             <DarkImage onClick={() => dispatch(whiteMode())} />
-          )}
+          )} */}
         </Icons>
       </ContentBox>
     </HeaderBox>
@@ -93,13 +73,13 @@ const iconStyles = css`
   border-radius: 100%;
   :hover {
     border: 4px solid gray;
-    color: gray;
+    color: ${customColor.gray};
   }
   margin-right: 8px;
 `;
 
 export const HeaderBox = styled.div`
-  background-color: rgba(7, 104, 159, 1);
+  background-color: ${customColor.blue};
   width: 100%;
   height: 60px;
 `;

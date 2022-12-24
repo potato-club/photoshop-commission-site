@@ -1,33 +1,23 @@
 import React from 'react';
-import Link from 'next/link';
 import { Typography } from 'src/components';
 import styled from 'styled-components';
-import { useGetToken } from 'src/hooks/useGetToken';
+import { useLoginToken } from 'src/hooks/useLoginToken';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { useRouter } from 'next/router';
 import { customColor } from 'src/constants';
+import { useKaKaoLogin } from 'src/hooks/useKaKaoLogin';
 
 const Write = () => {
-  const { access, refresh } = useGetToken();
+  const { access, refresh } = useLoginToken();
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
   const isArtist = access && refresh && job === 'ARTIST';
   const router = useRouter();
-
-  const callKaKaoLoginHandler = () => {
-    router.push({
-      pathname: process.env.NEXT_PUBLIC_PATHNAME,
-      query: {
-        response_type: process.env.NEXT_PUBLIC_RESPONSE_TYPE,
-        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
-        redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI,
-      },
-    });
-  };
+  const { login } = useKaKaoLogin();
 
   const checkRoute = () => {
     if (!access || !refresh) {
-      callKaKaoLoginHandler();
+      login();
     } else if (isArtist) {
       router.push('/moreView/before');
     } else {
@@ -51,11 +41,4 @@ const WriteBtn = styled.button`
   background-color: ${customColor.blue};
   border-radius: 10px;
   padding: 10px 28px;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
 `;

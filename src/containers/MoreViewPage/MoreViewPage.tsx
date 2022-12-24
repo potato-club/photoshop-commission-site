@@ -8,7 +8,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Hr from './components/Hr';
-import Title from './components/Title';
+import FilterBox from './components/FilterBox';
 import SignUp from './components/SignUp';
 import { useMoreViewData } from 'src/hooks/useMoreViewData';
 
@@ -21,24 +21,20 @@ const StatePage = () => {
     page,
   );
 
-  useEffect(() => {
-    console.log(data);
-    console.log(total);
-  }, [data, total]);
-
   const handlePageChange = (page: number) => {
     setPage(page);
     window.scrollTo(0, 0);
   };
 
+
   return (
     <Container>
-      <Post>
+      <Title>
         <Typography size="40" color="blue" fontWeight="bold">
           {theme}
         </Typography>
-      </Post>
-      <Title setData={setData} page={page} state={state as string} />
+      </Title>
+      {/* <FilterBox setData={setData} page={page} state={state as string} /> */}
       <Hr />
       <CardListWrap>
         <CardList list={data} />
@@ -50,7 +46,6 @@ const StatePage = () => {
         totalItemsCount={total || 0}
         itemsCountPerPage={16}
       />
-      <SignUp />
       <SideBox />
     </Container>
   );
@@ -69,7 +64,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Post = styled.div`
+const Title = styled.div`
   margin-bottom: 105px;
   text-align: center;
 `;

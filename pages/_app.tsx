@@ -6,13 +6,7 @@ import store from 'src/redux-toolkit/store';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        refetchOnWindowFocus: false,
-      },
-    },
-  });
+  const queryClient = new QueryClient();
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>

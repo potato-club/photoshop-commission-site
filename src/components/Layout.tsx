@@ -17,6 +17,8 @@ export const Layout = ({ children }: LayoutType) => {
 };
 
 const Wrapper = styled.div<{ color: string }>`
+  display: flex;
+  justify-content: center;
   min-height: 100vh;
   background-color: ${({ color }) => color};
   overflow: auto;

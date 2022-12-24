@@ -13,7 +13,6 @@ export const useQueryMyPostRequestingAll = (page: number) => {
     () => myPageApi.myPost.requestingAll(page),
     {
       enabled: router.isReady,
-      retry: 0,
       onSuccess: ({ data }) => {
         setList(data);
       },

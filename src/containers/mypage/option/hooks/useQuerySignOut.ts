@@ -7,8 +7,8 @@ export const useQuerySignOut = () => {
     ['signOut'],
     () => myPageApi.signOut(),
     {
-      enabled: false,
       retry: 0,
+      enabled: false,
       onSuccess: ({ data }) => {},
     },
   );

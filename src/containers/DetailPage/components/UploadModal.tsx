@@ -44,7 +44,6 @@ export const UploadModal = ({ isOpen, handleCloseModal }: Props) => {
         infoModal('업로드가 완료되었습니다.', 'success');
         queryClient.invalidateQueries('checkOutput');
         handleCloseModal();
-        console.log(data);
       },
       onError: error => {
         alert('작업파일 업로드 오류');
@@ -139,13 +138,6 @@ const Button = styled.button<ButtonStyle>`
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-radius: 10px;
   align-self: flex-end;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
   ${({ borderColor }) =>
     borderColor ? `border: 1px solid ${borderColor}` : ''}
 `;

@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { checkApi } from 'src/apis/check';
-import { useGetToken } from './useGetToken';
+import { useLoginToken } from './useLoginToken';
 import { useState, useEffect } from 'react';
 import { useSessionStorage } from './useSessionStorage';
 
 export const useCheckSelectedArtist = () => {
   const router = useRouter();
-  const { access, refresh } = useGetToken();
+  const { access, refresh } = useLoginToken();
   const [selectedArtist, setSelectedArtist] = useState<boolean>();
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
@@ -26,10 +26,6 @@ export const useCheckSelectedArtist = () => {
       },
     },
   );
-
-  useEffect(() => {
-    console.log(selectedArtist);
-  }, [selectedArtist]);
 
   return {
     selectedArtist,

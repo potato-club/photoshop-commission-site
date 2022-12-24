@@ -7,7 +7,7 @@ import { customColor } from 'src/constants';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { requestApi } from 'src/apis/request';
 import { useRouter } from 'next/router';
-import { useGetToken } from 'src/hooks/useGetToken';
+import { useLoginToken } from 'src/hooks/useLoginToken';
 import { checkModal, infoModal } from 'src/utils/interactionModal';
 
 const customStyles = {
@@ -35,7 +35,7 @@ export const ConfirmModal = ({ isOpen, handleCloseModal }: Props) => {
   const queryClient = useQueryClient();
 
   const router = useRouter();
-  const { access, refresh } = useGetToken();
+  const { access, refresh } = useLoginToken();
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -164,18 +164,7 @@ const CommissionBtn = styled.button`
   background-color: ${customColor.blue};
   border-radius: 16px;
   padding: 8px 20px;
-  cursor: pointer;
-  :hover {
-    background-color: ${customColor.lightBlue};
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
   transition: background-color 200ms ease;
-`;
-const Date = styled.div`
-  text-align: center;
 `;
 
 const NickName = styled.div`

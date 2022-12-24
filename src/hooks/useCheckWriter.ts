@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
 import { checkApi } from 'src/apis/check';
-import { useGetToken } from './useGetToken';
+import { useLoginToken } from './useLoginToken';
 import { useState, useEffect } from 'react';
 import { useSessionStorage } from './useSessionStorage';
 
 export const useCheckWriter = () => {
   const router = useRouter();
-  const { access, refresh } = useGetToken();
+  const { access, refresh } = useLoginToken();
   const [myPost, setMyPost] = useState<boolean>();
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
@@ -26,10 +26,6 @@ export const useCheckWriter = () => {
       },
     },
   );
-
-  useEffect(() => {
-    console.log(myPost);
-  }, [myPost]);
 
   return {
     myPost,

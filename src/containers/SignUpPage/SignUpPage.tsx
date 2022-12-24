@@ -16,8 +16,6 @@ import { useCookies } from 'src/hooks/useCookies';
 import { infoModal } from 'src/utils/interactionModal';
 
 export function SignUpPage() {
-  // Todo 우선 submit 하면 자동으로 중복검사 하게끔하고, 이전방법이 낫겠다 싶으면 닉네임만 제어컴포넌트로 바꿔서 중복확인 버튼 사용하기
-  // const [doubleNameCheck, setDoubleNameCheck] = useState<boolean>(false);
   const { setSessionStorage, getSessionStorage, removeSessionStorage } =
     useSessionStorage();
   const { setCookie } = useCookies();
@@ -32,7 +30,6 @@ export function SignUpPage() {
 
   const signUp = async (data: FieldValues) => {
     const { nickname, userRole, introduction } = data;
-    console.log(data);
     try {
       // * 닉네임 중복확인 완료
       // * introduction 빈값 체크 완료
@@ -106,11 +103,4 @@ const SignUpButton = styled.button`
   background-color: ${customColor.blue};
   border-radius: 10px;
   align-self: flex-end;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.01);
-  }
-  :active {
-    transform: scale(0.99);
-  }
 `;

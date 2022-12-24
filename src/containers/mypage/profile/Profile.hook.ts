@@ -39,7 +39,6 @@ export const useProfile = () => {
         infoModal('회원정보가 수정되었습니다.', 'success', undefined, () => {
           setSessionStorage('nickname', nickname);
           setSessionStorage('job', role);
-          location.reload();
         });
       } else {
         setNickname(profile?.nickname ?? '');
@@ -59,9 +58,7 @@ export const useProfile = () => {
         }
         refetch();
         setIsIntroduceChange(false);
-        infoModal('회원정보가 수정되었습니다.', 'success', undefined, () =>
-          location.reload(),
-        );
+        infoModal('회원정보가 수정되었습니다.', 'success');
       } else {
         setIntroduce(profile?.introduction ?? '');
         setIsIntroduceChange(true);
