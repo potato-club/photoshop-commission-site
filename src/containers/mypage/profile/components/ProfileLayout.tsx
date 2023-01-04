@@ -34,6 +34,7 @@ export const ProfileLayout = ({
 };
 
 const Container = styled.div`
+  min-width: max-content;
   width: 100%;
 `;
 

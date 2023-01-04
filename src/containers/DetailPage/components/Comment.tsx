@@ -21,7 +21,7 @@ export const Comment = ({ writer, createdDate, modifiedDate, text, parentId }: P
   return (
     <>
       <Wrapper>
-        <div style={{ display: 'flex' }}>
+        <div style={{ display: 'flex', width: '100%' }}>
           <WriterWrapper>
             <Typography size="16" fontWeight="bold">
               {writer}
@@ -65,7 +65,7 @@ const Wrapper = styled.div`
 
 const WriterWrapper = styled.div`
   white-space: nowrap;
-  min-width: 160px;
+  position: absolute;
 `;
 const ContentsWrapper = styled.div`
   display: flex;
@@ -73,7 +73,7 @@ const ContentsWrapper = styled.div`
   width: 100%;
   max-width: 800px;
   flex-direction: column;
-  flex-wrap: wrap;
+  margin-left: clamp(60px, 20vw, 160px);
 `;
 
 const DateWrapper = styled.div`

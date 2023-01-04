@@ -17,9 +17,9 @@ export const CardList = ({ list }: CardListType) => {
 export default CardList;
 
 const CardBox = styled.div`
-  width: 1178px;
+  width: 100%;
   display: flex;
   margin: 0 auto;
   flex-wrap: wrap;
-  justify-content: start;
+  justify-content: space-between;
 `;

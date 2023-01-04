@@ -11,7 +11,7 @@ type Props = {
 export function TitleInput({ register, errors }: Props) {
   return (
     <Container>
-      <div style={{ marginLeft: '12px' }}>
+      <div style={{ marginLeft: '12px', whiteSpace: 'nowrap' }}>
         <Typography size="20" fontWeight="bold">
           글 제목
         </Typography>
@@ -32,7 +32,6 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   max-width: 900px;
-  white-space: nowrap;
 `;
 const InputWrapper = styled.div`
   position: relative;

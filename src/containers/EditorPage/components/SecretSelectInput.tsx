@@ -17,9 +17,11 @@ type Props = {
 export function SecretSelectInput({ control, errors }: Props) {
   return (
     <Container>
-      <Typography size="20" fontWeight="bold">
-        공개여부
-      </Typography>
+      <div style={{whiteSpace: 'nowrap'}}>
+        <Typography size="20" fontWeight="bold">
+          공개여부
+        </Typography>
+      </div>
       <InputWrapper>
         <Controller
           name="imageOpen"
@@ -70,7 +72,6 @@ const Container = styled.div`
   display: flex;
   width: 100%;
   max-width: 900px;
-  white-space: nowrap;
 `;
 
 const InputWrapper = styled.div`

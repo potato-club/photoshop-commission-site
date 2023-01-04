@@ -165,7 +165,7 @@ const Wrapper = styled.div`
 `;
 
 const ItemWrapper = styled.div`
-  padding: 30px 50px;
+  padding: 20px 40px;
 `;
 
 const IntroduceBoxWrapper = styled.div`

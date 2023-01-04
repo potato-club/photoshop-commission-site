@@ -17,6 +17,8 @@ export const Reply = ({ writer, createdDate, modifiedDate, text }: Props) => {
     text,
   });
 
+  console.log(toggleText)
+
   return (
     <Container>
       <div style={{ display: 'flex' }}>
@@ -57,7 +59,7 @@ const Container = styled.div`
 
 const WriterWrapper = styled.div`
   white-space: nowrap;
-  min-width: 160px;
+  margin-right: 60px;
 `;
 
 const ContentsWrapper = styled.div`
@@ -65,7 +67,6 @@ const ContentsWrapper = styled.div`
   justify-content: flex-start;
   width: 100%;
   max-width: 600px;
-  flex-wrap: wrap;
 `;
 
 const MoreView = styled.div`

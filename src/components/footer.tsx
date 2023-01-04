@@ -58,7 +58,8 @@ const ContentWrapper = styled.div`
 `;
 
 const EmailBox = styled.div`
-  width: 1178px;
+  width: 100%;
+  max-width: 1178px;
   position: relative;
   margin: 0 auto;
   color: ${customColor.gray};

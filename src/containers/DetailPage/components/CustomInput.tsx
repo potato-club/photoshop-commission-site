@@ -64,7 +64,7 @@ const Container = styled.form<StyleProps>`
   position: relative;
   width: 100%;
   max-width: 1178px;
-  padding-left: ${({ option }) => (option === 'Board' ? '12px' : '160px')};
+  padding-left: ${({ option }) => (option === 'Board' ? '12px' : 'calc(min(20vw,160px))')};
   padding-right: ${({ option }) => (option === 'Board' ? '12px' : 0)};
   margin-bottom: 20px;
 `;
@@ -80,6 +80,7 @@ const Input = styled.textarea<StyleProps>`
   font-size: 16px;
   ::placeholder {
     color: ${customColor.gray};
+    white-space: nowrap;
   }
 `;
 
