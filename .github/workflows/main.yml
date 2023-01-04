@@ -13,20 +13,13 @@ jobs:
         uses: actions/checkout@master
 
       - run: npm install
-      - name: Create env file
       - run: npm run build
         env:
           NEXT_PUBLIC_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_CLIENT_ID }}
           NEXT_PUBLIC_PATHNAME: ${{ secrets.NEXT_PUBLIC_PATHNAME }}
           NEXT_PUBLIC_REDIRECT_URI: ${{ secrets.NEXT_PUBLIC_REDIRECT_URI }}
           NEXT_PUBLIC_RESPONSE_TYPE: ${{ secrets.NEXT_PUBLIC_RESPONSE_TYPE }}
-        # run: |
-        #   touch .env
-        #   echo NEXT_PUBLIC_CLIENT_ID=${{secrets.NEXT_PUBLIC_CLIENT_ID}} >> .env
-        #   echo NEXT_PUBLIC_PATHNAME=${{secrets.NEXT_PUBLIC_PATHNAME}} >> .env
-        #   echo NEXT_PUBLIC_REDIRECT_URI=${{secrets.NEXT_PUBLIC_REDIRECT_URI}} >> .env
-        #   echo NEXT_PUBLIC_RESPONSE_TYPE=${{secrets.NEXT_PUBLIC_RESPONSE_TYPE}} >> .env
-        #   cat .env
+
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks --delete
