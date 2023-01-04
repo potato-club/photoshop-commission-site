@@ -41,6 +41,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 16px 0 20px 12px;
+  word-break: break-all;
 `;
 
 const CommentWrapper = styled.div`
@@ -49,7 +50,6 @@ const CommentWrapper = styled.div`
 `;
 
 const WriterWrapper = styled.div`
-  white-space: nowrap;
   min-width: 160px;
 `;
 const ContentsWrapper = styled.div`
@@ -84,5 +84,5 @@ const ReplyWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background-color: ${customColor.gray}40;
-  margin-left: 160px;
+  margin-left: clamp(60px, 20vw, 160px);
 `;

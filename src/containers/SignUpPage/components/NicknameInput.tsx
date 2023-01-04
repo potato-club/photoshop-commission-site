@@ -74,7 +74,8 @@ const Input = styled.input`
   border-radius: 10px;
   border: 1px solid ${customColor.black};
   padding: 0 10px;
-  width: 280px;
+  width: 50vw;
+  max-width: 280px;
   height: 30px;
   font-size: 16px;
   margin-left: 50px;

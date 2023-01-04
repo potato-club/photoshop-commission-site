@@ -17,12 +17,11 @@ export const Card = ({ id, title, image, nickname, imageOpen }: IData) => {
 export default Card;
 
 const Container = styled.div`
-  width: 270px;
+  width: 30%;
+  max-width: 240px;
   height: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  margin-top: 20px;
-  margin-left: 12.25px;
-  margin-right: 12.25px;
-  margin-bottom: 36px;
 `;

@@ -82,6 +82,9 @@ export const HeaderBox = styled.div`
   background-color: ${customColor.blue};
   width: 100%;
   height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ContentBox = styled.div`
@@ -90,8 +93,6 @@ const ContentBox = styled.div`
   max-width: 1178px;
   justify-content: space-between;
   align-items: center;
-  height: 100%;
-  margin: auto auto;
 `;
 
 const Theme = styled.a`

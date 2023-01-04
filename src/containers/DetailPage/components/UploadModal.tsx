@@ -15,7 +15,7 @@ const customStyles = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     borderRadius: '20px',
-    width: '720px',
+    width: 'min(720px, 100%)',
     height: '360px',
     padding: '40px',
     overflow: 'hidden',
