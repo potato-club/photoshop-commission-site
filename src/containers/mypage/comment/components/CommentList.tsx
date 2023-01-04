@@ -97,7 +97,7 @@ const LeftWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  width: 100%;
+  width: 70%;
   height: 60%;
   margin-bottom: 10px;
   :hover {

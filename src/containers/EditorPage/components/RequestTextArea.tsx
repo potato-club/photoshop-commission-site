@@ -12,14 +12,13 @@ type Props = {
 export function RequestTextArea({ register, errors }: Props) {
   return (
     <Container>
-      <Typography size="20" fontWeight="bold">
-        의뢰내용
-      </Typography>
+      <div style={{marginRight:20}}>
+        <Typography size="20" fontWeight="bold">
+          의뢰내용
+        </Typography>
+      </div>
       <InputWrapper>
-        <TextArea
-          {...register('context')}
-          placeholder="내용을 입력해주세요"
-        />
+        <TextArea {...register('context')} placeholder="내용을 입력해주세요" />
         <CustomErrorMessage
           errors={errors}
           name="context"
@@ -45,7 +44,6 @@ const InputWrapper = styled.div`
 `;
 
 const TextArea = styled.textarea`
-  margin-left: 20px;
   border-radius: 10px;
   width: 100%;
   outline: none;

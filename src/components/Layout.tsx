@@ -8,11 +8,11 @@ export const Layout = ({ children }: LayoutType) => {
   const { backgroundColor } = useCurrentMode();
 
   return (
-    <div style={{ height: '100%' }}>
+    <>
       <Header />
       <Wrapper color={backgroundColor}>{children}</Wrapper>
       <Footer />
-    </div>
+    </>
   );
 };
 

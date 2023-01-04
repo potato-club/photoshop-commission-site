@@ -37,7 +37,8 @@ export const MyQuest = () => {
 };
 
 const Container = styled.div`
-  width: 1178px;
+  width: 100%;
+  max-width: 1178px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

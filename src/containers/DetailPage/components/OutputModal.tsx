@@ -17,7 +17,7 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     borderRadius: '20px',
     height: '500px',
-    width: '550px',
+    width: 'min(550px, 100%)',
     overflow: 'hidden',
   },
   overlay: {

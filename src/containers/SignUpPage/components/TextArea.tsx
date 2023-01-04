@@ -13,9 +13,11 @@ export function TextAreaComponent({ register, errors }: Props) {
 
   return (
     <Container>
-      <Typography size="20" fontWeight="bold">
-        자기소개
-      </Typography>
+      <div style={{marginRight: 40}}>
+        <Typography size="20" fontWeight="bold">
+          자기소개
+        </Typography>
+      </div>
       <InputWrapper>
         <TextArea
           {...register('introduction', {
@@ -28,7 +30,12 @@ export function TextAreaComponent({ register, errors }: Props) {
             닉네임과 자기소개는 마이페이지에서 이후에 수정가능합니다
           </Typography>
         </Caption>
-        <CustomErrorMessage errors={errors} name="introduction" leftPosition="40" bottomPosition='-20'/>
+        <CustomErrorMessage
+          errors={errors}
+          name="introduction"
+          leftPosition="40"
+          bottomPosition="-20"
+        />
       </InputWrapper>
     </Container>
   );
@@ -51,19 +58,17 @@ const InputWrapper = styled.div`
 
 const Caption = styled.div`
   position: absolute;
-  bottom: -20px;
+  white-space: normal;
+  bottom: -30px;
   right: 0;
-  div {
-    right: 0;
-  }
 `;
 
 const TextArea = styled.textarea`
   border-radius: 10px;
+  width: 100%;
   height: 330px;
   padding: 5px 10px;
   box-sizing: border-box;
-  margin-left: 40px;
   font-size: 16px;
   ::placeholder {
     font-weight: bold;
