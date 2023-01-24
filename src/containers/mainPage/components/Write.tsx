@@ -28,7 +28,11 @@ const Write = () => {
   return (
     <WriteBtn onClick={checkRoute}>
       <Typography size="20" color="white" fontWeight="bold">
-        {isArtist ? '커미션 활동하기' : '의뢰 작성하기'}
+        {job === ''
+          ? '로그인 하기'
+          : isArtist
+          ? '커미션 활동하기'
+          : '의뢰 작성하기'}
       </Typography>
     </WriteBtn>
   );

@@ -24,9 +24,9 @@ export const MyCard = ({ post }: Props) => {
 
   return (
     <Container>
-      <Photo id={post.id} image={post.image} imageOpen={post.imageOpen} />
-      <Theme id={post.id} title={post.title} />
-      <NameAndDate id={post.id} nickname={post.nickname} />
+      <Photo image={post.image} imageOpen={post.imageOpen} />
+      <Theme title={post.title} />
+      <NameAndDate nickname={post.nickname} />
     </Container>
   );
 };

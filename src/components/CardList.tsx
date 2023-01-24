@@ -21,5 +21,6 @@ const CardBox = styled.div`
   display: flex;
   margin: 0 auto;
   flex-wrap: wrap;
+  gap: 60px 20px;
   justify-content: space-between;
 `;

@@ -5,11 +5,9 @@ import {
   SideBox,
   CustomPagination,
 } from 'src/components/index';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Hr from './components/Hr';
-import FilterBox from './components/FilterBox';
-import SignUp from './components/SignUp';
 import { useMoreViewData } from 'src/hooks/useMoreViewData';
 
 const StatePage = () => {

@@ -1,7 +1,7 @@
 import { FaGithub } from 'react-icons/fa';
 import { FooterList } from 'src/constants/footer/FooterList';
 import { Email } from 'src/constants/footer/FooterEmail';
-import { Content } from '../components/index';
+import { Content } from './index';
 import styled from 'styled-components';
 import { customColor } from 'src/constants';
 

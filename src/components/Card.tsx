@@ -1,15 +1,17 @@
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { IData } from '../containers/mainPage/components/MainRequestBoard';
+import NameAndDate from './NameAndDate';
 import Photo from './Photo';
 import Theme from './Theme';
-import NameAndDate from './NameAndDate';
 
 export const Card = ({ id, title, image, nickname, imageOpen }: IData) => {
+  const router = useRouter();
   return (
-    <Container>
-      <Photo id={id} image={image} imageOpen={imageOpen} />
-      <Theme id={id} title={title} />
-      <NameAndDate id={id} nickname={nickname} />
+    <Container onClick={() => router.push(`/detail/${id}`)}>
+      <Photo image={image} imageOpen={imageOpen} />
+      <Theme title={title} />
+      <NameAndDate nickname={nickname} />
     </Container>
   );
 };
@@ -24,4 +26,5 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  cursor: pointer;
 `;

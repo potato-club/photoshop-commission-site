@@ -1,34 +1,26 @@
 import Link from 'next/link';
-import { Typography } from '../components/index';
-import { HeaderName } from 'src/constants/header/HeaderName';
 import styled, { css } from 'styled-components';
 import { FaUserAlt, FaBell } from 'react-icons/fa';
 import { FiLogOut, FiLogIn } from 'react-icons/fi';
 import { BsBrightnessHigh } from 'react-icons/bs';
 import { MdOutlineDarkMode } from 'react-icons/md';
 import { pathName } from 'src/constants/pathName';
-import { useDispatch } from 'react-redux';
-import { useLoginToken } from 'src/hooks/useLoginToken';
-import { useSessionStorage } from 'src/hooks/useSessionStorage';
-import { blackMode, whiteMode } from 'src/redux-toolkit/slice/settingModeSlice';
-import { useCurrentMode } from 'src/hooks/useCurrentMode';
-import { useKaKaoLogin } from 'src/hooks/useKaKaoLogin';
 import { customColor } from 'src/constants';
+import Image from 'next/image';
 
 export const Header = () => {
-  const dispatch = useDispatch();
-  const { backgroundColor } = useCurrentMode();
-  const { access, refresh } = useLoginToken();
-  const {login, logout} = useKaKaoLogin();
+  // const dispatch = useDispatch();
+  // const { backgroundColor } = useCurrentMode();
+  // const { access, refresh } = useLoginToken();
+  // const {login, logout} = useKaKaoLogin();
+
 
   return (
     <HeaderBox>
       <ContentBox>
         <Link href={pathName.MAIN} passHref>
           <Theme>
-            <Typography color="white" size="32" fontWeight="bold">
-              {HeaderName.name}
-            </Typography>
+            <Image src={'/brandImage.png'} layout="fill" alt="brandImage" />
           </Theme>
         </Link>
         <Icons>
@@ -91,12 +83,22 @@ const ContentBox = styled.div`
   display: flex;
   width: 100%;
   max-width: 1178px;
+  height: 100%;
   justify-content: space-between;
   align-items: center;
 `;
 
 const Theme = styled.a`
   text-decoration: none;
+  width: 120px;
+  aspect-ratio: 2.4;
+  position: relative;
+  :hover {
+    transform: scale(1.01);
+  }
+  :active {
+    transform: scale(0.99);
+  }
 `;
 
 const Icons = styled.div`

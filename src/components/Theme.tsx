@@ -4,11 +4,10 @@ import styled from 'styled-components';
 import { Typography } from './Typography';
 
 interface ITheme {
-  id: number;
   title: string;
 }
 
-const Theme = ({ id, title }: ITheme) => {
+const Theme = ({ title }: ITheme) => {
   const theme = useMemo(
     () => (title.length >= 30 ? title.substring(0, 30) + '...' : title),
     [title],
@@ -16,13 +15,9 @@ const Theme = ({ id, title }: ITheme) => {
 
   return (
     <ThemeBox>
-      <Link href={`/detail/${id}`} passHref>
-        <a>
-          <Typography size="16" color="black">
-            {theme}
-          </Typography>
-        </a>
-      </Link>
+      <Typography size="16" color="black">
+        {theme}
+      </Typography>
     </ThemeBox>
   );
 };

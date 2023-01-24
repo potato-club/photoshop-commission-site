@@ -105,7 +105,7 @@ const IntroPage = () => {
         <br />
         <br />
         <Typography size="80" fontWeight="bold" color="blue">
-          이지 포토
+          Easy Photo
         </Typography>
       </FooterTextBox>
       <BtnBox>
