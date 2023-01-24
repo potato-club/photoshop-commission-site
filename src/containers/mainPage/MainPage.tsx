@@ -1,7 +1,6 @@
 import type { NextPage } from 'next';
 import { SideBox, MainRequestBoard } from '../../components/index';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
 import Comment from './components/Comment';
 import Write from './components/Write';
 

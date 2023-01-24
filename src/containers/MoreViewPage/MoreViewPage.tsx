@@ -5,45 +5,32 @@ import {
   SideBox,
   CustomPagination,
 } from 'src/components/index';
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import React from 'react';
 import Hr from './components/Hr';
-import FilterBox from './components/FilterBox';
-import SignUp from './components/SignUp';
-import { useMoreViewData } from 'src/hooks/useMoreViewData';
-
-const StatePage = () => {
-  const [page, setPage] = useState(1);
-  const router = useRouter();
-  const { state } = router.query;
-  const { data, theme, setData, total } = useMoreViewData(
-    state as string,
-    page,
-  );
+const StatePage = (props: any) => {
 
   const handlePageChange = (page: number) => {
-    setPage(page);
+    props.setPage(page);
     window.scrollTo(0, 0);
   };
-
 
   return (
     <Container>
       <Title>
         <Typography size="40" color="blue" fontWeight="bold">
-          {theme}
+          {props.theme}
         </Typography>
       </Title>
       {/* <FilterBox setData={setData} page={page} state={state as string} /> */}
       <Hr />
       <CardListWrap>
-        <CardList list={data} />
+        <CardList list={props.data} />
       </CardListWrap>
       <CustomPagination
         itemClass="page"
-        activePage={page}
+        activePage={props.page}
         onChange={handlePageChange}
-        totalItemsCount={total || 0}
+        totalItemsCount={props.total || 0}
         itemsCountPerPage={16}
       />
       <SideBox />

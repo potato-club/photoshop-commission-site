@@ -1,4 +1,3 @@
-import { isError } from 'react-query';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants';
 import styled from 'styled-components';

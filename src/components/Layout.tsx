@@ -1,5 +1,5 @@
-import { Header } from 'src/components/header';
-import Footer from './footer';
+import { Header } from 'src/components/Header';
+import Footer from './Footer';
 import styled from 'styled-components';
 import { useCurrentMode } from 'src/hooks/useCurrentMode';
 

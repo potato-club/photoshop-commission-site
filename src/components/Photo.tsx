@@ -7,15 +7,13 @@ import { imageOpenType } from 'src/types/imageOpen.type';
 import { useRouter } from 'next/router';
 
 interface IPhoto {
-  id: number;
   image: IData['image'];
   imageOpen: imageOpenType;
 }
 
-const Photo = ({ id, image, imageOpen }: IPhoto) => {
-  const router = useRouter();
+const Photo = ({ image, imageOpen }: IPhoto) => {
   return (
-    <PhotoBox onClick={() => router.push(`/detail/${id}`)}>
+    <PhotoBox>
           <NewImage
             src={
               imageOpen === imageOpenType.open && image
@@ -33,7 +31,7 @@ export default Photo;
 
 const PhotoBox = styled.div`
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1.25;
   position: relative;
 `;
 

@@ -1,4 +1,3 @@
-import React from 'react';
 
 export function useLocalStorage() {
   const setLocalStorage = (key: string, item: string) => {

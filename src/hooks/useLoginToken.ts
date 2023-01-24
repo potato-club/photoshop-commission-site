@@ -1,4 +1,3 @@
-import React from 'react';
 import { useCookies } from './useCookies';
 import { useSessionStorage } from './useSessionStorage';
 

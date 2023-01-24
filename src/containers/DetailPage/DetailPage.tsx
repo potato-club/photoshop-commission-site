@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { customColor } from 'src/constants/customColor';
-import {
-  Contents,
-  Header,
-  CommentHeader,
-  CustomInput,
-} from './components';
+import { Contents, Header, CommentHeader, CustomInput } from './components';
 import {
   ConfirmModalBtn,
   RequestModalBtn,
@@ -20,12 +15,23 @@ import { useCheckWriter } from 'src/hooks/useCheckWriter';
 import { useCheckOutput } from 'src/hooks/useCheckOutput';
 import { OutputModalBtn } from './components/OutputModalBtn';
 type Props = {
-  detailData : BoardType;
-}
+  detailData: BoardType;
+};
 export function DetailPage({ detailData }: Props) {
   const { getSessionStorage } = useSessionStorage();
   const job = getSessionStorage('job');
-  const {title, state, writer, createdDate, modifiedDate, imageUrls, imageOpen, contents, totalComment, commentList} = detailData;
+  const {
+    title,
+    state,
+    writer,
+    createdDate,
+    modifiedDate,
+    imageUrls,
+    imageOpen,
+    contents,
+    totalComment,
+    commentList,
+  } = detailData;
   const { selectedArtist } = useCheckSelectedArtist();
   const { myPost } = useCheckWriter();
   const { output } = useCheckOutput();
@@ -33,17 +39,30 @@ export function DetailPage({ detailData }: Props) {
   return (
     <Container>
       <Wrapper>
-        <Header state={state} title={title} writer={writer} createdDate={createdDate} modifiedDate={modifiedDate} myPost={myPost}/>
-        <Contents imageOpen={imageOpen} imageUrls={imageUrls} contents={contents}/>
+        <Header
+          state={state}
+          title={title}
+          writer={writer}
+          createdDate={createdDate}
+          modifiedDate={modifiedDate}
+          myPost={myPost}
+        />
+        <Contents
+          imageOpen={imageOpen}
+          imageUrls={imageUrls}
+          contents={contents}
+        />
         <ModalWrapper>
           {myPost && state === 'BEFORE' && <ConfirmModalBtn />}
           {job === 'ARTIST' && state === 'BEFORE' && <RequestModalBtn />}
-          {(!output || output.image?.length === 0) && selectedArtist && <UploadModalBtn />}
+          {(!output || output.image?.length === 0) && selectedArtist && (
+            <UploadModalBtn />
+          )}
           {state !== 'BEFORE' && output && <OutputModalBtn />}
         </ModalWrapper>
         <CommentContainer>
-          <CommentHeader totalComment={totalComment}/>
-          <CommentList commentList={commentList}/>
+          <CommentHeader totalComment={totalComment} />
+          <CommentList commentList={commentList} />
         </CommentContainer>
         <Line />
         <CustomInput type="Board" />

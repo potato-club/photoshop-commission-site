@@ -10,24 +10,30 @@ type Props = {
   imageOpen: imageOpenType;
   imageUrls: ImageType[];
   contents: string;
-}
-export function Contents({imageOpen, imageUrls, contents}:Props) {
+};
+export function Contents({ imageOpen, imageUrls, contents }: Props) {
   const checkDownload = (filename: string) => {
-    checkModal('원본사진을 다운하시겠습니까?', () => fileDownload(filename), undefined, undefined, '게시글의 사진과 크기차이가 있을 수 있습니다');
-  }
+    checkModal(
+      '원본사진을 다운하시겠습니까?',
+      () => fileDownload(filename),
+      undefined,
+      undefined,
+      '게시글의 사진과 크기차이가 있을 수 있습니다',
+    );
+  };
   return (
     <Container>
       {imageUrls && (
         <ImgContainer>
           {imageUrls.map((data, index) => (
-            <Image
-              onClick={() => checkDownload(data.fileName)}
-              width={630}
-              height={470}
-              key={index}
-              src={data.fileUrl}
-              alt="img"
-            />
+            <ImageWrapper key={index}>
+              <Image
+                onClick={() => checkDownload(data.fileName)}
+                layout="fill"
+                src={data.fileUrl}
+                alt="img"
+              />
+            </ImageWrapper>
           ))}
         </ImgContainer>
       )}
@@ -51,6 +57,14 @@ const ImgContainer = styled.div`
   gap: 40px 0;
   justify-content: center;
   align-items: center;
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+  width: 644px;
+  height: 480px;
+  align-self: center;
+  cursor: pointer;
 `;
 
 const TextWrapper = styled.div`
