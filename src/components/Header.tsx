@@ -7,6 +7,7 @@ import { MdOutlineDarkMode } from 'react-icons/md';
 import { pathName } from 'src/constants/pathName';
 import { customColor } from 'src/constants';
 import Image from 'next/image';
+import { myLoader } from 'src/utils/myLoader';
 
 export const Header = () => {
   // const dispatch = useDispatch();
@@ -15,12 +16,14 @@ export const Header = () => {
   // const {login, logout} = useKaKaoLogin();
 
 
+
+
   return (
     <HeaderBox>
       <ContentBox>
         <Link href={pathName.MAIN} passHref>
           <Theme>
-            <Image src={'/brandImage.png'} layout="fill" alt="brandImage" />
+            <Image loader={myLoader} src={'brandImage.png'} layout="fill" alt="brandImage" />
           </Theme>
         </Link>
         <Icons>
