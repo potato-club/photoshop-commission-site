@@ -14,15 +14,16 @@ interface IPhoto {
 const Photo = ({ image, imageOpen }: IPhoto) => {
   return (
     <PhotoBox>
-          <NewImage
-            src={
-              imageOpen === imageOpenType.open && image
-                ? image[0].fileUrl
-                : '../../image92.png'
-            }
-            layout='fill'
-            alt="비공개"
-          />
+      <NewImage
+        priority
+        src={
+          imageOpen === imageOpenType.open && image
+            ? image[0].fileUrl
+            : '../../image92.png'
+        }
+        layout="fill"
+        alt="image"
+      />
     </PhotoBox>
   );
 };
