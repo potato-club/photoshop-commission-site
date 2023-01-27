@@ -5,29 +5,29 @@ import { stateApi } from 'src/apis/moreViewPage';
 import { IData } from 'src/containers/mainPage/components/MainRequestBoard';
 
 export const useMoreViewData = (page: number) => {
-  const [data, setData] = useState<IData[]>([]);
+  const [data, setData] = useState<IData[]>();
   const [total, setTotal] = useState();
-  const [theme, setTheme] = useState('');
+  const [theme, setTheme] = useState<string>();
   const router = useRouter();
 
   useQuery(
     ['moreView', router.query.state, page],
-    async () => {
+    () => {
       const { state } = router.query;
       if (state === 'before') {
         setTheme('의뢰전 게시글');
-        return await stateApi.getBeforeAll(page);
+        return stateApi.getBeforeAll(page);
       } else if (state === 'doing') {
         setTheme('의뢰중 게시글');
-        return await stateApi.getRequestingAll(page);
+        return stateApi.getRequestingAll(page);
       } else {
         setTheme('의뢰완료 게시글');
-        return await stateApi.getCompleteAll(page);
+        return stateApi.getCompleteAll(page);
       }
     },
     {
-      enabled: router.isReady && !!page,
-      onSuccess: ({data}) => {
+      enabled: router.isReady && !!page && !!router.query.state,
+      onSuccess: ({ data }) => {
         setTotal(data.totalElements);
         setData(data.content);
       },

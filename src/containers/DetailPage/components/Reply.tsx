@@ -17,7 +17,6 @@ export const Reply = ({ writer, createdDate, modifiedDate, text }: Props) => {
     text,
   });
 
-  console.log(toggleText)
 
   return (
     <Container>

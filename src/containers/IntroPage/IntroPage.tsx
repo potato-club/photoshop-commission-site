@@ -138,6 +138,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   overflow-y: hidden;
+  padding-bottom: 400px;
 `;
 
 const Btn = styled.button`
@@ -154,7 +155,6 @@ const Btn = styled.button`
 const GoToBtn = styled(Btn)`
   background-color: ${customColor.purple};
   border: none;
-  margin-bottom: 400px;
 `;
 const LoginBtn = styled(Btn)`
   border: solid ${customColor.lightBlue};
