@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useMutation } from 'react-query';
 import { myPageApi } from 'src/apis/myPage';
 import { EditProfileType } from 'src/apis/myPage.type';
-import { useSessionStorage } from 'src/hooks/useSessionStorage';
+import { errorModal } from 'src/utils/interactionModal';
 import { Profile } from '../types/profile.type';
 
 export const useQueryEditProfile = (params: EditProfileType) => {
   const [profile, setProfile] = useState<Profile>();
 
-  const { isLoading, isError, refetch } = useQuery(
-    ['editProfile'],
-    () => myPageApi.profile.edit(params),
-    {
-      retry: 0,
-      enabled: false,
-      onSuccess: ({ data }) => {
-        setProfile(data);
-      },
-    },
-  );
 
-  return { profile, isLoading, isError, refetch };
+  const { mutate, isLoading, isError } = useMutation(() => myPageApi.profile.edit(params), {
+    onSuccess: ({data}) => {
+      setProfile(data);
+    },
+    onError: error => {
+      errorModal('회원정보수정 오류', '닉네임이 중복됩니다.');
+      console.log(error);
+    },
+  });
+
+  return { profile, isLoading, isError, mutate };
 };
