@@ -21,6 +21,7 @@ jobs:
         #   echo NEXT_PUBLIC_RESPONSE_TYPE=${{secrets.SOCIAL_LOGIN_RESPONSE_TYPE}} >> .env
         #   echo NEXT_PUBLIC_FRONT_URL=${{secrets.NEXT_PUBLIC_FRONT_URL}} >> .env
         #   cat .env
+        
       - run: npm run build
         env:
           NEXT_PUBLIC_CLIENT_ID: ${{ secrets.SOCIAL_LOGIN_CLIENT_ID }}
@@ -38,10 +39,3 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           # AWS_REGION: 'ap-northeast-2' # optional: defaults to us-east-1
           SOURCE_DIR: 'out' # optional: defaults to entire repository
-
-      - name: CloudFront Invalidate Cache
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_EC2_METADATA_DISABLED: true
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
