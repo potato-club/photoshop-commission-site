@@ -1,3 +1,4 @@
+import { useForm } from 'react-hook-form';
 import { CustomRadioButton } from 'src/components/CustomRadioButton';
 import { Typography } from 'src/components/Typography';
 import { customColor } from 'src/constants/customColor';
@@ -25,6 +26,7 @@ export const Profile = () => {
     handleChangeIntroduce,
     handleChangeNickname,
   } = useProfile();
+
   if (isLoading) {
     return (
       <MyPageLayout>

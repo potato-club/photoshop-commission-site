@@ -15,7 +15,7 @@ export const useProfile = () => {
   const { setSessionStorage } = useSessionStorage();
   const queryClient = useQueryClient();
 
-  const { refetch } = useQueryEditProfile({
+  const { mutate } = useQueryEditProfile({
     nickname: nickname === '' || !isInfoChange ? undefined : nickname,
     introduction:
       introduce === '' || !isIntroduceChange ? undefined : introduce,
@@ -36,7 +36,8 @@ export const useProfile = () => {
           errorModal('닉네임을 입력해주세요.');
           return;
         }
-        refetch();
+        mutate();
+        
         setIsInfoChange(false);
         infoModal('회원정보가 수정되었습니다.', 'success', undefined, () => {
           setSessionStorage('nickname', nickname);
@@ -59,7 +60,7 @@ export const useProfile = () => {
           errorModal('자기소개를 작성해주세요');
           return;
         }
-        refetch();
+        mutate();
         setIsIntroduceChange(false);
         infoModal('회원정보가 수정되었습니다.', 'success');
         queryClient.invalidateQueries('getProfile');
