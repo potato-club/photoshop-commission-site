@@ -4,6 +4,11 @@ export const pathName = {
   EDITOR: '/editor',
   SIGNUP: '/signUp',
   MOREVIEW: '/moreView',
+  // MOREVIEW: {
+  //   BEFORE: '/moreView/before',
+  //   DOING: '/moreView/doing',
+  //   COMPLETE: '/moreView/complete',
+  // },
   detail: '/detail',
   MYPAGE: {
     POST: {

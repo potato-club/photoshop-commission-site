@@ -4,16 +4,13 @@ import { useQuery } from 'react-query';
 import { stateApi } from 'src/apis/moreViewPage';
 import { IData } from 'src/containers/mainPage/components/MainRequestBoard';
 
-export const useMoreViewData = (page: number) => {
+export const useMoreViewData = (page: number, state: string) => {
   const [data, setData] = useState<IData[]>();
   const [total, setTotal] = useState();
   const [theme, setTheme] = useState<string>();
-  const router = useRouter();
-
   useQuery(
-    ['moreView', router.query.state, page],
+    ['moreView', state, page],
     () => {
-      const { state } = router.query;
       if (state === 'before') {
         setTheme('의뢰전 게시글');
         return stateApi.getBeforeAll(page);
@@ -26,7 +23,7 @@ export const useMoreViewData = (page: number) => {
       }
     },
     {
-      enabled: router.isReady && !!page && !!router.query.state,
+      enabled: !!page,
       onSuccess: ({ data }) => {
         setTotal(data.totalElements);
         setData(data.content);

@@ -7,5 +7,5 @@ type Props = {
   quality?: number;
 };
 export const myLoader = ({ src, width, quality }: Props) => {
-  return `http://localhost:3000/${src}?w=${width}&q=${quality || 75}`;
+  return `${process.env.NEXT_PUBLIC_FRONT_URI}/${src}?w=${width}&q=${quality || 75}`;
 };
