@@ -1,37 +1,33 @@
 # 포토샵 커미션 사이트
 
-### 디렉토리 설명
+### 프로젝트 배경
+"사진 이렇게 편집해주세요!" 같은 글을 SNS 에서 몇번씩 본적이 있는데,<br />
+이러한 주제를 전담마크한 사이트를 한번 만들어보자는 생각에서 진행하게 되었습니다.<br />
 
-assets - 이미지, 폰트 등을 저장
+### 프로젝트 인원
+- 프론트 3
+- 백엔드 2
 
-components - 2개이상의 페이지에 사용되는 '공용' 컴포넌트를 저장
+### 프로젝트 설명
+메인페이지에서 카카오톡 소셜 로그인을 통해 로그인하여 사이트 회원가입을 할 수 있습니다.<br />
+의뢰자 또는 디자이너로 회원가입 후 직업에 맞게 사이트를 이용할 수 있습니다.<br />
+- 의뢰자 : 사진편집 의뢰글을 등록 및 디자이너 선택을 할 수 있으며, <b>의뢰사진 공개, 비공개 설정이 가능</b>함<br/>
+- 디자이너 : 의뢰자가 올린 글에 자신이 의뢰를 맡아주겠다고 신청할 수 있음<br />
 
-constants - color, size 같은 값을 저장
 
-containers - pages에 들어갈 View 컨테이너를 저장
-containers/TestPage/components - TestPages에만 사용될 컴포넌트를 저장
+### 기술스택
+- FrontEnd : NextJs, TypeScript, Styled-components, Axios, React-Query, React-Hook-Form, React-Redux<br />
+- BackEnd : Spring boot(Spring Data JPA), QueryDsl, Gradle, MySQL, Redis
+<br />
+Deploy<br />
 
-pages - 라우팅 될 페이지를 저장, Page의 로직파트가 들어감 , containers 폴더에서 View 파일만 import만 함
+- Front : S3, CloudFront, Route53<br />
+- Back : S3, EC2, RDS, Nginx
 
-<br/>
+### 백엔드 레포지토리
+https://github.com/potato-club/photoshop-commission-site-backend
 
-### 브랜치 설명
+### 배포 주소
+https://easyphoto.site
 
-main :배포 브랜치
-
-develop :main브랜치에 넘어가기 전단계, 모든 브랜치는 develop에서 생성되어야 합니다.
-
-Ex)
-feat/login :로그인개발 브랜치 (main -> develop -> feat/login)
-
-<br/>
-
-### commit 설명
-
-feat: 신 기능 개발 브랜치
-
-fix: 버그 fix
-
-style: 스타일 변경
-
-chore: 간단한 이미지 교체, 스타일 변경 등 위 type들에 해당하지 않는 잡무, 만일 커밋이 두 개 이상의 타입에 해당하는 경우, 커밋을 타입 단위로 쪼개어 커밋합니다.
+![easyphoto](https://user-images.githubusercontent.com/62785823/218755057-6d8ce561-e414-4989-b9e7-664bfa2aa5c5.png)
