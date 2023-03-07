@@ -3,7 +3,7 @@ import { MyPageLayout } from '../components/MyPageLayout';
 import { CustomButton } from './components/CustomButton';
 import { useOption } from './Option.hook';
 export const Option = () => {
-  const { handleClickLogout, handleClickSignout } = useOption();
+  const { handleClickLogout, handleClickSignOut } = useOption();
 
   return (
     <MyPageLayout>
@@ -18,7 +18,7 @@ export const Option = () => {
         </ButtonWrapper>
         <ButtonWrapper>
           <CustomButton
-            handleClick={handleClickSignout}
+            handleClick={handleClickSignOut}
             style={{ color: 'white', backgroundColor: 'blue' }}
           >
             회원탈퇴

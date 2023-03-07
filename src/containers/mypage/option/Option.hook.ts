@@ -3,13 +3,13 @@ import { pathName } from 'src/constants/pathName';
 import { useLoginToken } from 'src/hooks/useLoginToken';
 import { useSessionStorage } from 'src/hooks/useSessionStorage';
 import { infoModal } from 'src/utils/interactionModal';
-import { useQuerySignOut } from './hooks/useQuerySignOut';
+import { useResign } from './hooks/useResign';
 
 export const useOption = () => {
   const { resetToken } = useLoginToken();
   const router = useRouter();
   const { removeSessionStorage, setSessionStorage } = useSessionStorage();
-  const { refetch } = useQuerySignOut();
+  const { mutate } = useResign();
 
   const handleClickLogout = () => {
     resetToken();
@@ -19,8 +19,8 @@ export const useOption = () => {
       router.push(pathName.MAIN);
     });
   };
-  const handleClickSignout = () => {
-    refetch();
+  const handleClickSignOut = () => {
+    mutate();
     resetToken();
     removeSessionStorage('job');
     setSessionStorage('nickname', 'GUEST');
@@ -29,5 +29,5 @@ export const useOption = () => {
     });
   };
 
-  return { handleClickLogout, handleClickSignout };
+  return { handleClickLogout, handleClickSignOut };
 };

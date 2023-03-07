@@ -107,7 +107,7 @@ export const myPageApi = {
       return response;
     },
   },
-  signOut: async () => {
+  resign: async () => {
     const response = await api.delete('mypage/resign');
 
     return response;
